@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Leaves Settings</h2>
+<hr />
+<p class="ErorrMessage">@ViewBag.CMessage</p>
+<div class="form-group CreateBtnMargin"><a    href="~/LeaveSettings/LvQuotaList">List of Employees Leave Quotas</a></div>
+    <section class="col-md-6">
+         <header><h4>Add Leave Balance (Year Closing)</h4></header>
+        @using (Html.BeginForm("AddLeaveQuota", "LeaveSettings", FormMethod.Post))
+        {
+        <article class="row">
+            <section class="col-md-6">
+                <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Casual Leaves</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="CLeaves" name="CLeaves" type="number" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Annual Leaves</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="ALeaves" name="ALeaves" type="number" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Sick Leaves</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="SLeaves" name="SLeaves" type="number" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-left:10%; margin-top:3%; margin-bottom:3%">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" value="Save"  class="btn btn-sm btn-success"/>
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-6">
+
+            </section>
+        </article>
+        }
+        @using (Html.BeginForm("AdjustLeaveQuotaStepOne", "LeaveSettings", FormMethod.Post))
+        {
+        <header><h4>Adjust Leave Balance</h4></header>
+        <article class="row">
+            <section class="col-md-6">
+                <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Emp No</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="AdjustEmpNo" name="AdjustEmpNo" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-left:10%;margin-bottom:3%; margin-top:3%">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" value="Next"  class="btn btn-sm btn-success"/>
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-6">
+
+            </section>
+        </article>
+            
+        }
+    </section>
+    <section class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4>Create Leave Quota</h4></div>
+            <div class="panel-body">
+                 @using (Html.BeginForm("CreateLeaveQuota", "LeaveSettings", FormMethod.Post))
+                {
+                <div>
+                     <div style="margin-left:15%; font-size:15px">
+                          <div class="radio"><label><input type="radio" checked value="ByEmployee" name="CreateLeaveCriteria">By Employee</label></div>
+                         <div class="radio"><label><input type="radio" value="ByCategory" name="CreateLeaveCriteria">By Category</label></div>
+                         <div class="radio"><label><input type="radio" value="ByEmpType" name="CreateLeaveCriteria">By Employee Type</label></div>
+                     </div>
+                    <div id="ByEmpDiv" class="desc" style="display: none;">
+                        <div class="row" style="margin-left:10%; margin-bottom:5%; margin-top:5%">
+                            <div class="col-md-3">
+                                <label>Employee No</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ByEmpTypeDiv" class="desc" style="display: none;">
+                        <div class="row" style="margin-left:10%; margin-bottom:5%; margin-top:5%">
+                            <div class="col-md-3">
+                                <label>Employee Type</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("TypeID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ByCatDiv" class="desc" style="display: none;">
+                        <div class="row" style="margin-left:10%; margin-bottom:5%; margin-top:5%">
+                            <div class="col-md-3">
+                                <label>Category</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("CatID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:10%; margin-bottom:1%; margin-top:5%">
+                        <div class="col-md-3">
+                            <label>Casual Leaves</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input id="CLeaves" name="CLeaves" type="number" class="form-control"/>
+                                    
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:10%; margin-bottom:1%">
+                        <div class="col-md-3">
+                            <label>Annual Leaves</label>
+                        </div>
+                        <div class="col-md-4">
+                           <input id="ALeaves" name="ALeaves" type="number" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:10%; margin-bottom:1%">
+                        <div class="col-md-3">
+                            <label>Sick Leaves</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input id="SLeaves" name="SLeaves" type="number" class="form-control"/>
+                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Save"  class="btn btn-xs btn-success"/>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+     <header></header>
+       
+    </section>
+
+<script src="@Url.Content("~/Scripts/Leaves/LeaveQuota.js")"></script>
+

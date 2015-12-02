@@ -1,0 +1,130 @@
+﻿@model IEnumerable<WMS.Controllers.RosterDetailAttributes>
+@{
+    ViewBag.Title = "RosterDetail";
+}
+
+<h2>Roster Details</h2>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Day
+        </th>
+        <th>
+             Duty Date
+        </th>
+        <th>
+            Duty Code
+        </th>
+        <th>
+             Duty Time
+        </th>
+        <th>
+            Work Minutes
+        </th>
+    </tr>
+
+@foreach (var item in Model) 
+{
+    if(item.Changed==true)
+        {
+            if(item.DutyCode=="R")
+            {
+                <tr   style="background-color:#7ac143">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Day)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.DutyDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DutyCode)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.DutyTime)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.WorkMin)
+                    </td>
+                    <td>
+                    </td>
+               </tr>
+            }
+            else
+            {
+            <tr   style="background-color:#F3F58E">
+                  <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.DutyDate)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.DutyCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DutyTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkMin)
+                </td>
+                <td>
+                </td>
+            </tr>
+            }
+        }
+        else
+        {
+            if(item.DutyCode=="R")
+            {
+                <tr   style="background-color:#7ac143">
+                 <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.DutyDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DutyCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DutyTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkMin)
+                </td>
+                <td>
+                </td>
+            </tr>
+            }
+            else
+            {
+            <tr >
+                <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.DutyDate)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.DutyCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DutyTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkMin)
+            </td>
+            <td>
+            </td>
+        </tr>
+            }
+        }
+   
+}
+
+</table>

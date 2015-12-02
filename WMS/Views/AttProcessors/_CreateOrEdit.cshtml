@@ -1,0 +1,76 @@
+@model WMS.Models.AttProcessor
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.PeriodTag, new { @class = "control-label col-md-2" })
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PeriodTag)
+    @Html.ValidationMessageFor(model => model.PeriodTag)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.DateFrom)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.DateFrom)
+    @Html.ValidationMessageFor(model => model.DateFrom)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.DateTo)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.DateTo)
+    @Html.ValidationMessageFor(model => model.DateTo)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ProcessingDone)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ProcessingDone)
+    @Html.ValidationMessageFor(model => model.ProcessingDone)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.WhenToProcess)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.WhenToProcess)
+    @Html.ValidationMessageFor(model => model.WhenToProcess)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.MonthPeriod)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.MonthPeriod)
+    @Html.ValidationMessageFor(model => model.MonthPeriod)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CompanyID)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CompanyID)
+    @Html.ValidationMessageFor(model => model.CompanyID)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.LocationID)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.LocationID)
+    @Html.ValidationMessageFor(model => model.LocationID)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CatID)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CatID)
+    @Html.ValidationMessageFor(model => model.CatID)
+</div>
+

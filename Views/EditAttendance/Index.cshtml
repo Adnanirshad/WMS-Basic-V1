@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Title = "EditAttWizardOne";
+}
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    $(function () {
+        $('.focus :input').focus();
+    });
+</script>
+<h3>Edit Attendance</h3><hr />
+<p class="ErorrMessage">@ViewBag.Message</p>
+<article class="row">
+    <section class="col-md-6">
+        <p style="font-size:16px; margin-bottom:30px;">Edit Manual Time In/ Out</p>
+       @using (Html.BeginForm("EditAttWizardOne", "EditAttendance", FormMethod.Post))
+        {
+           
+        <article class="row">
+            <section class="col-md-6">
+                
+                 <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-6">
+                        <label>Date</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="DateFrom" name="DateFrom" value="@ViewData["datef"]" type="date" class="form-control"/>
+
+                    </div>
+                </div>
+                <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-6">
+                        <label>Employee No</label>
+                    </div>
+                    <div class="focus col-md-6">
+                        <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>
+                    </div>
+                </div>
+               
+                <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" value="Next"  class="btn btn-sm btn-success"/>
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-6">
+
+            </section>
+        </article>
+        }
+    </section>
+    <section class="col-md-6">
+        <p style="font-size:16px; margin-bottom:15px;">Assign Job Card</p>
+        @using (Html.BeginForm("EditAttJobCard", "EditAttendance", FormMethod.Post))
+        {
+        <article class="row">
+            <section class="col-md-6">
+                 <div style="margin-left:15%; font-size:15px">
+                    <div class="radio"><label><input type="radio" value="shift" name="cars">By Shift</label></div>
+                    <div class="radio"><label><input type="radio" value="crew" name="cars">By Crew</label></div>
+                    <div class="radio"><label><input type="radio" value="section"name="cars">By Section</label></div>
+                    <div class="radio"><label><input type="radio" checked value="employee" name="cars">By Employee</label></div>
+                </div>
+                <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-6">
+                        <label>From</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="JobDateFrom" name="JobDateFrom" value="@ViewData["JobDateFrom"]" type="date" class="form-control"/>
+                    </div>
+                </div>
+                 <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-6">
+                        <label>To</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="JobDateTo" name="JobDateTo" type="date" value="@ViewData["JobDateTo"]" class="form-control"/>
+                    </div>
+                </div>
+                 <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-6">
+                        <label>Job Card</label>
+                    </div>
+                    <div class="col-md-6">
+                         @Html.DropDownList("JobCardType",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                    </div>
+                </div>
+              
+                 <div id="Option1" class="desc">
+                        <div class="row" style="margin-left:10%; margin-bottom:3%">
+                            <div class="col-md-6">
+                                <label>Shift</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("ShiftList",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Option2" class="desc" style="display: none;">
+                        <div class="row" style="margin-left:10%; margin-bottom:3%">
+                            <div class="col-md-6">
+                                <label>Crew</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("CrewList",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                            </div>
+                        </div>
+                    </div>
+                     <div id="Option3" class="desc" style="display: none;">
+                        <div class="row" style="margin-left:10%; margin-bottom:3%">
+                            <div class="col-md-6">
+                                <label>Section</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("SectionList",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                            </div>
+                        </div>
+                    </div>
+                     <div id="Option4" class="desc" style="display: none;">
+                        <div class="row" style="margin-left:10%; margin-bottom:3%">
+                            <div class="col-md-6">
+                                <label>Employee</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="JobEmpNo" name="JobEmpNo" type="text" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+@*Double Duty Work Time Input Control*@
+                    <div id="doubleDutyDiv">
+                        <div class="row" style="margin-left:10%; margin-bottom:3%">
+                            <div class="col-md-6">
+                                <label>Work Mins</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="DDWorkMins" name="DDWorkMins" type="text" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="BadliDiv" class="desc" style="display: none;">
+                        <div class="row" style="margin-left:10%; margin-bottom:3%">
+                            <div class="col-md-6">
+                                <label>Designation</label>
+                            </div>
+                            <div class="col-md-6">
+                                    @Html.DropDownList("DesignationID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                            </div>
+                        </div>
+                    </div>
+                <p class="ErorrMessage">@ViewBag.CMessage</p>
+                <div class="row" style="margin-left:10%; margin-bottom:3%">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" value="Save"  class="btn btn-sm btn-success"/>
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-6">
+
+            </section>
+        </article>
+        }
+    </section>
+</article>
+<script src="@Url.Content("~/Scripts/EditAttendance.js")"></script>
+<script src="@Url.Content("~/Scripts/Shift/GetUserSpecificShifts.js")"></script>

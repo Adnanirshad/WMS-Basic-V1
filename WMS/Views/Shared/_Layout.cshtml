@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - AirBlue | WMS</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/toastr.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+     <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+   
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+   
+@*<script src="~/Scripts/highcharts.js"></script>
+<script src="~/Scripts/angular/highcharts-ng.js"></script>*@
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Workforce Management System", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse pull-right">
+                @if (Session["LogedUserID"] == "" || Session["LogedUserID"] == null)
+                {
+
+                }
+                else
+                {
+                <ul class="nav navbar-nav">
+                  @if(Session["MHR"].ToString() == "1")
+                   {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-folder-close"></span><span>  Company</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        <li><a href="~/Emp">Employees</a></li>
+                        <li><a href="~/Shift">Shifts</a></li>
+                        @*<li><a href="~/Company">Company</a></li>*@
+                        <li><a href="~/Holiday">Holidays</a></li>
+                        @*<li><a href="~/Company">Company</a></li>*@
+                        <li class="divider"></li>
+                        <li><a href="~/Designation">Designations</a></li>
+                        <li><a href="~/JobTitle">Job Titles</a></li>
+                        <li><a href="~/EmpType">Employee Types</a></li>
+                        <li><a href="~/Grade">Grade</a></li>
+                        <li class="divider"></li>
+                        <li><a href="~/Section">Sections</a></li>
+                        <li><a href="~/Dept">Departments</a></li>
+                        <li><a href="~/Division">Divisions</a></li>
+                        <li class="divider"></li>
+                        <li><a href="~/Location">Locations</a></li>
+                        <li><a href="~/Crew">Crews</a></li>
+                        <li><a href="~/City">Cities</a></li>
+                        <li><a href="~/Region">Regions</a></li>
+                             @if(Session["MRoster"].ToString() == "1")
+                        {
+                        <li><a href="~/Roster">Roster</a></li>
+                             }
+                        @if(Session["MUser"].ToString() == "1")
+                        {
+                        <li><a href="~/User">Users</a></li>
+                        }
+                        </ul>
+                    </li>    
+                  }
+                  @if (Session["MEditAtt"].ToString() == "1")
+                   {             
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-phone"></i>  Attendance <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="~/EditAttendance">Edit</a></li>
+                          @if(Session["MProcess"].ToString() == "1")
+                        {
+                         <li><a href="~/AttProcessors">Process Attendance</a></li>
+                          }
+                      </ul>
+                    </li>
+                  }
+                  @if (Session["MDevice"].ToString() == "1")
+                   {
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-phone"></i>  Readers <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="~/Reader">Readers</a></li>
+                        <li><a href="~/ReaderType">Reader Types</a></li>
+                        <li><a href="~/Vendor">Vendors</a></li>
+                      </ul>
+                    </li>
+                  }
+                  @if (Session["MLeave"].ToString() == "1")
+                  {
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large"></i>  Leaves <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="~/LvApp">Leave Applications</a></li>
+                        <li><a href="~/LvShort">Short Leaves</a></li>
+                        <li>@*<a href="~/LeaveSettings">Leave Quota</a>*@</li>
+                          <li><a href="~/LeaveSettings">Leave Quota</a></li>
+                      </ul>
+                    </li>
+                  }
+                     @*@if(Session["MUser"].ToString() == "1")
+                        {
+                         <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large"></i>  Settings <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="~/LeaveSettings">Leaves</a></li>
+                      </ul>
+                    </li>
+                        }*@
+              @*  @if (Session["MEditAtt"].ToString() == "1")
+                  {
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon glyphicon-tasks"></i>  Process Attendance <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        
+                         <li><a href="~/AttProcessors">Process Attendance</a></li>
+                       
+                      </ul>
+                    </li>
+                  }*@
+                    <li><a href="~/Reports/Filters/StepOneFilter.aspx"><i class="glyphicon glyphicon-stats"></i> Reports</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>  <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><a>@Html.ActionLink("Log Out", "Logout", "Home", null, new { @class = "" })</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                }
+            </div>
+        </div>
+
+        
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - AirBlue  <b>Workforce Management System</b> - <span style="color: Background"><a href="http://www.cns.com.pk">powered by CNS</a></span></p>
+        </footer>
+    </div>
+@*  <script src="~/Scripts/toastr.js"></script>
+   
+<script src="~/Scripts/angular/UserEditController.js"></script>  
+<script src="~/Scripts/angular/DashboardController.js"></script>  *@
+</body>
+</html>

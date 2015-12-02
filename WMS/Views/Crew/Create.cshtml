@@ -1,0 +1,39 @@
+﻿@model WMS.Models.Crew
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div>
+      <form class ="form-inline" role="form">
+          <div class="form-group "> <h3>Add Crew</h3> </div>
+      </form>  
+    </div>
+ <hr />
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.CrewName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CrewName)
+                @Html.ValidationMessageFor(model => model.CrewName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

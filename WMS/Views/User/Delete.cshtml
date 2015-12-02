@@ -1,0 +1,250 @@
+﻿@model WMS.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanView)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanView)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MHR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MHR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MDevice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MDevice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MDesktop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MDesktop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEditAtt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEditAtt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOption)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRDailyAtt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRDailyAtt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRLeave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRLeave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRMonthly)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRMonthly)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRAudit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRAudit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRManualEditAtt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRManualEditAtt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MREmployee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MREmployee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRDetail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRSummary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRSummary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRGraph)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRGraph)
+        </dd>
+
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp.EmpNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp.EmpNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRole.RoleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRole.RoleName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

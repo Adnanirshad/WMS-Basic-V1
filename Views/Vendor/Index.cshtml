@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WMS.Models.ReaderVendor>
+@*@model PagedList.IPagedList<WMSModel.ReaderVendor>*@
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Reader Vendor";
+}
+<div>
+    <form class ="form-inline" role="form">
+        <div class="form-group"> <h2>Device Vendors</h2> </div>
+        <div class="form-group CreateBtnMargin"><p>@Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-xs btn-success" })</p></div>
+        <div class="form-group pull-right SearchBtnMargin">
+            @using (Html.BeginForm("Index", "Vendor", FormMethod.Get))
+            {<p>Find: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string,new { @class = "form-control" })  
+                <input class="btn btn-sm btn-success" type="submit" value="Search" /></p>}
+        </div> 
+    </form>  
+</div>
+<div class="table-responsive">
+<table class="table table-bordered table-hover table-condensed">
+    <tr class="table-header">
+        <th>
+            @Html.ActionLink("Vendor", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>Edit | View | Delete</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorName)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id=item.VendorID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" })
+            @Html.ActionLink(" ", "Details", new { id=item.VendorID }, new { @class = "glyphicon glyphicon-pencil btn btn-info btn-xs" })
+            @Html.ActionLink(" ", "Delete", new { id=item.VendorID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>
+</div>

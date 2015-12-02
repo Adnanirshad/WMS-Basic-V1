@@ -1,0 +1,33 @@
+﻿@model WMS.Models.Grade
+
+@{
+    ViewBag.Title = "Details";
+}
+<style>  
+ dd,dt {
+    margin-bottom: 5px;
+}
+</style>
+<div>
+      <form class ="form-inline" role="form">
+          <div class="form-group "> <h2>Grade Details</h2> </div>
+      </form>  
+    </div>
+ <hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Grade Name:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradeName)
+        </dd>
+         
+        <dd>
+            <p></p>
+             @Html.ActionLink(" Edit ", "Edit", new { id = Model.GradeID } , new { @class = "btn btn-warning" })
+             @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+        </dd>
+    </dl>
+</div>

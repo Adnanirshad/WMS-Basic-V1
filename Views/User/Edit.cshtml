@@ -1,0 +1,379 @@
+﻿@model WMS.Models.User
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit User</h2>
+
+@using (Html.BeginForm("Edit","User", FormMethod.Post, new { enctype ="multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+<div ng-app="UserLocation">
+    <div class="form-horizontal" ng-controller="myCtrlEdit" data-ng-init="initFunction(@Model.UserID)">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.EmpID)
+        @Html.HiddenFor(model => model.UserName)
+        @*<input type="hidden" name="UserID" ng-model="UserID" value=""/>*@
+           <section class="col-md-4">
+             
+               <div class="form-group">
+                     <div class="control-label col-md-4">User Name</div>
+                         <div class="col-md-4">
+                            @Html.Label(Model.UserName)
+                        </div>
+              </div>
+             @* <div class="form-group">
+                   <div class="control-label col-md-4">Password</div>
+                      <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Password,new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                      </div>
+              </div>*@
+              <div class="form-group">
+                   <div class="control-label col-md-4">Name</div>
+                      <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Name,new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                      </div>
+             </div>
+
+            @*<div class="form-group">
+                   <div class="control-label col-md-4">EmpNo</div>
+                      <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Emp.EmpNo,new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Emp.EmpNo)
+                      </div>
+             </div>*@
+
+
+
+
+                <div class="form-group">
+        <div class="control-label col-md-4">Status</div>
+            <div class="col-md-6">
+                @Html.DropDownList("Status", new List<SelectListItem>
+                    { 
+                        new SelectListItem { Text = "Active", Value = "true"},
+                        new SelectListItem { Text = "Inactive", Value = "false"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"}) 
+                        @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        </div>
+        <div class="form-group">
+           <div class="control-label col-md-4">Data Role</div>
+                <div class="col-md-4">
+                    @Html.DropDownList("RoleID", null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                    @Html.ValidationMessageFor(model => model.RoleID)
+                </div>
+        </div> 
+        <div class="form-group">
+            <div class="control-label col-md-4">Location</div>
+            <div class="col-md-8">
+                <input type="hidden" placeholder="e.g Lahore" data-ng-model="location.name" id="uLocationCount" name="uLocationCount" class="form-control" value="{{locations.length}}">
+                <div class="input-group" ng-repeat="location in locations">
+                    <input disabled type="text" placeholder="e.g Lahore" id="testLocation{{$index + 1}}" data-ng-model="location.name" class="form-control">
+                    <input type="hidden" placeholder="e.g Lahore" data-ng-model="location.name" id="uLocation{{$index + 1}}" name="uLocation{{$index + 1}}" class="form-control" value="{{location.name}}">
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="removeLocation($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
+                    </span>
+                </div>
+                 <div  ng-show="isAddingLocation">
+                    @*<input type="text" placeholder="Add a Location" data-ng-model="newLocation.name" class="form-control">*@
+                    <select type="text" placeholder="Add a Location" data-ng-model="newLocation.name" class="form-control">
+                        <option ng-repeat="loc in AllLocations">{{loc.Text}}</option>
+                    </select>
+                    <a class="btn btn-default btn-sm" ng-click="addLocation()">Add</a>
+                    <a href="" ng-click="isAddingLocation = false">Done Adding</a>
+                </div>
+                <p><a href="" ng-click="isAddingLocation = true">+ Add Location</a></p>
+            </div>
+        </div>
+       @*<div class="form-group">
+            <div class="control-label col-md-4">Location</div>
+            <div class="col-md-4">
+                @Html.DropDownList("LocationID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                @Html.ValidationMessageFor(model => model.LocationID)
+            </div>
+        </div> *@
+        <div class="form-group">
+            <div class="control-label col-md-4">Permanent Staff</div>
+            <div class="col-md-6">
+                 @Html.DropDownList("ViewPermanentStaff", new List<SelectListItem>
+                    { 
+                        new SelectListItem { Text = "Yes", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"}) 
+            </div>
+        </div>
+        
+         <div class="form-group">
+           <div class="control-label col-md-4">Permanent Management</div>
+            <div class="col-md-6">
+                 @Html.DropDownList("ViewPermanentMgm", new List<SelectListItem>
+                    { 
+                        new SelectListItem { Text = "Yes", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"}) 
+            </div>
+        </div>
+
+        <div class="form-group">
+           <div class="control-label col-md-4">Contractuals</div>
+            <div class="col-md-6">
+                 @Html.DropDownList("ViewContractual", new List<SelectListItem>
+                    { 
+                        new SelectListItem { Text = "Yes", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"}) 
+            </div>
+        </div>
+
+@*        <div class="form-group">
+            <div class="control-label col-md-4">Only Location</div>
+            <div class="col-md-6">
+                 @Html.DropDownList("ViewLocation", new List<SelectListItem>
+                    { 
+                        new SelectListItem { Text = "Yes", Value = "true"},
+                        new SelectListItem { Text = "No", Value = "false"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                @Html.ValidationMessageFor(model => model.ViewLocation) 
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <div class="control-label col-md-4">Can Edit</div>
+            <div class="col-md-6">
+                @Html.DropDownList("CanEdit", new List<SelectListItem>
+                { 
+                    new SelectListItem { Text = "No", Value = "false"},
+                    new SelectListItem { Text = "Yes", Value = "true"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"})  
+                        @Html.ValidationMessageFor(model => model.CanEdit) 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-4">Can Delete</div>
+            <div class="col-md-6">
+                @Html.DropDownList("CanDelete", new List<SelectListItem>
+                { new SelectListItem { Text = "No", Value = "false"},
+                    new SelectListItem { Text = "Yes", Value = "true"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"})
+                    @Html.ValidationMessageFor(model => model.CanDelete)  
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-4">Can Add</div>
+            <div class="col-md-6">
+                @Html.DropDownList("CanAdd", new List<SelectListItem>
+                { new SelectListItem { Text = "No", Value = "false"},
+                    new SelectListItem { Text = "Yes", Value = "true"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+            </div>
+        </div>
+        
+        <div class="form-group">
+           <div class="control-label col-md-4">Can View</div>
+            <div class="col-md-6">
+                @Html.DropDownList("CanView", new List<SelectListItem>
+                { new SelectListItem { Text = "No", Value = "false"},
+                    new SelectListItem { Text = "Yes", Value = "true"}
+                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+            </div>
+        </div>      
+     </section>
+       
+
+     <section class="col-md-4">
+        <center><h3>Application Module</h3></center> 
+             <div class="form-group">
+                <div class="control-label col-md-6">User</div>
+                <div class="col-md-6">
+                    @Html.DropDownList("MUser", new List<SelectListItem>
+                    { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                        new SelectListItem { Text = "Yes", Value = "true"}
+                        },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                </div>
+            </div>
+        
+
+            <div class="form-group">
+                <div class="control-label col-md-6">HR</div>
+                <div class="col-md-6">
+                    @Html.DropDownList("MHR", new List<SelectListItem>
+                    { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                        new SelectListItem { Text = "Yes", Value = "true"}
+                        },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                </div>
+            </div>
+         
+
+            <div class="form-group">
+                <div class="control-label col-md-6">Device</div>
+                <div class="col-md-6">
+                    @Html.DropDownList("MDevice", new List<SelectListItem>
+                    { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                        new SelectListItem { Text = "Yes", Value = "true"}
+                        },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                </div>
+            </div>
+            <div class="form-group">
+                 <div class="control-label col-md-6">Desktop</div>
+                <div class="col-md-6">
+                    @Html.DropDownList("MDesktop", new List<SelectListItem>
+                    { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                        new SelectListItem { Text = "Yes", Value = "true"}
+                        },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                </div>
+            </div>
+            <div class="form-group">
+                 <div class="control-label col-md-6">Edit Attendance</div>
+                <div class="col-md-6">
+                    @Html.DropDownList("MEditAtt", new List<SelectListItem>
+                    { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                        new SelectListItem { Text = "Yes", Value = "true"}
+                        },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                </div>
+            </div>
+         <div class="form-group">
+                    <div class="control-label col-md-6">Process</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MProcess", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                </div>
+            <div class="form-group">
+                 <div class="control-label col-md-6">Leave</div>
+                <div class="col-md-6">
+                    @Html.DropDownList("MLeave", new List<SelectListItem>
+                    { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                        new SelectListItem { Text = "Yes", Value = "true"}
+                        },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                </div>
+            </div>
+         <div class="form-group">
+                    <div class="control-label col-md-6">Roster</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRoster", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                 </div>
+       </section>
+
+         <section class="col-md-4"> 
+             <center><h3>Reports Module</h3></center>
+        
+                <div class="form-group">
+                    <div class="control-label col-md-6">Leave</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRLeave", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                   <div class="control-label col-md-6">Daily</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRDailyAtt", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                   <div class="control-label col-md-6">Monthly</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRMonthly", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                </div>
+
+
+                 <div class="form-group">
+                    <div class="control-label col-md-6">Audit</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRAudit", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                 </div>
+
+
+                 <div class="form-group">
+                   <div class="control-label col-md-6">Manual Edit</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRManualEditAtt", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                 </div>
+
+
+                 <div class="form-group">
+                    <div class="control-label col-md-6">Employee</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MREmployee", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-md-6">Detail</div>
+                        <div class="col-md-6">
+                            @Html.DropDownList("MRDetail", new List<SelectListItem>
+                            { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                                new SelectListItem { Text = "Yes", Value = "true"}
+                                },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                        </div>
+                </div>
+
+                <div class="form-group">
+                   <div class="control-label col-md-6">Graph</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRGraph", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                </div>
+
+                 <div class="form-group">
+                    <div class="control-label col-md-6">Summary</div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("MRSummary", new List<SelectListItem>
+                        { new SelectListItem { Text = "No", Value = "false", Selected=true},
+                            new SelectListItem { Text = "Yes", Value = "true"}
+                            },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall"}) 
+                    </div>
+                </div>
+         </section>
+          
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default btn-success" />
+              @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+            </div>
+        </div>
+    </div>
+</div>
+}
+ <script src="~/Scripts/angular/MainController.js"></script>  
+<script src="~/Scripts/angular/UserEditController.js"></script> 
