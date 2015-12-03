@@ -1,0 +1,53 @@
+﻿@model PagedList.IPagedList<WMS.Models.Section>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div>
+      <form class ="form-inline" role="form">
+          <div class="form-group"> <h2>Sections</h2> </div>
+          <div class="form-group CreateBtnMargin">@Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-xs btn-success" })</div>
+          <div class="form-group pull-right SearchBtnMargin">
+              @using (Html.BeginForm("Index", "Section", FormMethod.Get))
+                {<p>Find: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string,new { @class = "form-control" })  
+                 <input class="btn btn-sm btn-success" type="submit" value="Search" /></p>}
+          </div> 
+      </form>  
+    </div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed">
+     <tr class="table-header">
+        <th>
+           @Html.ActionLink("Section", "Index", new { sortOrder = ViewBag.SectionSortParm })
+        </th>
+        <th>
+            Department
+        
+        <th>Edit | View | Delete</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SectionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department.DeptName)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id=item.SectionID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" })
+            @Html.ActionLink(" ", "Details", new { id=item.SectionID }, new { @class = "glyphicon glyphicon-pencil btn btn-info btn-xs" }) 
+            @Html.ActionLink(" ", "Delete", new { id=item.SectionID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
+        </td>)
+    </tr>
+}
+
+</table>
+    </div>
+<div class="form-inline">
+          <div class="form-group ">@Html.PagedListPager(Model, page => Url.Action("Index", 
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</div>
+          <div class="form-group pull-right">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+</div>

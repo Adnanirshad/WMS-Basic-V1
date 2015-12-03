@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+ 
+
+
+
+<div class="jumbotron">
+    @using (Html.BeginForm("Logout","Home", FormMethod.Post))
+    {
+    if (Session["LogedUserFullname"] != null)
+    {
+        <h2>Login Successful</h2>
+     <div><h3>Welcome @Session["LogedUserFullname"].ToString() </h3></div>
+    }
+}
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading"><h3>Time & Attendance System</h3></div>
+            <div class="panel-body">
+                @*<ul >
+                    <li><b>Total</b> - 15</li>
+                    <li><b>Locations</b> - 4</li>
+                    <li><b>Sites</b> - 3</li>
+                </ul>*@
+                Our completely automated time and attendance solutions reduce labor costs by enforcing pay and work rules consistently and accurately across the organization. Labor-intensive timecard tracking, data entry. And that reduces the administrative time associated with attendance exceptions and employee inquiries.
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading"><h3>Leave Management</h3></div>
+            <div class="panel-body">
+                Leave Tracker enables you to apply for leave online, view leave balances and track all your employee leave information from one central place. Employees' leave transactions are accurately tracked and leave balances are automatically updated. You can import/export leave summary for integrating data with other applications.
+            </div>
+        </div>
+    </div>
+     <div class="col-md-4">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h3>Flexible Shift Management</h3></div>
+            <div class="panel-body">
+               Flexible shift patterns should work well for any environment. The easiest to manage should be for early and late starters.The trick is to start to look at the call profile and to look at your staffing profile. You may find that your resource forecasting software may be able to help you modelling the call profiles against the number of people needed.
+            </div>
+        </div>
+    </div>
+</div>
+
+ <script>
+
+     $(document).ready(function () {
+         toastr.options.positionClass = 'toast-bottom-full-width';
+         @Html.Raw(ViewBag.JS)
+     });
+ </script>

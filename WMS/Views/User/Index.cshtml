@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WMS.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+      <form class ="form-inline" role="form">
+          <div class="form-group"> <h2>Users</h2> </div>
+          <div class="form-group CreateBtnMargin"><p>@Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-xs btn-success" })</p></div>
+          <div class="form-group pull-right SearchBtnMargin">
+              @using (Html.BeginForm("Index", "User", FormMethod.Get))
+                {<p>Find:  @Html.TextBox("SearchString", ViewBag.CurrentFilter as string,new { @class = "form-control" })  
+                 <input class="btn btn-sm btn-success" type="submit" value="Search" /></p>}
+          </div> 
+      </form>  
+    </div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-condensed">
+        <tr class="table-header">
+        <th>
+            User Name
+        </th>
+        @*<th>
+            Employee No
+        </th>*@
+        <th>
+            Name
+        </th>
+         <th>
+            User Type
+        </th>
+         @*<th>
+            Location
+        </th>*@
+         @*<th>
+            Company
+        </th> *@  
+        <th>
+            Status
+        </th>
+        
+       @* <th>
+            CompName
+        </th>*@
+        
+        <th>Edit | View </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+       @* <td>
+            @Html.DisplayFor(modelItem => item.Emp.EmpNo)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserRole.RoleName)
+        </td>
+       @* <td>
+            @Html.DisplayFor(modelItem => item.Location.LocName)
+        </td>*@
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Company.CompName)
+        </td>*@
+        <td>
+            @if (item.Status==true)
+                {
+                    <div>Active</div>
+                }
+            
+                else
+                {
+                    <div>Inactive</div>
+                }
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Company.CompName)
+        </td>*@
+        
+        <td>
+            @Html.ActionLink(" " , "Edit", new { id=item.UserID },new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" })
+            @Html.ActionLink(" " , "Details", new { id=item.UserID },new { @class = "glyphicon glyphicon-pencil btn btn-info btn-xs" })
+        </td>
+    </tr>
+}
+
+</table>
+    </div>

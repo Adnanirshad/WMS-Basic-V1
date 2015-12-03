@@ -1,0 +1,169 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ReportingEngine.master.cs" Inherits="WMS.ReportingEngine" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>WMS - Reports</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+    <link href="Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
+    <script src="../../Scripts/modernizr-2.6.2.js"></script>
+    <script type="text/javascript" src="../../Scripts/Filters/FilterScripts.js" ></script>
+    <link href="Content/style/filter-navigation.css" type="text/css" rel="stylesheet" />
+    <link href="Content/style/filters-page.css" type="text/css" rel="stylesheet" />
+    <script src="../../Scripts/jquery.js"></script>
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/jquery.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
+   
+    <script src="../../Scripts/angular.min.js"></script>
+<script src="../../Scripts/highcharts.js"></script>
+    <script src="../../Scripts/highcharts-3d.js"></script>
+        <script src="../../Scripts/exporting.js"></script>
+<script src="../../Scripts/angular/highcharts-ng.js"></script>
+     <script src="../../Scripts/slimscroll.js" type="text/javascript"></script>
+   
+</head>
+<body ng-app="UserLocation">
+    <header>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class = "navbar-brand">
+                    Workforce Management System - Reports
+                </div>
+            </div>
+            <div class="navbar-collapse collapse pull-right">
+                <ul class="nav navbar-nav">
+                     <% if (Session["MGraph"].ToString() == "1") %> 
+                     <% { %> 
+                    <li class="dropdown">
+                        <a href="/WMS/Reports/Graphs/Graphs.aspx"><span class="glyphicon glyphicon-stats"></span><span> Graphs</span></a> 
+                    </li>
+                    <% }%> 
+                    <% if (Session["MRSummary"].ToString() == "1") %> 
+                     <% { %> 
+                     <li class="dropdown">
+                        <a href="/WMS/Reports/Filters/SummaryReports.aspx"><span class="glyphicon glyphicon-book"></span><span> Summaries</span></a> 
+                    </li>
+                    <% }%> 
+                   <%--  
+
+                    <% if (Session["MRDailyAtt"].ToString() == "1") %> 
+                     <% { %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book"></span><span>  Daily</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/WMS/Reports/DDetailed.aspx">Detailed Attendance</a></li>
+                            <li><a href="/WMS/Reports/DAttendance.aspx">Attendance</a></li>
+                            <li><a href="/WMS/Reports/Dpresent.aspx">Present</a></li>
+                            <li><a href="/WMS/Reports/DAbsent.aspx">Absent</a></li>
+                            <% if (Session["MRLeave"].ToString() == "1") %> 
+                             <% { %>
+                                <li><a href="/WMS/Reports/DLeave.aspx">Leaves</a></li>
+                                <li><a href="/WMS/Reports/DShortLeave.aspx">Short Leave</a></li>
+                            <% } %>
+                            <li class="divider"></li>
+                            <li><a href="/WMS/Reports/DLateIn.aspx">Late In</a></li>
+                            <li><a href="/WMS/Reports/DLateOut.aspx">Late Out</a></li>
+                            <li><a href="/WMS/Reports/DEarlyIn.aspx">Early In</a></li>
+                            <li><a href="/WMS/Reports/DEarlyOut.aspx">Early Out</a></li>
+                            <li><a href="/WMS/Reports/DOverTime.aspx">OverTime</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/WMS/Reports/DMissingAtt.aspx">Missing Attendance</a></li>
+                            <li><a href="/WMS/Reports/DMultipleInOut.aspx">Multiple In/Out</a></li>
+                        </ul>
+                    </li>
+                    <% }%>
+
+                    <% if (Session["MRMonthly"].ToString() == "1") %> 
+                     <% { %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tower"></span><span> Summary</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-level">
+                            <li><a href="/WMS/Reports/MLvConsumed.aspx">Monthly Leaves</a></li>
+                            <li><a href="/WMS/Reports/MYLeaveSummary.aspx">Yearly Leaves</a></li>
+                            <li><a href="/WMS/Reports/MSheet.aspx">Monthly Sheet (21th to 20th)</a></li>
+                            <li><a href="/WMS/Reports/MSheetC.aspx">Monthly Sheet (1st to 31th) </a></li>
+                            <li><a href="/WMS/Reports/MSummary.aspx">Monthly Summary (21th to 20th)</a></li>
+                            <li><a href="/WMS/Reports/MSummaryC.aspx">Monthly Summary (1st to 31th)</a></li>
+                            <li class="divider"></li>
+                             <li><a href="/WMS/Reports/MDetailExcelP.aspx">Monthly Sheet (21th to 20th)(Excel)</a></li>
+                            <li><a href="/WMS/Reports/MDetailExcelC.aspx">Monthly Sheet (1st to 31th)(Excel)</a></li>
+                        </ul>
+                    </li>
+                    <% } %>
+
+                    <% if (Session["MRAudit"].ToString() == "1") %> 
+                     <% { %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tower"></span><span> Audit</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-level">
+                            <li><a href="/WMS/Reports/AuditLog.aspx">Audit Log</a></li>
+                        </ul>
+                    </li>
+                    <% } %>
+
+                    <% if (Session["MRDetail"].ToString() == "1") %> 
+                     <% { %>
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tower"></span><span> Detiled</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu multi-level">
+                            <li><a href="/WMS/Reports/EmpAttSummary.aspx">Employee Detailed Attendance</a></li>
+                            <li><a href="/WMS/Reports/DetailedAbsent.aspx">Employee Absent</a></li>
+                        </ul>
+                    </li>
+                    <% } %>
+                    <%--<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span><span>  Trends</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/WMS/Emp">Date Wise</a></li>
+                            <li><a href="/WMS/Emp">Shift Wise</a></li>
+                            <li><a href="/WMS/Emp">Section Wise</a></li>
+                            <li><a href="/WMS/Emp">Department Wise</a></li>
+                            <li><a href="/WMS/Emp">Company Wise</a></li>
+                        </ul>
+                    </li>--%>
+
+                   <li class="dropdown">
+                        <a href="/WMS/Home" ><span class="glyphicon glyphicon-home"></span><span>  Home</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/WMS/Home/LogOut" ><span>  LogOut</span></a>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+
+        
+    </div>
+    </header>
+    <section >
+            <div>
+                <form id="form1" runat="server">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+                </asp:ContentPlaceHolder>
+                    </form>
+            </div>
+    </section>
+    
+    <footer>
+
+    </footer>
+     <script src="../../Scripts/angular/reportingEngineMainController.js"></script>  
+ 
+<script src="../../Scripts/angular/DashboardController.js"></script>  
+</body>
+
+   
+</html>

@@ -1,0 +1,228 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+#single-line
+{
+    width:500px;
+
+}
+.ComboBoxWidth{
+    width:260px;
+
+}
+.ComboBoxWidthSmall{
+    width:100%;
+}
+.jumbotron {
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input[type="text"],
+input[type="password"] {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.CreateBtnMargin{
+    margin-top:30px;
+    margin-left:20px;
+}
+
+.SearchBtnMargin{
+    margin-top:18px;
+}
+
+div.Outer {
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+
+div.InnerLeft {
+    width: 40%;
+    position: relative;      
+    float: left;
+ }
+
+div.InnerRight {
+    width: 59%;
+    position: relative;      
+    float: right;
+}
+div.InnerLeft1 {
+    width: 50%;
+    position: relative;      
+    float: left;
+ }
+
+div.InnerRight1 {
+    width: 49%;
+    position: relative;      
+    float: right;
+}
+div.InnerLeft2{
+    width: 50%;
+    position: relative;      
+    float: left;
+ }
+
+div.InnerRight2 {
+    width: 49%;
+    position: relative;      
+    float: right;
+}
+
+
+.btn-EditViewDelete{
+/*height: 26px;
+width: 25px;
+padding: 5px 5px 5px 5px;
+text-align:center;*/
+}
+
+.table-header
+{
+   background-color:#f0f0f0;
+}
+
+
+.clearfix
+{
+ clear:both; 
+}
+
+.report-filter
+{
+    width:220px;
+    float:left;
+    background-color:#5E2750;
+}
+.report-viewer-container
+{ margin: 0 0 0 5px;
+    float:left;
+    background-color:White;
+    width:70%;
+    
+}
+.report-viewer-containerSumery
+{
+    margin: 0 0 0 5px    ;
+    float:left ;
+    background-color:White;
+    width:400px;
+    height:500px;
+}
+.report-container
+{
+   
+    display:inline;
+}
+
+.PanelFilters
+{
+display: block;
+height: auto;
+margin: 10px 10px 10px 10px;
+padding-left: 5px;
+padding-bottom:5px;
+padding-top:5px;
+background-color: #5E2750;
+font-family:Signika;
+font-size:14px;
+}
+
+.PanelFilter .chkbox 
+{
+    
+}
+ 
+.PanelFilter span .drpdown
+{
+   
+} 
+.PanelDateFilters
+{
+display: block;
+height: 100px;
+margin: 10px 10px 10px 10px;
+}
+.PanelFiltersGrade
+{
+display: block;
+height: 100px;
+margin: 10px 10px 10px 10px;
+background-color:Window;
+}
+.PanelFilter .PanelFilterDate
+{
+    height:40px;
+}
+   
+    .report-viewer-containerdiv
+    {
+        background-color:white;
+    }
+
+.button-div
+{
+background-color: #5E2750;
+width: 170px;
+height: 80px;
+padding-left:15px;
+font-family:Ubuntu;
+}
+.button-divDate
+{
+background-color: #5E2750;
+width: 170px;
+height: 130px;
+padding-left:15px;
+font-family:Ubuntu;
+}
+
+.ErorrMessage {
+    color:red;
+    font-size:small !important;
+    font-family:Ubuntu;
+}
+.Logout-button
+{
+    background-color:green;
+    font-size:13px;
+    text-align:center;
+    width:150px;
+    height:40px;
+}

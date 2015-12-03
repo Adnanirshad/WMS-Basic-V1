@@ -1,0 +1,87 @@
+*git
+#ignore thumbnails created by windows
+Thumbs.db
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+# ReSharper is a .NET coding add-in
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+# TODO: Comment the next line if you want to checkin your web deploy settings 
+# but database connection strings (with potential passwords) will be unencrypted
+*.pubxml
+*.publishproj
+#Ignore files build by Visual Studio
+dlldata.c
+*_i.h
+*.ilk
+*.meta
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+packages
+NuGet.exe
+*.tlh
+*.bak
+*.cache
+*.[Cc]ache
+*.ilk
+*.log
+*.config
+*[Rr]esharper*
+[Bb]in
+[Bb]in
+[Oo]bj
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
