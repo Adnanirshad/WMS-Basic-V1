@@ -34,7 +34,6 @@ namespace WMS.Models
         public Nullable<short> OldShiftMin { get; set; }
         public Nullable<short> NewShiftMin { get; set; }
     
-        public virtual Emp Emp { get; set; }
         public virtual User User { get; set; }
     }
 }

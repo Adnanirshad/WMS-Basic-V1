@@ -33,7 +33,5 @@ namespace WMS.Models
         public Nullable<double> YearRemaining { get; set; }
         public Nullable<double> GrandTotal { get; set; }
         public Nullable<double> GrandTotalRemaining { get; set; }
-    
-        public virtual Emp Emp { get; set; }
     }
 }

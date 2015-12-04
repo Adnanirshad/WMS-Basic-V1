@@ -50,11 +50,10 @@ namespace WMS.Models
         public Nullable<bool> StatusBreak { get; set; }
         public Nullable<short> ShifMin { get; set; }
         public string Remarks { get; set; }
-        public string Expr1 { get; set; }
         public string GradeName { get; set; }
         public string SectionName { get; set; }
         public string CrewName { get; set; }
-        public short DeptID { get; set; }
+        public Nullable<short> DeptID { get; set; }
         public string TypeName { get; set; }
         public Nullable<short> CatID { get; set; }
         public string CatName { get; set; }
@@ -85,6 +84,6 @@ namespace WMS.Models
         public int EmpID { get; set; }
         public string DivisionName { get; set; }
         public string DeptName { get; set; }
-        public short DivID { get; set; }
+        public Nullable<short> DivID { get; set; }
     }
 }

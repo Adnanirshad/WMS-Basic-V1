@@ -30,7 +30,6 @@ namespace WMS.Models
         public Nullable<short> LocID { get; set; }
     
         public virtual ICollection<EmpRdr> EmpRdrs { get; set; }
-        public virtual Location Location { get; set; }
         public virtual ICollection<PollData> PollDatas { get; set; }
         public virtual RdrDutyCode RdrDutyCode { get; set; }
         public virtual ReaderType ReaderType { get; set; }

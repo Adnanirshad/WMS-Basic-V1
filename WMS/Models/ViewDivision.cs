@@ -14,9 +14,7 @@ namespace WMS.Models
     
     public partial class ViewDivision
     {
-        public string DivisionName { get; set; }
         public short DivisionID { get; set; }
-        public string CompName { get; set; }
-        public short CompID { get; set; }
+        public string DivisionName { get; set; }
     }
 }

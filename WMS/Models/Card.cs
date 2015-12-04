@@ -27,7 +27,5 @@ namespace WMS.Models
         public Nullable<bool> active { get; set; }
     
         public virtual CardType CardType { get; set; }
-        public virtual Emp Emp { get; set; }
-        public virtual Reason Reason { get; set; }
     }
 }

@@ -14,7 +14,33 @@ namespace WMS.Models
     
     public partial class ViewMonthlyData
     {
+        public string GradeName { get; set; }
+        public string SectionName { get; set; }
+        public string CrewName { get; set; }
+        public Nullable<short> DeptID { get; set; }
+        public string TypeName { get; set; }
+        public Nullable<short> CatID { get; set; }
+        public string CatName { get; set; }
+        public string RegionName { get; set; }
+        public string CityName { get; set; }
+        public string LocName { get; set; }
+        public string ShiftName { get; set; }
+        public string DesignationName { get; set; }
+        public Nullable<int> DesigID { get; set; }
+        public Nullable<short> JobID { get; set; }
+        public Nullable<byte> TypeID { get; set; }
+        public Nullable<short> GradeID { get; set; }
+        public Nullable<short> SecID { get; set; }
+        public string CardNo { get; set; }
+        public Nullable<System.DateTime> JoinDate { get; set; }
+        public Nullable<System.DateTime> ResignDate { get; set; }
+        public Nullable<short> CrewID { get; set; }
         public int EmpID { get; set; }
+        public string DivisionName { get; set; }
+        public string DeptName { get; set; }
+        public Nullable<short> DivID { get; set; }
+        public Nullable<byte> ShiftID { get; set; }
+        public Nullable<short> LocID { get; set; }
         public string Period { get; set; }
         public string EmpMonth { get; set; }
         public string EmpNo { get; set; }
@@ -28,8 +54,8 @@ namespace WMS.Models
         public string D7 { get; set; }
         public string D8 { get; set; }
         public string D9 { get; set; }
-        public string D11 { get; set; }
         public string D10 { get; set; }
+        public string D11 { get; set; }
         public string D12 { get; set; }
         public string D13 { get; set; }
         public string D14 { get; set; }
@@ -42,13 +68,13 @@ namespace WMS.Models
         public string D21 { get; set; }
         public string D22 { get; set; }
         public string D23 { get; set; }
-        public string D25 { get; set; }
         public string D24 { get; set; }
+        public string D25 { get; set; }
         public string D26 { get; set; }
         public string D27 { get; set; }
         public string D28 { get; set; }
-        public string D30 { get; set; }
         public string D29 { get; set; }
+        public string D30 { get; set; }
         public string D31 { get; set; }
         public Nullable<byte> TotalDays { get; set; }
         public Nullable<double> WorkDays { get; set; }
@@ -57,6 +83,7 @@ namespace WMS.Models
         public Nullable<byte> RestDays { get; set; }
         public Nullable<byte> GZDays { get; set; }
         public Nullable<byte> LeaveDays { get; set; }
+        public Nullable<double> HalfLeavesDay { get; set; }
         public Nullable<byte> OfficialDutyDays { get; set; }
         public Nullable<short> TEarlyIn { get; set; }
         public Nullable<short> TEarlyOut { get; set; }
@@ -90,41 +117,13 @@ namespace WMS.Models
         public Nullable<short> OT22 { get; set; }
         public Nullable<short> OT23 { get; set; }
         public Nullable<short> OT24 { get; set; }
-        public Nullable<short> OT26 { get; set; }
         public Nullable<short> OT25 { get; set; }
+        public Nullable<short> OT26 { get; set; }
         public Nullable<short> OT27 { get; set; }
         public Nullable<short> OT28 { get; set; }
         public Nullable<short> OT29 { get; set; }
         public Nullable<short> OT30 { get; set; }
         public Nullable<short> OT31 { get; set; }
-        public string DesignationName { get; set; }
-        public string GradeName { get; set; }
-        public string CompName { get; set; }
-        public string JobTitle { get; set; }
-        public string CityName { get; set; }
-        public string RegionName { get; set; }
-        public string CrewName { get; set; }
-        public string LocName { get; set; }
-        public string SectionName { get; set; }
-        public string TypeName { get; set; }
-        public string DeptName { get; set; }
-        public string CatName { get; set; }
-        public string ShiftName { get; set; }
-        public string MarStatus { get; set; }
-        public Nullable<System.DateTime> JoinDate { get; set; }
-        public Nullable<System.DateTime> ValidDate { get; set; }
-        public Nullable<System.DateTime> IssueDate { get; set; }
-        public Nullable<System.DateTime> ResignDate { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public string Remarks { get; set; }
-        public Nullable<bool> FlagFP { get; set; }
-        public Nullable<bool> FlagFace { get; set; }
-        public Nullable<bool> FlagCard { get; set; }
-        public string DivisionName { get; set; }
-        public string CardNo { get; set; }
-        public Nullable<short> CompanyID { get; set; }
-        public Nullable<byte> TypeID { get; set; }
-        public Nullable<short> CatID { get; set; }
         public string L1 { get; set; }
         public string L2 { get; set; }
         public string L3 { get; set; }
@@ -134,19 +133,19 @@ namespace WMS.Models
         public string L7 { get; set; }
         public string L8 { get; set; }
         public string L9 { get; set; }
-        public string L11 { get; set; }
         public string L10 { get; set; }
+        public string L11 { get; set; }
         public string L12 { get; set; }
         public string L13 { get; set; }
         public string L14 { get; set; }
         public string L15 { get; set; }
         public string L16 { get; set; }
         public string L17 { get; set; }
-        public string L19 { get; set; }
         public string L18 { get; set; }
+        public string L19 { get; set; }
         public string L20 { get; set; }
-        public string L22 { get; set; }
         public string L21 { get; set; }
+        public string L22 { get; set; }
         public string L23 { get; set; }
         public string L24 { get; set; }
         public string L25 { get; set; }
@@ -155,17 +154,6 @@ namespace WMS.Models
         public string L28 { get; set; }
         public string L29 { get; set; }
         public string L30 { get; set; }
-        public string L31 { get; set; }
-        public Nullable<double> HalfLeavesDay { get; set; }
-        public Nullable<short> LocID { get; set; }
-        public Nullable<short> CrewID { get; set; }
-        public Nullable<short> GradeID { get; set; }
-        public short DeptID { get; set; }
-        public Nullable<byte> ShiftID { get; set; }
-        public Nullable<short> SecID { get; set; }
-        public short DivID { get; set; }
-        public Nullable<int> DesigID { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<bool> Status { get; set; }
     }
 }

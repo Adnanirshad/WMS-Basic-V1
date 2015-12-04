@@ -17,7 +17,5 @@ namespace WMS.Models
         public int PhotoID { get; set; }
         public byte[] EmpPic { get; set; }
         public Nullable<int> EmpID { get; set; }
-    
-        public virtual Emp Emp { get; set; }
     }
 }

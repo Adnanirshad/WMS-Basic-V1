@@ -29,7 +29,6 @@ namespace WMS.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
     
         public virtual Category Category { get; set; }
-        public virtual Location Location { get; set; }
         public virtual User User { get; set; }
     }
 }

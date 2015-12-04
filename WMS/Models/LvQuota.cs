@@ -12,18 +12,14 @@ namespace WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class LvQuota
     {
-        public City()
-        {
-            this.Locations = new HashSet<Location>();
-        }
-    
-        public short CityID { get; set; }
-        public string CityName { get; set; }
-        public Nullable<byte> RegionID { get; set; }
-    
-        public virtual Region Region { get; set; }
-        public virtual ICollection<Location> Locations { get; set; }
+        public int EmpID { get; set; }
+        public Nullable<double> A { get; set; }
+        public Nullable<double> TA { get; set; }
+        public Nullable<double> B { get; set; }
+        public Nullable<double> TB { get; set; }
+        public Nullable<double> C { get; set; }
+        public Nullable<double> TC { get; set; }
     }
 }

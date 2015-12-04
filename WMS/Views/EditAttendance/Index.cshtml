@@ -27,7 +27,9 @@
                         <label>Date</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="DateFrom" name="DateFrom" value="@ViewData["datef"]" type="date" class="form-control"/>
+
+                        <input id="DateFrom" name="DateFrom" value="@ViewData["datef"]" type="date" class="form-control" style="width:200px"/>
+
 
                     </div>
                 </div>
@@ -71,7 +73,9 @@
                         <label>From</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="JobDateFrom" name="JobDateFrom" value="@ViewData["JobDateFrom"]" type="date" class="form-control"/>
+
+                        <input id="JobDateFrom" name="JobDateFrom" value="@ViewData["JobDateFrom"]" type="date" class="form-control" style="width:auto"/>
+
                     </div>
                 </div>
                  <div class="row" style="margin-left:10%; margin-bottom:3%">
@@ -79,7 +83,9 @@
                         <label>To</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="JobDateTo" name="JobDateTo" type="date" value="@ViewData["JobDateTo"]" class="form-control"/>
+
+                        <input id="JobDateTo" name="JobDateTo" type="date" value="@ViewData["JobDateTo"]" class="form-control" style="width:auto"/>
+
                     </div>
                 </div>
                  <div class="row" style="margin-left:10%; margin-bottom:3%">
@@ -169,4 +175,5 @@
     </section>
 </article>
 <script src="@Url.Content("~/Scripts/EditAttendance.js")"></script>
-<script src="@Url.Content("~/Scripts/Shift/GetUserSpecificShifts.js")"></script>
+@*<script src="@Url.Content("~/Scripts/Shift/GetUserSpecificShifts.js")"></script>*@
+

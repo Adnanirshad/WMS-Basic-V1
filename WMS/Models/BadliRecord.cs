@@ -20,8 +20,5 @@ namespace WMS.Models
         public string EmpDateBadli { get; set; }
         public Nullable<int> BadliDesgID { get; set; }
         public string Remarks { get; set; }
-    
-        public virtual AttData AttData { get; set; }
-        public virtual Emp Emp { get; set; }
     }
 }

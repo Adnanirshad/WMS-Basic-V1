@@ -147,16 +147,18 @@ namespace WMS.Reports.Filters
             QueryBuilder qb = new QueryBuilder();
             string query = qb.QueryForCompanyViewLinq(LoggedInUser);
            
-            _View = da.ViewDivisions.Where(query).AsQueryable().OrderBy("DivisionName ASC").ToList();
-            if (fm.CompanyFilter.Count > 0)
-            {
-                foreach (var comp in fm.CompanyFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.CompID == _compID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
+
+            //_View = da.ViewDivisions.Where(query).AsQueryable().OrderBy("DivisionName ASC").ToList();
+            //if (fm.CompanyFilter.Count > 0)
+            //{
+            //    foreach (var comp in fm.CompanyFilter)
+            //    {
+            //        short _compID = Convert.ToInt16(comp.ID);
+            //        _TempView.AddRange(_View.Where(aa => aa.CompID == _compID).ToList());
+            //    }
+            //    _View = _TempView.ToList();
+            //}
+
             GridViewDivision.DataSource = _View.Where(aa => aa.DivisionName.ToUpper().Contains(search.ToUpper())).ToList();
             GridViewDivision.DataBind();
         }

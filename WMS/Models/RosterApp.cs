@@ -29,6 +29,5 @@ namespace WMS.Models
         public Nullable<short> CompanyID { get; set; }
     
         public virtual RosterType RosterType { get; set; }
-        public virtual Shift Shift { get; set; }
     }
 }

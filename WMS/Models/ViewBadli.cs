@@ -14,8 +14,7 @@ namespace WMS.Models
     
     public partial class ViewBadli
     {
-        public Nullable<int> BadliDesgID { get; set; }
-        public string DesignationName { get; set; }
+        public Nullable<System.DateTime> AttDate { get; set; }
         public string DutyCode { get; set; }
         public Nullable<System.TimeSpan> DutyTime { get; set; }
         public Nullable<System.DateTime> TimeIn { get; set; }
@@ -31,36 +30,35 @@ namespace WMS.Models
         public Nullable<System.TimeSpan> SLMin { get; set; }
         public Nullable<bool> StatusP { get; set; }
         public Nullable<bool> StatusAB { get; set; }
+        public string Remarks { get; set; }
+        public string DesignationName { get; set; }
         public int BadliID { get; set; }
-        public Nullable<System.DateTime> AttDate { get; set; }
         public string EmpDateBadli { get; set; }
-        public string DeptName { get; set; }
-        public short DeptID { get; set; }
-        public Nullable<short> CityID { get; set; }
-        public int EmpID { get; set; }
-        public Nullable<short> CrewID { get; set; }
-        public Nullable<short> GradeID { get; set; }
-        public Nullable<short> LocID { get; set; }
-        public Nullable<byte> TypeID { get; set; }
-        public Nullable<byte> ShiftID { get; set; }
-        public Nullable<short> SecID { get; set; }
-        public Nullable<short> CatID { get; set; }
-        public Nullable<short> CompanyID { get; set; }
-        public string DivisionName { get; set; }
+        public Nullable<int> BadliDesgID { get; set; }
+        public string EmpNo { get; set; }
+        public string GradeName { get; set; }
         public string SectionName { get; set; }
-        public string EmpName { get; set; }
-        public string Expr2 { get; set; }
-        public string ShiftName { get; set; }
-        public string CatName { get; set; }
-        public string TypeName { get; set; }
         public string CrewName { get; set; }
-        public string LocName { get; set; }
+        public Nullable<short> DeptID { get; set; }
+        public string TypeName { get; set; }
+        public Nullable<short> CatID { get; set; }
+        public string CatName { get; set; }
         public string RegionName { get; set; }
         public string CityName { get; set; }
-        public string CompName { get; set; }
-        public string GradeName { get; set; }
-        public string Expr3 { get; set; }
-        public short DivID { get; set; }
-        public string Remarks { get; set; }
+        public string LocName { get; set; }
+        public Nullable<short> CityID { get; set; }
+        public string ShiftName { get; set; }
+        public string Expr1 { get; set; }
+        public string EmpName { get; set; }
+        public Nullable<byte> TypeID { get; set; }
+        public Nullable<short> GradeID { get; set; }
+        public Nullable<short> SecID { get; set; }
+        public Nullable<short> CrewID { get; set; }
+        public int EmpID { get; set; }
+        public string DivisionName { get; set; }
+        public string DeptName { get; set; }
+        public Nullable<short> DivID { get; set; }
+        public Nullable<byte> ShiftID { get; set; }
+        public Nullable<short> LocID { get; set; }
     }
 }

@@ -16,8 +16,6 @@ namespace WMS.Models
     {
         public string Period { get; set; }
         public string EmpMonth { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<int> EmpID { get; set; }
         public string EmpNo { get; set; }
         public string EmpName { get; set; }
