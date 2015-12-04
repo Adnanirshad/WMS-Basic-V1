@@ -112,13 +112,19 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
+<<<<<<< HEAD
         /// GridViewRegion control.
+=======
+        /// GridViewCompany control.
+>>>>>>> 92c8efc907499465a40b438e8fab917f49c589c4
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+
         protected global::System.Web.UI.WebControls.GridView GridViewRegion;
+
         
         /// <summary>
         /// tbSearch_Location control.
@@ -139,13 +145,15 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
-        /// GridViewDivision control.
+
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+
         protected global::System.Web.UI.WebControls.GridView GridViewDivision;
+
         
         /// <summary>
         /// ScriptManager1 control.

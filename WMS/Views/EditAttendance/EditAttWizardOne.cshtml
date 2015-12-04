@@ -245,7 +245,9 @@
                 <div class="col-md-2">
                      @if (Model.DutyTime != null)
                 {
+
                     <input type="text" step="1" max= "2400" min= "0" id="DutyTime" name="DutyTime" class="form-control" value="@Model.DutyTime.Value.ToString()" style="width:auto">
+
                 }
                 else
                 {
@@ -261,11 +263,13 @@
                 <div class="focus col-md-2">
                      @if (Model.TimeIn != null)
                 {
+
                     <input type="number" step="1" max= "2400" min= "0" id="Inhours" name="Inhours" class="form-control" value="@Model.TimeIn.Value.ToString("HHmm")" style="width:auto">
                 }
                 else
                 {
                    <input type="number" step="1" max= "2400" min= "0" id="Inhours" name="Inhours" class="form-control" value="0000" style="width:auto">
+
                 }
                 </div>
              </div>
@@ -277,11 +281,13 @@
                     @*@Html.Editor("OutHour")*@
                      @if (Model.TimeOut != null)
                 {
+
                     <input type="number" step="1" max= "2400" min= "0" id="OutHour" name="OutHour" class="form-control"value="@Model.TimeOut.Value.ToString("HHmm")" style="width:auto">
                 }
                 else
                 {
                    <input type="number" step="1" max= "2400" min= "0" id="OutHour" name="OutHour" class="form-control"value="0000" style="width:auto">
+
                 }
                     
                 </div>
@@ -304,6 +310,7 @@
                     @*@Html.Editor("OutHour")*@
                 @if (Model.ShifMin != null)
                 {
+
                     <input type="number" step="1" max= "800" min= "0" id="ShiftMin" name="ShiftMin" class="form-control"value="@Model.ShifMin.Value" style="width:auto">
                     <input type="hidden" step="1" max= "800" min= "0"  id ="ShiftMinHidden" name="ShiftMinHidden" class="form-control"value="@Model.ShifMin.Value" style="width:auto">
                 }
@@ -311,6 +318,7 @@
                 {
                    <input type="number"  min= "0" id="ShiftMin" name="ShiftMin" class="form-control"value="0" style="width:auto">
                     <input type="hidden"  id="ShiftMinHidden" name="ShiftMinHidden" class="form-control"value="0" style="width:auto">
+
                 }
                 </div>
              </div>
@@ -319,7 +327,9 @@
                     Remarks
                 </div>
                 <div class="col-md-2">
+
                         <input type="text" id="NewRemarks" name="NewRemarks" class="form-control" style="width:auto">
+
                 </div>
              </div>
             <div class="form-group">

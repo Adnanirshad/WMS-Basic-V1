@@ -147,6 +147,7 @@ namespace WMS.Reports.Filters
             QueryBuilder qb = new QueryBuilder();
             string query = qb.QueryForCompanyViewLinq(LoggedInUser);
            
+
             //_View = da.ViewDivisions.Where(query).AsQueryable().OrderBy("DivisionName ASC").ToList();
             //if (fm.CompanyFilter.Count > 0)
             //{
@@ -157,6 +158,7 @@ namespace WMS.Reports.Filters
             //    }
             //    _View = _TempView.ToList();
             //}
+
             GridViewDivision.DataSource = _View.Where(aa => aa.DivisionName.ToUpper().Contains(search.ToUpper())).ToList();
             GridViewDivision.DataBind();
         }
