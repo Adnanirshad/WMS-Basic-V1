@@ -12,10 +12,14 @@ namespace WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ViewDivision
+    public partial class LvQuota
     {
-        public string DivisionName { get; set; }
-        public short DivisionID { get; set; }
-      
+        public int EmpID { get; set; }
+        public Nullable<double> A { get; set; }
+        public Nullable<double> TA { get; set; }
+        public Nullable<double> B { get; set; }
+        public Nullable<double> TB { get; set; }
+        public Nullable<double> C { get; set; }
+        public Nullable<double> TC { get; set; }
     }
 }
