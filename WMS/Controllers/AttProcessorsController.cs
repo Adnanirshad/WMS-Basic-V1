@@ -36,7 +36,7 @@ namespace WMS.Controllers
             ViewBag.WhenToSortParm = sortOrder == "whento" ? "whento_desc" : "whento";
             ViewBag.LocationSortParm = sortOrder == "location" ? "location_desc" : "location";
             ViewBag.CatSortParm = sortOrder == "cat" ? "cat_desc" : "cat";
-
+           
             if (searchString != null)
                 page = 1;
              else
@@ -114,7 +114,7 @@ namespace WMS.Controllers
 
             }, "Value", "Text", 1);
             query = qb.QueryForLocationTableSegerationForLinq(LoggedInUser);
-            ViewBag.LocationID = new SelectList(db.Locations.Where(query).OrderBy(s=>s.LocName), "LocID", "LocName");
+            ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
             
             ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
              return View();

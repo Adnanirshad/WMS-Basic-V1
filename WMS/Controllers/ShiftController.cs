@@ -283,23 +283,20 @@ namespace WMS.Controllers
         public ActionResult ShiftList()
         {
 
-            QueryBuilder qb = new QueryBuilder();
-            User LoggedInUser = Session["LoggedUser"] as User;
-            qb.QueryForShiftForLinq(LoggedInUser);
-            //var type;
-            //if (HttpContext.Request.IsAjaxRequest())
-            //    return Json(new SelectList(
-            //                    types.ToArray(),
-            //                    "ShiftID",
-            //                    "ShiftName")
-            //               , JsonRequestBehavior.AllowGet);
+            //QueryBuilder qb = new QueryBuilder();
+            //User LoggedInUser = Session["LoggedUser"] as User;
+            List<Shift> shifts = db.Shifts.ToList();
+            var type = shifts;
+            if (HttpContext.Request.IsAjaxRequest())
+                return Json(new SelectList(
+                                type.ToArray(),
+                                "ShiftID",
+                                "ShiftName")
+                           , JsonRequestBehavior.AllowGet);
 
             return RedirectToAction("Index");
         }
-        protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            String d = "SDFSDF";
-        }
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)

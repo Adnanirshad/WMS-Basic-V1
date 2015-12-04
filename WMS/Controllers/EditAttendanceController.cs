@@ -30,6 +30,7 @@ namespace WMS.Controllers
             ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
             ViewBag.ShiftList = new SelectList(db.Shifts, "ShiftID", "ShiftName");
+          
             ViewBag.CrewList = new SelectList(db.Crews, "CrewID", "CrewName");
             ViewBag.SectionList = new SelectList(db.Sections, "SectionID", "SectionName");
             ViewBag.DesignationID = new SelectList(db.Designations, "DesignationID", "DesignationName");
