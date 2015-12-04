@@ -112,11 +112,8 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-<<<<<<< HEAD
         /// GridViewRegion control.
-=======
-        /// GridViewCompany control.
->>>>>>> 92c8efc907499465a40b438e8fab917f49c589c4
+
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
