@@ -17,7 +17,5 @@ namespace WMS.Models
         public int EmpID { get; set; }
         public string Face1 { get; set; }
         public Nullable<int> Length { get; set; }
-    
-        public virtual Emp Emp { get; set; }
     }
 }

@@ -71,7 +71,7 @@ namespace WMS.Controllers
                         _Polls = db.PollDatas.Where(aa => aa.EmpDate == _EmpDate).OrderBy(a => a.EntTime).ToList();
                         ViewBag.PollsDataIn = _Polls.Where(aa => aa.RdrDuty == 1);
                         ViewBag.PollsDataOut = _Polls.Where(aa => aa.RdrDuty == 5);
-                        ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo", _attData.EmpID);
+                        ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s => s.EmpName), "EmpID", "EmpNo", _attData.EmpID);
                         Session["NEmpNo"] = _attData.EmpID;
                         ViewBag.SucessMessage = "";
                         if (_attData.WorkMin != null)
@@ -91,7 +91,10 @@ namespace WMS.Controllers
                         return View(_attData);
                     }
                     else
+                    {
+                        ViewBag.Message = "Attendance Not Found";
                         return View("Index");
+                    }
                 }
                 else
                     return View("Index");

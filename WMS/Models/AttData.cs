@@ -14,11 +14,6 @@ namespace WMS.Models
     
     public partial class AttData
     {
-        public AttData()
-        {
-            this.BadliRecords = new HashSet<BadliRecord>();
-        }
-    
         public string EmpDate { get; set; }
         public Nullable<System.DateTime> AttDate { get; set; }
         public string EmpNo { get; set; }
@@ -35,7 +30,7 @@ namespace WMS.Models
         public Nullable<short> OTMin { get; set; }
         public Nullable<short> GZOTMin { get; set; }
         public Nullable<short> BreakMin { get; set; }
-        public Nullable<System.TimeSpan> SLMin { get; set; }
+        public Nullable<short> SLMin { get; set; }
         public Nullable<bool> StatusP { get; set; }
         public Nullable<bool> StatusAB { get; set; }
         public Nullable<bool> StatusLI { get; set; }
@@ -92,6 +87,5 @@ namespace WMS.Models
         public Nullable<System.DateTime> Tout15 { get; set; }
     
         public virtual Emp Emp { get; set; }
-        public virtual ICollection<BadliRecord> BadliRecords { get; set; }
     }
 }

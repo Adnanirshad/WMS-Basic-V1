@@ -14,14 +14,7 @@ namespace WMS.Models
     
     public partial class Reason
     {
-        public Reason()
-        {
-            this.Cards = new HashSet<Card>();
-        }
-    
         public byte ReasonID { get; set; }
         public string ReasonName { get; set; }
-    
-        public virtual ICollection<Card> Cards { get; set; }
     }
 }

@@ -36,7 +36,6 @@ namespace WMS.Models
         public string LvStatus { get; set; }
         public Nullable<bool> Active { get; set; }
     
-        public virtual Emp Emp { get; set; }
         public virtual User User { get; set; }
         public virtual LvType LvType1 { get; set; }
         public virtual ICollection<LvData> LvDatas { get; set; }

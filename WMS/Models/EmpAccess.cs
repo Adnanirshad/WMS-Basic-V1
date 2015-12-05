@@ -19,7 +19,5 @@ namespace WMS.Models
         public Nullable<byte> RdrID { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<bool> Access { get; set; }
-    
-        public virtual Emp Emp { get; set; }
     }
 }

@@ -869,12 +869,12 @@ namespace WMS.Reports
             //for company
             if (fm.CompanyFilter.Count > 0)
             {
-                foreach (var comp in fm.CompanyFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
+                //foreach (var comp in fm.CompanyFilter)
+                //{
+                //    short _compID = Convert.ToInt16(comp.ID);
+                //    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
+                //}
+                //_ViewList = _TempViewList.ToList();
             }
             else
                 _TempViewList = _ViewList.ToList();
@@ -1083,12 +1083,12 @@ namespace WMS.Reports
             //for company
             if (fm.CompanyFilter.Count > 0)
             {
-                foreach (var comp in fm.CompanyFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
+                //foreach (var comp in fm.CompanyFilter)
+                //{
+                //    short _compID = Convert.ToInt16(comp.ID);
+                //    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
+                //}
+                //_ViewList = _TempViewList.ToList();
             }
             else
                 _TempViewList = _ViewList.ToList();
@@ -1613,21 +1613,7 @@ namespace WMS.Reports
         public List<ViewDetailAttData> ReportsFilterImplementation(FiltersModel fm, List<ViewDetailAttData> _TempViewList, List<ViewDetailAttData> _ViewList)
         {
            
-            //for company
-            if (fm.CompanyFilter.Count > 0)
-            {
-                foreach (var comp in fm.CompanyFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-
+           
 
             //for location
             if (fm.LocationFilter.Count > 0)
@@ -1779,20 +1765,7 @@ namespace WMS.Reports
         //ViewMonthlyData
         public List<ViewMonthlyData> ReportsFilterImplementation(FiltersModel fm, List<ViewMonthlyData> _TempViewList, List<ViewMonthlyData> _ViewList)
         {
-            //for company
-            if (fm.CompanyFilter.Count > 0)
-            {
-                foreach (var comp in fm.CompanyFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
+            
 
 
             //for location
@@ -1944,22 +1917,7 @@ namespace WMS.Reports
         //ViewMonthlyDataPer
         public List<ViewMonthlyDataPer> ReportsFilterImplementation(FiltersModel fm, List<ViewMonthlyDataPer> _TempViewList, List<ViewMonthlyDataPer> _ViewList)
         {
-            //for company
-            if (fm.CompanyFilter.Count > 0)
-            {
-                foreach (var comp in fm.CompanyFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-
-
+           
             //for location
             if (fm.LocationFilter.Count > 0)
             {

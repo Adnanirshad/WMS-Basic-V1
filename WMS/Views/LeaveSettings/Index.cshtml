@@ -4,9 +4,8 @@
 }
 
 <h2>Leaves Settings</h2>
-<hr />
+<a    href="~/LeaveSettings/LvQuotaList">List of Employees Leave Quotas</a><hr />
 <p class="ErorrMessage">@ViewBag.CMessage</p>
-<div class="form-group CreateBtnMargin"><a    href="~/LeaveSettings/LvQuotaList">List of Employees Leave Quotas</a></div>
     <section class="col-md-6">
          <header><h4>Add Leave Balance (Year Closing)</h4></header>
         @using (Html.BeginForm("AddLeaveQuota", "LeaveSettings", FormMethod.Post))
@@ -128,7 +127,7 @@
                         </div>
                     </div>
                     <div class="row" style="margin-left:10%; margin-bottom:1%; margin-top:5%">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label>Casual Leaves</label>
                         </div>
                         <div class="col-md-4">
@@ -137,7 +136,7 @@
                         </div>
                     </div>
                     <div class="row" style="margin-left:10%; margin-bottom:1%">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label>Annual Leaves</label>
                         </div>
                         <div class="col-md-4">
@@ -145,7 +144,7 @@
                         </div>
                     </div>
                     <div class="row" style="margin-left:10%; margin-bottom:1%">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label>Sick Leaves</label>
                         </div>
                         <div class="col-md-4">
@@ -155,7 +154,7 @@
                     </div>
                 </div>
                 <div class="row" style="margin-left:10%; margin-bottom:3%">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                     </div>
                     <div class="col-md-4">
                         <input type="submit" value="Save"  class="btn btn-xs btn-success"/>

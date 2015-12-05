@@ -20,8 +20,8 @@
 </div>
     <div class="col-md-4">
         <div style="margin-top:20px" class="pull-right">
-        @Html.ActionLink("Previous Date", "PreviousEntry",null, new { @class = "btn btn-danger btn-sm " }) 
-            @Html.ActionLink("Next Date", "NextEntry",null, new { @class = "btn btn-success btn-sm " }) 
+        @Html.ActionLink("Previous Date", "PreviousEntry",null, new { @class = "btn btn-danger btn-xs " }) 
+            @Html.ActionLink("Next Date", "NextEntry",null, new { @class = "btn btn-success btn-xs" }) 
             </div>
     </div>
 </div>
@@ -239,10 +239,10 @@
             <div class="col-md-6">
             <h4 style="margin-bottom:20px;">Enter New Time In and Out</h4>
              <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     Duty Time
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                      @if (Model.DutyTime != null)
                 {
                     <input type="text" step="1" max= "2400" min= "0" id="DutyTime" name="DutyTime" class="form-control" value="@Model.DutyTime.Value.ToString()">
@@ -255,10 +255,10 @@
                 </div>
              </div>
              <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     Time In
                 </div>
-                <div class="focus col-md-2">
+                <div class="focus col-md-4">
                      @if (Model.TimeIn != null)
                 {
                     <input type="number" step="1" max= "2400" min= "0" id="Inhours" name="Inhours" class="form-control" value="@Model.TimeIn.Value.ToString("HHmm")">
@@ -270,10 +270,10 @@
                 </div>
              </div>
             <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     Time Out
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     @*@Html.Editor("OutHour")*@
                      @if (Model.TimeOut != null)
                 {
@@ -287,7 +287,7 @@
                 </div>
              </div>
             <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     Duty Code
                 </div>
                 <div class="col-md-4">
@@ -297,10 +297,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <input type="checkbox"name="checkShiftMin" id="checkShiftMin" onclick="enable_text()" >Shift Minutes
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     @*@Html.Editor("OutHour")*@
                 @if (Model.ShifMin != null)
                 {
@@ -315,17 +315,17 @@
                 </div>
              </div>
              <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     Remarks
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                         <input type="text" id="NewRemarks" name="NewRemarks" class="form-control">
                 </div>
              </div>
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-sm btn-success" />
-                    <a href="~/EditAttendance" class="btn btn-sm btn-warning">Back</a>
+                <div class="col-md-offset-3 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-xs btn-success" />
+                    <a href="~/EditAttendance" class="btn btn-xs btn-warning">Back</a>
                 </div>
             </div>
             <p style="color:green; font-size:15px;">@ViewBag.SucessMessage</p>

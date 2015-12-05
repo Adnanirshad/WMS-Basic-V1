@@ -18,6 +18,7 @@ namespace WMS.Models
         public string RoleDataLegend { get; set; }
         public Nullable<int> RoleDataValue { get; set; }
         public Nullable<int> RoleUserID { get; set; }
+        public string UserRoleLegend { get; set; }
     
         public virtual User User { get; set; }
     }

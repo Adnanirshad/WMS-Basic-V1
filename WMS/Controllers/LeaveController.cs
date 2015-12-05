@@ -44,30 +44,35 @@ namespace WMS.Controllers
             return true;
         }
 
-        public bool CheckLeaveBalance(LvApplication _lvapp)
+        public bool CheckLeaveBalance(LvApplication _lvapp, LvType LeaveType)
         {
             bool balance = false;
             decimal RemainingLeaves;
-            using (var ctx = new TAS2013Entities())
+            if (LeaveType.UpdateBalance == true)
             {
-                List<LvConsumed> _lvConsumed = new List<LvConsumed>();
-                string empLvType = _lvapp.EmpID.ToString() + _lvapp.LvType;
-                _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
-                RemainingLeaves = (decimal)_lvConsumed.FirstOrDefault().YearRemaining;
-                if ((RemainingLeaves - Convert.ToDecimal(_lvapp.NoOfDays)) >= 0)
+                using (var ctx = new TAS2013Entities())
                 {
-                    balance= true;
-                }
-                else
-                    balance= false;
+                    List<LvConsumed> _lvConsumed = new List<LvConsumed>();
+                    string empLvType = _lvapp.EmpID.ToString() + _lvapp.LvType;
+                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                    RemainingLeaves = (decimal)_lvConsumed.FirstOrDefault().YearRemaining;
+                    if ((RemainingLeaves - Convert.ToDecimal(_lvapp.NoOfDays)) >= 0)
+                    {
+                        balance = true;
+                    }
+                    else
+                        balance = false;
 
+                }
             }
+            else
+                balance = true;
 
             return balance;
 
         }
 
-        public bool AddLeaveToLeaveAttData(LvApplication lvappl)
+        public bool AddLeaveToLeaveAttData(LvApplication lvappl,LvType lvType)
         {
             try
             {
@@ -82,9 +87,6 @@ namespace WMS.Controllers
                         {
                             AttData _EmpAttData = new AttData();
                             _EmpAttData = context.AttDatas.First(aa => aa.EmpDate == _EmpDate);
-                            _EmpAttData.TimeIn = null;
-                            _EmpAttData.TimeOut = null;
-                            _EmpAttData.WorkMin = null;
                             _EmpAttData.LateIn = null;
                             _EmpAttData.LateOut = null;
                             _EmpAttData.EarlyIn = null;
@@ -101,14 +103,7 @@ namespace WMS.Controllers
                             _EmpAttData.StatusGZOT = null;
                             _EmpAttData.StatusMN = null;
                             _EmpAttData.StatusOD = null;
-                            if (lvappl.LvType == "A")//Casual Leave
-                                _EmpAttData.Remarks = "[CL]";
-                            if (lvappl.LvType == "B")//Anual Leave
-                                _EmpAttData.Remarks = "[AL]";
-                            if (lvappl.LvType == "C")//Sick Leave
-                                _EmpAttData.Remarks = "[SL]";
-                            _EmpAttData.StatusAB = false;
-                            _EmpAttData.StatusLeave = true;
+                            _EmpAttData.Remarks = lvType.FldName;
                             context.SaveChanges();
                         }
                     }
@@ -123,7 +118,7 @@ namespace WMS.Controllers
 
         }
 
-        public bool AddLeaveToLeaveData(LvApplication lvappl)
+        public bool AddLeaveToLeaveData(LvApplication lvappl,LvType lvType)
         {
             DateTime datetime = new DateTime();
             datetime = lvappl.FromDate;
@@ -152,33 +147,36 @@ namespace WMS.Controllers
                 datetime = datetime.AddDays(1);
                 // Balance Leaves from Emp Table
             }
-            BalanceLeaves(lvappl);
+            BalanceLeaves(lvappl, lvType);
             return true;
         }
 
-        public void BalanceLeaves(LvApplication lvappl)
+        public void BalanceLeaves(LvApplication lvappl,LvType LeaveType)
         {
-            using (var ctx = new TAS2013Entities())
+            if (LeaveType.UpdateBalance == true)
             {
-                List<LvConsumed> _lvConsumed = new List<LvConsumed>();
-                string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
-                _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
-                float _NoOfDays = lvappl.NoOfDays;
-                if (_lvConsumed.Count > 0)
+                using (var ctx = new TAS2013Entities())
                 {
-                    _lvConsumed.FirstOrDefault().YearRemaining = (float)(_lvConsumed.FirstOrDefault().YearRemaining - _NoOfDays);
-                    _lvConsumed.FirstOrDefault().GrandTotalRemaining = (float)(_lvConsumed.FirstOrDefault().GrandTotalRemaining - _NoOfDays);
-                    if (lvappl.IsHalf == true)
+                    List<LvConsumed> _lvConsumed = new List<LvConsumed>();
+                    string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
+                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                    float _NoOfDays = lvappl.NoOfDays;
+                    if (_lvConsumed.Count > 0)
                     {
-                        AddHalfLeaveBalancceMonthQuota(_lvConsumed, lvappl);
-                    }
-                    else
-                    {
-                        AddBalancceMonthQuota(_lvConsumed, lvappl);
-                    }
+                        _lvConsumed.FirstOrDefault().YearRemaining = (float)(_lvConsumed.FirstOrDefault().YearRemaining - _NoOfDays);
+                        _lvConsumed.FirstOrDefault().GrandTotalRemaining = (float)(_lvConsumed.FirstOrDefault().GrandTotalRemaining - _NoOfDays);
+                        if (lvappl.IsHalf == true)
+                        {
+                            AddHalfLeaveBalancceMonthQuota(_lvConsumed, lvappl);
+                        }
+                        else
+                        {
+                            AddBalancceMonthQuota(_lvConsumed, lvappl);
+                        }
                         ctx.SaveChanges();
-                }
-                ctx.Dispose();
+                    }
+                    ctx.Dispose();
+                } 
             }
         }
 
@@ -440,7 +438,7 @@ namespace WMS.Controllers
 
         #region -- Add Half Leave--
 
-        public void AddHalfLeaveToLeaveData(LvApplication lvappl)
+        public void AddHalfLeaveToLeaveData(LvApplication lvappl,LvType lvType)
         {
             DateTime datetime = new DateTime();
             datetime = lvappl.FromDate;
@@ -467,10 +465,10 @@ namespace WMS.Controllers
 
             }
             // Balance Leaves from Emp Table
-            BalanceLeaves(lvappl);
+            BalanceLeaves(lvappl, lvType);
         }
 
-        public void AddHalfLeaveToAttData(LvApplication lvappl)
+        public void AddHalfLeaveToAttData(LvApplication lvappl,LvType lvType)
         {
             DateTime datetime = new DateTime();
             datetime = lvappl.FromDate;
@@ -481,12 +479,7 @@ namespace WMS.Controllers
                 {
                     AttData _EmpAttData = new AttData();
                     _EmpAttData = db.AttDatas.First(aa => aa.EmpDate == _EmpDate);
-                    if (lvappl.LvType == "A")//Casual Leave
-                        _EmpAttData.Remarks = _EmpAttData.Remarks+"[H-CL]";
-                    if (lvappl.LvType == "B")//Anual Leave
-                        _EmpAttData.Remarks = _EmpAttData.Remarks+"[H-AL]";
-                    if (lvappl.LvType == "C")//Sick Leave
-                        _EmpAttData.Remarks = _EmpAttData.Remarks+"[H-SL]";
+                    _EmpAttData.Remarks = _EmpAttData.Remarks + lvType.HalfLvCode;
 
                     if (_EmpAttData.Remarks.Contains("[Absent]"))
                         _EmpAttData.Remarks.Replace("[Abesnt]", "");
@@ -513,26 +506,31 @@ namespace WMS.Controllers
             }
         }
 
-        public bool CheckHalfLeaveBalance(LvApplication lvapplication)
+        public bool CheckHalfLeaveBalance(LvApplication lvapplication,LvType lvType)
         {
             bool check = false;
             float RemainingLeaves;
             List<LvConsumed> _lvConsumed = new List<LvConsumed>();
-            using (var ctx = new TAS2013Entities())
+            if (lvType.UpdateBalance == true)
             {
-                string empLvType = lvapplication.EmpID.ToString() + lvapplication.LvType;
-                _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
-                if (_lvConsumed.Count > 0)
+                using (var ctx = new TAS2013Entities())
                 {
-                    RemainingLeaves = (float)_lvConsumed.FirstOrDefault().YearRemaining;
-                     if ((RemainingLeaves - (float)lvapplication.NoOfDays) >= 0)
+                    string empLvType = lvapplication.EmpID.ToString() + lvapplication.LvType;
+                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                    if (_lvConsumed.Count > 0)
                     {
-                        check =true;
+                        RemainingLeaves = (float)_lvConsumed.FirstOrDefault().YearRemaining;
+                        if ((RemainingLeaves - (float)lvapplication.NoOfDays) >= 0)
+                        {
+                            check = true;
+                        }
+                        else
+                            check = false;
                     }
-                    else
-                        check= false;
                 }
             }
+            else
+                check = true;
             return check;
 
         }
@@ -777,6 +775,8 @@ namespace WMS.Controllers
                     _EmpAttData = db.AttDatas.First(aa => aa.EmpDate == lvshort.EmpDate);
                     _EmpAttData.StatusAB = false;
                     _EmpAttData.StatusSL = true;
+                    _EmpAttData.SLMin = Convert.ToInt16(lvshort.THour.Value.Minutes);
+                    _EmpAttData.ShifMin = (short)(_EmpAttData.ShifMin - Convert.ToInt16(lvshort.THour.Value.Minutes));
                     _EmpAttData.Remarks = _EmpAttData.Remarks + "[Short Leave]";
                     db.SaveChanges();
                 }
@@ -784,16 +784,21 @@ namespace WMS.Controllers
         }
         #endregion
 
-        public bool HasLeaveQuota(int empID, string lvType)
+        public bool HasLeaveQuota(int empID, string lvType,LvType leaveType)
         {
             bool check = false;
-            using (var ctx = new TAS2013Entities())
+            if (leaveType.UpdateBalance == true)
             {
-                List<LvConsumed> lv = new List<LvConsumed>();
-                lv = ctx.LvConsumeds.Where(aa => aa.EmpID == empID && aa.LeaveType == lvType).ToList();
-                if (lv.Count > 0)
-                    check = true;
+                using (var ctx = new TAS2013Entities())
+                {
+                    List<LvConsumed> lv = new List<LvConsumed>();
+                    lv = ctx.LvConsumeds.Where(aa => aa.EmpID == empID && aa.LeaveType == lvType).ToList();
+                    if (lv.Count > 0)
+                        check = true;
+                }
             }
+            else
+                check = true;
             return check;
         }
     }

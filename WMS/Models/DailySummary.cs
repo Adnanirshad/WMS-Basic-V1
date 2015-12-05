@@ -15,6 +15,7 @@ namespace WMS.Models
     public partial class DailySummary
     {
         public string SummaryDateCriteria { get; set; }
+        public string Criteria { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<short> TotalEmps { get; set; }
         public Nullable<short> PresentEmps { get; set; }
@@ -23,12 +24,12 @@ namespace WMS.Models
         public Nullable<short> ShortLvEmps { get; set; }
         public Nullable<short> HalfLvEmps { get; set; }
         public Nullable<short> LIEmps { get; set; }
-        public Nullable<short> DayOffEmps { get; set; }
         public Nullable<short> LOEmps { get; set; }
         public Nullable<short> EIEmps { get; set; }
         public Nullable<short> EOEmps { get; set; }
         public Nullable<short> OTEmps { get; set; }
         public Nullable<short> OnTimeEmps { get; set; }
+        public Nullable<short> DayOffEmps { get; set; }
         public Nullable<int> LIMins { get; set; }
         public Nullable<int> LOMins { get; set; }
         public Nullable<int> EIMins { get; set; }
@@ -45,10 +46,9 @@ namespace WMS.Models
         public Nullable<short> AExpectedMins { get; set; }
         public Nullable<short> AActualMins { get; set; }
         public Nullable<short> ALossMins { get; set; }
-        public string Criteria { get; set; }
         public Nullable<short> CriteriaValue { get; set; }
         public string CriteriaName { get; set; }
-        public Nullable<System.TimeSpan> AverageTimeIn { get; set; }
-        public Nullable<System.TimeSpan> AverageTimeOut { get; set; }
+        public Nullable<System.TimeSpan> AvgTimeIn { get; set; }
+        public Nullable<System.TimeSpan> AvgTimeOut { get; set; }
     }
 }

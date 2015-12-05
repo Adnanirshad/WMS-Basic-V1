@@ -126,8 +126,9 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
+                LvType lvType = db.LvTypes.First(aa => aa.LvType1 == lvapplication.LvType);
                 LeaveController LvProcessController = new LeaveController();
-                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID,lvapplication.LvType))
+                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LvType, lvType))
                 {
                     if (lvapplication.IsHalf != true)
                     {
@@ -136,7 +137,7 @@ namespace WMS.Controllers
                         if (LvProcessController.CheckDuplicateLeave(lvapplication))
                         {
                             //Check leave Balance
-                            if (LvProcessController.CheckLeaveBalance(lvapplication))
+                            if (LvProcessController.CheckLeaveBalance(lvapplication, lvType))
                             {
                                 lvapplication.LvDate = DateTime.Today;
                                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
@@ -146,8 +147,8 @@ namespace WMS.Controllers
                                 if (db.SaveChanges() > 0)
                                 {
                                     HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Leave, (byte)MyEnums.Operation.Add, DateTime.Now);
-                                    LvProcessController.AddLeaveToLeaveData(lvapplication);
-                                    LvProcessController.AddLeaveToLeaveAttData(lvapplication);
+                                    LvProcessController.AddLeaveToLeaveData(lvapplication,lvType);
+                                    LvProcessController.AddLeaveToLeaveAttData(lvapplication,lvType);
                                     ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo");
                                     ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvType1).ToList(), "LvType1", "LvDesc");
                                     return RedirectToAction("Create");
@@ -171,7 +172,7 @@ namespace WMS.Controllers
                         {
                             if (LvProcessController.CheckDuplicateLeave(lvapplication))
                             {
-                                if (LvProcessController.CheckHalfLeaveBalance(lvapplication))
+                                if (LvProcessController.CheckHalfLeaveBalance(lvapplication,lvType))
                                 {
                                     lvapplication.LvDate = DateTime.Today;
                                     int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
@@ -181,8 +182,8 @@ namespace WMS.Controllers
                                     if (db.SaveChanges() > 0)
                                     {
                                         HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Leave, (byte)MyEnums.Operation.Add, DateTime.Now);
-                                        LvProcessController.AddHalfLeaveToLeaveData(lvapplication);
-                                        LvProcessController.AddHalfLeaveToAttData(lvapplication);
+                                        LvProcessController.AddHalfLeaveToLeaveData(lvapplication,lvType);
+                                        LvProcessController.AddHalfLeaveToAttData(lvapplication, lvType);
                                         ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo");
                                         ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvType1).ToList(), "LvType1", "LvDesc");
                                         return RedirectToAction("Create");
