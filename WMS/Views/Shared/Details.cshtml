@@ -1,0 +1,30 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.ViewModels.DetailsView
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+@section styles
+{
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/details")
+    <script type="text/javascript">
+        YUI().use('details-view', function(Y)
+        {
+            new Y.DetailsView().render();
+        });
+    </script>
+
+}
+
+@section ContextActions
+{
+    @Html.DisplayFor(model => model.ContextItems)
+}
+
+<h2>@Model.Title</h2>
+@Html.DisplayFor(model => model.Table)

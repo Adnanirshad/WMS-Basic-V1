@@ -95,12 +95,12 @@ namespace WMS.Reports.Filters
             FiltersModel fm = Session["FiltersModel"] as FiltersModel;
             List<EmpView> _View = new List<EmpView>();
             List<EmpView> _TempView = new List<EmpView>();
-            //User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
-            //QueryBuilder qb = new QueryBuilder();
-            //string query = qb.QueryForCompanyFilters(LoggedInUser);
-            //DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
-            //_View = dt.ToList<EmpView>().AsQueryable().SortBy("EmpNo").ToList();
-            _View = da.EmpViews.Where(aa => aa.Status == true).ToList();
+            User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
+            QueryBuilder qb = new QueryBuilder();
+            string query = qb.MakeCustomizeQueryForEmpView(LoggedInUser);
+            DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
+            _View = dt.ToList<EmpView>().AsQueryable().SortBy("EmpNo").ToList();
+            _View = _View.Where(aa => aa.Status == true).ToList();
             if (fm.DivisionFilter.Count > 0)
             {
                 _TempView.Clear();
@@ -141,6 +141,26 @@ namespace WMS.Reports.Filters
                 }
                 _View = _TempView.ToList();
             }
+            if (fm.RegionFilter.Count > 0)
+            {
+                _TempView.Clear();
+                foreach (var comp in fm.RegionFilter)
+                {
+                    short _compID = Convert.ToInt16(comp.ID);
+                    _TempView.AddRange(_View.Where(aa => aa.RegionID == _compID).ToList());
+                }
+                _View = _TempView.ToList();
+            }
+            if (fm.CityFilter.Count > 0)
+            {
+                _TempView.Clear();
+                foreach (var comp in fm.CityFilter)
+                {
+                    short _compID = Convert.ToInt16(comp.ID);
+                    _TempView.AddRange(_View.Where(aa => aa.CityID == _compID).ToList());
+                }
+                _View = _TempView.ToList();
+            }
             if (fm.LocationFilter.Count > 0)
             {
                 _TempView.Clear();
@@ -158,16 +178,6 @@ namespace WMS.Reports.Filters
                 {
                     short _compID = Convert.ToInt16(comp.ID);
                     _TempView.AddRange(_View.Where(aa => aa.ShiftID == _compID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
-            if (fm.CrewFilter.Count > 0)
-            {
-                _TempView.Clear();
-                foreach (var comp in fm.CrewFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.CrewID == _compID).ToList());
                 }
                 _View = _TempView.ToList();
             }

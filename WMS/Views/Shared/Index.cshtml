@@ -1,0 +1,51 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.ViewModels.IndexView
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+@section styles
+{
+    @Styles.Render("~/css/indexview")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/indexview")
+    <script type="text/javascript">
+        YUI().use('index-view', function (Y)
+        {
+            new Y.IndexView(
+                {
+                    modelName: '@Model.ModelName',
+                    filterOptionsUrl: '@Url.HttpRouteUrl("ApiAction", new { controller = "Index", action = "GetFilterOptions" })',
+                    refreshTableUrl: '@Url.RouteUrl("Default", new { controller = "IndexView", action = "RefreshTableBody" })'
+                })
+                .render();
+        });
+    </script>
+}
+
+@section GlobalContextActions
+{
+    <div class="pure-form">
+        <input @Html.Raw(Model.SearchControl.InputHtml.ToHtmlString()) />
+        <button @Html.Raw(Model.SearchControl.Button.Html.ToHtmlString())>
+            <i class="@Html.Raw(string.Join(" ", Model.SearchControl.Button.IconHtmlClasses))"></i>
+        </button>
+    </div>
+}
+
+@section ContextActions
+{
+    @Html.DisplayFor(model => model.CreateButton)
+    @Html.DisplayFor(model => model.ContextItems)     
+}
+
+<div style="display:inline-block;">
+    <div class="clearfix" style="position:relative;">
+        <h2 style="float:left;">@Model.Title</h2>
+        @Html.DisplayFor(model => model.Pager)
+    </div>
+    @Html.DisplayFor(model => model.Table)
+</div>

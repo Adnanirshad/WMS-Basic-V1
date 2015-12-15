@@ -66,7 +66,6 @@ namespace WMS.Models
         public DbSet<LvApplication> LvApplications { get; set; }
         public DbSet<LvConsumed> LvConsumeds { get; set; }
         public DbSet<LvData> LvDatas { get; set; }
-        public DbSet<LvQuota> LvQuotas { get; set; }
         public DbSet<LvShort> LvShorts { get; set; }
         public DbSet<LvType> LvTypes { get; set; }
         public DbSet<Option> Options { get; set; }
@@ -100,12 +99,12 @@ namespace WMS.Models
         public DbSet<ViewCrew> ViewCrews { get; set; }
         public DbSet<ViewDepartment> ViewDepartments { get; set; }
         public DbSet<ViewDetailAttData> ViewDetailAttDatas { get; set; }
-        public DbSet<ViewDivision> ViewDivisions { get; set; }
         public DbSet<ViewEditAttendance> ViewEditAttendances { get; set; }
         public DbSet<ViewEmpPic> ViewEmpPics { get; set; }
         public DbSet<ViewEmpType> ViewEmpTypes { get; set; }
         public DbSet<ViewLeaveData> ViewLeaveDatas { get; set; }
         public DbSet<ViewLeaveQuota> ViewLeaveQuotas { get; set; }
+        public DbSet<ViewLocation> ViewLocations { get; set; }
         public DbSet<ViewLvApplication> ViewLvApplications { get; set; }
         public DbSet<ViewLvConsumed> ViewLvConsumeds { get; set; }
         public DbSet<ViewMonthlyData> ViewMonthlyDatas { get; set; }

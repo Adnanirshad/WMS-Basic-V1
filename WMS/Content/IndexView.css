@@ -1,0 +1,21 @@
+﻿.sorter
+{
+    margin-left:10px;
+    color:#262727;
+}
+
+.pure-table tr
+{
+    cursor: pointer;
+}
+
+.pure-table tr:hover td
+{
+    background-color: #f0fbff;
+}
+
+.pure-table thead tr th span ul li ul.pure-menu-children
+{
+    max-height: 200px;
+    overflow-y: scroll;
+}

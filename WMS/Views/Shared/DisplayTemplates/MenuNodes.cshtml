@@ -1,0 +1,9 @@
+﻿@using System.Collections.ObjectModel;
+@model Collection<Psns.Common.Mvc.ViewBuilding.Menu.MenuNode>
+
+<ul>
+    @foreach(var node in Model)
+    {
+        Html.DisplayFor(m => node);
+    }
+</ul>

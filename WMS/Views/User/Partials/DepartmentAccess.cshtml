@@ -1,0 +1,22 @@
+﻿<div class="form-group" data-ng-show="UserAccessLevelD == 'D'">
+            <div class="control-label col-md-4">Department</div>
+            <div class="col-md-8">
+                <input type="hidden" placeholder="e.g Lahore" data-ng-model="department.name" id="uDepartmentCount" name="uDepartmentCount" class="form-control" value="{{departments.length}}">
+                <div class="input-group" ng-repeat="department in departments">
+                    <input disabled type="text" placeholder="e.g Lahore" id="testDepartment{{$index + 1}}" data-ng-model="department.name" class="form-control">
+                    <input type="hidden" placeholder="e.g I.T" data-ng-model="department.name" id="uDepartment{{$index + 1}}" name="uDepartment{{$index + 1}}" class="form-control" value="{{department.name}}">
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="removeDepartment($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
+                    </span>
+                </div>
+                 <div  ng-show="isAddingDepartment">
+                    
+                    <select type="text" placeholder="Add a Department" data-ng-model="newDepartment.name" class="form-control">
+                        <option ng-repeat="dept in AllDepartments">{{dept.Text}}</option>
+                    </select>
+                    <a class="btn btn-default btn-sm" ng-click="addDepartment()">Add</a>
+                    <a href="" ng-click="isAddingDepartment = false">Done Adding</a>
+                </div>
+                <p><a href="" ng-click="isAddingDepartment = true">+ Add Department</a></p>
+            </div>
+          </div>

@@ -1,0 +1,13 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.ViewModels.TableModel.Table
+
+<tbody>
+    @foreach(var row in Model.Rows)
+    {
+        <tr @Html.Raw(row.Html.ToHtmlString())>
+            @foreach(var column in row.Columns)
+            {
+                <td @Html.Raw(column.Html.ToHtmlString())>@column.Value</td>
+            }
+        </tr>
+    }
+</tbody>

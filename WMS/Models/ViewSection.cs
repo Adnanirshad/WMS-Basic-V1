@@ -20,7 +20,5 @@ namespace WMS.Models
         public string DeptName { get; set; }
         public string DivisionName { get; set; }
         public Nullable<short> DivID { get; set; }
-        public string CompName { get; set; }
-        public Nullable<short> CompID { get; set; }
     }
 }

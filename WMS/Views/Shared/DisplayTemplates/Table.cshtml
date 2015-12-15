@@ -1,0 +1,13 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.ViewModels.TableModel.Table
+
+<table class="pure-table">
+    <thead>
+        <tr>
+            @foreach(var column in Model.Header.Columns)
+            {
+                <th>@column.Value</th>
+            }
+        </tr>
+    </thead>
+    @Html.Partial("_TableBody", Model)
+</table>

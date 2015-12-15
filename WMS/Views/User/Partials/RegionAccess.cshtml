@@ -1,0 +1,22 @@
+﻿<div class="form-group" data-ng-show="UserAccessLevelL == 'R'">
+            <div class="control-label col-md-4">Region</div>
+            <div class="col-md-8">
+                <input type="hidden" placeholder="e.g Lahore" data-ng-model="region.name" id="uRegionCount" name="uRegionCount" class="form-control" value="{{regions.length}}">
+                <div class="input-group" ng-repeat="region in regions">
+                    <input disabled type="text" placeholder="e.g Lahore" id="testRegion{{$index + 1}}" data-ng-model="region.name" class="form-control">
+                    <input type="hidden" placeholder="e.g Lahore" data-ng-model="region.name" id="uRegion{{$index + 1}}" name="uRegion{{$index + 1}}" class="form-control" value="{{region.name}}">
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="removeRegion($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
+                    </span>
+                </div>
+                 <div  ng-show="isAddingRegion">
+                    
+                    <select type="text" placeholder="Add a Region" data-ng-model="newRegion.name" class="form-control">
+                        <option ng-repeat="reg in AllRegions">{{reg.Text}}</option>
+                    </select>
+                    <a class="btn btn-default btn-sm" ng-click="addRegion()">Add</a>
+                    <a href="" ng-click="isAddingRegion = false">Done Adding</a>
+                </div>
+                <p><a href="" ng-click="isAddingRegion = true">+ Add Region</a></p>
+            </div>
+          </div>

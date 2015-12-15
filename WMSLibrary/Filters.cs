@@ -220,6 +220,9 @@ namespace WMSLibrary
                 case "Department":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.DepartmentFilter);
                     break;
+                case "Region":
+                    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.RegionFilter);
+                    break;
                 case "Section":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.SectionFilter);
                     break;

@@ -1,0 +1,22 @@
+﻿<div class="form-group" data-ng-show="UserAccessLevelL == 'C'">
+            <div class="control-label col-md-4">City</div>
+            <div class="col-md-8">
+                <input type="hidden" placeholder="e.g Lahore" data-ng-model="city.name" id="uCityCount" name="uCityCount" class="form-control" value="{{cities.length}}">
+                <div class="input-group" ng-repeat="city in cities">
+                    <input disabled type="text" placeholder="e.g Lahore" id="testCity{{$index + 1}}" data-ng-model="city.name" class="form-control">
+                    <input type="hidden" placeholder="e.g Lahore" data-ng-model="city.name" id="uCity{{$index + 1}}" name="uCity{{$index + 1}}" class="form-control" value="{{city.name}}">
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="removeCity($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
+                    </span>
+                </div>
+                 <div  ng-show="isAddingCity">
+                    
+                    <select type="text" placeholder="Add a City" data-ng-model="newCity.name" class="form-control">
+                        <option ng-repeat="cit in AllCities">{{cit.Text}}</option>
+                    </select>
+                    <a class="btn btn-default btn-sm" ng-click="addCity()">Add</a>
+                    <a href="" ng-click="isAddingCity = false">Done Adding</a>
+                </div>
+                <p><a href="" ng-click="isAddingCity = true">+ Add City</a></p>
+            </div>
+          </div>

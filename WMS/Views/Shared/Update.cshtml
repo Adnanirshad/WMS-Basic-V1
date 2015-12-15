@@ -1,0 +1,66 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.ViewModels.UpdateView
+@using Psns.Common.Mvc.ViewBuilding.Attributes
+@using Psns.Common.Mvc.Crudified.Helpers
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+@section styles
+{
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/updateview")
+    <script type="text/javascript">
+        YUI().use('update-view', function(Y)
+        {
+            new Y.UpdateView().render();
+        });
+    </script>
+}
+
+@section ContextActions
+{
+    @Html.DisplayFor(model => model.ContextItems)
+}
+
+@using(Html.BeginRouteForm(Model.Form.RouteName,
+Model.Form.RouteValues,
+Model.Form.FormMethod,
+Model.Form.Html))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>@Model.Title</legend>
+        @foreach(var inputProperty in Model.InputProperties)
+        {
+            <div class="pure-control-group">
+                @Html.ValidationLabel(inputProperty.ModelName, inputProperty.Label)
+                @if(inputProperty.Value != null && inputProperty.Value.GetType().UnderlyingSystemType == typeof(SelectList))
+                {
+                    @Html.DropDownList(inputProperty.ModelName, inputProperty.Value as SelectList)
+                }
+                else if(inputProperty.Value is MultiSelectList)
+                {
+                    @Html.ListBox(inputProperty.ModelName, inputProperty.Value as MultiSelectList)
+                }
+                else
+                {
+                    switch(inputProperty.Type)
+                    {
+                        case InputPropertyType.String:
+                            @Html.TextBox(inputProperty.ModelName, inputProperty.Value)
+                            break;
+                        default:
+                            @Html.EditorFor(_ => inputProperty.Value, inputProperty.Label, inputProperty.ModelName)
+                            break;
+                    }
+                }
+                @Html.ValidationMessage(inputProperty.ModelName)
+            </div>
+        }
+    </fieldset>
+}

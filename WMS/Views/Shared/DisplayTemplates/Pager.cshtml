@@ -1,0 +1,24 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.ViewModels.Pager
+
+<ul @Html.Raw(Model.Html.ToHtmlString())>
+    @if(Model.First != null)
+    {
+        <li>@Html.DisplayFor(model => model.First)</li>
+    }
+    @if(Model.Previous != null)
+    {
+        <li>@Html.DisplayFor(model => model.Previous)</li>
+    }
+    @if(Model.PagerState != null)
+    {
+        <li>@Html.DisplayFor(model => model.PagerState)</li>
+    }
+    @if(Model.Next != null)
+    {
+        <li>@Html.DisplayFor(model => model.Next)</li>
+    }
+    @if(Model.Last != null)
+    {
+        <li>@Html.DisplayFor(model => model.Last)</li>
+    }
+</ul>

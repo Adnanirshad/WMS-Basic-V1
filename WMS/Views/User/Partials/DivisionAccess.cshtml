@@ -1,0 +1,23 @@
+﻿<div class="form-group" data-ng-show="UserAccessLevelD == 'V'">
+            <div class="control-label col-md-4">Division</div>
+   
+            <div class="col-md-8">
+                <input type="hidden" placeholder="e.g Lahore" data-ng-model="division.name" id="uDivisionCount" name="uDivisionCount" class="form-control" value="{{divisions.length}}">
+                <div class="input-group" ng-repeat="division in divisions">
+                    <input disabled type="text" placeholder="e.g Lahore" id="testDivision{{$index + 1}}" data-ng-model="division.name" class="form-control">
+                    <input type="hidden" placeholder="e.g Lahore" data-ng-model="division.name" id="uDivision{{$index + 1}}" name="uDivision{{$index + 1}}" class="form-control" value="{{division.name}}">
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="removeDivision($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
+                    </span>
+                </div>
+                 <div  ng-show="isAddingDivision">
+                    
+                    <select type="text" placeholder="Add a Division" data-ng-model="newDivision.name" class="form-control">
+                        <option ng-repeat="div in AllDivisions">{{div.Text}}</option>
+                    </select>
+                    <a class="btn btn-default btn-sm" ng-click="addDivision()">Add</a>
+                    <a href="" ng-click="isAddingDivision = false">Done Adding</a>
+                </div>
+                <p><a href="" ng-click="isAddingDivision = true">+ Add Division</a></p>
+            </div>
+          </div>

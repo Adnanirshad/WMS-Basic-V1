@@ -1,0 +1,105 @@
+﻿@using Psns.Common.Mvc.ViewBuilding.Menu
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @Styles.Render("~/css/crudglobal")
+    @Scripts.RenderFormat("<!--[if lt IE 9]><script type=\"text/javascript\" src=\"{0}\"></script><![endif]-->",
+        "~/scripts/respond")
+    @RenderSection("styles", required: false)
+</head>
+<body class="pure-skin-psns">
+    <div id="header">
+        <div id="nav" class="clearfix">
+            @if(IsSectionDefined("logo"))
+            {
+                @RenderSection("logo", false)
+            }
+            <div class="menu-link" id="menuLink">
+                <span class="fa fa-bars"></span>
+            </div>
+            <div id="globalContext">
+                @if(IsSectionDefined("GlobalContextActions"))
+                {
+                    <div id="globalContextActions">
+                        @RenderSection("GlobalContextActions", false)
+                    </div>
+                }
+                <div id="nav-menu" class="pure-menu">
+                    <ul id="nav-menu-root">
+                        @foreach(var mapper in GlobalMenu.GlobalMenuItems)
+                        {
+                            @Html.DisplayFor(m => mapper.RootNode)
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @if(GlobalMenu.ContextMenu != null)
+        {
+            <div id="contextHeader" class="clearfix">
+                @if(!string.IsNullOrEmpty(GlobalMenu.ContextMenu.Title))
+                {
+                    <div id="contextTitle" class="context-element">
+                        <a href="@Url.Content("~/")">@GlobalMenu.ContextMenu.Title</a>
+                        <span id="contextTitleAffix">
+                            @RenderSection("ContextTitleAffix", false)
+                        </span>
+                    </div>
+                }
+                <div id="contextHeaderRight" class="context-element">
+                    @if(GlobalMenu.ContextMenu is IContextMenuWithDropDowns)
+                    {
+                        var menu = GlobalMenu.ContextMenu as IContextMenuWithDropDowns;
+                        if(menu.MenuItems != null)
+                        {
+                            <div id="contextMenu" class="pure-menu">
+                                <ul id="contextMenuData">
+                                    @foreach(var mapper in menu.MenuItems)
+                                    {
+                                        @Html.DisplayFor(m => mapper.RootNode)
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    }
+                    @if(IsSectionDefined("ContextActions"))
+                    {
+                        <div id="contextActions">
+                            @RenderSection("ContextActions", false)
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <div id="container">
+        @if(TempData["AlertMessage"] != null)
+        {
+            @TempData["AlertMessage"]
+        }
+        @RenderSection("featured", required: false)
+        @RenderBody()
+    </div>
+    @if(IsSectionDefined("footer"))
+    {
+        @RenderSection("footer", false)
+    }
+    @Scripts.Render("~/scripts/yui")
+    @Scripts.Render("~/scripts/global")
+    <script type="text/javascript">
+        YUIConfigurator.Configure('@YuiBaseUrl',
+            '@YuiGalleryBaseUrl',
+            true);
+
+        YUI().use('application-menu', function (Y)
+        {
+            Y.ApplicationMenu.Initialize();
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

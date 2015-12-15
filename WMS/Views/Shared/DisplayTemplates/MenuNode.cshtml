@@ -1,0 +1,18 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.Menu.MenuNode
+
+<li>
+    @if(!string.IsNullOrEmpty(Model.IconHtmlClasses))
+    {
+        <a href="@Model.Url" title="@Model.Title">
+            <i class="@Model.IconHtmlClasses"></i>
+        </a>
+    }
+    else
+    {
+        <a href="@Model.Url" title="@Model.Title">@Model.Text</a>
+    }
+    @if(@Model.Children.Any())
+    {       
+        <ul>@Html.DisplayFor(m => Model.Children)</ul>
+    }
+</li>

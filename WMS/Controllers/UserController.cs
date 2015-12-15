@@ -56,7 +56,8 @@ namespace WMS.Controllers
 
             ViewBag.EmpID = new SelectList(db.Emps, "EmpID", "EmpNo");
             ViewBag.LocationID = new SelectList(db.Locations, "LocID", "LocName");
-            ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "RoleName");
+            ViewBag.UserRoleL = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "L"), "RoleLegend", "RoleName");
+            ViewBag.UserRoleD = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "D"), "RoleLegend", "RoleName");
             return View();
         }
 
@@ -104,8 +105,8 @@ namespace WMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,UserName,Password,EmpID,DateCreated,Name,Status,Department,CanEdit,CanDelete,CanAdd,CanView,RoleID,MHR,MDevice,MLeave,MDesktop,MEditAtt,MUser,MOption,MRoster,MRDailyAtt,MRLeave,MRMonthly,MRAudit,MRManualEditAtt,MREmployee,MRDetail,MRSummary,MRGraph,ViewPermanentStaff,ViewPermanentMgm,ViewContractual,ViewLocation,LocationID,MProcess")] User user)
         {
-            int count = Convert.ToInt32(Request.Form["uLocationCount"]);
-            if (count > 0)
+            //int count = Convert.ToInt32(Request.Form["uLocationCount"]);
+            //if (count > 0)
             {
                 bool check = false;
                 string _EmpNo = Request.Form["EmpNo"].ToString();
@@ -230,36 +231,37 @@ namespace WMS.Controllers
 
                 if (check == false)
                 {
-                    string _dpName = FindADUser(user.UserName);
-                    if (_dpName != "No")
+                    //string _dpName = FindADUser(user.UserName);
+                    //if (_dpName != "No")
                     {
-                        user.Name = _dpName;
+                        //user.Name = _dpName;
                         user.DateCreated = DateTime.Today;
                         user.EmpID = _emp.FirstOrDefault().EmpID;
+
+                        user.UserRoleL = Request.Form["UserRoleL"];
+                        user.UserRoleD = Request.Form["UserRoleD"];
                         db.Users.Add(user);
                         db.SaveChanges();
-                        //Save UserLoc
-                        List<Location> locs = new List<Location>();
-                        locs = db.Locations.ToList();
-                        for (int i = 1; i <= count; i++)
-                        {
-                            string uLocID = "uLocation" + i;
-                            string LocName = Request.Form[uLocID].ToString();
-                            int locID = locs.Where(aa => aa.LocName == LocName).FirstOrDefault().LocID;
-                            //UserLocation uloc = new UserLocation();
-                            //uloc.UserID = user.UserID;
-                            //uloc.LocationID = (short)locID;
-                            //db.UserLocations.Add(uloc);
-                            db.SaveChanges();
-                        }
+                        SetUserAccessLevelData(user);
+
+
                         return RedirectToAction("Index");
                     }
                 }
             }
             ViewBag.EmpID = new SelectList(db.Emps, "EmpID", "EmpNo", user.EmpID);
-            ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "RoleName", user.UserRole);
+            
+            // TO be verified - contains no user data
+            ViewBag.LocationID = new SelectList(db.Locations, "LocID", "LocName");
+            ViewBag.UserRoleL = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "L"), "RoleLegend", "RoleName");
+            ViewBag.UserRoleD = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "D"), "RoleLegend", "RoleName");
+            
+
+
             return View(user);
         }
+
+        
 
         private string FindADUser(string adUserName)
         {
@@ -289,7 +291,14 @@ namespace WMS.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmpID = new SelectList(db.Emps, "EmpID", "EmpNo", user.EmpID);
-            ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "RoleName", user.UserRole);
+            //ViewBag.RoleIDL = new SelectList(db.UserRoles, "RoleID", "RoleName", user.UserRoleL);
+
+            ViewBag.LocationID = new SelectList(db.Locations, "LocID", "LocName");
+            ViewBag.UserRoleL = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "L"), "RoleLegend", "RoleName", user.UserRoleL);
+            ViewBag.UserRoleD = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "D"), "RoleLegend", "RoleName", user.UserRoleD);
+            
+
+
             return View(user);
         }
 
@@ -301,7 +310,11 @@ namespace WMS.Controllers
         public ActionResult Edit([Bind(Include = "UserID,UserName,Password,EmpID,DateCreated,Name,Status,Department,CanEdit,CanDelete,CanAdd,CanView,RoleID,MHR,MDevice,MLeave,MDesktop,MEditAtt,MUser,MOption,MRDailyAtt,MRLeave,MRMonthly,MRAudit,MRManualEditAtt,MREmployee,MRDetail,MRSummary,MRGraph,ViewPermanentStaff,ViewPermanentMgm,ViewContractual,ViewLocation,LocationID,MProcess")] User user)
         {
             bool check = false;
-            user.UserRoleD = Request.Form["RoleID"].ToString();
+            
+            
+            //user.UserRoleD = Request.Form["RoleID"].ToString();
+
+
             if (Request.Form["Status"].ToString() == "true")
                 user.Status = true;
             else
@@ -401,54 +414,167 @@ namespace WMS.Controllers
 
             if (check == false)
             {
+
+                
+                user.UserRoleL = Request.Form["UserRoleL"];
+                user.UserRoleD = Request.Form["UserRoleD"];
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
-                int count = Convert.ToInt32(Request.Form["uLocationCount"]);
-                List<Location> locs = new List<Location>();
-                //List<UserLocation> userLocs = db.UserLocations.Where(aa=>aa.UserID==user.UserID).ToList();
-                //locs = db.Locations.ToList();
-                //List<int> currentLocIDs = new List<int>();
-                //foreach (var uloc in userLocs)
-                //{
-                //    UserLocation ul = db.UserLocations.First(aa=>aa.UserLocID==uloc.UserLocID);
-                //    db.UserLocations.Remove(ul);
-                //    db.SaveChanges();
-                //}
-                //userLocs = new List<UserLocation>();
-                //for (int i = 1; i <= count; i++)
-                //{
-                //    string uLocID = "uLocation" + i;
-                //    string LocName = Request.Form[uLocID].ToString();
-                //    int locID = locs.Where(aa => aa.LocName == LocName).FirstOrDefault().LocID;
-                //    currentLocIDs.Add(locID);
-                //    if(userLocs.Where(aa=>aa.LocationID==locID).Count()>0)
-                //    {
-                        
-                //    }
-                //    else
-                //    {
-                //        UserLocation uloc = new UserLocation();
-                //        uloc.UserID = user.UserID;
-                //        uloc.LocationID = (short)locID;
-                //        db.UserLocations.Add(uloc);
-                //        userLocs.Add(uloc);
-                //        db.SaveChanges();
-                //    }   
-                //}
-                //foreach (var item in userLocs)
-                //{
-                //    if (!currentLocIDs.Contains((int)item.LocationID))
-                //    {
-                        
-                //    }
-                //}
+                RemoveUserRoleDatas(user);
+                SetUserAccessLevelData(user);
+                
+                
+                
                 return RedirectToAction("Index");
 
             }
 
             ViewBag.EmpID = new SelectList(db.Emps, "EmpID", "EmpNo", user.EmpID);
-            ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "RoleName", user.UserRole);
+            //ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "RoleName", user.UserRole);
+             
+
+            // todo to be verified - user data missing
+            ViewBag.LocationID = new SelectList(db.Locations, "LocID", "LocName");
+            ViewBag.UserRoleL = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "L"), "RoleLegend", "RoleName");
+            ViewBag.UserRoleD = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "D"), "RoleLegend", "RoleName");
+            
             return View(user);
+        }
+
+        private void RemoveUserRoleDatas(Models.User user)
+        {
+            List<UserRoleData> UserRoleDatas = db.UserRoleDatas.Where(aa => aa.RoleUserID == user.UserID).ToList();
+            foreach (var roleData in UserRoleDatas)
+            {
+                db.UserRoleDatas.Remove(roleData);
+                db.SaveChanges();
+            }
+            
+        }
+
+        private void SetUserAccessLevelData(User user)
+        {
+            //Save UserLoc
+
+            if (Request.Form["uLocationCount"] != "" && Request.Form["UserRoleL"] == "L")
+            {
+                int locationCount = Convert.ToInt32(Request.Form["uLocationCount"]);
+                List<Location> locs = new List<Location>();
+                locs = db.Locations.ToList();
+                for (int i = 1; i <= locationCount; i++)
+                {
+                    string uLocID = "uLocation" + i;
+                    string LocName = Request.Form[uLocID].ToString();
+                    int locID = locs.Where(aa => aa.LocName == LocName).FirstOrDefault().LocID;
+                    UserRoleData urd = new UserRoleData();
+                    urd.RoleDataLegend = "L";
+                    urd.UserRoleLegend = "L";
+                    urd.RoleDataValue = (short)locID;
+                    urd.RoleUserID = user.UserID;
+                    db.UserRoleDatas.Add(urd);
+                    db.SaveChanges();
+                }
+            }
+            //Save User City
+            if (Request.Form["uCityCount"] != "" && Request.Form["UserRoleL"] == "C")
+            {
+                int cityCount = Convert.ToInt32(Request.Form["uCityCount"]);
+                List<City> cities = new List<City>();
+                cities = db.Cities.ToList();
+                for (int i = 1; i <= cityCount; i++)
+                {
+                    string uCityID = "uCity" + i;
+                    string CityName = Request.Form[uCityID].ToString();
+                    int cityID = cities.Where(aa => aa.CityName == CityName).FirstOrDefault().CityID;
+                    UserRoleData urd = new UserRoleData();
+                    urd.RoleDataLegend = "C";
+                    urd.UserRoleLegend = "L";
+                    urd.RoleDataValue = (short)cityID;
+                    urd.RoleUserID = user.UserID;
+                    db.UserRoleDatas.Add(urd);
+                    db.SaveChanges();
+                }
+            }
+            //Save User Region
+            if (Request.Form["uRegionCount"] != "" && Request.Form["UserRoleL"] == "R")
+            {
+                int regionCount = Convert.ToInt32(Request.Form["uRegionCount"]);
+                List<Region> regions = new List<Region>();
+                regions = db.Regions.ToList();
+                for (int i = 1; i <= regionCount; i++)
+                {
+                    string uRegionID = "uRegion" + i;
+                    string RegionName = Request.Form[uRegionID].ToString();
+                    int regionID = regions.Where(aa => aa.RegionName == RegionName).FirstOrDefault().RegionID;
+                    UserRoleData urd = new UserRoleData();
+                    urd.RoleDataLegend = "R";
+                    urd.UserRoleLegend = "L";
+                    urd.RoleDataValue = (short)regionID;
+                    urd.RoleUserID = user.UserID;
+                    db.UserRoleDatas.Add(urd);
+                    db.SaveChanges();
+                }
+            }
+            //Save User Section
+            if (Request.Form["uSectionCount"] != "" && Request.Form["UserRoleD"] == "S")
+            {
+                int sectionCount = Convert.ToInt32(Request.Form["uSectionCount"]);
+                List<Section> sections = new List<Section>();
+                sections = db.Sections.ToList();
+                for (int i = 1; i <= sectionCount; i++)
+                {
+                    string uSectionID = "uSection" + i;
+                    string SectionName = Request.Form[uSectionID].ToString();
+                    int sectionID = sections.Where(aa => aa.SectionName == SectionName).FirstOrDefault().SectionID;
+                    UserRoleData urd = new UserRoleData();
+                    urd.RoleDataLegend = "S";
+                    urd.UserRoleLegend = "D";
+                    urd.RoleDataValue = (short)sectionID;
+                    urd.RoleUserID = user.UserID;
+                    db.UserRoleDatas.Add(urd);
+                    db.SaveChanges();
+                }
+            }
+            //Save User Department
+            if (Request.Form["uDepartmentCount"] != "" && Request.Form["UserRoleD"] == "D")
+            {
+                int departmentCount = Convert.ToInt32(Request.Form["uDepartmentCount"]);
+                List<Department> departments = new List<Department>();
+                departments = db.Departments.ToList();
+                for (int i = 1; i <= departmentCount; i++)
+                {
+                    string uDepartmentID = "uDepartment" + i;
+                    string DepartmentName = Request.Form[uDepartmentID].ToString();
+                    int DepartmentID = departments.Where(aa => aa.DeptName == DepartmentName).FirstOrDefault().DeptID;
+                    UserRoleData urd = new UserRoleData();
+                    urd.RoleDataLegend = "D";
+                    urd.UserRoleLegend = "D";
+                    urd.RoleDataValue = (short)DepartmentID;
+                    urd.RoleUserID = user.UserID;
+                    db.UserRoleDatas.Add(urd);
+                    db.SaveChanges();
+                }
+            }
+            //Save User Division
+            if (Request.Form["uDivisionCount"] != "" && Request.Form["UserRoleD"] == "V")
+            {
+                int divisionCount = Convert.ToInt32(Request.Form["uDivisionCount"]);
+                List<Division> divisions = new List<Division>();
+                divisions = db.Divisions.ToList();
+                for (int i = 1; i <= divisionCount; i++)
+                {
+                    string uDivisionID = "uDivision" + i;
+                    string DivisionName = Request.Form[uDivisionID].ToString();
+                    int divisionID = divisions.Where(aa => aa.DivisionName == DivisionName).FirstOrDefault().DivisionID;
+                    UserRoleData urd = new UserRoleData();
+                    urd.RoleDataLegend = "V";
+                    urd.UserRoleLegend = "D";
+                    urd.RoleDataValue = (short)divisionID;
+                    urd.RoleUserID = user.UserID;
+                    db.UserRoleDatas.Add(urd);
+                    db.SaveChanges();
+                }
+            }
         }
 
         // GET: /User/Delete/5
@@ -486,35 +612,223 @@ namespace WMS.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult UserLocationList()
+        
+
+        public ActionResult Template(string id)
         {
-            var states = db.Locations.ToList();
+            switch (id.ToLower())
+            {
+                case "locationaccess":
+                    return PartialView("~/Views/User/Partials/LocationAccess.cshtml");
+                case "cityaccess":
+                    return PartialView("~/Views/User/Partials/CityAccess.cshtml");
+                case "regionaccess":
+                    return PartialView("~/Views/User/Partials/RegionAccess.cshtml");
+                case "sectionaccess":
+                    return PartialView("~/Views/User/Partials/SectionAccess.cshtml");
+                case "departmentaccess":
+                    return PartialView("~/Views/User/Partials/DepartmentAccess.cshtml");
+                case "divisionaccess":
+                    return PartialView("~/Views/User/Partials/DivisionAccess.cshtml");
+                
+                default:
+                    throw new Exception("template not known");
+            }
+        }
+
+
+        #region user access Level Lists
+        
+            public ActionResult UserLocationList()
+            {
+                var states = db.Locations.ToList();
                 return Json(new SelectList(
                                 states.ToArray(),
                                 "LocID",
                                 "LocName")
                            , JsonRequestBehavior.AllowGet);
-        }
+            }
 
-        public ActionResult SelectedUserLocList(int id)
-        {
-            //List<UserLocation> userLoc = db.UserLocations.Where(aa=>aa.UserID==id).ToList();
-            List<Location> _locs = db.Locations.ToList();
-            List<Location> locs = new List<Location>();
-            //var uloc = new List<UserLocation>();
+            
 
-            //foreach (var loc in userLoc)
-            //{
-            //    Location ll = db.Locations.FirstOrDefault(aa => aa.LocID == loc.LocationID);
-            //    locs.Add(ll);
-            //}
-            return Json(new SelectList(
-                           locs.ToArray(),
-                           "LocID",
-                           "LocName")
-                      , JsonRequestBehavior.AllowGet);
-        }
+            public ActionResult UserCityList()
+            {
+                var cities = db.Cities.ToList();
+                return Json(new SelectList(
+                                cities.ToArray(),
+                                "CityID",
+                                "CityName")
+                           , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult UserRegionList()
+            {
+                var regions = db.Regions.ToList();
+                return Json(new SelectList(
+                                regions.ToArray(),
+                                "RegionID",
+                                "RegionName")
+                           , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult UserSectionList()
+            {
+                var sections = db.Sections.ToList();
+                return Json(new SelectList(
+                                sections.ToArray(),
+                                "SectionID",
+                                "SectionName")
+                           , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult UserDepartmentList()
+            {
+                var departments = db.Departments.ToList();
+                return Json(new SelectList(
+                                departments.ToArray(),
+                                "DeptID",
+                                "DeptName")
+                           , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult UserDivisionList()
+            {
+                var divisions = db.Divisions.ToList();
+                return Json(new SelectList(
+                                divisions.ToArray(),
+                                "DivisionID",
+                                "DivisionName")
+                           , JsonRequestBehavior.AllowGet);
+            }
+        
+        #endregion
+
+        #region User Acess Level Data for Edit
+            public ActionResult SelectedUserLocList(int id)
+            {
+                List<Location> _locs = db.Locations.ToList();
+                List<Location> locs = new List<Location>();
+                List<UserRoleData> listUserLocationRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "L").ToList();
+                var userLoc = new List<Location>();
+
+                foreach (var uloc in listUserLocationRoleData)
+                {
+                    Location ll = db.Locations.FirstOrDefault(aa => aa.LocID == uloc.RoleDataValue);
+                    locs.Add(ll);
+                }
+
+                return Json(new SelectList(
+                               locs.ToArray(),
+                               "LocID",
+                               "LocName")
+                          , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult SelectedUserCityList(int id)
+            {
+                List<City> _cities = db.Cities.ToList();
+                List<City> cities = new List<City>();
+                List<UserRoleData> listUserCityRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "C").ToList();
+                var userCity = new List<City>();
+
+                foreach (var ucity in listUserCityRoleData)
+                {
+                    City ll = db.Cities.FirstOrDefault(aa => aa.CityID == ucity.RoleDataValue);
+                    cities.Add(ll);
+                }
+
+                return Json(new SelectList(
+                               cities.ToArray(),
+                               "CityID",
+                               "CityName")
+                          , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult SelectedUserRegionList(int id)
+            {
+                List<Region> _regions = db.Regions.ToList();
+                List<Region> regions = new List<Region>();
+                List<UserRoleData> listUserRegionRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "R").ToList();
+                var userRegion = new List<Region>();
+
+                foreach (var uregion in listUserRegionRoleData)
+                {
+                    Region ll = db.Regions.FirstOrDefault(aa => aa.RegionID == uregion.RoleDataValue);
+                    regions.Add(ll);
+                }
+
+                return Json(new SelectList(
+                               regions.ToArray(),
+                               "RegionID",
+                               "RegionName")
+                          , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult SelectedUserSectionList(int id)
+            {
+                List<Section> _sections = db.Sections.ToList();
+                List<Section> sections = new List<Section>();
+                List<UserRoleData> listUserSectionRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "S").ToList();
+                var userSection = new List<Section>();
+
+                foreach (var usection in listUserSectionRoleData)
+                {
+                    Section ll = db.Sections.FirstOrDefault(aa => aa.SectionID == usection.RoleDataValue);
+                    sections.Add(ll);
+                }
+
+                return Json(new SelectList(
+                               sections.ToArray(),
+                               "SectionID",
+                               "SectionName")
+                          , JsonRequestBehavior.AllowGet);
+            }
+
+            public ActionResult SelectedUserDepartmentList(int id)
+            {
+                List<Department> _departments = db.Departments.ToList();
+                List<Department> departments = new List<Department>();
+                List<UserRoleData> listUserDepartmentRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "D").ToList();
+                var userDepartment = new List<Department>();
+
+                foreach (var udepartment in listUserDepartmentRoleData)
+                {
+                    Department ll = db.Departments.FirstOrDefault(aa => aa.DeptID == udepartment.RoleDataValue);
+                    departments.Add(ll);
+                }
+
+                return Json(new SelectList(
+                               departments.ToArray(),
+                               "DeptID",
+                               "DeptName")
+                          , JsonRequestBehavior.AllowGet);
+            }
+            public ActionResult SelectedUserDivisionList(int id)
+            {
+                List<Division> _divisions = db.Divisions.ToList();
+                List<Division> divisions = new List<Division>();
+                List<UserRoleData> listUserDivisionRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "V").ToList();
+                var userDivision = new List<Division>();
+
+                foreach (var udivision in listUserDivisionRoleData)
+                {
+                    Division ll = db.Divisions.FirstOrDefault(aa => aa.DivisionID == udivision.RoleDataValue);
+                    divisions.Add(ll);
+                }
+
+                return Json(new SelectList(
+                               divisions.ToArray(),
+                               "DivisionID",
+                               "DivisionName")
+                          , JsonRequestBehavior.AllowGet);
+            }
+        #endregion
+
+
+
     }
+
+
 
     public class ADUsersAttributes
     {

@@ -1,0 +1,6 @@
+﻿@model System.Collections.ObjectModel.Collection<Psns.Common.Mvc.ViewBuilding.ViewModels.Routeable>
+
+@foreach(var action in Model)
+{
+    Html.DisplayFor(_ => action);
+}

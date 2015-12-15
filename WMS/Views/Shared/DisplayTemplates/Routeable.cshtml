@@ -1,0 +1,60 @@
+﻿@model Psns.Common.Mvc.ViewBuilding.ViewModels.Routeable
+@using Psns.Common.Mvc.ViewBuilding.ViewModels
+
+@if(Model is ActionModel)
+{
+    var action = Model as ActionModel;
+    switch(action.Type)
+    {
+        case ActionType.Button:
+            if(action.IconHtmlClasses.Count > 0)
+            {
+                <button @Html.Raw(Model.Html.ToHtmlString())><i class="@string.Join(" ", action.IconHtmlClasses)"></i></button>
+            }
+            else
+            {
+                <button @Html.Raw(Model.Html.ToHtmlString())>@action.Text</button>
+            }
+            break;
+        case ActionType.Link:
+            if(Model.RouteValues != null && Model.RouteValues.Any())
+            {
+                if(action.IconHtmlClasses.Count == 0)
+                {
+                    @Html.RouteLink(action.Text, Model.RouteName, Model.RouteValues, Model.Html)
+                }
+                else
+                {
+                    <a @Html.Raw(Model.Html.ToHtmlString()) href="@Url.RouteUrl(Model.RouteName, Model.RouteValues)">
+                        <i class="@string.Join(" ", action.IconHtmlClasses)"></i>
+                    </a>
+                }
+            }
+            else
+            {
+                if (action.IconHtmlClasses.Count == 0)
+                {
+                    <a @Html.Raw(Model.Html.ToHtmlString())>@action.Text</a>
+                }
+                else
+                {
+                    <a @Html.Raw(Model.Html.ToHtmlString())><i class="@string.Join(" ", action.IconHtmlClasses)"></i></a>
+                }
+            }
+            break;
+        default:
+            break;
+    }
+}
+else if(Model is Form)
+{
+    var form = Model as Form;
+    using(Html.BeginRouteForm(form.RouteName, 
+        form.RouteValues, 
+        form.FormMethod, 
+        form.Html))
+    {
+        @Html.AntiForgeryToken()
+        @Html.DisplayFor(model => form.Submit)
+    }
+}

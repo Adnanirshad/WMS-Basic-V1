@@ -94,13 +94,13 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl dateTo;
         
         /// <summary>
-        /// tbSearch_Section control.
+        /// tbSearch_Type control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSearch_Section;
+        protected global::System.Web.UI.WebControls.TextBox tbSearch_Type;
         
         /// <summary>
         /// Button1 control.
@@ -112,22 +112,22 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// GridViewSection control.
+        /// GridViewType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewSection;
+        protected global::System.Web.UI.WebControls.GridView GridViewType;
         
         /// <summary>
-        /// tbSearch_Crew control.
+        /// tbSearch_Shift control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSearch_Crew;
+        protected global::System.Web.UI.WebControls.TextBox tbSearch_Shift;
         
         /// <summary>
         /// Button2 control.
@@ -139,12 +139,12 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
-        /// GridViewCrew control.
+        /// GridViewShift control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewCrew;
+        protected global::System.Web.UI.WebControls.GridView GridViewShift;
     }
 }

@@ -766,7 +766,7 @@ namespace WMS.Controllers
         #region -- Add Short Leave --
         public void AddShortLeaveToAttData(LvShort lvshort)
         {
-            DateTime datetime = new DateTime();
+            DateTime datetime = lvshort.DutyDate.Value;
             using (var db = new TAS2013Entities())
             {
                 if (db.AttProcesses.Where(aa => aa.ProcessDate == datetime).Count() > 0)
@@ -775,6 +775,10 @@ namespace WMS.Controllers
                     _EmpAttData = db.AttDatas.First(aa => aa.EmpDate == lvshort.EmpDate);
                     _EmpAttData.StatusAB = false;
                     _EmpAttData.StatusSL = true;
+                    _EmpAttData.StatusLI = false;
+                    _EmpAttData.LateIn = 0;
+                    _EmpAttData.StatusEO = false;
+                    _EmpAttData.EarlyOut = 0;
                     _EmpAttData.SLMin = Convert.ToInt16(lvshort.THour.Value.Minutes);
                     _EmpAttData.ShifMin = (short)(_EmpAttData.ShifMin - Convert.ToInt16(lvshort.THour.Value.Minutes));
                     _EmpAttData.Remarks = _EmpAttData.Remarks + "[Short Leave]";

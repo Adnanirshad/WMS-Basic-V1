@@ -114,7 +114,9 @@ namespace WMS.Controllers
 
             }, "Value", "Text", 1);
             query = qb.QueryForLocationTableSegerationForLinq(LoggedInUser);
-            ViewBag.LocationID = new SelectList(db.Locations.Where(query).OrderBy(s=>s.LocName), "LocID", "LocName");
+
+            ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
+
             
             ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
              return View();
