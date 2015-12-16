@@ -1,0 +1,22 @@
+﻿<div class="form-group" data-ng-show="UserAccessLevelD == 'S'">
+            <div class="control-label col-md-4">Section</div>
+            <div class="col-md-8">
+                <input type="hidden" placeholder="e.g Lahore" data-ng-model="section.name" id="uSectionCount" name="uSectionCount" class="form-control" value="{{sections.length}}">
+                <div class="input-group" ng-repeat="section in sections">
+                    <input disabled type="text" placeholder="e.g Lahore" id="testSection{{$index + 1}}" data-ng-model="section.name" class="form-control">
+                    <input type="hidden" placeholder="e.g Lahore" data-ng-model="section.name" id="uSection{{$index + 1}}" name="uSection{{$index + 1}}" class="form-control" value="{{section.name}}">
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="removeSection($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
+                    </span>
+                </div>
+                 <div  ng-show="isAddingSection">
+                    
+                    <select type="text" placeholder="Add a Section" data-ng-model="newSection.name" class="form-control">
+                        <option ng-repeat="sec in AllSections">{{sec.Text}}</option>
+                    </select>
+                    <a class="btn btn-default btn-sm" ng-click="addSection()">Add</a>
+                    <a href="" ng-click="isAddingSection = false">Done Adding</a>
+                </div>
+                <p><a href="" ng-click="isAddingSection = true">+ Add Section</a></p>
+            </div>
+          </div>

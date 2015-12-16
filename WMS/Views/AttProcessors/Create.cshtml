@@ -6,7 +6,11 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
+
+       <br />
     <fieldset>
+     
+
         <legend>Attendance Processor</legend>
  <div class="form-horizontal">
      <div class="form-group">
@@ -21,15 +25,6 @@
             <div class="control-label col-md-2">Criteria</div>
             <div class="col-md-10">
               @Html.DropDownList("CriteriaID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-            </div>
-        </div>
-         </div>
-     <div id="company">
-	<div class="form-group" >
-            <div class="control-label col-md-2">Company</div>
-            <div class="col-md-10">
-              @Html.DropDownList("CompanyID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                        @Html.ValidationMessageFor(model => model.CompanyID)
             </div>
         </div>
          </div>

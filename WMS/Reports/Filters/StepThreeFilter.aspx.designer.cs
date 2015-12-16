@@ -94,13 +94,13 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl dateTo;
         
         /// <summary>
-        /// tbSearch_Department control.
+        /// tbSearch_Section control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSearch_Department;
+        protected global::System.Web.UI.WebControls.TextBox tbSearch_Section;
         
         /// <summary>
         /// Button1 control.
@@ -112,22 +112,22 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// GridViewDepartment control.
+        /// GridViewSection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewDepartment;
+        protected global::System.Web.UI.WebControls.GridView GridViewSection;
         
         /// <summary>
-        /// tbSearch_Type control.
+        /// tbSearch_Location control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSearch_Type;
+        protected global::System.Web.UI.WebControls.TextBox tbSearch_Location;
         
         /// <summary>
         /// Button2 control.
@@ -139,12 +139,12 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
-        /// GridViewType control.
+        /// GridViewLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewType;
+        protected global::System.Web.UI.WebControls.GridView GridViewLocation;
     }
 }

@@ -17,7 +17,9 @@ namespace WMS.Models
         public Emp()
         {
             this.AttDatas = new HashSet<AttData>();
+            this.LvApplications = new HashSet<LvApplication>();
             this.LvConsumeds = new HashSet<LvConsumed>();
+            this.LvShorts = new HashSet<LvShort>();
         }
     
         public int EmpID { get; set; }
@@ -67,6 +69,8 @@ namespace WMS.Models
         public virtual Location Location { get; set; }
         public virtual Section Section { get; set; }
         public virtual Shift Shift { get; set; }
+        public virtual ICollection<LvApplication> LvApplications { get; set; }
         public virtual ICollection<LvConsumed> LvConsumeds { get; set; }
+        public virtual ICollection<LvShort> LvShorts { get; set; }
     }
 }

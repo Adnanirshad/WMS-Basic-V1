@@ -21,8 +21,8 @@ namespace WMS.Reports.Filters
             if (!IsPostBack)
             {
                 // Bind Grid View According to Filters
-                BindGridViewDepartment("");
-                BindGridViewType("");
+                BindGridViewSection("");
+                BindGridViewLocation("");
                 List<string> list = Session["ReportSession"] as List<string>;
                 dateFrom.Value = list[0];
                 dateTo.Value = list[1];
@@ -30,60 +30,60 @@ namespace WMS.Reports.Filters
             }
             else
             {
-                SaveDepartmentIDs();
-                SaveTypeIDs();
+                SaveSectionIDs();
+                SaveLocationIDs();
             }
             if (Session["FiltersModel"] != null)
             {
                 // Check and Uncheck Items in grid view according to Session Filters Model
-                WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Department");
-                WMSLibrary.Filters.SetGridViewCheckState(GridViewType, Session["FiltersModel"] as FiltersModel, "Type");
+                WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Section");
+                WMSLibrary.Filters.SetGridViewCheckState(GridViewLocation, Session["FiltersModel"] as FiltersModel, "Location");
             }
         }
-        protected void ButtonSearchDepartment_Click(object sender, EventArgs e)
+        protected void ButtonSearchSection_Click(object sender, EventArgs e)
         {
             // Save selected Company ID and Name in Session
-            SaveDepartmentIDs();
-            BindGridViewDepartment(tbSearch_Department.Text.Trim());
+            SaveSectionIDs();
+            BindGridViewSection(tbSearch_Section.Text.Trim());
             // Check and set Check box state
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Department");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Section");
         }
-        protected void ButtonSearchType_Click(object sender, EventArgs e)
+        protected void ButtonSearchLocation_Click(object sender, EventArgs e)
         {
             // Save selected Company ID and Name in Session
-            SaveTypeIDs();
-            BindGridViewType(tbSearch_Type.Text.Trim());
+            SaveLocationIDs();
+            BindGridViewLocation(tbSearch_Location.Text.Trim());
             // Check and set Check box state
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewType, Session["FiltersModel"] as FiltersModel, "Type");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewLocation, Session["FiltersModel"] as FiltersModel, "Location");
         }
-        protected void GridViewDepartment_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void GridViewSection_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             // Save selected Company ID and Name in Session
-            SaveDepartmentIDs();
+            SaveSectionIDs();
 
             //change page index
-            GridViewDepartment.PageIndex = e.NewPageIndex;
-            BindGridViewDepartment(tbSearch_Department.Text.Trim());
+            GridViewSection.PageIndex = e.NewPageIndex;
+            BindGridViewSection(tbSearch_Section.Text.Trim());
             // Check and set Check box state
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Department");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Section");
         }
 
-        protected void GridViewType_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void GridViewLocation_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             // Save selected Company ID and Name in Session
-            SaveTypeIDs();
+            SaveLocationIDs();
 
             //change page index
-            GridViewType.PageIndex = e.NewPageIndex;
-            BindGridViewType(tbSearch_Type.Text.Trim());
+            GridViewLocation.PageIndex = e.NewPageIndex;
+            BindGridViewLocation(tbSearch_Location.Text.Trim());
             // Check and set Check box state
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewType, Session["FiltersModel"] as FiltersModel, "Type");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewLocation, Session["FiltersModel"] as FiltersModel, "Location");
         }
 
-        private void SaveDepartmentIDs()
+        private void SaveSectionIDs()
         {
             WMSLibrary.Filters filterHelper = new WMSLibrary.Filters();
-            WMSLibrary.FiltersModel FM = filterHelper.SyncGridViewIDs(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Department");
+            WMSLibrary.FiltersModel FM = filterHelper.SyncGridViewIDs(GridViewSection, Session["FiltersModel"] as FiltersModel, "Section");
             Session["FiltersModel"] = FM;
         }
         #region --DeleteAll Filters--
@@ -98,46 +98,37 @@ namespace WMS.Reports.Filters
             WMSLibrary.Filters filtersHelper = new WMSLibrary.Filters();
             Session["FiltersModel"] = filtersHelper.DeleteAllFilters(Session["FiltersModel"] as FiltersModel);
 
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Company");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Location");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Division");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Shift");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Department");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Type");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Section");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Type");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Crew");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewDepartment, Session["FiltersModel"] as FiltersModel, "Employee");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Company");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Location");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Division");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Shift");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Section");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Location");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Department");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Type");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Crew");
+            WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Employee");
 
 
         }
         #endregion 
-        private void SaveTypeIDs()
+        private void SaveLocationIDs()
         {
             WMSLibrary.Filters filterHelper = new WMSLibrary.Filters();
-            WMSLibrary.FiltersModel FM = filterHelper.SyncGridViewIDs(GridViewType, Session["FiltersModel"] as FiltersModel, "Type");
+            WMSLibrary.FiltersModel FM = filterHelper.SyncGridViewIDs(GridViewLocation, Session["FiltersModel"] as FiltersModel, "Location");
             Session["FiltersModel"] = FM;
         }
 
-        private void BindGridViewDepartment(string search)
+        private void BindGridViewSection(string search)
         {
             FiltersModel fm = Session["FiltersModel"] as FiltersModel;
-            List<ViewDepartment> _View = new List<ViewDepartment>();
-            List<ViewDepartment> _TempView = new List<ViewDepartment>();
+            List<ViewSection> _View = new List<ViewSection>();
+            List<ViewSection> _TempView = new List<ViewSection>();
             User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
             string query = qb.QueryForCompanyView(LoggedInUser);
-            DataTable dt = qb.GetValuesfromDB("select * from ViewDepartment " + query + " ORDER BY DeptName ASC");
-            _View = dt.ToList<ViewDepartment>();
-            if (fm.CompanyFilter.Count > 0)
-            {
-                foreach (var comp in fm.CompanyFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.CompID == _compID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
+            DataTable dt = qb.GetValuesfromDB("select * from ViewSection " + query + " ORDER BY SectionName ASC");
+            _View = dt.ToList<ViewSection>();
             if (fm.DivisionFilter.Count > 0)
             {
                 _TempView.Clear();
@@ -148,31 +139,52 @@ namespace WMS.Reports.Filters
                 }
                 _View = _TempView.ToList();
             }
-            GridViewDepartment.DataSource = _View.Where(aa => aa.DeptName.ToUpper().Contains(search.ToUpper())).ToList();
-            GridViewDepartment.DataBind();
-        }
-
-        private void BindGridViewType(string search)
-        {
-            FiltersModel fm = Session["FiltersModel"] as FiltersModel;
-            List<ViewEmpType> _View = new List<ViewEmpType>();
-            List<ViewEmpType> _TempView = new List<ViewEmpType>();
-            User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
-            QueryBuilder qb = new QueryBuilder();
-            string query = qb.QueryForCompanyViewForLinq(LoggedInUser);
-            DataTable dt = qb.GetValuesfromDB("select * from ViewEmpType where " + query);
-            _View = dt.ToList<ViewEmpType>().AsQueryable().SortBy("TypeName").ToList();
-            if (fm.CompanyFilter.Count > 0)
+            if (fm.DepartmentFilter.Count > 0)
             {
-                foreach (var comp in fm.CompanyFilter)
+                _TempView.Clear();
+                foreach (var dept in fm.DepartmentFilter)
                 {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.CompanyID == _compID).ToList());
+                    short _deptID = Convert.ToInt16(dept.ID);
+                    _TempView.AddRange(_View.Where(aa => aa.DeptID == _deptID).ToList());
                 }
                 _View = _TempView.ToList();
             }
-            GridViewType.DataSource = _View.Where(aa => aa.TypeName.ToUpper().Contains(search.ToUpper())).ToList();
-            GridViewType.DataBind();
+            GridViewSection.DataSource = _View.Where(aa => aa.DeptName.ToUpper().Contains(search.ToUpper())).ToList();
+            GridViewSection.DataBind();
+        }
+
+        private void BindGridViewLocation(string search)
+        {
+            FiltersModel fm = Session["FiltersModel"] as FiltersModel;
+            List<ViewLocation> _View = new List<ViewLocation>();
+            List<ViewLocation> _TempView = new List<ViewLocation>();
+            User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
+            QueryBuilder qb = new QueryBuilder();
+            string query = qb.QueryForLocReport(LoggedInUser);
+            DataTable dt = qb.GetValuesfromDB("select * from ViewLocation " + query +" order by LocName asc");
+            _View = dt.ToList<ViewLocation>();
+            if (fm.RegionFilter.Count > 0)
+            {
+                _TempView.Clear();
+                foreach (var reg in fm.RegionFilter)
+                {
+                    short _regID = Convert.ToInt16(reg.ID);
+                    _TempView.AddRange(_View.Where(aa => aa.RegionID == _regID).ToList());
+                }
+                _View = _TempView.ToList();
+            }
+            if (fm.CityFilter.Count > 0)
+            {
+                _TempView.Clear();
+                foreach (var city in fm.CityFilter)
+                {
+                    short _cityID = Convert.ToInt16(city.ID);
+                    _TempView.AddRange(_View.Where(aa => aa.CityID == _cityID).ToList());
+                }
+                _View = _TempView.ToList();
+            }
+            GridViewLocation.DataSource = _View.Where(aa => aa.LocName.ToUpper().Contains(search.ToUpper())).ToList();
+            GridViewLocation.DataBind();
         }
 
         #region Navigation Buttons
@@ -180,8 +192,8 @@ namespace WMS.Reports.Filters
         {
             SaveDateSession();
             // Save selected Company ID and Name in Session
-            SaveDepartmentIDs();
-            SaveTypeIDs();
+            SaveSectionIDs();
+            SaveLocationIDs();
             // Go to the next page
             string url = "~/Reports/Filters/StepFourFilter.aspx";
             Response.Redirect(url);
@@ -189,7 +201,7 @@ namespace WMS.Reports.Filters
         protected void ButtonSkip_Click(object sender, EventArgs e)
         {
             // Save selected Company ID and Name in Session
-            SaveDepartmentIDs();
+            SaveSectionIDs();
             // Go to the next page
             string url = "~/Filters/DeptFilter.aspx";
             Response.Redirect(url);
@@ -197,27 +209,27 @@ namespace WMS.Reports.Filters
         protected void ButtonFinish_Click(object sender, EventArgs e)
         {
             // Save selected Company ID and Name in Session
-            SaveDepartmentIDs();
-            SaveTypeIDs();
+            SaveSectionIDs();
+            SaveLocationIDs();
             // Go to the next page
             string url = "~/Reports/ReportContainer.aspx";
             Response.Redirect(url);
         }
         #endregion
 
-        protected void GridViewDepartment_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void GridViewSection_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Footer)
             {
-                e.Row.Cells[0].Text = "Page " + (GridViewDepartment.PageIndex + 1) + " of " + GridViewDepartment.PageCount;
+                e.Row.Cells[0].Text = "Page " + (GridViewSection.PageIndex + 1) + " of " + GridViewSection.PageCount;
             }
         }
 
-        protected void GridViewType_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void GridViewLocation_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Footer)
             {
-                e.Row.Cells[0].Text = "Page " + (GridViewType.PageIndex + 1) + " of " + GridViewType.PageCount;
+                e.Row.Cells[0].Text = "Page " + (GridViewLocation.PageIndex + 1) + " of " + GridViewLocation.PageCount;
             }
         }
         public DateTime DateFrom
@@ -251,8 +263,8 @@ namespace WMS.Reports.Filters
         private void NavigationCommonCalls(string path)
         {
             SaveDateSession();
-            SaveDepartmentIDs();
-            SaveTypeIDs();
+            SaveSectionIDs();
+            SaveLocationIDs();
             Response.Redirect(path);
         }
         protected void btnStepOne_Click(object sender, EventArgs e)
@@ -283,8 +295,8 @@ namespace WMS.Reports.Filters
         protected void btnStepSix_Click(object sender, EventArgs e)
         {
             SaveDateSession();
-            SaveDepartmentIDs();
-            SaveTypeIDs();
+            SaveSectionIDs();
+            SaveLocationIDs();
             FiltersModel fm = Session["FiltersModel"] as FiltersModel;
             if (MyHelper.UserHasValuesInSession(fm))
             {

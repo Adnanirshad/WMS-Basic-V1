@@ -16,5 +16,7 @@ namespace WMS.Models
     {
         public string DivisionName { get; set; }
         public short DivisionID { get; set; }
+        public string CompName { get; set; }
+        public short CompID { get; set; }
     }
 }

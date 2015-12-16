@@ -16,17 +16,17 @@
                     <li class="sidebar-brand">
                         <h4>Filters Navigation</h4>
                     </li>
-                    <li >
-                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Company, Locations</p></asp:LinkButton>
+                     <li >
+                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Divisions, Regions</p></asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton ID="btnStepTwo" runat="server" CssClass="active-link" OnClick="btnStepTwo_Click" >Step Two<p>Divisions, Shifts</p></asp:LinkButton>
+                        <asp:LinkButton ID="btnStepTwo" runat="server" CssClass="active-link" OnClick="btnStepTwo_Click" >Step Two<p>Departments, Cities</p></asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton ID="btnStepThree" runat="server"  CssClass="inactive-link" OnClick="btnStepThree_Click" >Step Three<p>Departments, Employee Type</p></asp:LinkButton>
+                        <asp:LinkButton ID="btnStepThree" runat="server"  CssClass="inactive-link" OnClick="btnStepThree_Click" >Step Three<p>Sections, Locations</p></asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton ID="btnStepFour" runat="server" CssClass="inactive-link" OnClick="btnStepFour_Click" >Step Four<p>Sections, Crew</p></asp:LinkButton>
+                        <asp:LinkButton ID="btnStepFour" runat="server" CssClass="inactive-link" OnClick="btnStepFour_Click" >Step Four<p>Employee Type, Shifts</p></asp:LinkButton>
                     </li>
                     <li>
                         <asp:LinkButton ID="btnStepFive" runat="server"  CssClass="inactive-link" OnClick="btnStepFive_Click" >Step Five<p>Employee</p></asp:LinkButton>
@@ -46,7 +46,7 @@
                         <div class="row"> 
                             <div class="col-md-8">
                                  <div class="col-md-8">
-                                <h3>Choose a Division or Shift</h3>
+                                <h3>Choose Department or City</h3>
                                      </div>
                                   <div class="col-md-3">
                               <asp:Button ID="Button3" runat="server" style="margin-top:18px" Text="Clear All Filters" CssClass="btn-warning" OnClick="ButtonDeleteAll_Click" />
@@ -67,17 +67,17 @@
                         </div>
                         <hr />
                         <div class="row">
-                            <div class="filterHeader"><span class="FilterNameHeading">Division</span>
-                                 <span style="margin-left:10px"><asp:TextBox ID="TextBoxSearchDivision" CssClass="input-field" runat="server" /> <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn-primary" OnClick="ButtonSearchDivision_Click" /></span></div>
+                            <div class="filterHeader"><span class="FilterNameHeading">Department</span>
+                                 <span style="margin-left:10px"><asp:TextBox ID="TextBoxSearchDepartment" CssClass="input-field" runat="server" /> <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn-primary" OnClick="ButtonSearchDepartment_Click" /></span></div>
                             <section>
-                            <asp:GridView ID="GridViewDivision" runat="server" Width="450px" AutoGenerateColumns="False" PagerStyle-CssClass="pgr" CssClass="Grid"                              GridLines="None" AllowPaging="True" AllowSorting="True"                                                OnPageIndexChanging="GridViewDivision_PageIndexChanging" ForeColor="Black" OnRowDataBound="GridViewDivision_RowDataBound" ShowFooter="True"  >
+                            <asp:GridView ID="GridViewDepartment" runat="server" Width="450px" AutoGenerateColumns="False" PagerStyle-CssClass="pgr" CssClass="Grid"                              GridLines="None" AllowPaging="True" AllowSorting="True"                                                OnPageIndexChanging="GridViewDepartment_PageIndexChanging" ForeColor="Black" OnRowDataBound="GridViewDepartment_RowDataBound" ShowFooter="True"  >
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                 <Columns>
-                                    <asp:BoundField DataField="DivisionID" HeaderText="ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  />
+                                    <asp:BoundField DataField="DeptID" HeaderText="ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"  />
                                     <asp:TemplateField>
                                         <HeaderTemplate>
                                             <%--<asp:CheckBox ID="CheckAll" runat="server" />--%>
-                                            <input style="margin-left:6px" id="chkAll" onclick="javascript: SelectAllCheckboxes(this, 'GridViewDivision');" 
+                                            <input style="margin-left:6px" id="chkAll" onclick="javascript: SelectAllCheckboxes(this, 'GridViewDepartment');" 
                                             runat="server" type="checkbox" />
                                         </HeaderTemplate>
                                         <ItemTemplate>
@@ -86,8 +86,8 @@
                                         <ItemStyle Width="10%" />
                                     </asp:TemplateField>
                                         
-                                        <asp:BoundField DataField="DivisionName" HeaderText="Name" />
-                                         <asp:BoundField DataField="CompName" HeaderText="Company" />
+                                        <asp:BoundField DataField="DeptName" HeaderText="Name" />
+                                         <asp:BoundField DataField="DivisionName" HeaderText="Division" />
                                 </Columns>
                                 <EditRowStyle BackColor="#999999" />
                                 <FooterStyle BackColor="#EEEEEE" Font-Bold="False" ForeColor="Black" Wrap="False" />
@@ -105,18 +105,18 @@
                         </div>
                         <hr />
                         <div class="row">
-                             <div class="filterHeader"><span class="FilterNameHeading">Shifts</span>
-                                 <span style="margin-left:10px"><asp:TextBox ID="tbSearch_Shift" CssClass="input-field" runat="server" /> <asp:Button ID="Button2" runat="server" Text="Search" CssClass="btn-primary" OnClick="ButtonSearchShift_Click" /></span>
+                             <div class="filterHeader"><span class="FilterNameHeading">Cities</span>
+                                 <span style="margin-left:10px"><asp:TextBox ID="tbSearch_City" CssClass="input-field" runat="server" /> <asp:Button ID="Button2" runat="server" Text="Search" CssClass="btn-primary" OnClick="ButtonSearchCity_Click" /></span>
                         </div>
                              <section>
-                            <asp:GridView ID="GridViewShift" runat="server" Width="450px" AutoGenerateColumns="False" PagerStyle-CssClass="pgr" CssClass="Grid"                              GridLines="None" AllowPaging="True" AllowSorting="True"                                                OnPageIndexChanging="GridViewShift_PageIndexChanging" BorderColor="#0094FF" BorderStyle="None" OnRowDataBound="GridViewShift_RowDataBound" ShowFooter="True" BorderWidth="1px"  >
+                            <asp:GridView ID="GridViewCity" runat="server" Width="450px" AutoGenerateColumns="False" PagerStyle-CssClass="pgr" CssClass="Grid"                              GridLines="None" AllowPaging="True" AllowSorting="True"                                                OnPageIndexChanging="GridViewCity_PageIndexChanging" BorderColor="#0094FF" BorderStyle="None" OnRowDataBound="GridViewCity_RowDataBound" ShowFooter="True" BorderWidth="1px"  >
                                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                                 <Columns>
-                                      <asp:BoundField DataField="ShiftID" HeaderText="ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
+                                      <asp:BoundField DataField="CityID" HeaderText="ID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" />
                                     <asp:TemplateField>
                                         <HeaderTemplate>
                                             <%--<asp:CheckBox ID="CheckAll" runat="server" />--%>
-                                            <input style="margin-left:6px" id="chkAll" onclick="javascript: SelectAllCheckboxes(this, 'GridViewShift');" 
+                                            <input style="margin-left:6px" id="chkAll" onclick="javascript: SelectAllCheckboxes(this, 'GridViewCity');" 
                                             runat="server" type="checkbox" />
                                         </HeaderTemplate>
                                         <ItemTemplate>
@@ -125,9 +125,7 @@
                                         <ItemStyle Width="10%" />
                                     </asp:TemplateField>
                                       
-                                        <asp:BoundField DataField="ShiftName" HeaderText="Name" />
-                                        <asp:BoundField DataField="Location.City.CityName" HeaderText="City" />
-                                        <asp:BoundField DataField="Location.LocName" HeaderText="Location" />
+                                        <asp:BoundField DataField="CityName" HeaderText="Name" />
 
                                 </Columns>
                                 <EditRowStyle BackColor="#999999" />

@@ -335,5 +335,400 @@ namespace WMS.CustomClass
             //query = query + _CriteriaForOrLoc[_CriteriaForOrLoc.Count - 1];
             return query;
         }
+
+        #region -- Reports Filters Data Seggregation according to User Role--
+        internal string QueryForRegionInFilters(User LoggedInUser)
+        {
+            string query = " where ";
+            TAS2013Entities db = new TAS2013Entities();
+            List<UserRoleData> roleDataL = new List<UserRoleData>();
+            roleDataL = db.UserRoleDatas.Where(aa => aa.RoleUserID == LoggedInUser.UserID && aa.UserRoleLegend=="L").ToList();
+            List<Region> regions = db.Regions.ToList();
+            List<City> cities = db.Cities.ToList();
+            List<Location> locs = db.Locations.ToList();
+            List<string> queryList = new List<string>();
+            foreach (var access in roleDataL)
+            {
+                switch (LoggedInUser.UserRoleL)
+                {
+                    case "A"://Super ADmin
+                        query = "";
+                        break;
+                    case "R"://REgion
+                        queryList.Add(" RegionID =" + access.RoleDataValue.ToString());
+                        break;
+                    case "C"://City
+                        string regionID = cities.Where(aa => aa.CityID == access.RoleDataValue).FirstOrDefault().RegionID.ToString();
+                        queryList.Add(" RegionID =" + regionID);
+                        break;
+                    case "L"://Location
+                        string regionIDForLoc = locs.Where(aa => aa.LocID == access.RoleDataValue).FirstOrDefault().City.Region.RegionID.ToString();
+                        queryList.Add(" RegionID =" + regionIDForLoc);
+                        break;
+                }
+            }
+            if (queryList.Count == 1)
+            {
+                query = query + queryList[0];
+            }
+            else if (queryList.Count > 1)
+            {
+                for (int i = 0; i < queryList.Count - 1; i++)
+                {
+                    query = query + queryList[i] + " or ";
+                }
+                query = query + queryList[queryList.Count - 1];
+            }
+
+
+            return query;
+        }
+
+        internal string QueryForReportsCity(User LoggedInUser)
+        {
+            string query = " where ";
+            TAS2013Entities db = new TAS2013Entities();
+            List<UserRoleData> uAcc = new List<UserRoleData>();
+            uAcc = db.UserRoleDatas.Where(aa => aa.RoleUserID == LoggedInUser.UserID && aa.UserRoleLegend=="L").ToList();
+            List<City> cities = db.Cities.ToList();
+            List<Location> locs = db.Locations.ToList();
+            List<string> queryList = new List<string>();
+            foreach (var access in uAcc)
+            {
+                switch (LoggedInUser.UserRoleL)
+                {
+                    case "A"://Super ADmin
+                        query = "";
+                        break;
+                    case "R"://REgion
+                        List<City> city = cities.Where(aa => aa.RegionID == access.RoleDataValue).ToList();
+                        foreach (var c in city)
+                        {
+                            queryList.Add(" CityID =" + c.CityID);
+                        }
+                        break;
+                    case "C"://City
+                        string cityID = cities.Where(aa => aa.CityID == access.RoleDataValue).FirstOrDefault().CityID.ToString();
+                        queryList.Add(" CityID =" + cityID);
+                        break;
+                    case "L"://Location
+                        string cityIDForLoc = locs.Where(aa => aa.LocID == access.RoleDataValue).FirstOrDefault().CityID.ToString();
+                        queryList.Add(" CityID =" + cityIDForLoc);
+                        break;
+                }
+            }
+            if (queryList.Count == 1)
+            {
+                query = query + queryList[0];
+            }
+            else if (queryList.Count > 1)
+            {
+                for (int i = 0; i < queryList.Count - 1; i++)
+                {
+                    query = query + queryList[i] + " or ";
+                }
+                query = query + queryList[queryList.Count - 1];
+            }
+
+
+            return query;
+        }
+
+        internal string QueryForLocReport(User LoggedInUser)
+        {
+            string query = " where ";
+            TAS2013Entities db = new TAS2013Entities();
+            List<UserRoleData> uAcc = new List<UserRoleData>();
+            uAcc = db.UserRoleDatas.Where(aa => aa.RoleUserID == LoggedInUser.UserID && aa.UserRoleLegend == "L").ToList();
+            List<Region> regions = db.Regions.ToList();
+            List<Location> locss = db.Locations.ToList();
+            List<string> queryList = new List<string>();
+            foreach (var access in uAcc)
+            {
+                switch (LoggedInUser.UserRoleL)
+                {
+                    case "A"://Super ADmin
+                        query = "";
+                        break;
+                    case "R"://REgion
+                        List<Location> locs = locss.Where(aa => aa.City.RegionID == access.RoleDataValue).ToList();
+                        foreach (var c in locs)
+                        {
+                            queryList.Add(" LocID =" + c.LocID);
+                        }
+                        break;
+                    case "C"://City
+                        locs = locss.Where(aa => aa.CityID == access.RoleDataValue).ToList();
+                        foreach (var c in locs)
+                        {
+                            queryList.Add(" LocID =" + c.LocID);
+                        }
+                        break;
+                    case "L"://Location
+                        string cityIDForLoc = locss.Where(aa => aa.LocID == access.RoleDataValue).FirstOrDefault().LocID.ToString();
+                        queryList.Add(" LocID =" + cityIDForLoc);
+                        break;
+                }
+            }
+            if (queryList.Count == 1)
+            {
+                query = query + queryList[0];
+            }
+            else if (queryList.Count > 1)
+            {
+                for (int i = 0; i < queryList.Count - 1; i++)
+                {
+                    query = query + queryList[i] + " or ";
+                }
+                query = query + queryList[queryList.Count - 1];
+            }
+
+
+            return query;
+        }
+
+        //internal string QueryForEmployeeReports(User LoggedInUser)
+        //{
+        //    string query = " where ";
+        //    TAS2013Entities db = new TAS2013Entities();
+        //    List<UserAccess> uAcc = new List<UserAccess>();
+        //    uAcc = db.UserAccesses.Where(aa => aa.UserID == LoggedInUser.UserID).ToList();
+        //    List<Region> regions = db.Regions.ToList();
+        //    List<City> cities = db.Cities.ToList();
+        //    List<Location> locs = db.Locations.ToList();
+        //    List<string> queryList = new List<string>();
+        //    foreach (var access in uAcc)
+        //    {
+        //        switch (LoggedInUser.RoleID)
+        //        {
+        //            case 1://Super ADmin
+        //                query = "";
+        //                break;
+        //            case 4://Zone
+        //                queryList.Add(" ZoneID =" + access.CriteriaData.ToString());
+        //                break;
+        //            case 5://REgion
+        //                queryList.Add(" RegionID =" + access.CriteriaData.ToString());
+        //                break;
+        //            case 6://City
+
+        //                queryList.Add(" CityID =" + access.CriteriaData.ToString());
+        //                break;
+        //            case 7://Location
+        //                queryList.Add(" LocID =" + access.CriteriaData.ToString());
+        //                break;
+        //        }
+        //    }
+        //    if (queryList.Count == 1)
+        //    {
+        //        query = query + queryList[0];
+        //    }
+        //    else if (queryList.Count > 1)
+        //    {
+        //        for (int i = 0; i < queryList.Count - 1; i++)
+        //        {
+        //            query = query + queryList[i] + " or ";
+        //        }
+        //        query = query + queryList[queryList.Count - 1];
+        //    }
+
+
+        //    return query;
+        //}
+
+        internal string QueryForDivisionInFilters(User LoggedInUser)
+        {
+            string query = " where ";
+            TAS2013Entities db = new TAS2013Entities();
+            List<UserRoleData> roleDataD = new List<UserRoleData>();
+            roleDataD = db.UserRoleDatas.Where(aa => aa.RoleUserID == LoggedInUser.UserID && aa.UserRoleLegend == "D").ToList();
+            List<Division> divisions = db.Divisions.ToList();
+            List<Department> depts = db.Departments.ToList();
+            List<Section> secs = db.Sections.ToList();
+            List<string> queryList = new List<string>();
+            foreach (var access in roleDataD)
+            {
+                switch (LoggedInUser.UserRoleD)
+                {
+                    case "G"://Super ADmin
+                        query = "";
+                        break;
+                    case "V"://Divison
+                        queryList.Add(" DivisionID =" + access.RoleDataValue.ToString());
+                        break;
+                    case "D"://Depts
+                        string DivID = depts.Where(aa => aa.DeptID == access.RoleDataValue).FirstOrDefault().DivID.ToString();
+                        queryList.Add(" DivisionID =" + DivID);
+                        break;
+                    case "S"://Sections
+                        DivID = secs.Where(aa => aa.SectionID == access.RoleDataValue).FirstOrDefault().Department.DivID.ToString();
+                        queryList.Add(" DivisionID =" + DivID);
+                        break;
+                }
+            }
+            if (queryList.Count == 1)
+            {
+                query = query + queryList[0];
+            }
+            else if (queryList.Count > 1)
+            {
+                for (int i = 0; i < queryList.Count - 1; i++)
+                {
+                    query = query + queryList[i] + " or ";
+                }
+                query = query + queryList[queryList.Count - 1];
+            }
+
+
+            return query;
+        }
+
+        internal string QueryForReportsDepartment(User LoggedInUser)
+        {
+            string query = " where ";
+            TAS2013Entities db = new TAS2013Entities();
+            List<UserRoleData> uAcc = new List<UserRoleData>();
+            uAcc = db.UserRoleDatas.Where(aa => aa.RoleUserID == LoggedInUser.UserID && aa.UserRoleLegend == "D").ToList();
+            List<Department> depts = db.Departments.ToList();
+            List<Section> secs = db.Sections.ToList();
+            List<string> queryList = new List<string>();
+            foreach (var access in uAcc)
+            {
+                switch (LoggedInUser.UserRoleD)
+                {
+                    case "G"://Super ADmin
+                        query = "";
+                        break;
+                    case "V"://division
+                        List<Department> dept = depts.Where(aa => aa.DivID == access.RoleDataValue).ToList();
+                        foreach (var c in dept)
+                        {
+                            queryList.Add(" DeptID =" + c.DeptID);
+                        }
+                        break;
+                    case "D"://dept
+                        string deptID = depts.Where(aa => aa.DeptID == access.RoleDataValue).FirstOrDefault().DeptID.ToString();
+                        queryList.Add(" DeptID =" + deptID);
+                        break;
+                    case "S"://section
+                        deptID = secs.Where(aa => aa.SectionID == access.RoleDataValue).FirstOrDefault().DeptID.ToString();
+                        queryList.Add(" DeptID =" + deptID);
+                        break;
+                }
+            }
+            if (queryList.Count == 1)
+            {
+                query = query + queryList[0];
+            }
+            else if (queryList.Count > 1)
+            {
+                for (int i = 0; i < queryList.Count - 1; i++)
+                {
+                    query = query + queryList[i] + " or ";
+                }
+                query = query + queryList[queryList.Count - 1];
+            }
+            return query;
+        }
+        #endregion
+        public string MakeCustomizeQueryForEmpView(User _user)
+        {
+            string RoleQuery = "";
+            string CatQuery = "";
+            TAS2013Entities db = new TAS2013Entities();
+            List<UserRoleData> userRoleDataD = new List<UserRoleData>();
+            List<UserRoleData> userRoleDataL = new List<UserRoleData>();
+            List<string> UserRoleString = new List<string>();
+            List<string> CategoryUser = new List<string>();
+            CategoryUser.Add(" where (CatID=1 ");
+            if (_user.ViewContractual == true)
+            {
+                CategoryUser.Add(" CatID = 4 ");
+            }
+            if (_user.ViewPermanentMgm == true)
+            {
+                CategoryUser.Add(" CatID = 2  ");
+            }
+            if (_user.ViewPermanentStaff == true)
+            {
+                CategoryUser.Add(" CatID = 3  ");
+            }
+            userRoleDataD = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID && aa.UserRoleLegend=="D").ToList();
+            userRoleDataL = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID && aa.UserRoleLegend == "L").ToList();
+            switch (_user.UserRoleD)
+            {
+                case "G"://Admin
+                   
+                    break;
+                case "D"://Department
+                    foreach (var urd in userRoleDataD)
+                    {
+                        UserRoleString.Add(" DeptID = " + urd.RoleDataValue + " ");
+                    }
+                    break;
+                case "S"://Section
+                    foreach (var urd in userRoleDataD)
+                    {
+                        UserRoleString.Add(" SecID = " + urd.RoleDataValue + " ");
+                    }
+                    break;
+                case "V"://Division
+                    foreach (var urd in userRoleDataD)
+                    {
+                        UserRoleString.Add(" DivID = " + urd.RoleDataValue + " ");
+                    }
+                    break;
+            }
+            switch (_user.UserRoleL)
+            {
+                case "A"://Admin
+
+                    break;
+                case "C"://City
+                    foreach (var urd in userRoleDataL)
+                    {
+                        UserRoleString.Add(" CityID = " + urd.RoleDataValue + " ");
+                    }
+                    break;
+                case "L"://Location
+                    foreach (var urd in userRoleDataL)
+                    {
+                        UserRoleString.Add(" LocID = " + urd.RoleDataValue + " ");
+                    }
+                    break;
+                case "R"://Region
+                    foreach (var urd in userRoleDataL)
+                    {
+                        UserRoleString.Add(" RegionID = " + urd.RoleDataValue + " ");
+                    }
+                    break;
+            }
+            if (UserRoleString.Count == 1)
+            {
+                RoleQuery = " and (" + RoleQuery + UserRoleString[0] + " ) ";
+            }
+            else if (UserRoleString.Count > 1)
+            {
+                RoleQuery = RoleQuery + " and ( ";
+                for (int i = 0; i < UserRoleString.Count - 1; i++)
+                {
+                    RoleQuery = RoleQuery + UserRoleString[i] + " or ";
+                }
+                RoleQuery = RoleQuery + UserRoleString[UserRoleString.Count - 1] + " ) ";
+            }
+            if (CategoryUser.Count == 1)
+                CatQuery = CatQuery + CategoryUser[0] + " ) ";
+            else if (CategoryUser.Count > 1)
+            {
+                for (int i = 0; i < CategoryUser.Count - 1; i++)
+                {
+                    CatQuery = CatQuery + CategoryUser[i] + " or ";
+                }
+                CatQuery = CatQuery + CategoryUser[CategoryUser.Count - 1] + " ) ";
+            }
+
+            return CatQuery + RoleQuery;
+        }
+        
     }
 }

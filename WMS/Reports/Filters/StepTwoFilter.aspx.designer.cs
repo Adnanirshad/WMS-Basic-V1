@@ -94,13 +94,13 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl dateTo;
         
         /// <summary>
-        /// TextBoxSearchDivision control.
+        /// TextBoxSearchDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxSearchDivision;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxSearchDepartment;
         
         /// <summary>
         /// Button1 control.
@@ -112,22 +112,22 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// GridViewDivision control.
+        /// GridViewDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewDivision;
+        protected global::System.Web.UI.WebControls.GridView GridViewDepartment;
         
         /// <summary>
-        /// tbSearch_Shift control.
+        /// tbSearch_City control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbSearch_Shift;
+        protected global::System.Web.UI.WebControls.TextBox tbSearch_City;
         
         /// <summary>
         /// Button2 control.
@@ -139,12 +139,12 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
-        /// GridViewShift control.
+        /// GridViewCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewShift;
+        protected global::System.Web.UI.WebControls.GridView GridViewCity;
     }
 }

@@ -62,46 +62,40 @@
                         @Html.ValidationMessageFor(model => model.Status)
             </div>
         </div>
+
+
+
+        
         <div class="form-group">
-            <div class="control-label col-md-4">Data Role</div>
-            @*<div class="col-md-4">
-                @Html.DropDownList("RoleID", null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                @Html.ValidationMessageFor(model => model.RoleID)
-            </div>*@
+           <div class="control-label col-md-4">Data Access level (Locations)</div>
             <div class="col-md-4">
-                @Html.DropDownList("RoleID", null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                @Html.DropDownList("UserRoleL", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth", @data_ng_model="UserAccessLevelL" })
                 @Html.ValidationMessageFor(model => model.UserRoleL)
             </div>
         </div> 
-        <div class="form-group">
-            <div class="control-label col-md-4">Location</div>
-            <div class="col-md-8">
-                <input type="hidden" placeholder="e.g Lahore" data-ng-model="location.name" id="uLocationCount" name="uLocationCount" class="form-control" value="{{locations.length}}">
-                <div class="input-group" ng-repeat="location in locations">
-                    <input disabled type="text" placeholder="e.g Lahore" id="testLocation{{$index + 1}}" data-ng-model="location.name" class="form-control">
-                    <input type="hidden" placeholder="e.g Lahore" data-ng-model="location.name" id="uLocation{{$index + 1}}" name="uLocation{{$index + 1}}" class="form-control" value="{{location.name}}">
-                    <span class="input-group-btn">
-                        <button type="button" ng-click="removeLocation($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
-                    </span>
-                </div>
-                 <div  ng-show="isAddingLocation">
-                    @*<input type="text" placeholder="Add a Location" data-ng-model="newLocation.name" class="form-control">*@
-                    <select type="text" placeholder="Add a Location" data-ng-model="newLocation.name" class="form-control">
-                        <option ng-repeat="loc in AllLocations">{{loc.Text}}</option>
-                    </select>
-                    <a class="btn btn-default btn-sm" ng-click="addLocation()">Add</a>
-                    <a href="" ng-click="isAddingLocation = false">Done Adding</a>
-                </div>
-                <p><a href="" ng-click="isAddingLocation = true">+ Add Location</a></p>
-            </div>
-        </div>
-       @*<div class="form-group">
-            <div class="control-label col-md-4">Location</div>
+            <div ng-include src="'../Template/LocationAccess'"></div>
+            <div ng-include src="'../Template/CityAccess'"></div>
+            <div ng-include src="'../Template/RegionAccess'"></div>
+
+
+
+
+
+            <div class="form-group">
+           <div class="control-label col-md-4">Data Access level (Organization)</div>
             <div class="col-md-4">
-                @Html.DropDownList("LocationID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                @Html.ValidationMessageFor(model => model.LocationID)
+                @Html.DropDownList("UserRoleD", null, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth", @data_ng_model="UserAccessLevelD" })
+                @Html.ValidationMessageFor(model => model.UserRoleD)
             </div>
-        </div> *@
+        </div> 
+            <div ng-include src="'../Template/SectionAccess'"></div>
+            <div ng-include src="'../Template/DepartmentAccess'"></div>
+            <div ng-include src="'../Template/DivisionAccess'"></div>
+          
+
+
+
+
         <div class="form-group">
             <div class="control-label col-md-4">Permanent Staff</div>
             <div class="col-md-6">

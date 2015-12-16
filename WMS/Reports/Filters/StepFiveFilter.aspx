@@ -17,7 +17,9 @@
                         <h4>Filters Navigation</h4>
                     </li>
                    <li >
-                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Company, Locations</p></asp:LinkButton>
+
+                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Region,Division </p></asp:LinkButton>
+
                     </li>
                     <li>
                         <asp:LinkButton ID="btnStepTwo" runat="server" CssClass="inactive-link" OnClick="btnStepTwo_Click" >Step Two<p>Divisions, Shifts</p></asp:LinkButton>

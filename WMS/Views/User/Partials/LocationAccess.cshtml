@@ -1,0 +1,22 @@
+﻿<div class="form-group" data-ng-show="UserAccessLevelL == 'L'">
+            <div class="control-label col-md-4">Location</div>
+            <div class="col-md-8">
+                <input type="hidden" placeholder="e.g Lahore" data-ng-model="location.name" id="uLocationCount" name="uLocationCount" class="form-control" value="{{locations.length}}">
+                <div class="input-group" ng-repeat="location in locations">
+                    <input disabled type="text" placeholder="e.g Lahore" id="testLocation{{$index + 1}}" data-ng-model="location.name" class="form-control">
+                    <input type="hidden" placeholder="e.g Lahore" data-ng-model="location.name" id="uLocation{{$index + 1}}" name="uLocation{{$index + 1}}" class="form-control" value="{{location.name}}">
+                    <span class="input-group-btn">
+                        <button type="button" ng-click="removeLocation($index)" class="btn btn-default"><i class="fa fa-times"></i>[X]</button>
+                    </span>
+                </div>
+                 <div  ng-show="isAddingLocation">
+                    
+                    <select type="text" placeholder="Add a Location" data-ng-model="newLocation.name" class="form-control">
+                        <option ng-repeat="loc in AllLocations">{{loc.Text}}</option>
+                    </select>
+                    <a class="btn btn-default btn-sm" ng-click="addLocation()">Add</a>
+                    <a href="" ng-click="isAddingLocation = false">Done Adding</a>
+                </div>
+                <p><a href="" ng-click="isAddingLocation = true">+ Add Location</a></p>
+            </div>
+          </div>

@@ -1,1 +1,0 @@
-﻿var app = angular.module('UserLocation', ["highcharts-ng"]);

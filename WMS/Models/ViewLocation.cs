@@ -12,13 +12,13 @@ namespace WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ViewSection
+    public partial class ViewLocation
     {
-        public short SectionID { get; set; }
-        public string SectionName { get; set; }
-        public short DeptID { get; set; }
-        public string DeptName { get; set; }
-        public string DivisionName { get; set; }
-        public Nullable<short> DivID { get; set; }
+        public Nullable<byte> RegionID { get; set; }
+        public string CityName { get; set; }
+        public string LocName { get; set; }
+        public short LocID { get; set; }
+        public Nullable<short> CityID { get; set; }
+        public string RegionName { get; set; }
     }
 }
