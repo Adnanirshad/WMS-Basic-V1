@@ -333,6 +333,11 @@
     <Content Include="Scripts\slimscroll.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Views\LvType\Create.cshtml" />
+    <Content Include="Views\LvType\Delete.cshtml" />
+    <Content Include="Views\LvType\Details.cshtml" />
+    <Content Include="Views\LvType\Edit.cshtml" />
+    <Content Include="Views\LvType\Index.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -396,6 +401,7 @@
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\LvAppController.cs" />
     <Compile Include="Controllers\LvShortController.cs" />
+    <Compile Include="Controllers\LvTypeController.cs" />
     <Compile Include="Controllers\ReaderController.cs" />
     <Compile Include="Controllers\ReaderTypeController.cs" />
     <Compile Include="Controllers\RosterController.cs" />

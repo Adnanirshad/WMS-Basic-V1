@@ -1,0 +1,106 @@
+﻿@model IEnumerable<WMS.Models.LvType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LvDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FldName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfLvCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfAbCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VacDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MonthProcess)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FldName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfLvCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfAbCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VacDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MonthProcess)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LvType1 }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LvType1 }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LvType1 })
+        </td>
+    </tr>
+}
+
+</table>
