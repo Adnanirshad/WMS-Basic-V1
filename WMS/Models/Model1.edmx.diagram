@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6f178252e0de4a87a02a180fb3a63abf" Name="Diagram1" ZoomLevel="41">
+      <Diagram DiagramId="215286e388854df68fe33e80585f7306" Name="Diagram1">
         <EntityTypeShape EntityType="TAS2013Model.AccessEmp" Width="1.5" PointX="5.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TAS2013Model.AttData" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TAS2013Model.AttDataManEdit" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
@@ -47,7 +47,7 @@
         <EntityTypeShape EntityType="TAS2013Model.LvConsumed" Width="1.5" PointX="7.5" PointY="35.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TAS2013Model.LvData" Width="1.5" PointX="12.75" PointY="25" IsExpanded="true" />
         <EntityTypeShape EntityType="TAS2013Model.LvShort" Width="1.5" PointX="7.5" PointY="41.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TAS2013Model.LvType" Width="1.5" PointX="8.25" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TAS2013Model.LvType" Width="1.5" PointX="8.25" PointY="30" IsExpanded="true" />
         <EntityTypeShape EntityType="TAS2013Model.Option" Width="1.5" PointX="11.75" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TAS2013Model.PollData" Width="1.5" PointX="7.5" PointY="48.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TAS2013Model.PollDataError" Width="1.5" PointX="16.75" PointY="20.75" IsExpanded="true" />

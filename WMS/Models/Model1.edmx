@@ -2387,13 +2387,10 @@
           <Property Name="HalfLvCode" Type="nvarchar" Nullable="false" MaxLength="10" />
           <Property Name="HalfAbCode" Type="nvarchar" Nullable="false" MaxLength="10" />
           <Property Name="MaxDays" Type="tinyint" Nullable="false" />
-          <Property Name="WorkDays" Type="bit" Nullable="false" />
-          <Property Name="VacDays" Type="bit" Nullable="false" />
-          <Property Name="MonthProcess" Type="bit" Nullable="false" />
           <Property Name="UpdateBalance" Type="bit" Nullable="false" />
-          <Property Name="LvStatus" Type="bit" Nullable="false" />
           <Property Name="Enable" Type="bit" />
-          <Property Name="CompanyID" Type="smallint" />
+          <Property Name="CarryForward" Type="bit" />
+          <Property Name="CountVacDays" Type="bit" />
         </EntityType>
         <EntityType Name="Option">
           <Key>
@@ -5623,13 +5620,10 @@
           <Property Name="HalfLvCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="HalfAbCode" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="MaxDays" Type="Byte" Nullable="false" />
-          <Property Name="WorkDays" Type="Boolean" Nullable="false" />
-          <Property Name="VacDays" Type="Boolean" Nullable="false" />
-          <Property Name="MonthProcess" Type="Boolean" Nullable="false" />
           <Property Name="UpdateBalance" Type="Boolean" Nullable="false" />
-          <Property Name="LvStatus" Type="Boolean" Nullable="false" />
           <Property Name="Enable" Type="Boolean" />
-          <Property Name="CompanyID" Type="Int16" />
+          <Property Name="CarryForward" Type="Boolean" />
+          <Property Name="CountVacDays" Type="Boolean" />
           <NavigationProperty Name="LvApplications" Relationship="TAS2013Model.FK_LvApplications_LvType" FromRole="LvType" ToRole="LvApplication" />
           <NavigationProperty Name="LvDatas" Relationship="TAS2013Model.FK_LvData_LvCode" FromRole="LvType" ToRole="LvData" />
         </EntityType>
@@ -8511,13 +8505,10 @@
                 <ScalarProperty Name="HalfLvCode" ColumnName="HalfLvCode" />
                 <ScalarProperty Name="HalfAbCode" ColumnName="HalfAbCode" />
                 <ScalarProperty Name="MaxDays" ColumnName="MaxDays" />
-                <ScalarProperty Name="WorkDays" ColumnName="WorkDays" />
-                <ScalarProperty Name="VacDays" ColumnName="VacDays" />
-                <ScalarProperty Name="MonthProcess" ColumnName="MonthProcess" />
                 <ScalarProperty Name="UpdateBalance" ColumnName="UpdateBalance" />
-                <ScalarProperty Name="LvStatus" ColumnName="LvStatus" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
-                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CarryForward" ColumnName="CarryForward" />
+                <ScalarProperty Name="CountVacDays" ColumnName="CountVacDays" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -27,13 +27,10 @@ namespace WMS.Models
         public string HalfLvCode { get; set; }
         public string HalfAbCode { get; set; }
         public byte MaxDays { get; set; }
-        public bool WorkDays { get; set; }
-        public bool VacDays { get; set; }
-        public bool MonthProcess { get; set; }
         public bool UpdateBalance { get; set; }
-        public bool LvStatus { get; set; }
         public Nullable<bool> Enable { get; set; }
-        public Nullable<short> CompanyID { get; set; }
+        public Nullable<bool> CarryForward { get; set; }
+        public Nullable<bool> CountVacDays { get; set; }
     
         public virtual ICollection<LvApplication> LvApplications { get; set; }
         public virtual ICollection<LvData> LvDatas { get; set; }
