@@ -354,7 +354,7 @@ namespace WMS.Controllers
                 {
                     emp.EmpNo = emp.EmpNo.ToUpper();
                     db.Entry(emp).State = EntityState.Modified;
-                    ViewBag.JS = "toastr.success('" + emp.EmpName + " data Successfully edited');";
+                   
                     db.SaveChanges();
                     int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                     HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Employee, (byte)MyEnums.Operation.Edit, DateTime.Now);
@@ -460,7 +460,19 @@ namespace WMS.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult CrewList()
+        {
+          
+            var secs = db.Crews.OrderBy(s => s.CrewName);
+            if (HttpContext.Request.IsAjaxRequest())
+                return Json(new SelectList(
+                                secs.ToArray(),
+                                "CrewID",
+                                "CrewName")
+                           , JsonRequestBehavior.AllowGet);
 
+            return RedirectToAction("Index");
+        }
         public ActionResult EmpTypeList(string ID)
         {
             short CatID = Convert.ToInt16(ID);
@@ -591,7 +603,32 @@ namespace WMS.Controllers
                 return Json(new { success = false, errorMessage = "Unable to upload file.\nERRORINFO: " + ex.Message });
             }
         }
+        public ActionResult GradeList()
+        {
+           
+            var states = db.Grades.OrderBy(s => s.GradeName);
+            if (HttpContext.Request.IsAjaxRequest())
+                return Json(new SelectList(
+                                states.ToArray(),
+                                "GradeID",
+                                "GradeName")
+                           , JsonRequestBehavior.AllowGet);
 
+            return RedirectToAction("Index");
+        }
+        public ActionResult DesignationList()
+        {
+           
+            var secs = db.Designations.OrderBy(s => s.DesignationName);
+            if (HttpContext.Request.IsAjaxRequest())
+                return Json(new SelectList(
+                                secs.ToArray(),
+                                "DesignationID",
+                                "DesignationName")
+                           , JsonRequestBehavior.AllowGet);
+
+            return RedirectToAction("Index");
+        }
         private bool IsImage(HttpPostedFileBase file)
         {
             if (file.ContentType.Contains("image"))

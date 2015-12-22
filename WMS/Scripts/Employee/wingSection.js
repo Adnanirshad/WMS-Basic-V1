@@ -21,7 +21,7 @@
         $('#SecID').empty();
         //var URL = '/WMS/Emp/SectionList';
         var URL = '/Emp/SectionList';
-       var convalue = $('#DeptID').val() + "s" + $('#CompanyID').val();
+       var convalue = $('#DeptID').val();
        $.getJSON(URL + '/' + convalue, function (data) {
             var selectedItemID = document.getElementById("selectedSectionIdHidden").value;
             var items;
@@ -45,7 +45,7 @@
         $('#SecID').empty();
         //var URL = '/WMS/Emp/SectionList';
         var URL = '/Emp/SectionList';
-        var convalue = $('#DeptID').val() + "s" + $('#CompanyID').val();
+        var convalue = $('#DeptID').val();
         $.getJSON(URL + '/' +convalue, function (data) {
             var selectedItemID = document.getElementById("selectedSectionIdHidden").value;
             var items;

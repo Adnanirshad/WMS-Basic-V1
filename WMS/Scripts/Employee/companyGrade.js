@@ -3,7 +3,7 @@
     $('#GradeID').empty();
     //   var URL = '/WMS/Emp/GradeList';
     var URL = '/Emp/GradeList';
-    $.getJSON(URL + '/' + $('#CompanyID').val(), function (data) {
+    $.getJSON(URL, function (data) {
         var selectedItemID = document.getElementById("selectedGradeIdHidden").value;
         var items;
         $.each(data, function (i, state) {
@@ -22,7 +22,7 @@
         $('#GradeID').empty();
         //var URL = '/WMS/Emp/GradeList';
         var URL = '/Emp/GradeList';
-        $.getJSON(URL + '/' + $('#CompanyID').val(), function (data) {
+        $.getJSON(URL, function (data) {
             var selectedItemID = document.getElementById("selectedGradeIdHidden").value;
             var items;
             $.each(data, function (i, state) {

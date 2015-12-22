@@ -189,9 +189,14 @@
     <Content Include="Scripts\EditAttendance.js" />
     <Content Include="Scripts\Employee\catEmpTypeCompanyCreate.js" />
     <Content Include="Scripts\dx.chartjs.js" />
+    <Content Include="Scripts\Employee\companyGrade.js" />
+    <Content Include="Scripts\Employee\companyGradeCreate.js" />
+    <Content Include="Scripts\Employee\crewCompany.js" />
+    <Content Include="Scripts\Employee\crewCompanyCreate.js" />
+    <Content Include="Scripts\Employee\desigCompany.js" />
+    <Content Include="Scripts\Employee\desigCompanyCreate.js" />
     <Content Include="Scripts\Employee\empTypeCategory.js" />
     <Content Include="Scripts\Employee\empTypeCategoryCreate.js" />
-    <Content Include="Scripts\exporting.js" />
     <Content Include="Scripts\Filters\ClearSessionOnPageClose.js" />
     <Content Include="Scripts\Filters\DeleteSingleFilters.js" />
     <Content Include="Scripts\Filters\FilterScripts.js" />
@@ -202,7 +207,6 @@
     <Content Include="Scripts\HR\DeptCompanyCreate.js" />
     <Content Include="Scripts\HR\DivisionCompany.js" />
     <Content Include="Scripts\HR\DivisionCompanyCreate.js" />
-    <Content Include="Scripts\Leaves\LeaveQuota.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.maskedinput.js" />
@@ -256,11 +260,8 @@
     </Content>
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\a.pubxml" />
-    <None Include="Properties\PublishProfiles\as.pubxml" />
-    <None Include="Properties\PublishProfiles\FatimaWMS.pubxml" />
-    <None Include="Properties\PublishProfiles\WMSFatima.pubxml" />
     <Content Include="ReportingEngine.Master" />
-    <None Include="Properties\PublishProfiles\WMSProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\SCP-Publish.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -330,7 +331,6 @@
     <Content Include="Scripts\site.avatar.js" />
     <Content Include="Scripts\Employee\wingSection.js" />
     <Content Include="Scripts\Employee\wingSectionCreate.js" />
-    <Content Include="Scripts\slimscroll.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Views\LvType\Create.cshtml" />
@@ -946,7 +946,9 @@
       <Name>WMSLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Scripts\Leaves\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WMSLibrary\WMSLibrary.csproj">
       <Project>{bee16d41-5976-4142-97d7-ae43d44519c9}</Project>
