@@ -1,0 +1,55 @@
+﻿<script src="~/Scripts/ui-bootstrap-tpls-0.2.0.js"></script>
+<script src="~/Scripts/angular/ESSUsersController.js"></script>
+<link href="~/Content/bootstrap-combined.min.css" rel="stylesheet" />
+
+@model List<WMS.Models.Emp>
+@{
+    ViewBag.Title = "Index";
+}
+
+ 
+<h2>Generate user accounts for employees</h2>
+
+<div class="alert alert-info" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  User accounts when newly generated will have a default username same as the employee number and the default password will be "password". For Example: an employee with employee number: 00213 will have user name: <b>00213</b> and password: <b>password</b> 
+</div>
+
+<div ng-app="ESSApp">
+    <div data-ng-controller="ESSUserCtrl" data-ng-init="initFunction()">
+        Search:
+        <input type="text" data-ng-model="search" />
+        <button class="btn btn-sm btn-success pull-right" data-ng-click="generateSelected()">Generate Selected Users</button>
+        <button class="btn btn-sm btn-info pull-right" data-ng-click="generateAll()">Generate All</button>
+        <div>
+        <div>
+             <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Employee No.</th>
+                        <th>Name</th>
+                        <th>Generate/Restrict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="emp in filtered | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                        <td><input type="checkbox" data-ng-model="emp.isSelected"/></td>
+                        <td>{{emp.EmpNo}}</td>
+                        <td>{{emp.EmpName}}</td>
+                        <td><button data-ng-show="!emp.HasAccess" class="btn btn-sm btn-success" data-ng-click="generateUser(emp)">Generate User</button>
+            <button data-ng-show="emp.HasAccess" class="btn btn-sm btn-danger" data-ng-click="restrictUser(emp)">Restrict User</button></td>
+                    </tr>
+                </tbody>
+                 <pagination data-boundary-links="true" data-num-pages="noOfPages" data-current-page="currentPage" max-size="maxSize" class="pagination-small" data-previous-text="&laquo;" data-next-text="&raquo;"></pagination>
+            </table>
+
+        </div>
+           
+        </div>
+    </div>
+</div>
+
+
+

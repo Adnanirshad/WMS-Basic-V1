@@ -93,26 +93,15 @@ namespace WMS.Models
         public DbSet<UserRoleData> UserRoleDatas { get; set; }
         public DbSet<EmpView> EmpViews { get; set; }
         public DbSet<ViewAttData> ViewAttDatas { get; set; }
-        public DbSet<ViewAuditLog> ViewAuditLogs { get; set; }
         public DbSet<ViewBadli> ViewBadlis { get; set; }
-        public DbSet<ViewCard> ViewCards { get; set; }
-        public DbSet<ViewCrew> ViewCrews { get; set; }
         public DbSet<ViewDepartment> ViewDepartments { get; set; }
         public DbSet<ViewDetailAttData> ViewDetailAttDatas { get; set; }
-        public DbSet<ViewEditAttendance> ViewEditAttendances { get; set; }
         public DbSet<ViewEmpPic> ViewEmpPics { get; set; }
-        public DbSet<ViewEmpType> ViewEmpTypes { get; set; }
-        public DbSet<ViewLeaveData> ViewLeaveDatas { get; set; }
-        public DbSet<ViewLeaveQuota> ViewLeaveQuotas { get; set; }
         public DbSet<ViewLocation> ViewLocations { get; set; }
         public DbSet<ViewLvApplication> ViewLvApplications { get; set; }
-        public DbSet<ViewLvConsumed> ViewLvConsumeds { get; set; }
         public DbSet<ViewMonthlyData> ViewMonthlyDatas { get; set; }
         public DbSet<ViewMonthlyDataPer> ViewMonthlyDataPers { get; set; }
         public DbSet<ViewMultipleInOut> ViewMultipleInOuts { get; set; }
-        public DbSet<ViewPollData> ViewPollDatas { get; set; }
         public DbSet<ViewSection> ViewSections { get; set; }
-        public DbSet<ViewSLData> ViewSLDatas { get; set; }
-        public DbSet<ViewSummary> ViewSummaries { get; set; }
     }
 }

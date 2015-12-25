@@ -29,7 +29,7 @@ namespace WMS.Models
         public Nullable<short> OTMin { get; set; }
         public Nullable<short> GZOTMin { get; set; }
         public Nullable<short> BreakMin { get; set; }
-        public Nullable<System.TimeSpan> SLMin { get; set; }
+        public Nullable<short> SLMin { get; set; }
         public Nullable<bool> StatusP { get; set; }
         public Nullable<bool> StatusAB { get; set; }
         public Nullable<bool> StatusLI { get; set; }

@@ -153,6 +153,7 @@
   <ItemGroup>
     <Content Include="AppForms\WebForm1.aspx" />
     <Content Include="App_Data\ExportService.mdb" />
+    <Content Include="Content\bootstrap-combined.min.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-select.min.css" />
@@ -180,6 +181,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular\angular-bootstrap-select.js" />
     <Content Include="Scripts\angular\DashboardController.js" />
+    <Content Include="Scripts\angular\ESSUsersController.js" />
     <Content Include="Scripts\angular\highcharts-ng.js" />
     <Content Include="Scripts\angular\MainController.js" />
     <Content Include="Scripts\angular\reportingEngineMainController.js" />
@@ -262,6 +264,7 @@
     <None Include="Properties\PublishProfiles\a.pubxml" />
     <Content Include="ReportingEngine.Master" />
     <None Include="Properties\PublishProfiles\SCP-Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\WMSProfile.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -333,11 +336,13 @@
     <Content Include="Scripts\Employee\wingSectionCreate.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.2.0.js" />
     <Content Include="Views\LvType\Create.cshtml" />
     <Content Include="Views\LvType\Delete.cshtml" />
     <Content Include="Views\LvType\Details.cshtml" />
     <Content Include="Views\LvType\Edit.cshtml" />
     <Content Include="Views\LvType\Index.cshtml" />
+    <Content Include="Views\ESSUser\Index.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -347,7 +352,9 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\AttProcessors\Create.cshtml" />
     <Content Include="Views\AttProcessors\Edit.cshtml" />
     <Content Include="Views\AttProcessors\Delete.cshtml" />
@@ -387,6 +394,7 @@
     <Compile Include="Controllers\EditAttendance\ManualAttendanceProcess.cs" />
     <Compile Include="Controllers\EmpController.cs" />
     <Compile Include="Controllers\EmpTypeController.cs" />
+    <Compile Include="Controllers\ESSUserController.cs" />
     <Compile Include="Controllers\Filters\CustomActionAttribute.cs" />
     <Compile Include="Controllers\Filters\CustomControllerAttributes.cs" />
     <Compile Include="Controllers\GradeController.cs" />
@@ -643,16 +651,7 @@
     <Compile Include="Models\ViewAttData.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewAuditLog.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewBadli.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewCard.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewCrew.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewDepartment.cs">
@@ -661,28 +660,13 @@
     <Compile Include="Models\ViewDetailAttData.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewEditAttendance.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewEmpPic.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewEmpType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewLeaveData.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewLeaveQuota.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewLocation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewLvApplication.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewLvConsumed.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewMonthlyData.cs">
@@ -694,16 +678,7 @@
     <Compile Include="Models\ViewMultipleInOut.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewPollData.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewSection.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewSLData.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewSummary.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Reports\Filters\SummaryReports.aspx.cs">

@@ -59,6 +59,7 @@ namespace WMS.Models
         public Nullable<bool> FlagCard { get; set; }
         public Nullable<int> EmpImageID { get; set; }
         public Nullable<bool> HasOT { get; set; }
+        public Nullable<bool> HasAccess { get; set; }
     
         public virtual ICollection<AttData> AttDatas { get; set; }
         public virtual Crew Crew { get; set; }
