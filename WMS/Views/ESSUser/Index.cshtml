@@ -19,7 +19,8 @@
 <div ng-app="ESSApp">
     <div data-ng-controller="ESSUserCtrl" data-ng-init="initFunction()">
         Search:
-        <input type="text" data-ng-model="search" />
+        <input class="" type="text" data-ng-model="search" />
+        <button class="btn btn-sm btn-success " data-ng-click="deleselectAll()">Deselect All</button>
         <button class="btn btn-sm btn-success pull-right" data-ng-click="generateSelected()">Generate Selected Users</button>
         <button class="btn btn-sm btn-info pull-right" data-ng-click="generateAll()">Generate All</button>
         <div>

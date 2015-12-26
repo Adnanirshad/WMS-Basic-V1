@@ -30,6 +30,12 @@ ESSApp.controller('ESSUserCtrl', function ($scope, $http, filterFilter) {
         });
     }
 
+    $scope.deleselectAll = function () {
+        $scope.AllEmps.filter(function (emp, index) {
+            emp.isSelected = false;
+        });
+    }
+
     $scope.generateSelected = function () {
         var selectedEmps = [];
         for (var i = 0; i < $scope.AllEmps.length; i++) {
@@ -57,7 +63,7 @@ ESSApp.controller('ESSUserCtrl', function ($scope, $http, filterFilter) {
                 emp.HasAccess = false;
         })
     }
-    
+
     $scope.$watch('search', function (term) {
         // Create $scope.filtered and then calculat $scope.noOfPages, no racing!
         if ($scope.AllEmps) {
