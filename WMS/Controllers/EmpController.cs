@@ -34,7 +34,7 @@ namespace WMS.Controllers
             ViewBag.DepartmentSortParm = sortOrder == "wing" ? "wing_desc" : "wing";
             ViewBag.ShiftSortParm = sortOrder == "shift" ? "shift_desc" : "shift";
             ViewBag.TypeSortParm = sortOrder == "type" ? "type_desc" : "type";
-            //List<EmpView> emps = new List<EmpView>();
+           
             if (searchString != null)
             {
                 page = 1;
@@ -47,7 +47,8 @@ namespace WMS.Controllers
             QueryBuilder qb = new QueryBuilder();
             string query = qb.MakeCustomizeQuery(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from EmpView"+query);
-            List<EmpView> emps = dt.ToList<EmpView>();
+            List<EmpView> emps = new List<EmpView>();
+            emps = dt.ToList<EmpView>();
             
             ViewBag.CurrentFilter = searchString;
 
@@ -66,15 +67,15 @@ namespace WMS.Controllers
                     try
                     {
                         emps = emps.Where(s => s.EmpName.ToUpper().Contains(searchString.ToUpper())
-                         || s.EmpNo.Contains(searchString.ToUpper())
-                         || s.SectionName.ToUpper().Contains(searchString.ToUpper())
-                         || s.ShiftName.ToUpper().Contains(searchString.ToUpper())
-                         || s.DesignationName.ToUpper().Contains(searchString.ToUpper())).ToList();
-                    }
-                    catch(Exception ex)
-                    {
+                         || s.EmpNo.Contains(searchString.ToUpper())).ToList();
 
                     }
+                    catch (Exception)
+                    {
+                        
+                        throw;
+                    }       
+                    
                 }
             }
 
