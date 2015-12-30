@@ -1,0 +1,124 @@
+﻿@model IEnumerable<WMS.Models.LvApplication>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ESS/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LvDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoOfDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsHalf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstHalf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfAbsent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvReason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRevoked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp.EmpNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvType1.LvDesc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsHalf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstHalf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfAbsent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvReason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsRevoked)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Emp.EmpNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvType1.LvDesc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LvID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LvID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LvID })
+        </td>
+    </tr>
+}
+
+</table>

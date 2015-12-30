@@ -153,6 +153,8 @@
   <ItemGroup>
     <Content Include="AppForms\WebForm1.aspx" />
     <Content Include="App_Data\ExportService.mdb" />
+    <Content Include="Areas\ESS\Scripts\ESSLeave.js" />
+    <Content Include="Areas\ESS\Scripts\LeaveForwardController.js" />
     <Content Include="Content\bootstrap-combined.min.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
@@ -183,6 +185,7 @@
     <Content Include="Scripts\angular\DashboardController.js" />
     <Content Include="Scripts\angular\ESSUsersController.js" />
     <Content Include="Scripts\angular\highcharts-ng.js" />
+    <Content Include="Scripts\angular\LeaveApprovalController.js" />
     <Content Include="Scripts\angular\MainController.js" />
     <Content Include="Scripts\angular\reportingEngineMainController.js" />
     <Content Include="Scripts\angular\UserController.js" />
@@ -235,6 +238,14 @@
     </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
+    <Content Include="Areas\ESS\Views\web.config" />
+    <Content Include="Areas\ESS\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\ESS\Views\ESSLeave\Create.cshtml" />
+    <Content Include="Areas\ESS\Views\ESSLeave\Delete.cshtml" />
+    <Content Include="Areas\ESS\Views\ESSLeave\Details.cshtml" />
+    <Content Include="Areas\ESS\Views\ESSLeave\Edit.cshtml" />
+    <Content Include="Areas\ESS\Views\ESSLeave\Index.cshtml" />
+    <Content Include="Areas\ESS\Views\LeaveForward\Index.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -343,6 +354,7 @@
     <Content Include="Views\LvType\Edit.cshtml" />
     <Content Include="Views\LvType\Index.cshtml" />
     <Content Include="Views\ESSUser\Index.cshtml" />
+    <Content Include="Views\LeaveApproval\Index.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -381,6 +393,9 @@
     </Compile>
     <Compile Include="App_Start\DatePickerHelperBundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\ESS\Controllers\ESSLeaveController.cs" />
+    <Compile Include="Areas\ESS\Controllers\LeaveForwardController.cs" />
+    <Compile Include="Areas\ESS\ESSAreaRegistration.cs" />
     <Compile Include="Bootstrap Html Helpers\DatePickerFor.cs" />
     <Compile Include="Bootstrap Html Helpers\HelperMethods.cs" />
     <Compile Include="Controllers\AttProcessorsController.cs" />
@@ -404,6 +419,7 @@
     <Compile Include="Controllers\JobCardAppRController.cs" />
     <Compile Include="Controllers\JobCardEmpRController.cs" />
     <Compile Include="Controllers\JobTitleController.cs" />
+    <Compile Include="Controllers\LeaveApprovalController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\LeaveSettingsController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
@@ -922,6 +938,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\ESS\Models\" />
     <Folder Include="Scripts\Leaves\" />
   </ItemGroup>
   <ItemGroup>

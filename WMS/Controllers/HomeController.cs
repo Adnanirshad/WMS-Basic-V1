@@ -76,8 +76,18 @@ namespace WMS.Controllers
                           using (TAS2013Entities dc = new TAS2013Entities())
                           {
                               var v = dc.Users.Where(a => a.UserName.Equals(u.UserName) && a.Password==u.Password && a.Status == true).FirstOrDefault();
+                              //login for emplioyee
+                              if (v != null && v.UserRoleD == "E" && v.UserRoleL == null)
+                             {
+                                 Session["LogedUserID"] = v.UserID.ToString();
+                                 Session["LogedUserFullname"] = v.UserName;
+                                 Session["LoggedUser"] = v;
+                                 return RedirectToAction("index", "ESSLeave", new { area = "ESS" });
+                              }
+                              else
                               if (v != null)
                               {
+
                                   Session["MDevice"] = "0";
                                   Session["MHR"] = "0";
                                   Session["MDevice"] = "0";

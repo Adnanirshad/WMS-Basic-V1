@@ -1,0 +1,147 @@
+﻿@model WMS.Models.LvApplication
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/ESS/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LvApplication</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LvDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsHalf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsHalf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstHalf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstHalf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HalfAbsent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HalfAbsent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LvReason)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvReason)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LvAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LvStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRevoked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRevoked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp.EmpNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp.EmpNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LvType1.LvDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvType1.LvDesc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LvID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

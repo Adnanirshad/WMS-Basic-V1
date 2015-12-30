@@ -1,0 +1,68 @@
+﻿<script src="~/Scripts/ui-bootstrap-tpls-0.2.0.js"></script>
+<script src="~/Areas/ESS/Scripts/LeaveForwardController.js"></script>
+<link href="~/Content/bootstrap-combined.min.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/ESS/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div ng-app="LvApp">
+    <div data-ng-controller="LvForwardCtrl" data-ng-init="initFunction()">
+
+        <h2>Forward the leaves of your team to HR Department</h2>
+
+        <div class="alert alert-default" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <ng-pluralize count="AllLeaves.length" when="{'0': 'Congrats, you have no more leaves pending for approval', 
+                        '1': 'One more leave pending your approval', 
+                        'other': '{{AllLeaves.length | number:2}} leaves pending approval'}">
+            </ng-pluralize>
+        </div>
+
+        <div data-ng-show="AllLeaves.length > 0">
+            Search:
+            <input class="" type="text" data-ng-model="search" />
+            <button class="btn btn-sm btn-success " data-ng-click="deleselectAll()">Deselect All</button>
+           
+                <button class="btn btn-sm btn-success pull-right" data-ng-click="approveSelected()">Forward Selected Leaves</button>
+                <button class="btn btn-sm btn-info pull-right" data-ng-click="approveAll()">Forward All</button>
+            
+            <div>
+                 <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Days</th>
+                            <th>Employee No.</th>
+                            <th>Name</th>
+                            <th>Reason</th>
+                            <th>Approve/Revoke</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="leave in filtered | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                            <td><input type="checkbox" data-ng-model="leave.isSelected"/></td>
+                            <td>{{leave.FromDate.slice(6, -2) | date: 'dd-MM-yyyy' }} - {{leave.ToDate.slice(6, -2) | date: 'dd-MM-yyyy' }}</td>
+                            <td>{{leave.EmpNo}}</td>
+                            <td>{{leave.EmpName}}</td>
+                            <td>{{leave.Reason}}</td>
+                            <td><button class="btn btn-sm btn-success" data-ng-click="approveLeave(leave)">Forward Leave to HR</button>
+                <button class="btn btn-sm btn-danger" data-ng-click="revokeLeave(leave)">Revoke Leave</button></td>
+                        </tr>
+                    </tbody>
+                     <pagination data-boundary-links="true" data-num-pages="noOfPages" data-current-page="currentPage" max-size="maxSize" class="pagination-small" data-previous-text="&laquo;" data-next-text="&raquo;"></pagination>
+                </table>
+       
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+
+
+
+

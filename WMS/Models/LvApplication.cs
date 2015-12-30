@@ -32,8 +32,11 @@ namespace WMS.Models
         public string LvReason { get; set; }
         public string LvAddress { get; set; }
         public Nullable<int> CreatedBy { get; set; }
-        public Nullable<int> ApprovedBy { get; set; }
         public string LvStatus { get; set; }
+        public Nullable<int> ManagerID { get; set; }
+        public Nullable<int> ApprovedBy { get; set; }
+        public Nullable<bool> IsRevoked { get; set; }
+        public Nullable<byte> Stage { get; set; }
         public Nullable<bool> Active { get; set; }
     
         public virtual Emp Emp { get; set; }

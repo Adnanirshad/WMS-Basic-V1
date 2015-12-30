@@ -1892,8 +1892,11 @@
           <Property Name="LvReason" Type="nvarchar" MaxLength="500" />
           <Property Name="LvAddress" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedBy" Type="int" />
-          <Property Name="ApprovedBy" Type="int" />
           <Property Name="LvStatus" Type="char" MaxLength="1" />
+          <Property Name="ManagerID" Type="int" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="IsRevoked" Type="bit" />
+          <Property Name="Stage" Type="tinyint" />
           <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="LvConsumed">
@@ -4513,8 +4516,11 @@
           <Property Name="LvReason" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="LvAddress" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="ApprovedBy" Type="Int32" />
           <Property Name="LvStatus" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ManagerID" Type="Int32" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="IsRevoked" Type="Boolean" />
+          <Property Name="Stage" Type="Byte" />
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Emp" Relationship="TAS2013Model.FK_LvApplication_Emp" FromRole="LvApplication" ToRole="Emp" />
           <NavigationProperty Name="User" Relationship="TAS2013Model.FK_LvApplication_User" FromRole="LvApplication" ToRole="User" />
@@ -6892,8 +6898,11 @@
                 <ScalarProperty Name="LvReason" ColumnName="LvReason" />
                 <ScalarProperty Name="LvAddress" ColumnName="LvAddress" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
                 <ScalarProperty Name="LvStatus" ColumnName="LvStatus" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="IsRevoked" ColumnName="IsRevoked" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
