@@ -1,7 +1,8 @@
-﻿@model IEnumerable<WMS.Models.JobCardEmp>
+﻿@model IEnumerable<WMS.Models.JobCardTime>
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -12,46 +13,34 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EmpDate)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.EmpID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Dated)
+            @Html.DisplayNameFor(model => model.StartTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SubmittedFrom)
+            @Html.DisplayNameFor(model => model.EndTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WrkCardID)
+            @Html.DisplayNameFor(model => model.TTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CompanyID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SendTo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Approved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rejected)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
+            @Html.DisplayNameFor(model => model.DutyDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Remarks)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TimeIn)
+            @Html.DisplayNameFor(model => model.AssignedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TimeOut)
+            @Html.DisplayNameFor(model => model.CreatedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WorkMin)
+            @Html.DisplayNameFor(model => model.JobCardID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
         </th>
         <th></th>
     </tr>
@@ -59,51 +48,39 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.EmpDate)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.EmpID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Dated)
+            @Html.DisplayFor(modelItem => item.StartTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SubmittedFrom)
+            @Html.DisplayFor(modelItem => item.EndTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WrkCardID)
+            @Html.DisplayFor(modelItem => item.TTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CompanyID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SendTo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Approved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rejected)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
+            @Html.DisplayFor(modelItem => item.DutyDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TimeIn)
+            @Html.DisplayFor(modelItem => item.AssignedBy)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TimeOut)
+            @Html.DisplayFor(modelItem => item.CreatedBy)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WorkMin)
+            @Html.DisplayFor(modelItem => item.JobCardID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.JobDataID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.JobDataID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.JobDataID })
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

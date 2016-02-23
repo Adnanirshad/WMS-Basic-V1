@@ -36,7 +36,7 @@ namespace WMS.Models
         public Nullable<int> ManagerID { get; set; }
         public Nullable<int> ApprovedBy { get; set; }
         public Nullable<bool> IsRevoked { get; set; }
-        public Nullable<byte> Stage { get; set; }
+        public byte Stage { get; set; }
         public Nullable<bool> Active { get; set; }
     
         public virtual Emp Emp { get; set; }

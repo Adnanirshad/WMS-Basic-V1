@@ -27,6 +27,8 @@ namespace WMS.Models
         public Nullable<bool> ProcessCat { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<int> EmpID { get; set; }
+        public string EmpNo { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual User User { get; set; }

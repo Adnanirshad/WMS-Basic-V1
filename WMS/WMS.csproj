@@ -354,6 +354,11 @@
     <Content Include="Views\LvType\Index.cshtml" />
     <Content Include="Views\ESSUser\Index.cshtml" />
     <Content Include="Views\LeaveApproval\Index.cshtml" />
+    <Content Include="Views\JobCardTime\Create.cshtml" />
+    <Content Include="Views\JobCardTime\Delete.cshtml" />
+    <Content Include="Views\JobCardTime\Details.cshtml" />
+    <Content Include="Views\JobCardTime\Edit.cshtml" />
+    <Content Include="Views\JobCardTime\Index.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -417,6 +422,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobCardAppRController.cs" />
     <Compile Include="Controllers\JobCardEmpRController.cs" />
+    <Compile Include="Controllers\JobCardTimeController.cs" />
     <Compile Include="Controllers\JobTitleController.cs" />
     <Compile Include="Controllers\LeaveApprovalController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
@@ -558,6 +564,9 @@
     <Compile Include="Models\JobCardEmp.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\JobCardTime.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\JobTitle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -622,6 +631,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Region.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Remark.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roster.cs">
