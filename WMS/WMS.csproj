@@ -909,11 +909,11 @@
     <Content Include="Views\Roster\Create.cshtml" />
     <Content Include="Views\User\ListOfADUser.cshtml" />
     <Content Include="Views\Roster\RosterAppIndex.cshtml" />
-    <Content Include="Views\JobCardAppR\Create.cshtml" />
-    <Content Include="Views\JobCardAppR\Delete.cshtml" />
-    <Content Include="Views\JobCardAppR\Details.cshtml" />
-    <Content Include="Views\JobCardAppR\Edit.cshtml" />
-    <Content Include="Views\JobCardAppR\Index.cshtml" />
+    <Content Include="Views\JobCardDate\Create.cshtml" />
+    <Content Include="Views\JobCardDate\Delete.cshtml" />
+    <Content Include="Views\JobCardDate\Details.cshtml" />
+    <Content Include="Views\JobCardDate\Edit.cshtml" />
+    <Content Include="Views\JobCardDate\Index.cshtml" />
     <Content Include="Views\JobCardEmpR\Create.cshtml" />
     <Content Include="Views\JobCardEmpR\Delete.cshtml" />
     <Content Include="Views\JobCardEmpR\Details.cshtml" />
