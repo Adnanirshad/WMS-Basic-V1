@@ -238,7 +238,6 @@
     </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <Content Include="Areas\ESS\Views\web.config" />
     <Content Include="Areas\ESS\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\ESS\Views\ESSLeave\Create.cshtml" />
     <Content Include="Areas\ESS\Views\ESSLeave\Delete.cshtml" />
