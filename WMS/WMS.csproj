@@ -914,11 +914,11 @@
     <Content Include="Views\JobCardDate\Details.cshtml" />
     <Content Include="Views\JobCardDate\Edit.cshtml" />
     <Content Include="Views\JobCardDate\Index.cshtml" />
-    <Content Include="Views\JobCardEmpR\Create.cshtml" />
-    <Content Include="Views\JobCardEmpR\Delete.cshtml" />
-    <Content Include="Views\JobCardEmpR\Details.cshtml" />
-    <Content Include="Views\JobCardEmpR\Edit.cshtml" />
-    <Content Include="Views\JobCardEmpR\Index.cshtml" />
+    <Content Include="Views\JobCardTime\Create.cshtml" />
+    <Content Include="Views\JobCardTime\Delete.cshtml" />
+    <Content Include="Views\JobCardTime\Details.cshtml" />
+    <Content Include="Views\JobCardTime\Edit.cshtml" />
+    <Content Include="Views\JobCardTime\Index.cshtml" />
     <Content Include="Views\Roster\RosterDetail.cshtml" />
     <Content Include="Views\Roster\RosterContinue.cshtml" />
     <Content Include="Views\LeaveQuota\Index.cshtml" />
