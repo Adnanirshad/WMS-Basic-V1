@@ -1,7 +1,8 @@
-﻿@model WMS.Models.JobCardEmp
+﻿@model WMS.Models.JobCardTime
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Edit</h2>
@@ -11,18 +12,10 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>JobCardEmp</h4>
+        <h4>JobCardTime</h4>
         <hr />
         @Html.ValidationSummary(true)
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmpDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmpDate)
-                @Html.ValidationMessageFor(model => model.EmpDate)
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => model.JobDataID)
+        @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.EmpID, new { @class = "control-label col-md-2" })
@@ -33,66 +26,34 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Dated, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StartTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Dated)
-                @Html.ValidationMessageFor(model => model.Dated)
+                @Html.EditorFor(model => model.StartTime)
+                @Html.ValidationMessageFor(model => model.StartTime)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SubmittedFrom, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EndTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SubmittedFrom)
-                @Html.ValidationMessageFor(model => model.SubmittedFrom)
+                @Html.EditorFor(model => model.EndTime)
+                @Html.ValidationMessageFor(model => model.EndTime)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WrkCardID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.WrkCardID)
-                @Html.ValidationMessageFor(model => model.WrkCardID)
+                @Html.EditorFor(model => model.TTime)
+                @Html.ValidationMessageFor(model => model.TTime)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CompanyID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DutyDate, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CompanyID)
-                @Html.ValidationMessageFor(model => model.CompanyID)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SendTo, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SendTo)
-                @Html.ValidationMessageFor(model => model.SendTo)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Approved, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Approved)
-                @Html.ValidationMessageFor(model => model.Approved)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Rejected, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Rejected)
-                @Html.ValidationMessageFor(model => model.Rejected)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateCreated, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateCreated)
-                @Html.ValidationMessageFor(model => model.DateCreated)
+                @Html.EditorFor(model => model.DutyDate)
+                @Html.ValidationMessageFor(model => model.DutyDate)
             </div>
         </div>
 
@@ -105,26 +66,34 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TimeIn, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AssignedBy, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TimeIn)
-                @Html.ValidationMessageFor(model => model.TimeIn)
+                @Html.EditorFor(model => model.AssignedBy)
+                @Html.ValidationMessageFor(model => model.AssignedBy)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TimeOut, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CreatedBy, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TimeOut)
-                @Html.ValidationMessageFor(model => model.TimeOut)
+                @Html.EditorFor(model => model.CreatedBy)
+                @Html.ValidationMessageFor(model => model.CreatedBy)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WorkMin, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.JobCardID, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkMin)
-                @Html.ValidationMessageFor(model => model.WorkMin)
+                @Html.EditorFor(model => model.JobCardID)
+                @Html.ValidationMessageFor(model => model.JobCardID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedDate)
+                @Html.ValidationMessageFor(model => model.CreatedDate)
             </div>
         </div>
 

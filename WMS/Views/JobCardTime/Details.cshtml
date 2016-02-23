@@ -1,23 +1,16 @@
-﻿@model WMS.Models.JobCardEmp
+﻿@model WMS.Models.JobCardTime
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>JobCardEmp</h4>
+    <h4>JobCardTime</h4>
 	<hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EmpDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmpDate)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.EmpID)
         </dt>
@@ -27,67 +20,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dated)
+            @Html.DisplayNameFor(model => model.StartTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Dated)
+            @Html.DisplayFor(model => model.StartTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SubmittedFrom)
+            @Html.DisplayNameFor(model => model.EndTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SubmittedFrom)
+            @Html.DisplayFor(model => model.EndTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WrkCardID)
+            @Html.DisplayNameFor(model => model.TTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WrkCardID)
+            @Html.DisplayFor(model => model.TTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CompanyID)
+            @Html.DisplayNameFor(model => model.DutyDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CompanyID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SendTo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SendTo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Approved)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Approved)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Rejected)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rejected)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
+            @Html.DisplayFor(model => model.DutyDate)
         </dd>
 
         <dt>
@@ -99,32 +60,40 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TimeIn)
+            @Html.DisplayNameFor(model => model.AssignedBy)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TimeIn)
+            @Html.DisplayFor(model => model.AssignedBy)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TimeOut)
+            @Html.DisplayNameFor(model => model.CreatedBy)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TimeOut)
+            @Html.DisplayFor(model => model.CreatedBy)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WorkMin)
+            @Html.DisplayNameFor(model => model.JobCardID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WorkMin)
+            @Html.DisplayFor(model => model.JobCardID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.JobDataID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

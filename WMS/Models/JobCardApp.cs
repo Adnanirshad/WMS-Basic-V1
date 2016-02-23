@@ -26,7 +26,6 @@ namespace WMS.Models
         public Nullable<System.DateTime> TimeIn { get; set; }
         public Nullable<System.DateTime> TimeOut { get; set; }
         public Nullable<short> WorkMin { get; set; }
-        public Nullable<System.TimeSpan> StartTime { get; set; }
         public string Remarks { get; set; }
         public Nullable<short> OtherValue { get; set; }
     }
