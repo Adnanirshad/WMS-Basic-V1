@@ -70,6 +70,7 @@ namespace WMS.Controllers
                          || s.EmpNo.Contains(searchString.ToUpper())).ToList();
 
                     }
+
                     catch (Exception)
                     {
                         
