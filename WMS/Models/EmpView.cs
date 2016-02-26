@@ -40,7 +40,6 @@ namespace WMS.Models
         public Nullable<int> FpID { get; set; }
         public string NicNo { get; set; }
         public Nullable<System.DateTime> JoinDate { get; set; }
-        public Nullable<System.DateTime> ResignDate { get; set; }
         public Nullable<bool> Status { get; set; }
         public Nullable<short> CrewID { get; set; }
         public Nullable<bool> HasOT { get; set; }
@@ -50,5 +49,13 @@ namespace WMS.Models
         public Nullable<short> DivID { get; set; }
         public Nullable<byte> ShiftID { get; set; }
         public Nullable<short> LocID { get; set; }
+        public string FatherName { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
+        public Nullable<System.DateTime> IssueDate { get; set; }
+        public Nullable<System.DateTime> ValidDate { get; set; }
+        public Nullable<System.DateTime> ResignDate { get; set; }
+        public string Email { get; set; }
+        public string CellNo { get; set; }
+        public bool ProcessAtt { get; set; }
     }
 }

@@ -163,6 +163,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Dashboard\AdminLTE.min.css" />
+    <Content Include="Content\Dashboard\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Content\Dashboard\_all-skins.min.css" />
     <Content Include="Content\jquery.Jcrop.css" />
     <Content Include="Content\jquery.Jcrop.min.css" />
     <Content Include="Content\LogIn.css" />
@@ -191,6 +194,16 @@
     <Content Include="Scripts\angular\UserController.js" />
     <Content Include="Scripts\angular\UserEditController.js" />
     <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\Dashboard\app.min.js" />
+    <Content Include="Scripts\Dashboard\bootstrap.min.js" />
+    <Content Include="Scripts\Dashboard\Chart.min.js" />
+    <Content Include="Scripts\Dashboard\dashboard2.js" />
+    <Content Include="Scripts\Dashboard\DashboardValues.js" />
+    <Content Include="Scripts\Dashboard\demo.js" />
+    <Content Include="Scripts\Dashboard\jQuery-2.1.4.min.js" />
+    <Content Include="Scripts\Dashboard\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Scripts\Dashboard\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Scripts\Dashboard\jquery.sparkline.min.js" />
     <Content Include="Scripts\EditAttendance.js" />
     <Content Include="Scripts\Employee\catEmpTypeCompanyCreate.js" />
     <Content Include="Scripts\dx.chartjs.js" />
@@ -354,6 +367,11 @@
     <Content Include="Views\LvType\Index.cshtml" />
     <Content Include="Views\ESSUser\Index.cshtml" />
     <Content Include="Views\LeaveApproval\Index.cshtml" />
+    <Content Include="Views\JobCard\Create.cshtml" />
+    <Content Include="Views\JobCard\Delete.cshtml" />
+    <Content Include="Views\JobCard\Details.cshtml" />
+    <Content Include="Views\JobCard\Edit.cshtml" />
+    <Content Include="Views\JobCard\Index.cshtml" />
     <Content Include="Views\JobCardTime\Create.cshtml" />
     <Content Include="Views\JobCardTime\Delete.cshtml" />
     <Content Include="Views\JobCardTime\Details.cshtml" />
@@ -690,6 +708,9 @@
     <Compile Include="Models\ViewEmpPic.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewJobCardTime.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewLocation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -921,16 +942,6 @@
     <Content Include="Views\Roster\Create.cshtml" />
     <Content Include="Views\User\ListOfADUser.cshtml" />
     <Content Include="Views\Roster\RosterAppIndex.cshtml" />
-    <Content Include="Views\JobCardDate\Create.cshtml" />
-    <Content Include="Views\JobCardDate\Delete.cshtml" />
-    <Content Include="Views\JobCardDate\Details.cshtml" />
-    <Content Include="Views\JobCardDate\Edit.cshtml" />
-    <Content Include="Views\JobCardDate\Index.cshtml" />
-    <Content Include="Views\JobCardTime\Create.cshtml" />
-    <Content Include="Views\JobCardTime\Delete.cshtml" />
-    <Content Include="Views\JobCardTime\Details.cshtml" />
-    <Content Include="Views\JobCardTime\Edit.cshtml" />
-    <Content Include="Views\JobCardTime\Index.cshtml" />
     <Content Include="Views\Roster\RosterDetail.cshtml" />
     <Content Include="Views\Roster\RosterContinue.cshtml" />
     <Content Include="Views\LeaveQuota\Index.cshtml" />

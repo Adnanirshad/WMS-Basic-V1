@@ -246,40 +246,163 @@ namespace WMS.Controllers
             return xmlSerial.Deserialize(xmlStream);
         }
 
-        //public ActionResult TestData()
-        //{
-        //    short Code = 7;
+        public ActionResult GetDahboard()
+        {
+            DateTime dt = DateTime.Today.AddDays(-1);
+            //DateTime dt = new DateTime(2016, 02, 02);
+            DashboardValues dv = new DashboardValues();
+            TAS2013Entities db = new TAS2013Entities();
+            List<DailySummary> ds = new List<DailySummary>();
+            List<JobCardEmp> jcEmp = new List<JobCardEmp>();
+            if (dt.DayOfWeek == DayOfWeek.Saturday)
+                dt = dt.AddDays(-1);
+            if (dt.DayOfWeek == DayOfWeek.Sunday)
+                dt = dt.AddDays(-2);
+            jcEmp = db.JobCardEmps.Where(aa => aa.Dated == dt).ToList();
+            List<JobCardTime> jcEmpT = new List<JobCardTime>();
+            jcEmpT = db.JobCardTimes.Where(aa => aa.DutyDate == dt).ToList();
+            ds = db.DailySummaries.Where(aa => aa.Date == dt && aa.Criteria == "C").ToList();
+            if (ds.Count > 0)
+            {
+                dv.DateTime = dt.ToString("dd-MMM-yyy");
+                dv.TotalEmps = (short)ds.FirstOrDefault().TotalEmps;
+                dv.Present = (short)ds.FirstOrDefault().PresentEmps;
+                dv.Absent = (short)ds.FirstOrDefault().AbsentEmps;
+                dv.Leaves = (short)ds.FirstOrDefault().LvEmps;
+                dv.LateIn = (short)ds.FirstOrDefault().LIEmps;
+                dv.LateOut = (short)ds.FirstOrDefault().LOEmps;
+                dv.EarlyIn = (short)ds.FirstOrDefault().EIEmps;
+                dv.EarlyOut = (short)ds.FirstOrDefault().EOEmps;
+                dv.OverTime = (short)ds.FirstOrDefault().OTEmps;
+                dv.ShortLeaves = (short)ds.FirstOrDefault().ShortLvEmps;
+                dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 11).Count();
+                dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 9).Count();
+                dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 8).Count();
+                dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 10).Count();
+                dv.EWork = (int)(ds.FirstOrDefault().ExpectedWorkMins / 60);
+                dv.AWork = (int)(ds.FirstOrDefault().ActualWorkMins / 60);
+                dv.LWork = (int)(ds.FirstOrDefault().LossWorkMins / 60);
+            }
+            else
+            {
+                dv.DateTime = dt.ToString("dd-MMM-yyy");
+                dv.TotalEmps = 0;
+                dv.Present = 0;
+                dv.Absent = 0;
+                dv.Leaves = 0;
+                dv.LateIn = 0;
+                dv.LateOut = 0;
+                dv.EarlyIn = 0;
+                dv.EarlyOut = 0;
+                dv.OverTime = 0;
+                dv.ShortLeaves = 0;
+                dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count;
+                dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count;
+                dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count;
+                dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count;
+            }
+            if (HttpContext.Request.IsAjaxRequest())
+                return Json(dv
+                           , JsonRequestBehavior.AllowGet);
 
-        //    using (var db = new TAS2013Entities())
-        //    {
-        //        db.Configuration.ProxyCreationEnabled = false;
-        //        List<DailySumSection> secs = db.DailySumSections.Where(aa => aa.SectionID == Code).ToList();
-        //        List<Section> _secList = db.Sections.ToList();
-        //        //return Json(movies, JsonRequestBehavior.AllowGet);
-        //        //string output = SerializeObject(secs);
-        //        if (HttpContext.Request.IsAjaxRequest())
-        //            return Json(ConvertToJsonList(secs, _secList), JsonRequestBehavior.AllowGet);
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction("Index");
+        }
+        public ActionResult GetDahboardGraph()
+        {
+            //DateTime dtE =  new DateTime(2016,02,02);
+            DateTime dtE = DateTime.Today.AddDays(-1);
+            DateTime dtS = dtE.AddDays(-31);
+            TAS2013Entities db = new TAS2013Entities();
+            List<DailySummary> ds = new List<DailySummary>();
+            List<DailySummary> dsTemp = new List<DailySummary>();
+            DashboardGraph dg = new DashboardGraph();
+            ds = db.DailySummaries.Where(aa => aa.Date >= dtS && aa.Date <= dtE && aa.Criteria == "C").ToList();
+            if (ds.Count > 0)
+            {
+                dg.DateTime1 = ds[0].Date.Value.ToString("dd-MMM");
+                dg.LateIn1 = (int)ds[0].LIEmps;
 
-        //private object ConvertToJsonList(List<DailySumSection> _sec, List<Section> _secList)
-        //{
-        //    var data = new List<object>();
-        //    foreach (var item in _sec)
-        //    {
-        //        string SecName = _secList.Where(aa => aa.SectionID == _sec.FirstOrDefault().SectionID).FirstOrDefault().SectionName;
-        //        data.Add(new
-        //        {
-        //            SectionName = SecName,
-        //            Date = item.SummaryDate.Value.ToString("dd-MMM-yyyy"),
-        //            TotalEmp = item.TotalEmp,
-        //        });
-        //    }
-        //    return data;
-        //}
+                dg.DateTime2 = ds[2].Date.Value.ToString("dd-MMM");
+                dg.LateIn2 = (int)ds[2].LIEmps;
 
+                dg.DateTime3 = ds[4].Date.Value.ToString("dd-MMM");
+                dg.LateIn3 = (int)ds[4].LIEmps;
 
-        // Usage:
+                dg.DateTime4 = ds[7].Date.Value.ToString("dd-MMM");
+                dg.LateIn4 = (int)ds[7].LIEmps;
+
+                dg.DateTime5 = ds[10].Date.Value.ToString("dd-MMM");
+                dg.LateIn5 = (int)ds[10].LIEmps;
+
+                dg.DateTime6 = ds[12].Date.Value.ToString("dd-MMM");
+                dg.LateIn6 = (int)ds[12].LIEmps;
+
+                dg.DateTime7 = ds[15].Date.Value.ToString("dd-MMM");
+                dg.LateIn7 = (int)ds[15].LIEmps;
+
+                dg.DateTime8 = ds[17].Date.Value.ToString("dd-MMM");
+                dg.LateIn8 = (int)ds[17].LIEmps;
+
+                dg.DateTime9 = ds[19].Date.Value.ToString("dd-MMM");
+                dg.LateIn9 = (int)ds[19].LIEmps;
+
+                dg.DateTime10 = ds[ds.Count - 1].Date.Value.ToString("dd-MMM");
+                dg.LateIn10 = (int)ds[ds.Count - 1].LIEmps;
+            }
+            else
+            {
+
+            }
+            if (HttpContext.Request.IsAjaxRequest())
+                return Json(dg
+                           , JsonRequestBehavior.AllowGet);
+
+            return RedirectToAction("Index");
+        }
+    }
+    public class DashboardValues
+    {
+        public string DateTime { get; set; }
+        public int TotalEmps { get; set; }
+        public int Present { get; set; }
+        public int Absent { get; set; }
+        public int Leaves { get; set; }
+        public int LateIn { get; set; }
+        public int LateOut { get; set; }
+        public int EarlyIn { get; set; }
+        public int EarlyOut { get; set; }
+        public int OverTime { get; set; }
+        public int ShortLeaves { get; set; }
+        public int JCTour { get; set; }
+        public int JCVisit { get; set; }
+        public int JCTraining { get; set; }
+        public int JCOfficalAssignment { get; set; }
+        public int EWork { get; set; }
+        public int AWork { get; set; }
+        public int LWork { get; set; }
+    }
+
+    public class DashboardGraph
+    {
+        public string DateTime1 { get; set; }
+        public int LateIn1 { get; set; }
+        public string DateTime2 { get; set; }
+        public int LateIn2 { get; set; }
+        public string DateTime3 { get; set; }
+        public int LateIn3 { get; set; }
+        public string DateTime4 { get; set; }
+        public int LateIn4 { get; set; }
+        public string DateTime5 { get; set; }
+        public int LateIn5 { get; set; }
+        public string DateTime6 { get; set; }
+        public int LateIn6 { get; set; }
+        public string DateTime7 { get; set; }
+        public int LateIn7 { get; set; }
+        public string DateTime8 { get; set; }
+        public int LateIn8 { get; set; }
+        public string DateTime9 { get; set; }
+        public int LateIn9 { get; set; }
+        public string DateTime10 { get; set; }
+        public int LateIn10 { get; set; }
     }
 }

@@ -45,6 +45,11 @@ namespace WMS.Models
         public Nullable<bool> GZDays { get; set; }
         public Nullable<bool> OpenShift { get; set; }
         public Nullable<short> LocationID { get; set; }
+        public Nullable<bool> PresentAtIn { get; set; }
+        public Nullable<bool> EIincludeOT { get; set; }
+        public Nullable<bool> LOincludeOT { get; set; }
+        public Nullable<bool> EIincludeWork { get; set; }
+        public Nullable<bool> LOincludeWork { get; set; }
     
         public virtual DaysName DaysName { get; set; }
         public virtual DaysName DaysName1 { get; set; }
