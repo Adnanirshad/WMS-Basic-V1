@@ -377,6 +377,11 @@
     <Content Include="Views\JobCardTime\Details.cshtml" />
     <Content Include="Views\JobCardTime\Edit.cshtml" />
     <Content Include="Views\JobCardTime\Index.cshtml" />
+    <Content Include="Views\JobCardDate\Create.cshtml" />
+    <Content Include="Views\JobCardDate\Delete.cshtml" />
+    <Content Include="Views\JobCardDate\Details.cshtml" />
+    <Content Include="Views\JobCardDate\Edit.cshtml" />
+    <Content Include="Views\JobCardDate\Index.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -439,6 +444,7 @@
     <Compile Include="Controllers\HolidayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobCardAppRController.cs" />
+    <Compile Include="Controllers\JobCardDateController.cs" />
     <Compile Include="Controllers\JobCardEmpRController.cs" />
     <Compile Include="Controllers\JobCardTimeController.cs" />
     <Compile Include="Controllers\JobTitleController.cs" />
