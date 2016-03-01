@@ -1,88 +1,138 @@
-﻿@model IEnumerable<WMS.Models.JobCardTime>
-
+﻿@*@model IEnumerable<WMS.Models.JobCardTime>*@
+@model IEnumerable<WMS.Models.EmpView>
+@using PagedList.Mvc;
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Job Card Time";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
+     <section class="col-md-4 col-sm-4">
+        @using (Html.BeginForm("EditAttJobCard", "JobCardTime", FormMethod.Post))
+        {
+            
+        <h2>Assign Job Card</h2>
+            <h5>@Html.ActionLink("List of Job Cards", "JobCardList",null,new { @class = "" })</h5><hr/>
+        <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-4">Date<span style="color:red;"> *</span></label>
+            <div class="col-md-8">
+                <input id="JobDateFrom" name="JobDate" value="@ViewData["JobDate"]" type="date" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">Start<span style="color:red;"> *</span></label>
+            <div class="col-md-8">
+                <input type="text" step="1" max= "2400" min= "0" id="SHour" name="SHour" class="form-control" value="1100">
+           </div>
+        </div>
+<div class="form-group">
+            <label class="control-label col-md-4">End<span style="color:red;"> *</span></label>
+            <div class="col-md-8">
+                <input type="text" step="1" max= "2400" min= "0" id="EHour" name="EHour" class="form-control" value="1400">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">Card<span style="color:red;"> *</span></label>
+            <div class="col-md-8">
+                @Html.DropDownList("JobCardType",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthJobCard"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">Fp ID<span style="color:red;"> *</span></label>
+            <div class="col-md-8">
+                <input id="JobEmpNo" name="JobEmpNo" type="text" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">Assigned By<span style="color:red;"> *</span></label>
+            <div class="col-md-8">
+                @Html.DropDownList("JobCardDesignation",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthJobCard"})
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4">Remarks<span style="color:red;"> *</span></label>
+            <div class="col-md-8">
+                <input id="Remakrs" name="Remakrs" type="text" class="form-control"/>
+            </div>
+        </div>
+        <p class="ErorrMessage">@ViewBag.CMessage</p>
+        <div class="form-group">
+            <label class="control-label col-md-4"></label>
+            <div class="col-md-8">
+                 <input type="submit" value="Save"  class="btn btn-sm btn-success"/>
+            </div>
+        </div>
+        </div>
+        }
+    </section>
+<section class="col-md-8 col-sm-8">
+    <div>
+    <div class="row" style="margin-top:3%;"">
+      <form class ="form-inline" role="form">
+          <div class="form-group"> <h4>List of Employees</h4> </div>
+          <div class="form-group pull-right" >
+              @using (Html.BeginForm("Index", "JobCard", FormMethod.Get))
+                {<p><span style="font-weight:bold">Find: </span>  @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" } )  
+                    <input class="btn btn-sm btn-success" type="submit" value="Search" /></p>}
+          </div> 
+      </form>  
+       
+    </div>
 
-<h2>Index</h2>
+  <div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover  table-condensed">
+            <tr class="table-header">
+              <th style="width:6%">
+                   Photo
+                </th>
+                <th style="width:90px">
+                   FPID
+                </th>
+                <th>
+                    @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    Father's Name
+                </th>
+                <th>
+                     @Html.ActionLink("Designation", "Index", new { sortOrder = ViewBag.DesigSortParm })
+                </th>
+                <th>
+                     @Html.ActionLink("Section", "Index", new { sortOrder = ViewBag.SectionSortParm })
+                </th>
+            </tr>
+            @foreach (var item in Model) {
+            <tr>
+               <td>
+                    <img src="/WMS/Emp/RetrieveImage/@item.EmpID" alt="" height=40 width=45/>
+                </td>
+                <td>
+                   @Html.DisplayFor(modelItem => item.EmpID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+                </td>
+               <td>
+                    @Html.DisplayFor(modelItem => item.FatherName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SectionName)
+                </td>
+            </tr>
+        }
+        </table>
+    </div>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EmpID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DutyDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssignedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobCardID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th></th>
-    </tr>
+</div>
+ @*<div class="form-inline">
+          <div class="form-group ">@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</div>
+          <div class="form-group pull-right">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+     </div>*@
+</section>
+<script src="@Url.Content("~/Scripts/EditAttendance.js")"></script>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmpID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DutyDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Remarks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssignedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobCardID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
 
-</table>

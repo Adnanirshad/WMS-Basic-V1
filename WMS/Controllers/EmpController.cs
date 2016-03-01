@@ -218,7 +218,7 @@ namespace WMS.Controllers
             if (ModelState.IsValid)
             {
                 emp.ProcessAtt = true;
-                emp.ProcessIn = true;
+                //emp.ProcessI = true;
                 emp.EmpNo = emp.EmpNo.ToUpper();
                 empNo = emp.EmpNo;
                 emp.FpID = emp.EmpID;
