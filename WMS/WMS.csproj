@@ -382,6 +382,8 @@
     <Content Include="Views\JobCardDate\Details.cshtml" />
     <Content Include="Views\JobCardDate\Edit.cshtml" />
     <Content Include="Views\JobCardDate\Index.cshtml" />
+    <Content Include="Views\JobCardDate\JobCardList.cshtml" />
+    <Content Include="Views\JobCardTime\JobCardList.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
