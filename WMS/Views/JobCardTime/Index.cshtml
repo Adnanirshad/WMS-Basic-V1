@@ -82,9 +82,9 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="table-responsive">
         <table class="table table-bordered table-hover  table-condensed">
             <tr class="table-header">
-              <th style="width:6%">
+              @*<th style="width:6%">
                    Photo
-                </th>
+                </th>*@
                 <th style="width:90px">
                    FPID
                 </th>
@@ -103,12 +103,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
             </tr>
             @foreach (var item in Model) {
             <tr>
-               <td>
+               @*<td>
                     <img src="/WMS/Emp/RetrieveImage/@item.EmpID" alt="" height=40 width=45/>
-                </td>
-                <td>
+                </td>*@
+               @* <td>
                    @Html.DisplayFor(modelItem => item.EmpID)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.EmpName)
                 </td>

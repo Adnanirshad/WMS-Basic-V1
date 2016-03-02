@@ -477,6 +477,7 @@
     </Compile>
     <Compile Include="HelperClass\AttDeptSummary.cs" />
     <Compile Include="HelperClass\GraphClass.cs" />
+    <Compile Include="MannualAttendance\ManualProcess.cs" />
     <Compile Include="Models\AccessEmp.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -712,6 +713,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewEmpPic.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewJobCardApp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewJobCardEmp.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewJobCardTime.cs">

@@ -99,6 +99,8 @@ namespace WMS.Models
         public DbSet<ViewDepartment> ViewDepartments { get; set; }
         public DbSet<ViewDetailAttData> ViewDetailAttDatas { get; set; }
         public DbSet<ViewEmpPic> ViewEmpPics { get; set; }
+        public DbSet<ViewJobCardApp> ViewJobCardApps { get; set; }
+        public DbSet<ViewJobCardEmp> ViewJobCardEmps { get; set; }
         public DbSet<ViewJobCardTime> ViewJobCardTimes { get; set; }
         public DbSet<ViewLocation> ViewLocations { get; set; }
         public DbSet<ViewLvApplication> ViewLvApplications { get; set; }
