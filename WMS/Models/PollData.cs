@@ -27,6 +27,7 @@ namespace WMS.Models
         public Nullable<bool> Split { get; set; }
         public Nullable<System.DateTime> AddedDate { get; set; }
     
+        public virtual Emp Emp { get; set; }
         public virtual Reader Reader { get; set; }
     }
 }

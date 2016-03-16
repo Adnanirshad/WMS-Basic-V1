@@ -32,9 +32,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RdrTypeName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReaderVendor.VendorName)
-            </td>
+            
             <td>
                 @Html.ActionLink(" ", "Edit", new { id=item.RdrTypeID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
                 @Html.ActionLink(" ", "Details", new { id=item.RdrTypeID }, new { @class = "glyphicon glyphicon-pencil btn btn-info btn-xs" }) 

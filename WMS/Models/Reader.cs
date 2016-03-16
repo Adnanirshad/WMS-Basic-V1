@@ -16,7 +16,6 @@ namespace WMS.Models
     {
         public Reader()
         {
-            this.EmpRdrs = new HashSet<EmpRdr>();
             this.PollDatas = new HashSet<PollData>();
         }
     
@@ -29,7 +28,6 @@ namespace WMS.Models
         public bool Status { get; set; }
         public Nullable<short> LocID { get; set; }
     
-        public virtual ICollection<EmpRdr> EmpRdrs { get; set; }
         public virtual Location Location { get; set; }
         public virtual ICollection<PollData> PollDatas { get; set; }
         public virtual RdrDutyCode RdrDutyCode { get; set; }

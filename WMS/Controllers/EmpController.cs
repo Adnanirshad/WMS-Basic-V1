@@ -152,23 +152,21 @@ namespace WMS.Controllers
          [CustomActionAttribute]
         public ActionResult Create()
         {
-            var _wings = new List<Division>();
+
             using (TAS2013Entities context = new TAS2013Entities())
             {
-                _wings = context.Divisions.ToList();
+                //_wings = context.Divisions.ToList();
             }
              
-            ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s => s.CrewName), "CrewID", "CrewName");
+            //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s => s.CrewName), "CrewID", "CrewName");
             ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s => s.DesignationName), "DesignationID", "DesignationName");
-            ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
-            ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
+            //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
+            //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
             ViewBag.LocID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
             ViewBag.SecID = new SelectList(db.Sections.OrderBy(s=>s.SectionName), "SectionID", "SectionName");
             ViewBag.ShiftID = new SelectList(db.Shifts.OrderBy(s=>s.ShiftName), "ShiftID", "ShiftName");
             ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s=>s.TypeName), "TypeID", "TypeName");
-            ViewBag.EmpID = new SelectList(db.EmpFaces.OrderBy(s=>s.Face1), "EmpID", "Face1");
-            ViewBag.EmpID = new SelectList(db.EmpFps.OrderBy(s=>s.Fp1), "EmpID", "Fp1");
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
+            //ViewBag.CatID = new SelectList(dbCategories.OrderBy(s=>s.CatName), "CatID", "CatName");
             ViewBag.DeptID = new SelectList(db.Departments.OrderBy(s=>s.DeptName), "DeptID", "DeptName");
             return View();
         }
@@ -212,8 +210,8 @@ namespace WMS.Controllers
                 ModelState.AddModelError("SecID", "Please Specify section!");
             if (emp.TypeID == null)
                 ModelState.AddModelError("TypeID", "Please Specify Type!");
-            if (emp.GradeID == null)
-                ModelState.AddModelError("GradeID", "Please Specify Grade!");
+            //if (emp.GradeID == null)
+                //ModelState.AddModelError("GradeID", "Please Specify Grade!");
 
             if (ModelState.IsValid)
             {
@@ -221,7 +219,7 @@ namespace WMS.Controllers
                 //emp.ProcessI = true;
                 emp.EmpNo = emp.EmpNo.ToUpper();
                 empNo = emp.EmpNo;
-                emp.FpID = emp.EmpID;
+                //emp.FpID = emp.EmpID;
                 db.Emps.Add(emp);
                 db.SaveChanges();
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
@@ -251,21 +249,21 @@ namespace WMS.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            var _wings = new List<Division>();
+            //var _wings = new List<Division>();
             using (TAS2013Entities context = new TAS2013Entities())
             {
-                _wings = context.Divisions.ToList();
-            ViewBag.Wing = new SelectList(_wings.OrderBy(s=>s.DivisionName), "WingID", "WingName");
+
+            //ViewBag.Wing = new SelectList(_wings.OrderBy(s=>s.DivisionName), "WingID", "WingName");
             User LoggedInUser = Session["LoggedUser"] as User;
-            ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
+            //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
             ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName");
-            ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
-            ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
+            //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
+            //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
             ViewBag.LocID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
             ViewBag.SecID = new SelectList(db.Sections.OrderBy(s=>s.SectionName), "SectionID", "SectionName");
             ViewBag.ShiftID = new SelectList(db.Shifts.OrderBy(s=>s.ShiftName), "ShiftID", "ShiftName");
             ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s=>s.TypeName), "TypeID", "TypeName");
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
+            //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
             ViewBag.DeptID = new SelectList(db.Departments.OrderBy(s=>s.DeptName), "DeptID", "DeptName");
             }
             return View(emp);
@@ -287,11 +285,11 @@ namespace WMS.Controllers
             try
             {
                 EmpType et = db.EmpTypes.Where(aa => aa.TypeID == emp.TypeID).FirstOrDefault();
-                ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName", et.CatID);
-                ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName", emp.CrewID);
+                //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName", et.CatID);
+                //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName", emp.CrewID);
                 ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName", emp.DesigID);
-                ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName", emp.GradeID);
-                ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1", emp.JobID);
+                //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName", emp.GradeID);
+                //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1", emp.JobID);
                 ViewBag.LocID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName", emp.LocID);
                 ViewBag.SecID = new SelectList(db.Sections.OrderBy(s=>s.SectionName), "SectionID", "SectionName", emp.SecID);
                 ViewBag.ShiftID = new SelectList(db.Shifts.OrderBy(s=>s.ShiftName), "ShiftID", "ShiftName", emp.ShiftID);
@@ -350,8 +348,8 @@ namespace WMS.Controllers
                     ModelState.AddModelError("SecID", "Please Specify section!");
                 if (emp.TypeID == null)
                     ModelState.AddModelError("TypeID", "Please Specify Type!");
-                if (emp.GradeID == null)
-                    ModelState.AddModelError("GradeID", "Please Specify Grade!");
+                //if (emp.GradeID == null)
+                //    ModelState.AddModelError("GradeID", "Please Specify Grade!");
                 if (ModelState.IsValid)
                 {
                     emp.EmpNo = emp.EmpNo.ToUpper();
@@ -363,17 +361,17 @@ namespace WMS.Controllers
                     return RedirectToAction("Index");
                 }
                 User LoggedInUser = Session["LoggedUser"] as User;
-                ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
+                //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
                 ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName");
-                ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
-                ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
+                //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
+                //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
                 ViewBag.LocID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
                 ViewBag.SecID = new SelectList(db.Sections.OrderBy(s=>s.SectionName), "SectionID", "SectionName");
                 ViewBag.ShiftID = new SelectList(db.Shifts.OrderBy(s=>s.ShiftName), "ShiftID", "ShiftName");
                 ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s=>s.TypeName), "TypeID", "TypeName");
                 ViewBag.EmpID = new SelectList(db.EmpFaces.OrderBy(s=>s.Face1), "EmpID", "Face1");
                 ViewBag.EmpID = new SelectList(db.EmpFps.OrderBy(s=>s.Fp1), "EmpID", "Fp1");
-                ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
+                //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
                 ViewBag.DeptID = new SelectList(db.Departments.OrderBy(s=>s.DeptName), "DeptID", "DeptName");
                 return View(emp);
             }
@@ -381,17 +379,17 @@ namespace WMS.Controllers
             {
                 ViewBag.Message = ex.InnerException.ToString();
                 User LoggedInUser = Session["LoggedUser"] as User;
-                ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
+                //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
                 ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName");
-                ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
-                ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
+                //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
+                //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
                 ViewBag.LocID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
                 ViewBag.SecID = new SelectList(db.Sections.OrderBy(s=>s.SectionName), "SectionID", "SectionName");
                 ViewBag.ShiftID = new SelectList(db.Shifts.OrderBy(s=>s.ShiftName), "ShiftID", "ShiftName");
                 ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s=>s.TypeName), "TypeID", "TypeName");
                 ViewBag.EmpID = new SelectList(db.EmpFaces.OrderBy(s=>s.Face1), "EmpID", "Face1");
                 ViewBag.EmpID = new SelectList(db.EmpFps.OrderBy(s=>s.Fp1), "EmpID", "Fp1");
-                ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
+                //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
                 ViewBag.DeptID = new SelectList(db.Departments.OrderBy(s=>s.DeptName), "DeptID", "DeptName");
                 return View(emp);
             }
@@ -462,32 +460,32 @@ namespace WMS.Controllers
 
             return RedirectToAction("Index");
         }
-        public ActionResult CrewList()
-        {
+        //public ActionResult CrewList()
+        //{
           
-            var secs = db.Crews.OrderBy(s => s.CrewName);
-            if (HttpContext.Request.IsAjaxRequest())
-                return Json(new SelectList(
-                                secs.ToArray(),
-                                "CrewID",
-                                "CrewName")
-                           , JsonRequestBehavior.AllowGet);
+        //    var secs = db.Crews.OrderBy(s => s.CrewName);
+        //    if (HttpContext.Request.IsAjaxRequest())
+        //        return Json(new SelectList(
+        //                        secs.ToArray(),
+        //                        "CrewID",
+        //                        "CrewName")
+        //                   , JsonRequestBehavior.AllowGet);
 
-            return RedirectToAction("Index");
-        }
-        public ActionResult EmpTypeList(string ID)
-        {
-            short CatID = Convert.ToInt16(ID);
-            var types = db.EmpTypes.Where(aa => aa.CatID == CatID).OrderBy(s=>s.TypeName);
-            if (HttpContext.Request.IsAjaxRequest())
-                return Json(new SelectList(
-                                types.ToArray(),
-                                "TypeID",
-                                "TypeName")
-                           , JsonRequestBehavior.AllowGet);
+        //    return RedirectToAction("Index");
+        //}
+        //public ActionResult EmpTypeList(string ID)
+        //{
+        //    short CatID = Convert.ToInt16(ID);
+        //    var types = db.EmpTypes.Where(aa => aa.CatID == CatID).OrderBy(s=>s.TypeName);
+        //    if (HttpContext.Request.IsAjaxRequest())
+        //        return Json(new SelectList(
+        //                        types.ToArray(),
+        //                        "TypeID",
+        //                        "TypeName")
+        //                   , JsonRequestBehavior.AllowGet);
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
         #endregion
 
         public ActionResult RetrieveImage(int id)
@@ -608,10 +606,10 @@ namespace WMS.Controllers
         public ActionResult GradeList()
         {
            
-            var states = db.Grades.OrderBy(s => s.GradeName);
+            //var states = db.Grades.OrderBy(s => s.GradeName);
             if (HttpContext.Request.IsAjaxRequest())
                 return Json(new SelectList(
-                                states.ToArray(),
+                                //states.ToArray(),
                                 "GradeID",
                                 "GradeName")
                            , JsonRequestBehavior.AllowGet);

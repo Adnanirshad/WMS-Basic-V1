@@ -25,7 +25,7 @@ namespace WMS.Controllers
                 EmpID = x.EmpID,
                 EmpName = x.EmpName,
                 EmpNo = x.EmpNo,
-                HasAccess = x.HasAccess
+                //HasAccess = x.HasAccess
             });
             return Json(collection, JsonRequestBehavior.AllowGet);
         }
@@ -87,7 +87,7 @@ namespace WMS.Controllers
                 db.Users.Add(user);
             }
             user.Status = status;
-            emp.HasAccess = status;
+            //emp.HasAccess = status;
             if (db.SaveChanges() > 0)
                 return "success";
             else

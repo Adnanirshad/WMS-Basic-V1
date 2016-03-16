@@ -17,7 +17,6 @@ namespace WMS.Controllers
         public ActionResult Index()
         {
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
             ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
             return View();
         }
@@ -48,11 +47,11 @@ namespace WMS.Controllers
             switch (de)
             {
 
-                case "ByCategory":
-                    int  catid = Convert.ToInt32(Request.Form["CatID"].ToString());
-                    _Emp = db.Emps.Where(aa => aa.EmpType.CatID == catid).ToList();
+                //case "ByCategory":
+                //    int  catid = Convert.ToInt32(Request.Form["CatID"].ToString());
+                //    _Emp = db.Emps.Where(aa => aa.EmpType.CatID == catid).ToList();
                   
-                    break;
+                //    break;
                 case "ByEmployee":
                     string empNo = Request.Form["EmpNo"].ToString();
                     _Emp = db.Emps.Where(aa => aa.EmpNo == empNo).ToList();
@@ -77,7 +76,6 @@ namespace WMS.Controllers
                 
             }
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
             ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
 
 
@@ -141,8 +139,7 @@ namespace WMS.Controllers
 
             }
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
-            ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
+             ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
             return View("Index");
         }
         public ActionResult AdjustLeaves(FormCollection collection)
@@ -175,8 +172,7 @@ namespace WMS.Controllers
                 }
             }
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s => s.LocName), "LocID", "LocName");
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s => s.CatName), "CatID", "CatName");
-            ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
+              ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
             return View("Index");
         }
 

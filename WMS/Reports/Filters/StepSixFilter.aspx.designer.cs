@@ -11,5 +11,32 @@ namespace WMS.Reports.Filters {
     
     
     public partial class StepSixFilter {
+        
+        /// <summary>
+        /// btnStepOne control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnStepOne;
+        
+        /// <summary>
+        /// btnStepFour control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnStepFour;
+        
+        /// <summary>
+        /// btnStepFive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnStepFive;
     }
 }

@@ -13,11 +13,11 @@ namespace WMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           if (HttpContext.Current.Session["LogedUserID"].ToString() != "")
+            if (HttpContext.Current.Session["LogedUserID"].ToString() != "")
             {
                 //Deployment Type =false : Local Deployment
                 //Deployment Type =true: Server Deployment
-                GlobalVariables.DeploymentType = false;
+                //GlobalVariables.DeploymentType = false;
             }
             else
                 Response.Redirect("~/Home");

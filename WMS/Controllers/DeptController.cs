@@ -42,7 +42,7 @@ namespace WMS.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 departments = departments.Where(s => s.DeptName.ToUpper().Contains(searchString.ToUpper())
-                    ||s.Division.DivisionName.ToUpper().Contains(searchString.ToUpper())
+                    //||s.Division.DivisionName.ToUpper().Contains(searchString.ToUpper())
                     );
             }
 
@@ -80,7 +80,6 @@ namespace WMS.Controllers
            [CustomActionAttribute]
         public ActionResult Create()
         {
-            ViewBag.DivID = new SelectList(db.Divisions.OrderBy(s=>s.DivisionName) , "DivisionID", "DivisionName");
             return View();
         }
 
@@ -94,8 +93,7 @@ namespace WMS.Controllers
         {
             if (department.DeptName == "")
                 ModelState.AddModelError("DeptName", "Please enter Department Name");
-            if (department.DivID ==null)
-                ModelState.AddModelError("DivID", "Please select Division");
+           
             if (ModelState.IsValid)
             {
                 db.Departments.Add(department);
@@ -105,7 +103,6 @@ namespace WMS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DivID = new SelectList(db.Divisions.OrderBy(s=>s.DivisionName), "DivisionID", "DivisionName", department.DivID);
             return View(department);
         }
 
@@ -127,7 +124,6 @@ namespace WMS.Controllers
             string query = qb.QueryForCompanyViewForLinq(LoggedInUser);
             string query1 = qb.QueryForCompanyViewLinq(LoggedInUser);
          
-            ViewBag.DivID = new SelectList(db.Divisions.AsQueryable().OrderBy(s=>s.DivisionName), "DivisionID", "DivisionName", department.DivID);
             return View(department);
         }
 
@@ -141,8 +137,7 @@ namespace WMS.Controllers
         {
             if (department.DeptName == "")
                 ModelState.AddModelError("DeptName", "Please enter Department Name");
-            if (department.DivID == null)
-                ModelState.AddModelError("DivID", "Please select Division");
+            
             if (ModelState.IsValid)
             {
                 db.Entry(department).State = EntityState.Modified;
@@ -151,8 +146,7 @@ namespace WMS.Controllers
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Department, (byte)MyEnums.Operation.Edit, DateTime.Now);
                 return RedirectToAction("Index");
             }
-            ViewBag.DivID = new SelectList(db.Divisions.OrderBy(s=>s.DivisionName), "DivisionID", "DivisionName", department.DivID);
-            return View(department);
+                        return View(department);
         }
 
         // GET: /Dept/Delete/5

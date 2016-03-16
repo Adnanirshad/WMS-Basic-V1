@@ -24,6 +24,5 @@ namespace WMS.Models
         public Nullable<byte> VendorID { get; set; }
     
         public virtual ICollection<Reader> Readers { get; set; }
-        public virtual ReaderVendor ReaderVendor { get; set; }
     }
 }

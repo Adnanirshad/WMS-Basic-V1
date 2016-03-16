@@ -38,7 +38,7 @@ namespace WMS.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 emptype = emptype.Where(s => s.TypeName.ToUpper().Contains(searchString.ToUpper())
-                    || s.Category.CatName.ToUpper().Contains(searchString.ToUpper())
+                    //|| s.Category.CatName.ToUpper().Contains(searchString.ToUpper())
                     );
             }
 
@@ -47,12 +47,7 @@ namespace WMS.Controllers
                 case "name_desc":
                     emptype = emptype.OrderByDescending(s => s.TypeName);
                     break;
-                case "cat_desc":
-                    emptype = emptype.OrderByDescending(s => s.Category.CatName);
-                    break;
-                case "cat":
-                    emptype = emptype.OrderBy(s => s.Category.CatName);
-                    break;
+                
                 default:
                     emptype = emptype.OrderBy(s => s.TypeName);
                     break;
@@ -83,7 +78,6 @@ namespace WMS.Controllers
         [CustomActionAttribute]
         public ActionResult Create()
         {
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
             return View();
         }
 
@@ -95,8 +89,8 @@ namespace WMS.Controllers
         [CustomActionAttribute]
         public ActionResult Create([Bind(Include = "TypeID,TypeName,CatID")] EmpType emptype)
         {
-            if (emptype.CatID == null)
-                ModelState.AddModelError("CatID", "Please select Category");
+            //if (emptype.CatID == null)
+            //    ModelState.AddModelError("CatID", "Please select Category");
             if (string.IsNullOrEmpty(emptype.TypeName))
                 ModelState.AddModelError("TypeName", "This field is required!");
             if (emptype.TypeName != null)
@@ -114,8 +108,7 @@ namespace WMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s => s.CatName), "CatID", "CatName");
-            return View(emptype);
+              return View(emptype);
         }
         private bool CheckDuplicate(string _Name)
         {
@@ -140,7 +133,7 @@ namespace WMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s => s.CatName), "CatID", "CatName", emptype.CatID);
+            //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s => s.CatName), "CatID", "CatName", emptype.CatID);
             return View(emptype);
         }
 
@@ -169,7 +162,7 @@ namespace WMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName", emptype.CatID);
+            //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName", emptype.CatID);
             return View(emptype);
         }
 

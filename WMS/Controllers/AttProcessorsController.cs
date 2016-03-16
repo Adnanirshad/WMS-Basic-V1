@@ -118,8 +118,7 @@ namespace WMS.Controllers
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
 
             
-            ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
-             return View();
+              return View();
         } 
 
         //

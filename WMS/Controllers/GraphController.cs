@@ -48,8 +48,8 @@ namespace WMS.Controllers
         {
             List<CriteriaFoAngular> populateData = new List<CriteriaFoAngular>();
            // CriteriaFoAngular cfa = new CriteriaFoAngular();
-            if (fm.CompanyFilter.Count > 0)
-                populateData.Add(new CriteriaFoAngular("C","Company"));
+            //if (fm.CompanyFilter.Count > 0)
+            //    populateData.Add(new CriteriaFoAngular("C","Company"));
              if (fm.LocationFilter.Count > 0)
                 populateData.Add(new CriteriaFoAngular("L", "Location"));
             if (fm.SectionFilter.Count > 0)
@@ -229,12 +229,12 @@ namespace WMS.Controllers
             using (TAS2013Entities dc = new TAS2013Entities())
             {
                 FiltersModel fm = Session["FiltersModel"] as FiltersModel;
-                if (Criteria == "C")
-                {
-                    foreach (var company in fm.CompanyFilter)
-                        GetValueNames.Add(new CriteriaFoAngular("" + company.ID, company.FilterName));
+                //if (Criteria == "C")
+                //{
+                //    foreach (var company in fm.CompanyFilter)
+                //        GetValueNames.Add(new CriteriaFoAngular("" + company.ID, company.FilterName));
                 
-                }
+                //}
                 if (Criteria == "L")
                 {
                     foreach (var location in fm.LocationFilter)

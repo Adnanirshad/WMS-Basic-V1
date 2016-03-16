@@ -13,5 +13,53 @@ namespace WMS.Reports.Filters
         {
            
         }
+        #region Navigation Buttons
+        private void NavigationCommonCalls(string path)
+        {
+            //SaveDateSession();
+            //SaveSectionIDs();
+            //SaveLocationIDs();
+            Response.Redirect(path);
+        }
+        protected void btnStepOne_Click(object sender, EventArgs e)
+        {
+            NavigationCommonCalls("~/Reports/Filters/StepOneFilter.aspx");
+        }
+
+        protected void btnStepTwo_Click(object sender, EventArgs e)
+        {
+            NavigationCommonCalls("~/Reports/Filters/StepTwoFilter.aspx");
+        }
+
+        protected void btnStepThree_Click(object sender, EventArgs e)
+        {
+            NavigationCommonCalls("~/Reports/Filters/StepThreeFilter.aspx");
+        }
+
+        protected void btnStepFour_Click(object sender, EventArgs e)
+        {
+            NavigationCommonCalls("~/Reports/Filters/StepFourFilter.aspx");
+        }
+
+        protected void btnStepFive_Click(object sender, EventArgs e)
+        {
+            NavigationCommonCalls("~/Reports/Filters/StepFiveFilter.aspx");
+        }
+
+        //protected void btnStepSix_Click(object sender, EventArgs e)
+        //{
+        //    //SaveDateSession();
+        //    //SaveSectionIDs();
+        //    //SaveLocationIDs();
+        //    //FiltersModel fm = Session["FiltersModel"] as FiltersModel;
+        //    //if (MyHelper.UserHasValuesInSession(fm))
+        //    //{
+        //        Response.Redirect("~/Reports/Filters/StepSixFilter.aspx");
+        //    }
+        //}
+
+
+        #endregion
+
     }
 }

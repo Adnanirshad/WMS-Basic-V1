@@ -177,9 +177,7 @@
     <Content Include="Reports\Filters\StepFourFilter.aspx" />
     <Content Include="Reports\Filters\StepOneFilter.aspx" />
     <Content Include="Reports\Filters\StepSixFilter.aspx" />
-    <Content Include="Reports\Filters\StepTwoFilter.aspx" />
     <Content Include="Reports\Filters\StepFiveFilter.aspx" />
-    <Content Include="Reports\Filters\StepThreeFilter.aspx" />
     <Content Include="Reports\Filters\SummaryReports.aspx" />
     <Content Include="Reports\Graphs\Graphs.aspx" />
     <Content Include="Reports\ReportContainer.aspx" />
@@ -355,8 +353,8 @@
     <Content Include="Scripts\rosterScript.js" />
     <Content Include="Scripts\Shift\GetUserSpecificShifts.js" />
     <Content Include="Scripts\site.avatar.js" />
-    <Content Include="Scripts\Employee\wingSection.js" />
-    <Content Include="Scripts\Employee\wingSectionCreate.js" />
+    <Content Include="Scripts\wingSection.js" />
+    <Content Include="Scripts\wingSectionCreate.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.2.0.js" />
@@ -367,23 +365,6 @@
     <Content Include="Views\LvType\Index.cshtml" />
     <Content Include="Views\ESSUser\Index.cshtml" />
     <Content Include="Views\LeaveApproval\Index.cshtml" />
-    <Content Include="Views\JobCard\Create.cshtml" />
-    <Content Include="Views\JobCard\Delete.cshtml" />
-    <Content Include="Views\JobCard\Details.cshtml" />
-    <Content Include="Views\JobCard\Edit.cshtml" />
-    <Content Include="Views\JobCard\Index.cshtml" />
-    <Content Include="Views\JobCardTime\Create.cshtml" />
-    <Content Include="Views\JobCardTime\Delete.cshtml" />
-    <Content Include="Views\JobCardTime\Details.cshtml" />
-    <Content Include="Views\JobCardTime\Edit.cshtml" />
-    <Content Include="Views\JobCardTime\Index.cshtml" />
-    <Content Include="Views\JobCardDate\Create.cshtml" />
-    <Content Include="Views\JobCardDate\Delete.cshtml" />
-    <Content Include="Views\JobCardDate\Details.cshtml" />
-    <Content Include="Views\JobCardDate\Edit.cshtml" />
-    <Content Include="Views\JobCardDate\Index.cshtml" />
-    <Content Include="Views\JobCardDate\JobCardList.cshtml" />
-    <Content Include="Views\JobCardTime\JobCardList.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -428,12 +409,8 @@
     <Compile Include="Bootstrap Html Helpers\DatePickerFor.cs" />
     <Compile Include="Bootstrap Html Helpers\HelperMethods.cs" />
     <Compile Include="Controllers\AttProcessorsController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\CityController.cs" />
-    <Compile Include="Controllers\CrewController.cs" />
     <Compile Include="Controllers\DeptController.cs" />
     <Compile Include="Controllers\DesignationController.cs" />
-    <Compile Include="Controllers\DivisionController.cs" />
     <Compile Include="Controllers\EditAttendanceController.cs" />
     <Compile Include="Controllers\EditAttendance\ManualAttendanceProcess.cs" />
     <Compile Include="Controllers\EmpController.cs" />
@@ -441,15 +418,9 @@
     <Compile Include="Controllers\ESSUserController.cs" />
     <Compile Include="Controllers\Filters\CustomActionAttribute.cs" />
     <Compile Include="Controllers\Filters\CustomControllerAttributes.cs" />
-    <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\GraphController.cs" />
     <Compile Include="Controllers\HolidayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\JobCardAppRController.cs" />
-    <Compile Include="Controllers\JobCardDateController.cs" />
-    <Compile Include="Controllers\JobCardEmpRController.cs" />
-    <Compile Include="Controllers\JobCardTimeController.cs" />
-    <Compile Include="Controllers\JobTitleController.cs" />
     <Compile Include="Controllers\LeaveApprovalController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\LeaveSettingsController.cs" />
@@ -459,12 +430,9 @@
     <Compile Include="Controllers\LvTypeController.cs" />
     <Compile Include="Controllers\ReaderController.cs" />
     <Compile Include="Controllers\ReaderTypeController.cs" />
-    <Compile Include="Controllers\RosterController.cs" />
     <Compile Include="Controllers\Roster\RosterModel.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\VendorController.cs" />
-    <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="CustomClass\CriteriaFoAngular.cs" />
     <Compile Include="CustomClass\CustomFunc.cs" />
@@ -480,9 +448,6 @@
     <Compile Include="HelperClass\AttDeptSummary.cs" />
     <Compile Include="HelperClass\GraphClass.cs" />
     <Compile Include="MannualAttendance\ManualProcess.cs" />
-    <Compile Include="Models\AccessEmp.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AttData.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -510,24 +475,6 @@
     <Compile Include="Models\AuditOperation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BadliRecord.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Card.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CardType.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\City.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Crew.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DailySummary.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -538,9 +485,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Designation.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Division.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DownloadTime.cs">
@@ -555,9 +499,6 @@
     <Compile Include="Models\Emp.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmpAccess.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EmpFace.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -567,34 +508,13 @@
     <Compile Include="Models\EmpPhoto.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmpRdr.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EmpType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpView.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Grade.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Holiday.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobCard.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobCardApp.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobCardEmp.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobCardTime.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\JobTitle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs">
@@ -651,28 +571,10 @@
     <Compile Include="Models\ReaderType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ReaderVendor.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Reason.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Region.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Remark.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Roster.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RosterApp.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RosterDetail.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RosterType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Section.cs">
@@ -682,9 +584,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Shift.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Site.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -703,9 +602,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewAttData.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ViewBadli.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewDepartment.cs">
@@ -743,6 +639,13 @@
     </Compile>
     <Compile Include="Models\ViewSection.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Filters\StepOneFilter.aspx.cs">
+      <DependentUpon>StepOneFilter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Filters\StepOneFilter.aspx.designer.cs">
+      <DependentUpon>StepOneFilter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Filters\SummaryReports.aspx.cs">
       <DependentUpon>SummaryReports.aspx</DependentUpon>
@@ -787,13 +690,6 @@
     <Compile Include="Reports\Filters\StepFourFilter.aspx.designer.cs">
       <DependentUpon>StepFourFilter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Filters\StepOneFilter.aspx.cs">
-      <DependentUpon>StepOneFilter.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\Filters\StepOneFilter.aspx.designer.cs">
-      <DependentUpon>StepOneFilter.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reports\Filters\StepSixFilter.aspx.cs">
       <DependentUpon>StepSixFilter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -801,26 +697,12 @@
     <Compile Include="Reports\Filters\StepSixFilter.aspx.designer.cs">
       <DependentUpon>StepSixFilter.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Filters\StepTwoFilter.aspx.cs">
-      <DependentUpon>StepTwoFilter.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\Filters\StepTwoFilter.aspx.designer.cs">
-      <DependentUpon>StepTwoFilter.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Reports\Filters\StepFiveFilter.aspx.cs">
       <DependentUpon>StepFiveFilter.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reports\Filters\StepFiveFilter.aspx.designer.cs">
       <DependentUpon>StepFiveFilter.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\Filters\StepThreeFilter.aspx.cs">
-      <DependentUpon>StepThreeFilter.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reports\Filters\StepThreeFilter.aspx.designer.cs">
-      <DependentUpon>StepThreeFilter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\GlobalVariables.cs" />
     <Compile Include="Reports\ReportContainer.aspx.cs">
@@ -858,11 +740,6 @@
     <Content Include="Views\ReaderType\Details.cshtml" />
     <Content Include="Views\ReaderType\Edit.cshtml" />
     <Content Include="Views\ReaderType\Index.cshtml" />
-    <Content Include="Views\Vendor\Create.cshtml" />
-    <Content Include="Views\Vendor\Delete.cshtml" />
-    <Content Include="Views\Vendor\Details.cshtml" />
-    <Content Include="Views\Vendor\Edit.cshtml" />
-    <Content Include="Views\Vendor\Index.cshtml" />
     <Content Include="Views\Reader\Create.cshtml" />
     <Content Include="Views\Reader\Delete.cshtml" />
     <Content Include="Views\Reader\Details.cshtml" />
@@ -873,16 +750,6 @@
     <Content Include="Views\Location\Details.cshtml" />
     <Content Include="Views\Location\Edit.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
-    <Content Include="Views\JobTitle\Create.cshtml" />
-    <Content Include="Views\JobTitle\Delete.cshtml" />
-    <Content Include="Views\JobTitle\Details.cshtml" />
-    <Content Include="Views\JobTitle\Edit.cshtml" />
-    <Content Include="Views\JobTitle\Index.cshtml" />
-    <Content Include="Views\Grade\Create.cshtml" />
-    <Content Include="Views\Grade\Delete.cshtml" />
-    <Content Include="Views\Grade\Details.cshtml" />
-    <Content Include="Views\Grade\Edit.cshtml" />
-    <Content Include="Views\Grade\Index.cshtml" />
     <Content Include="Views\EmpType\Create.cshtml" />
     <Content Include="Views\EmpType\Delete.cshtml" />
     <Content Include="Views\EmpType\Details.cshtml" />
@@ -893,21 +760,6 @@
     <Content Include="Views\Designation\Details.cshtml" />
     <Content Include="Views\Designation\Edit.cshtml" />
     <Content Include="Views\Designation\Index.cshtml" />
-    <Content Include="Views\Crew\Create.cshtml" />
-    <Content Include="Views\Crew\Delete.cshtml" />
-    <Content Include="Views\Crew\Details.cshtml" />
-    <Content Include="Views\Crew\Edit.cshtml" />
-    <Content Include="Views\Crew\Index.cshtml" />
-    <Content Include="Views\City\Create.cshtml" />
-    <Content Include="Views\City\Delete.cshtml" />
-    <Content Include="Views\City\Details.cshtml" />
-    <Content Include="Views\City\Edit.cshtml" />
-    <Content Include="Views\City\Index.cshtml" />
-    <Content Include="Views\Category\Create.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
-    <Content Include="Views\Category\Details.cshtml" />
-    <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\LvApp\Create.cshtml" />
     <Content Include="Views\LvApp\Delete.cshtml" />
     <Content Include="Views\LvApp\Details.cshtml" />
@@ -928,11 +780,6 @@
     <Content Include="Views\Section\Details.cshtml" />
     <Content Include="Views\Section\Edit.cshtml" />
     <Content Include="Views\Section\Index.cshtml" />
-    <Content Include="Views\Division\Create.cshtml" />
-    <Content Include="Views\Division\Delete.cshtml" />
-    <Content Include="Views\Division\Details.cshtml" />
-    <Content Include="Views\Division\Edit.cshtml" />
-    <Content Include="Views\Division\Index.cshtml" />
     <Content Include="Views\Home\AfterLogin.cshtml" />
     <Content Include="Views\EditAttendance\Index.cshtml" />
     <Content Include="Views\EditAttendance\EditAttWizardOne.cshtml" />
@@ -984,10 +831,53 @@
       <Name>WMSLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\RDLC\AttDepartmentSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\BadliReport.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DetailedAbsent.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRAbsent.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRAttendance.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRDetailed.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DREarlyIn.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DREarlyOut.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRLateIn.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRLateOut.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRLeave.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRLeaveQuota.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRMissingAtt.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRMultipleInOut.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DROverTime.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRPresent.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRShortLeave.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DSConsolidated.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DSEmpStrength.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DSWorkSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpAttSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpAttSummaryNew.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\Employee.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmployeeDetail.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MLvApplication.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MLvConsumed.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRDetailExcelC.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRDetailExcelP.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRLeaveBal.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRSheetC.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRSheetP.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRSummaryC.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MYLeaveSummary.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\RAuditLog.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\REditAttendance.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\RLeaveQuota.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\RShortLeave.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\SummarizedMonthlyReport.rdlc" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

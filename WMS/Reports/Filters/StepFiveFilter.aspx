@@ -16,22 +16,14 @@
                     <li class="sidebar-brand">
                         <h4>Filters Navigation</h4>
                     </li>
-                   <li >
-
-                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Region,Division </p></asp:LinkButton>
-
+                  <li >
+                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Sections, Locations</p></asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton ID="btnStepTwo" runat="server" CssClass="inactive-link" OnClick="btnStepTwo_Click" >Step Two<p>Divisions, Shifts</p></asp:LinkButton>
+                        <asp:LinkButton ID="btnStepFour" runat="server" CssClass="active-link" OnClick="btnStepFour_Click" >Step Two<p>Types, Shifts</p></asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton ID="btnStepThree" runat="server"  CssClass="inactive-link" OnClick="btnStepThree_Click" >Step Three<p>Departments, Employee Type</p></asp:LinkButton>
-                    </li>
-                    <li>
-                        <asp:LinkButton ID="btnStepFour" runat="server" CssClass="inactive-link" OnClick="btnStepFour_Click" >Step Four<p>Sections, Crew</p></asp:LinkButton>
-                    </li>
-                    <li>
-                        <asp:LinkButton ID="btnStepFive" runat="server"  CssClass="active-link" OnClick="btnStepFive_Click" >Step Five<p>Employee</p></asp:LinkButton>
+                        <asp:LinkButton ID="btnStepFive" runat="server"  CssClass="inactive-link" OnClick="btnStepFive_Click" >Step Three<p>Employee</p></asp:LinkButton>
                     </li>
                     <li>
                         <asp:LinkButton ID="btnStepSix" runat="server" CssClass="inactive-link" OnClick="btnStepSix_Click" >Finish<p>Generate Report</p></asp:LinkButton>
@@ -88,7 +80,7 @@
                                          <asp:BoundField DataField="EmpNo" HeaderText="P.No" />
                                         <asp:BoundField DataField="EmpName" HeaderText="Name" />
                                         <asp:BoundField DataField ="DeptName" HeaderText ="Department" />
-                                   
+                                        <%--<asp:BoundField DataField="CompName" HeaderText="Company Name" />--%>
                     
                                 </Columns>
                                 <EditRowStyle BackColor="#999999" />
@@ -116,15 +108,15 @@
 
                     
 
-                    <% if (((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).CompanyFilter.Count > 0)
+                    <% if (((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter.Count > 0)
                        {
                            {
-                               int d = ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).CompanyFilter.Count;
-                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Companies</a>  <span style ='float:right;' class='badge' id='CompanySpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
+                               int d = ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter.Count;
+                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Sections</a>  <span style ='float:right;' class='badge' id='CompanySpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
                            }
-                           foreach (var item in ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).CompanyFilter)
+                           foreach (var item in ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter)
                            {
-                               { Response.Write("<a class='list-group-item' id='Company'>" + item.FilterName + "<button type='button' id='" + item.ID + "' onclick = 'deleteFromFilters(this)' class='btn btn-danger btn-sm' style='float:right;'>[X]</button></a> "); }
+                               { Response.Write("<a class='list-group-item' id='Section'>" + item.FilterName + "<button type='button' id='" + item.ID + "' onclick = 'deleteFromFilters(this)' class='btn btn-danger btn-sm' style='float:right;'>[X]</button></a> "); }
                            }
                            { Response.Write("</div></div></div>"); }
                        }%>
@@ -146,7 +138,7 @@
                     }%>
                                </div>
                        
-                        <div class="panel-group" id="Div2">
+                        <%--<div class="panel-group" id="Div2">
                     <% if (((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).DivisionFilter.Count > 0)
                        {
                            {
@@ -159,7 +151,7 @@
                            }
                            { Response.Write("</div></div></div>"); }
                     }%> </div>
-                       
+                       --%>
                        <div class="panel-group" id="Div3">
                          <% if (((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).ShiftFilter.Count > 0)
                        {
@@ -205,7 +197,7 @@
 
                          </div>
 
-                         <div class="panel-group" id="Div6">
+                        <%-- <div class="panel-group" id="Div6">
                         <% if (((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).CrewFilter.Count > 0)
                        {
                            {
@@ -218,7 +210,7 @@
                            }   { Response.Write("</div></div></div>"); }
                     }%>
 
-                         </div>
+                         </div>--%>
                          <% if (((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter.Count > 0)
                        {
                            {

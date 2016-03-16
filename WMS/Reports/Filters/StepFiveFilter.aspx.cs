@@ -69,15 +69,15 @@ namespace WMS.Reports.Filters
             WMSLibrary.Filters filtersHelper = new WMSLibrary.Filters();
             Session["FiltersModel"] = filtersHelper.DeleteAllFilters(Session["FiltersModel"] as FiltersModel);
 
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Company");
+            //WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Company");
             WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Location");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Division");
+            //WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Division");
             WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Type");
             WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Shift");
             WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Department");
             WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Type");
             WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Section");
-            WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Crew");
+            //WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Crew");
             WMSLibrary.Filters.SetGridViewCheckState(GridViewEmployee, Session["FiltersModel"] as FiltersModel, "Employee");
 
 
@@ -101,26 +101,26 @@ namespace WMS.Reports.Filters
             DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
             _View = dt.ToList<EmpView>().AsQueryable().SortBy("EmpNo").ToList();
             _View = _View.Where(aa => aa.Status == true).ToList();
-            if (fm.DivisionFilter.Count > 0)
-            {
-                _TempView.Clear();
-                foreach (var comp in fm.DivisionFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.DivID == _compID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
-            if (fm.DepartmentFilter.Count > 0)
-            {
-                _TempView.Clear();
-                foreach (var comp in fm.DepartmentFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.DeptID == _compID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    _TempView.Clear();
+            //    foreach (var comp in fm.DivisionFilter)
+            //    {
+            //        short _compID = Convert.ToInt16(comp.ID);
+            //        _TempView.AddRange(_View.Where(aa => aa.DivID == _compID).ToList());
+            //    }
+            //    _View = _TempView.ToList();
+            //}
+            //if (fm.DepartmentFilter.Count > 0)
+            //{
+            //    _TempView.Clear();
+            //    foreach (var comp in fm.DepartmentFilter)
+            //    {
+            //        short _compID = Convert.ToInt16(comp.ID);
+            //        _TempView.AddRange(_View.Where(aa => aa.DeptID == _compID).ToList());
+            //    }
+            //    _View = _TempView.ToList();
+            //}
             if (fm.SectionFilter.Count > 0)
             {
                 _TempView.Clear();
@@ -141,26 +141,26 @@ namespace WMS.Reports.Filters
                 }
                 _View = _TempView.ToList();
             }
-            if (fm.RegionFilter.Count > 0)
-            {
-                _TempView.Clear();
-                foreach (var comp in fm.RegionFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.RegionID == _compID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
-            if (fm.CityFilter.Count > 0)
-            {
-                _TempView.Clear();
-                foreach (var comp in fm.CityFilter)
-                {
-                    short _compID = Convert.ToInt16(comp.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.CityID == _compID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
+            //if (fm.RegionFilter.Count > 0)
+            //{
+            //    _TempView.Clear();
+            //    foreach (var comp in fm.RegionFilter)
+            //    {
+            //        short _compID = Convert.ToInt16(comp.ID);
+            //        _TempView.AddRange(_View.Where(aa => aa.RegionID == _compID).ToList());
+            //    }
+            //    _View = _TempView.ToList();
+            //}
+            //if (fm.CityFilter.Count > 0)
+            //{
+            //    _TempView.Clear();
+            //    foreach (var comp in fm.CityFilter)
+            //    {
+            //        short _compID = Convert.ToInt16(comp.ID);
+            //        _TempView.AddRange(_View.Where(aa => aa.CityID == _compID).ToList());
+            //    }
+            //    _View = _TempView.ToList();
+            //}
             if (fm.LocationFilter.Count > 0)
             {
                 _TempView.Clear();
@@ -181,7 +181,7 @@ namespace WMS.Reports.Filters
                 }
                 _View = _TempView.ToList();
             }
-            GridViewEmployee.DataSource = _View.Where(aa => aa.EmpName.ToUpper().Contains(search.ToUpper()) ||aa.EmpNo.ToUpper().Contains(search.ToUpper())).ToList();
+            GridViewEmployee.DataSource = _View.Where(aa => aa.EmpName.ToUpper().Contains(search.ToUpper()) || aa.EmpNo.ToUpper().Contains(search.ToUpper())).ToList();
             GridViewEmployee.DataBind();
         }
 

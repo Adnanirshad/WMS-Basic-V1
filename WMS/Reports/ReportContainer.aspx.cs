@@ -16,7 +16,7 @@ namespace WMS.Reports
     {
         String title = "";
         string _dateFrom = "";
-        List<EmpPhoto> companyimage = new List<EmpPhoto>();
+        List<Option> companyimage = new List<Option>();
         protected void Page_Load(object sender, EventArgs e)
         {
             String reportName = Request.QueryString["reportname"];
@@ -36,56 +36,7 @@ namespace WMS.Reports
                 string consolidatedMonth = "";
                 switch (reportName)
                 {
-                    case "badli_report":
-                        DataTable badlidt = qb.GetValuesfromDB("select * from ViewBadli where (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'" + _dateTo + "'" + " )");
-                        List<ViewBadli> _BadliList = badlidt.ToList<ViewBadli>();
-                        List<ViewBadli> _TempBadliList = new List<ViewBadli>();
-                        title = "Badli Report";
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/BadliReport.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/BadliReport.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempBadliList, _BadliList), _dateFrom + " TO " + _dateTo);
-                        break;
-                    //please modify the first case 
-                    case "summarized_monthly_report":
-                        List<TASReportDataSet.SummarizedMonthlyReportDataTable> AttDeptdummy = new List<TASReportDataSet.SummarizedMonthlyReportDataTable>().ToList();
-                        title = "Department Attendace Summary";
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/SummarizedMonthlyReport.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/SummarizedMonthlyReport.rdlc";
-
-                        LoadReport(PathString, AttDeptdummy, _dateFrom + " TO " + _dateTo);
-
-                        break;
-                    case "Employee_Att_Summary_New_report": DataTable dt4  = qb.GetValuesfromDB("select * from ViewAttData " + query + " and Status=1" + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'" + _dateTo + "'" + " )");
-                        List<ViewAttData> ListOfAttDate = new List<ViewAttData>();
-                        List<ViewAttData> TempList = new List<ViewAttData>();
-                        title = "Employee Attendace Summary New";
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/EmpAttSummaryNew.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/EmpAttSummaryNew.rdlc";
-                        ListOfAttDate = dt4.ToList<ViewAttData>();
-                        TempList = new List<ViewAttData>();
-                        
-                        LoadReport(PathString, ReportsFilterImplementation(fm, TempList, ListOfAttDate), _dateFrom + " TO " + _dateTo);
-                        
-
-                        break;
-                    //case "department_attendance_summary": HRReportsMaker hrm = new HRReportsMaker();
-                    //    List<AttDeptSummary> AttDept = hrm.GetListForAttDepartmentsSummary(Session["FiltersModel"] as FiltersModel, _dateFrom, _dateTo);
-                    //    title = "Department Attendace Summary";
-                    //    if (GlobalVariables.DeploymentType == false)
-                    //        PathString = "/Reports/RDLC/AttDepartmentSummary.rdlc";
-                    //    else
-                    //        PathString = "/WMS/Reports/RDLC/AttDepartmentSummary.rdlc";
-
-                    //    LoadReport(PathString, AttDept, _dateFrom + " TO " + _dateTo);
-
-                    //    break;
-                    case "emp_record": DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query + " and Status=1 ");
+                    case "emp_record": DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query + " where Status=1 ");
                         List<EmpView> _ViewList = dt.ToList<EmpView>();
                         List<EmpView> _TempViewList = new List<EmpView>();
                         title = "Employee Record Report";
@@ -93,11 +44,9 @@ namespace WMS.Reports
                             PathString = "/Reports/RDLC/Employee.rdlc";
                         else
                             PathString = "/WMS/Reports/RDLC/Employee.rdlc";
-
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList, _ViewList), _dateFrom + " TO " + _dateTo);
-
                         break;
-                    case "emp_record_active": dt = qb.GetValuesfromDB("select * from EmpView " + query+ " and Status=1 ");
+                    case "emp_record_active": dt = qb.GetValuesfromDB("select * from EmpView " + query+ " where Status=1 ");
                         _ViewList = dt.ToList<EmpView>();
                         _TempViewList = new List<EmpView>();
                         title = "Active Employees Record Report";
@@ -155,19 +104,6 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList2, _ViewList2), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "consolidated_att": DataTable dt3 = qb.GetValuesfromDB("select * from ViewAttData " + query + " and Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
-                                                     + _dateTo + "'" + " )");
-                        List<ViewAttData> _ViewList3 = dt3.ToList<ViewAttData>();
-                        List<ViewAttData> _TempViewList3 = new List<ViewAttData>();
-                        title = "Consolidated Attendence Report";
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DRAttendance.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DRAttendance.rdlc";
-
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList3, _ViewList3), _dateFrom + " TO " + _dateTo);
-
-                        break;
                     case "present": DataTable datatable = qb.GetValuesfromDB("select * from ViewAttData " + query + " and Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )" + " and StatusP = 1 ");
                         List<ViewAttData> _ViewList4 = datatable.ToList<ViewAttData>();
@@ -181,7 +117,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList4, _ViewList4), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "absent": DataTable dt5 = qb.GetValuesfromDB("select * from ViewAttData " + query + " and Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "absent": DataTable dt5 = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )" + " and StatusAB = 1 ");
                         List<ViewAttData> _ViewList5 = dt5.ToList<ViewAttData>();
                         List<ViewAttData> _TempViewList5 = new List<ViewAttData>();
@@ -695,7 +631,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<DailySummary> ie;
             ie = list.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
@@ -722,18 +658,18 @@ namespace WMS.Reports
                     dt = qb.GetValuesfromDB("select * from DailySummary " + " where Criteria = '"+Criteria + "' and (Date >= " + "'" + dateFrom + "'" + " and Date <= " + "'"
                                                      + dateTo + "'" + " )");
                     ViewDS = dt.ToList<DailySummary>();
-                    if (fm.CompanyFilter.Count > 0)
-                    {
-                        foreach (var comp in fm.CompanyFilter)
-                        {
-                            short _compID = Convert.ToInt16(comp.ID);
-                            TempDS.AddRange(ViewDS.Where(aa => aa.CriteriaValue == _compID && aa.Criteria == Criteria).ToList());
-                        }
-                        ViewDS = TempDS.ToList();
-                    }
-                    else
-                        TempDS = ViewDS.ToList();
-                    TempDS.Clear();
+                    //if (fm.CompanyFilter.Count > 0)
+                    //{
+                    //    foreach (var comp in fm.CompanyFilter)
+                    //    {
+                    //        short _compID = Convert.ToInt16(comp.ID);
+                    //        TempDS.AddRange(ViewDS.Where(aa => aa.CriteriaValue == _compID && aa.Criteria == Criteria).ToList());
+                    //    }
+                    //    ViewDS = TempDS.ToList();
+                    //}
+                    //else
+                    //    TempDS = ViewDS.ToList();
+                    //TempDS.Clear();
                     break;
                 case "L":
                     dt = qb.GetValuesfromDB("select * from DailySummary " + " where Criteria = '"+Criteria + "' and (Date >= " + "'" + dateFrom + "'" + " and Date <= " + "'"
@@ -839,194 +775,6 @@ namespace WMS.Reports
             return ViewDS;
         }
 
-        private void LoadReport(string PathString, List<ViewBadli> list, string p)
-        {
-            string _Header = title;
-            this.ReportViewer1.LocalReport.DisplayName = title;
-            ReportViewer1.ProcessingMode = ProcessingMode.Local;
-            ReportViewer1.LocalReport.ReportPath = Server.MapPath(PathString);
-            System.Security.PermissionSet sec = new System.Security.PermissionSet(System.Security.Permissions.PermissionState.Unrestricted);
-            ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
-            IEnumerable<ViewBadli> ie;
-            ie = list.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
-            companyImage = companyimage.AsQueryable();
-            ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
-            ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
-
-            ReportViewer1.LocalReport.DataSources.Clear();
-            ReportViewer1.LocalReport.EnableExternalImages = true;
-            ReportViewer1.LocalReport.DataSources.Add(datasource1);
-            ReportViewer1.LocalReport.DataSources.Add(datasource2);
-            ReportParameter rp = new ReportParameter("Date", p, false);
-            ReportParameter rp1 = new ReportParameter("Header", _Header, false);
-            this.ReportViewer1.LocalReport.SetParameters(new ReportParameter[] { rp1, rp });
-            ReportViewer1.LocalReport.Refresh();
-        }
-
-        private List<ViewBadli> ReportsFilterImplementation(FiltersModel fm, List<ViewBadli> _TempViewList, List<ViewBadli> _ViewList)
-        {
-            //for company
-            if (fm.CompanyFilter.Count > 0)
-            {
-                //foreach (var comp in fm.CompanyFilter)
-                //{
-                //    short _compID = Convert.ToInt16(comp.ID);
-                //    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
-                //}
-                //_ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-
-
-            //for location
-            if (fm.LocationFilter.Count > 0)
-            {
-                foreach (var loc in fm.LocationFilter)
-                {
-                    short _locID = Convert.ToInt16(loc.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.LocID == _locID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-            //for shifts
-            if (fm.ShiftFilter.Count > 0)
-            {
-                foreach (var shift in fm.ShiftFilter)
-                {
-                    short _shiftID = Convert.ToInt16(shift.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.ShiftID == _shiftID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-
-
-            _TempViewList.Clear();
-
-            //for type
-            if (fm.TypeFilter.Count > 0)
-            {
-                foreach (var type in fm.TypeFilter)
-                {
-                    short _typeID = Convert.ToInt16(type.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.TypeID == _typeID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-            //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-
-
-
-
-            //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    //baldi doesnt have the division id so using division name in
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == Convert.ToInt16(div.ID)).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-            //for department
-            if (fm.DepartmentFilter.Count > 0)
-            {
-                foreach (var dept in fm.DepartmentFilter)
-                {
-                    short _deptID = Convert.ToInt16(dept.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DeptID == _deptID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-            //for sections
-            if (fm.SectionFilter.Count > 0)
-            {
-                foreach (var sec in fm.SectionFilter)
-                {
-                    short _secID = Convert.ToInt16(sec.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.SecID == _secID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-            //Employee
-            if (fm.EmployeeFilter.Count > 0)
-            {
-                foreach (var emp in fm.EmployeeFilter)
-                {
-                    int _empID = Convert.ToInt32(emp.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.EmpID == _empID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
-
-
-            return _ViewList;
-        }
-
-        private void LoadReport(string PathString, List<TASReportDataSet.SummarizedMonthlyReportDataTable> VMLD, string p)
-        {
-            string _Header = title;
-            this.ReportViewer1.LocalReport.DisplayName = title;
-            ReportViewer1.ProcessingMode = ProcessingMode.Local;
-            ReportViewer1.LocalReport.ReportPath = Server.MapPath(PathString);
-            System.Security.PermissionSet sec = new System.Security.PermissionSet(System.Security.Permissions.PermissionState.Unrestricted);
-            ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
-            IEnumerable<TASReportDataSet.SummarizedMonthlyReportDataTable> ie;
-            ie = VMLD.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
-            companyImage = companyimage.AsQueryable();
-            ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
-            ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
-
-            ReportViewer1.LocalReport.DataSources.Clear();
-            ReportViewer1.LocalReport.EnableExternalImages = true;
-            ReportViewer1.LocalReport.DataSources.Add(datasource1);
-            ReportViewer1.LocalReport.DataSources.Add(datasource2);
-            this.ReportViewer1.LocalReport.SetParameters(new ReportParameter[] { });
-            ReportViewer1.LocalReport.Refresh();
-        }
-
         private void LoadReport(string PathString, List<AttDeptSummary> AttDept, string date)
         {
             string _Header = title;
@@ -1037,7 +785,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<AttDeptSummary> ie;
             ie = AttDept.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
@@ -1062,7 +810,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<ViewMultipleInOut> ie;
             ie = _Employee.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
@@ -1081,18 +829,18 @@ namespace WMS.Reports
         {
 
             //for company
-            if (fm.CompanyFilter.Count > 0)
-            {
-                //foreach (var comp in fm.CompanyFilter)
-                //{
-                //    short _compID = Convert.ToInt16(comp.ID);
-                //    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
-                //}
-                //_ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CompanyFilter.Count > 0)
+            //{
+            //    //foreach (var comp in fm.CompanyFilter)
+            //    //{
+            //    //    short _compID = Convert.ToInt16(comp.ID);
+            //    //    _TempViewList.AddRange(_ViewList.Where(aa => aa.CompanyID == _compID).ToList());
+            //    //}
+            //    //_ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
@@ -1141,36 +889,36 @@ namespace WMS.Reports
             _TempViewList.Clear();
 
             //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CrewFilter.Count > 0)
+            //{
+            //    foreach (var cre in fm.CrewFilter)
+            //    {
+            //        short _crewID = Convert.ToInt16(cre.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
 
 
             //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    short _divID = Convert.ToInt16(div.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    foreach (var div in fm.DivisionFilter)
+            //    {
+            //        short _divID = Convert.ToInt16(div.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
             //for department
             if (fm.DepartmentFilter.Count > 0)
@@ -1267,36 +1015,36 @@ namespace WMS.Reports
             _TempViewList.Clear();
 
             //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CrewFilter.Count > 0)
+            //{
+            //    foreach (var cre in fm.CrewFilter)
+            //    {
+            //        short _crewID = Convert.ToInt16(cre.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
 
 
             //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    short _divID = Convert.ToInt16(div.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    foreach (var div in fm.DivisionFilter)
+            //    {
+            //        short _divID = Convert.ToInt16(div.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
             //for department
             if (fm.DepartmentFilter.Count > 0)
@@ -1393,45 +1141,45 @@ namespace WMS.Reports
             _TempViewList.Clear();
 
             //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CrewFilter.Count > 0)
+            //{
+            //    //foreach (var cre in fm.CrewFilter)
+            //    //{
+            //    //    short _crewID = Convert.ToInt16(cre.ID);
+            //    //    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
+            //    //}
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
 
 
             //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    short _divID = Convert.ToInt16(div.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    //foreach (var div in fm.DivisionFilter)
+            //    //{
+            //    //    short _divID = Convert.ToInt16(div.ID);
+            //    //    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
+            //    //}
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
             //for department
             if (fm.DepartmentFilter.Count > 0)
             {
-                foreach (var dept in fm.DepartmentFilter)
-                {
-                    short _deptID = Convert.ToInt16(dept.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DeptID == _deptID).ToList());
-                }
+                //foreach (var dept in fm.DepartmentFilter)
+                //{
+                //    short _deptID = Convert.ToInt16(dept.ID);
+                //    _TempViewList.AddRange(_ViewList.Where(aa => aa.DeptID == _deptID).ToList());
+                //}
                 _ViewList = _TempViewList.ToList();
             }
             else
@@ -1521,36 +1269,36 @@ namespace WMS.Reports
             _TempViewList.Clear();
 
             //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CrewFilter.Count > 0)
+            //{
+            //    foreach (var cre in fm.CrewFilter)
+            //    {
+            //        short _crewID = Convert.ToInt16(cre.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
 
 
             //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    short _divID = Convert.ToInt16(div.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    foreach (var div in fm.DivisionFilter)
+            //    {
+            //        short _divID = Convert.ToInt16(div.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
             //for department
             if (fm.DepartmentFilter.Count > 0)
@@ -1598,12 +1346,12 @@ namespace WMS.Reports
             return _ViewList;
         }
 
-        public List<EmpPhoto> GetCompanyImages(FiltersModel fm)
+        public List<Option> GetCompanyImages(FiltersModel fm)
         {
             TAS2013Entities ctx = new TAS2013Entities();
-            companyimage = new List<EmpPhoto>();
-           
-                    companyimage.Add(ctx.EmpPhotoes.Where(aa => aa.PhotoID == 4785).First());
+            companyimage = new List<Option>();
+
+            companyimage.Add(ctx.Options.Where(aa => aa.ID==1).First());
           
             return companyimage;
 
@@ -1660,36 +1408,36 @@ namespace WMS.Reports
             _TempViewList.Clear();
 
             //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CrewFilter.Count > 0)
+            //{
+            //    foreach (var cre in fm.CrewFilter)
+            //    {
+            //        short _crewID = Convert.ToInt16(cre.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
 
 
             //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    short _divID = Convert.ToInt16(div.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    foreach (var div in fm.DivisionFilter)
+            //    {
+            //        short _divID = Convert.ToInt16(div.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
             //for department
             if (fm.DepartmentFilter.Count > 0)
@@ -1747,7 +1495,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<ViewDetailAttData> ie;
             ie = _Employee.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
@@ -1813,36 +1561,36 @@ namespace WMS.Reports
             _TempViewList.Clear();
 
             //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CrewFilter.Count > 0)
+            //{
+            //    foreach (var cre in fm.CrewFilter)
+            //    {
+            //        short _crewID = Convert.ToInt16(cre.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
 
 
             //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    short _divID = Convert.ToInt16(div.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    foreach (var div in fm.DivisionFilter)
+            //    {
+            //        short _divID = Convert.ToInt16(div.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
             //for department
             if (fm.DepartmentFilter.Count > 0)
@@ -1900,7 +1648,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<ViewMonthlyData> ie;
             ie = _Employee.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
@@ -1963,36 +1711,36 @@ namespace WMS.Reports
             _TempViewList.Clear();
 
             //for crews
-            if (fm.CrewFilter.Count > 0)
-            {
-                foreach (var cre in fm.CrewFilter)
-                {
-                    short _crewID = Convert.ToInt16(cre.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.CrewFilter.Count > 0)
+            //{
+            //    foreach (var cre in fm.CrewFilter)
+            //    {
+            //        short _crewID = Convert.ToInt16(cre.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.CrewID == _crewID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
 
 
 
 
             //for division
-            if (fm.DivisionFilter.Count > 0)
-            {
-                foreach (var div in fm.DivisionFilter)
-                {
-                    short _divID = Convert.ToInt16(div.ID);
-                    _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
-                }
-                _ViewList = _TempViewList.ToList();
-            }
-            else
-                _TempViewList = _ViewList.ToList();
-            _TempViewList.Clear();
+            //if (fm.DivisionFilter.Count > 0)
+            //{
+            //    foreach (var div in fm.DivisionFilter)
+            //    {
+            //        short _divID = Convert.ToInt16(div.ID);
+            //        _TempViewList.AddRange(_ViewList.Where(aa => aa.DivID == _divID).ToList());
+            //    }
+            //    _ViewList = _TempViewList.ToList();
+            //}
+            //else
+            //    _TempViewList = _ViewList.ToList();
+            //_TempViewList.Clear();
 
             //for department
             if (fm.DepartmentFilter.Count > 0)
@@ -2051,7 +1799,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<ViewMonthlyDataPer> ie;
             ie = _Employee.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
@@ -2074,7 +1822,7 @@ namespace WMS.Reports
             System.Security.PermissionSet sec = new System.Security.PermissionSet(System.Security.Permissions.PermissionState.Unrestricted);
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", _LvSummary);
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
 
@@ -2097,7 +1845,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<EmpView> ie;
             ie = _Employee.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
@@ -2122,7 +1870,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<ViewAttData> ie;
             ie = _Employee.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
@@ -2152,7 +1900,7 @@ namespace WMS.Reports
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", _LvSummary);
             ReportViewer1.LocalReport.DataSources.Clear();
             ReportViewer1.HyperlinkTarget = "_blank";
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
 
@@ -2175,7 +1923,7 @@ namespace WMS.Reports
             ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
             IEnumerable<ViewLvApplication> ie;
             ie = _Employee.AsQueryable();
-            IEnumerable<EmpPhoto> companyImage;
+            IEnumerable<Option> companyImage;
             companyImage = companyimage.AsQueryable();
             ReportDataSource datasource1 = new ReportDataSource("DataSet1", ie);
             ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
@@ -2217,7 +1965,7 @@ namespace WMS.Reports
                     EmpID = emp.EmpID;
                     EmpNo = emp.EmpNo;
                     EmpName = emp.EmpName;
-                    DeptID = (short)emp.DeptID;
+                    //DeptID = (short)emp.DeptID;
                     DeptName = emp.DeptName;
                     LocationName = emp.LocName;
                     LocationID = (short)emp.LocID;
@@ -2225,8 +1973,8 @@ namespace WMS.Reports
                     SecID = (short)emp.SecID;
                     DesgName = emp.DesignationName;
                     DesigID = (short)emp.DesigID;
-                    CrewName = emp.CrewName;
-                    CrewID = (short)emp.CrewID;
+                    //CrewName = emp.CrewName;
+                    //CrewID = (short)emp.CrewID;
                     switch (leave.LeaveType)
                     {
                         case "A"://Casual
@@ -2278,7 +2026,7 @@ namespace WMS.Reports
                             BalSL = (float)leave.YearRemaining;
                             break;
                     }
-                    AddDataToDT(EmpID, EmpNo, EmpName, TotalAL, BalAL, TotalCL, BalCL, TotalSL, BalSL, JanAL, JanCL, JanSL, FebAL, FebCL, FebSL, MarchAL, MarchCL, MarchSL, AprilAL, AprilCL, AprilSL, MayAL, MayCL, MaySL, JunAL, JunCL, JunSL, JullyAL, JullyCL, JullySL, AugAL, AugCL, AugSL, SepAL, SepCL, SepSL, OctAL, OctCL, OctSL, NovAL, NovCL, NovSL, DecAL, DecCL, DecSL, Remarks, DeptName, (short)DeptID, LocationName, (short)LocationID, SecName, (short)SecID, DesgName, DesigID, CrewName, CrewID);
+                    //AddDataToDT(EmpID, EmpNo, EmpName, TotalAL, BalAL, TotalCL, BalCL, TotalSL, BalSL, JanAL, JanCL, JanSL, FebAL, FebCL, FebSL, MarchAL, MarchCL, MarchSL, AprilAL, AprilCL, AprilSL, MayAL, MayCL, MaySL, JunAL, JunCL, JunSL, JullyAL, JullyCL, JullySL, AugAL, AugCL, AugSL, SepAL, SepCL, SepSL, OctAL, OctCL, OctSL, NovAL, NovCL, NovSL, DecAL, DecCL, DecSL, Remarks, DeptName, (short)DeptID, LocationName, (short)LocationID, SecName, (short)SecID, DesgName, DesigID, CrewName, CrewID);
                 }
             }
             return MYLeaveSummaryDT;
@@ -2566,7 +2314,7 @@ namespace WMS.Reports
                         BalCL = (float)(BeforeCL - UsedCL);
                         BalSL = (float)(BeforeSL - UsedSL);
                         BalAL = (float)(BeforeAL - UsedAL);
-                        AddDataToDT(emp.EmpNo, emp.EmpName, emp.DesignationName, emp.SectionName, emp.DeptName, emp.TypeName, emp.CatName, emp.LocName, BeforeCL, BeforeSL, BeforeAL, UsedCL, UsedSL, UsedAL, BalCL, BalSL, BalAL, _month);
+                        //AddDataToDT(emp.EmpNo, emp.EmpName, emp.DesignationName, emp.SectionName, emp.DeptName, emp.TypeName, emp.CatName, emp.LocName, BeforeCL, BeforeSL, BeforeAL, UsedCL, UsedSL, UsedAL, BalCL, BalSL, BalAL, _month);
                     }
 
                 }

@@ -61,13 +61,12 @@ namespace WMS.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            var readers = db.Readers.Include(r => r.Location).Include(r => r.RdrDutyCode).Include(r => r.ReaderType).Include(r => r.ReaderType.ReaderVendor);
+            var readers = db.Readers.Include(r => r.Location).Include(r => r.RdrDutyCode).Include(r => r.ReaderType);
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 readers = readers.Where(s => s.RdrName.ToUpper().Contains(searchString.ToUpper())
                      || s.ReaderType.RdrTypeName.ToUpper().Contains(searchString.ToUpper())
-                     || s.ReaderType.ReaderVendor.VendorName.ToUpper().Contains(searchString.ToUpper())
                      || s.Location.LocName.ToUpper().Contains(searchString.ToUpper())
                      || s.IpAdd.ToUpper().Contains(searchString.ToUpper()));
             }
@@ -90,12 +89,7 @@ namespace WMS.Controllers
                 case "RdrType":
                     readers = readers.OrderBy(s => s.ReaderType.RdrTypeName);
                     break;
-                case "Vendor_desc":
-                    readers = readers.OrderByDescending(s => s.ReaderType.ReaderVendor.VendorName);
-                    break;
-                case "Vendor":
-                    readers = readers.OrderBy(s => s.ReaderType.ReaderVendor.VendorName);
-                    break;
+                
                 case "Status_desc":
                     readers = readers.OrderByDescending(s => s.Status);
                     break;

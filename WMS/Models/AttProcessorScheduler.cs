@@ -21,7 +21,6 @@ namespace WMS.Models
         public System.DateTime DateTo { get; set; }
         public short CompanyID { get; set; }
         public short LocationID { get; set; }
-        public short CatID { get; set; }
         public Nullable<bool> ProcessingDone { get; set; }
         public string Criteria { get; set; }
         public Nullable<bool> ProcessCat { get; set; }
@@ -30,7 +29,6 @@ namespace WMS.Models
         public Nullable<int> EmpID { get; set; }
         public string EmpNo { get; set; }
     
-        public virtual Category Category { get; set; }
         public virtual User User { get; set; }
     }
 }

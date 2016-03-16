@@ -123,12 +123,12 @@ namespace WMS.HelperClass
         public static bool UserHasValuesInSession(FiltersModel fm)
         {
             bool check = false;
-            if (fm.CompanyFilter.Count > 0)
-                check = true;
+            //if (fm.CompanyFilter.Count > 0)
+            //    check = true;
             if (fm.LocationFilter.Count > 0)
                 check = true;
-            if (fm.DivisionFilter.Count > 0)
-                check = true;
+            //if (fm.DivisionFilter.Count > 0)
+            //    check = true;
             if (fm.ShiftFilter.Count > 0)
                 check = true;
             if (fm.DepartmentFilter.Count > 0)
@@ -137,8 +137,8 @@ namespace WMS.HelperClass
                 check = true;
             if (fm.TypeFilter.Count > 0)
                 check = true;
-            if (fm.CrewFilter.Count > 0)
-                check = true;
+            //if (fm.CrewFilter.Count > 0)
+            //    check = true;
             if (fm.EmployeeFilter.Count > 0)
                 check = true;
             return check;

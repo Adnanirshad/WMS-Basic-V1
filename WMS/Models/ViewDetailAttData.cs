@@ -14,42 +14,28 @@ namespace WMS.Models
     
     public partial class ViewDetailAttData
     {
-        public string EmpNo { get; set; }
+        public string DeptName { get; set; }
         public string SectionName { get; set; }
-        public string CrewName { get; set; }
-        public Nullable<short> DeptID { get; set; }
-        public string TypeName { get; set; }
-        public Nullable<short> CatID { get; set; }
-        public string CatName { get; set; }
-        public string RegionName { get; set; }
-        public Nullable<byte> RegionID { get; set; }
-        public string CityName { get; set; }
-        public string LocName { get; set; }
-        public Nullable<short> CityID { get; set; }
-        public string ShiftName { get; set; }
         public string DesignationName { get; set; }
+        public string EmpNo { get; set; }
         public string EmpName { get; set; }
         public Nullable<int> DesigID { get; set; }
-        public Nullable<short> JobID { get; set; }
-        public Nullable<byte> Gender { get; set; }
+        public Nullable<byte> ShiftID { get; set; }
+        public Nullable<short> LocID { get; set; }
         public Nullable<byte> TypeID { get; set; }
         public Nullable<short> SecID { get; set; }
         public string CardNo { get; set; }
-        public Nullable<int> FpID { get; set; }
         public string NicNo { get; set; }
         public Nullable<System.DateTime> JoinDate { get; set; }
-        public Nullable<System.DateTime> ResignDate { get; set; }
+        public Nullable<System.DateTime> ValidDate { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<short> CrewID { get; set; }
-        public Nullable<bool> HasOT { get; set; }
-        public int EmpID { get; set; }
-        public string DivisionName { get; set; }
-        public string DeptName { get; set; }
-        public Nullable<short> DivID { get; set; }
-        public Nullable<byte> ShiftID { get; set; }
-        public Nullable<short> LocID { get; set; }
+        public string TypeName { get; set; }
+        public string LocName { get; set; }
+        public string ShiftName { get; set; }
         public string EmpDate { get; set; }
         public Nullable<System.DateTime> AttDate { get; set; }
+        public string Expr1 { get; set; }
+        public Nullable<int> EmpID { get; set; }
         public string DutyCode { get; set; }
         public Nullable<System.TimeSpan> DutyTime { get; set; }
         public Nullable<System.DateTime> TimeIn { get; set; }
@@ -58,6 +44,7 @@ namespace WMS.Models
         public Nullable<short> LateIn { get; set; }
         public Nullable<short> LateOut { get; set; }
         public Nullable<short> EarlyIn { get; set; }
+        public Nullable<short> EarlyOut { get; set; }
         public Nullable<short> OTMin { get; set; }
         public Nullable<short> GZOTMin { get; set; }
         public Nullable<short> BreakMin { get; set; }
@@ -81,8 +68,6 @@ namespace WMS.Models
         public Nullable<bool> StatusIN { get; set; }
         public Nullable<bool> StatusBreak { get; set; }
         public Nullable<short> ShifMin { get; set; }
-        public Nullable<bool> ShfSplit { get; set; }
-        public Nullable<bool> ProcessIn { get; set; }
         public string Remarks { get; set; }
         public Nullable<System.DateTime> Tin0 { get; set; }
         public Nullable<System.DateTime> Tout0 { get; set; }
@@ -95,17 +80,11 @@ namespace WMS.Models
         public Nullable<System.DateTime> Tin4 { get; set; }
         public Nullable<System.DateTime> Tout4 { get; set; }
         public Nullable<System.DateTime> Tin5 { get; set; }
-        public Nullable<System.DateTime> Tout5 { get; set; }
         public Nullable<System.DateTime> Tin6 { get; set; }
+        public Nullable<System.DateTime> Tout5 { get; set; }
         public Nullable<System.DateTime> Tout6 { get; set; }
         public Nullable<System.DateTime> Tin7 { get; set; }
         public Nullable<System.DateTime> Tout7 { get; set; }
-        public Nullable<System.DateTime> Tin8 { get; set; }
-        public Nullable<System.DateTime> Tout8 { get; set; }
-        public Nullable<System.DateTime> Tin9 { get; set; }
-        public Nullable<System.DateTime> Tout9 { get; set; }
-        public Nullable<System.DateTime> Tin10 { get; set; }
-        public Nullable<System.DateTime> Tout10 { get; set; }
-        public string GradeName { get; set; }
+        public short DeptID { get; set; }
     }
 }

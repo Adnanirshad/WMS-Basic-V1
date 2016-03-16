@@ -21,9 +21,7 @@
         <th>
             @Html.ActionLink("Department", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
-        <th>
-            Division
-        </th>
+        
        
         <th>Edit|View|Delete</th>
     </tr>
@@ -33,9 +31,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.DeptName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Division.DivisionName)
-        </td>
+        
        
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.DeptID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" })

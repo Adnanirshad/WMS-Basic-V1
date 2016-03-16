@@ -15,8 +15,9 @@ namespace WMS.Models
     public partial class Option
     {
         public short ID { get; set; }
-        public string PicFolder { get; set; }
         public string CompanyName { get; set; }
-        public Nullable<bool> DownTime { get; set; }
+        public byte[] CompanyLogo { get; set; }
+        public Nullable<System.DateTime> MonthlyStart { get; set; }
+        public Nullable<System.DateTime> MonthlyEnd { get; set; }
     }
 }

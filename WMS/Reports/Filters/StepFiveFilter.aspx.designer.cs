@@ -22,24 +22,6 @@ namespace WMS.Reports.Filters {
         protected global::System.Web.UI.WebControls.LinkButton btnStepOne;
         
         /// <summary>
-        /// btnStepTwo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnStepTwo;
-        
-        /// <summary>
-        /// btnStepThree control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnStepThree;
-        
-        /// <summary>
         /// btnStepFour control.
         /// </summary>
         /// <remarks>

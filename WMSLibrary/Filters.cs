@@ -39,10 +39,10 @@ namespace WMSLibrary
         public FiltersModel DeleteAllFilters(FiltersModel filtersModel)
         {
             filtersModel.CityFilter = new List<FiltersAttributes>();
-            filtersModel.CompanyFilter = new List<FiltersAttributes>();
-            filtersModel.CrewFilter = new List<FiltersAttributes>();
+            //filtersModel.CompanyFilter = new List<FiltersAttributes>();
+            //filtersModel.CrewFilter = new List<FiltersAttributes>();
             filtersModel.DepartmentFilter = new List<FiltersAttributes>();
-            filtersModel.DivisionFilter = new List<FiltersAttributes>();
+            //filtersModel.DivisionFilter = new List<FiltersAttributes>();
             filtersModel.EmployeeFilter = new List<FiltersAttributes>();
             filtersModel.LocationFilter = new List<FiltersAttributes>();
             filtersModel.RegionFilter = new List<FiltersAttributes>();
@@ -100,20 +100,20 @@ namespace WMSLibrary
         {
             switch (filterName)
             {
-                case "Company":
-                    for (int k = 0; k < filtersModel.CompanyFilter.Count; k++)
-                    {
-                        if (filtersModel.CompanyFilter[k].ID == ItemID)
-                            filtersModel.CompanyFilter.RemoveAt(k);
-                    }
-                    break;
-                case "Division":
-                    for (int k = 0; k < filtersModel.DivisionFilter.Count; k++)
-                    {
-                        if (filtersModel.DivisionFilter[k].ID == ItemID)
-                            filtersModel.DivisionFilter.RemoveAt(k);
-                    }
-                    break;
+                //case "Company":
+                //    for (int k = 0; k < filtersModel.CompanyFilter.Count; k++)
+                //    {
+                //        if (filtersModel.CompanyFilter[k].ID == ItemID)
+                //            filtersModel.CompanyFilter.RemoveAt(k);
+                //    }
+                //    break;
+                //case "Division":
+                //    for (int k = 0; k < filtersModel.DivisionFilter.Count; k++)
+                //    {
+                //        if (filtersModel.DivisionFilter[k].ID == ItemID)
+                //            filtersModel.DivisionFilter.RemoveAt(k);
+                //    }
+                //    break;
                     
                 case "Department":
                     for (int k = 0; k < filtersModel.DepartmentFilter.Count; k++)
@@ -143,13 +143,13 @@ namespace WMSLibrary
                             filtersModel.ShiftFilter.RemoveAt(k);
                     }
                     break;
-                case "Crew":
-                    for (int k = 0; k < filtersModel.CrewFilter.Count; k++)
-                    {
-                        if (filtersModel.CrewFilter[k].ID == ItemID)
-                            filtersModel.CrewFilter.RemoveAt(k);
-                    }
-                    break;
+                //case "Crew":
+                //    for (int k = 0; k < filtersModel.CrewFilter.Count; k++)
+                //    {
+                //        if (filtersModel.CrewFilter[k].ID == ItemID)
+                //            filtersModel.CrewFilter.RemoveAt(k);
+                //    }
+                //    break;
                 case "Type":
                     for (int k = 0; k < filtersModel.TypeFilter.Count; k++)
                     {
@@ -171,14 +171,14 @@ namespace WMSLibrary
         {
             switch (filterName)
             {
-                case "Company":
-                    if (filtersModel.CompanyFilter.Where(aa => aa.ID == ItemID).Count() == 0)
-                        filtersModel.CompanyFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
-                    break;
-                case "Division":
-                    if (filtersModel.DivisionFilter.Where(aa => aa.ID == ItemID).Count() == 0)
-                        filtersModel.DivisionFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
-                    break;
+                //case "Company":
+                //    if (filtersModel.CompanyFilter.Where(aa => aa.ID == ItemID).Count() == 0)
+                //        filtersModel.CompanyFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
+                //    break;
+                //case "Division":
+                //    if (filtersModel.DivisionFilter.Where(aa => aa.ID == ItemID).Count() == 0)
+                //        filtersModel.DivisionFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
+                //    break;
                 case "Department":
                     if (filtersModel.DepartmentFilter.Where(aa => aa.ID == ItemID).Count() == 0)
                         filtersModel.DepartmentFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
@@ -203,10 +203,10 @@ namespace WMSLibrary
                     if (filtersModel.EmployeeFilter.Where(aa => aa.ID == ItemID).Count() == 0)
                         filtersModel.EmployeeFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
                     break;
-                case "Crew":
-                    if (filtersModel.CrewFilter.Where(aa => aa.ID == ItemID).Count() == 0)
-                        filtersModel.CrewFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
-                    break;
+                //case "Crew":
+                //    if (filtersModel.CrewFilter.Where(aa => aa.ID == ItemID).Count() == 0)
+                //        filtersModel.CrewFilter.Add(new FiltersAttributes() { ID = ItemID, FilterName = ItemName });
+                //    break;
 
             }
         }
@@ -220,30 +220,30 @@ namespace WMSLibrary
                 case "Department":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.DepartmentFilter);
                     break;
-                case "Region":
-                    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.RegionFilter);
-                    break;
+                //case "Region":
+                //    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.RegionFilter);
+                //    break;
                 case "Section":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.SectionFilter);
                     break;
-                case "Company":
-                    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.CompanyFilter);
-                    break;
+                //case "Company":
+                //    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.CompanyFilter);
+                //    break;
                 case "Location":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.LocationFilter);
                     break;
                 case "Shift":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.ShiftFilter);
                     break;
-                case "Division":
-                    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.DivisionFilter);
-                    break;
+                //case "Division":
+                //    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.DivisionFilter);
+                //    break;
                 case "Employee":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.EmployeeFilter);
                     break;
-                case "Crew":
-                    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.CrewFilter);
-                    break;
+                //case "Crew":
+                //    SetGridViewCheckStateChild(gv, filtersModel, filtersModel.CrewFilter);
+                //    break;
                 case "Type":
                     SetGridViewCheckStateChild(gv, filtersModel, filtersModel.TypeFilter);
                     break;
@@ -284,15 +284,14 @@ namespace WMSLibrary
 
     public class FiltersModel
     {
-        public List<FiltersAttributes> CompanyFilter = new List<FiltersAttributes>();
-        public List<FiltersAttributes> DivisionFilter = new List<FiltersAttributes>();
-        public List<FiltersAttributes> DepartmentFilter = new List<FiltersAttributes>();
         public List<FiltersAttributes> SectionFilter = new List<FiltersAttributes>();
         public List<FiltersAttributes> LocationFilter = new List<FiltersAttributes>();
+        //public List<FiltersAttributes> DivisionFilter = new List<FiltersAttributes>();
+        public List<FiltersAttributes> DepartmentFilter = new List<FiltersAttributes>();        
         public List<FiltersAttributes> ShiftFilter = new List<FiltersAttributes>();
         public List<FiltersAttributes> RegionFilter = new List<FiltersAttributes>();
         public List<FiltersAttributes> CityFilter = new List<FiltersAttributes>();
-        public List<FiltersAttributes> CrewFilter = new List<FiltersAttributes>();
+        //public List<FiltersAttributes> CrewFilter = new List<FiltersAttributes>();
         public List<FiltersAttributes> EmployeeFilter = new List<FiltersAttributes>();
         public List<FiltersAttributes> TypeFilter = new List<FiltersAttributes>();
     }

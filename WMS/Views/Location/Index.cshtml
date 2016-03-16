@@ -23,13 +23,6 @@
         <th>
             @Html.ActionLink("Location", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
-         <th>
-            @Html.ActionLink("City", "Index", new { sortOrder = ViewBag.CitySortParm })
-        </th>
-         <th>
-            @Html.ActionLink("Region", "Index", new { sortOrder = ViewBag.RegionSortParm })
-
-        </th>
         <th>Edit | View | Delete</th>
     </tr>
 
@@ -37,13 +30,7 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.LocName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City.CityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City.Region.RegionName)
-        </td>
+        </td>               
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.LocID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
             @Html.ActionLink(" ", "Details", new { id=item.LocID }, new { @class = "glyphicon glyphicon-pencil btn btn-info btn-xs" }) 

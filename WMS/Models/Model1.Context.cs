@@ -25,7 +25,6 @@ namespace WMS.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<AccessEmp> AccessEmps { get; set; }
         public DbSet<AttData> AttDatas { get; set; }
         public DbSet<AttDataManEdit> AttDataManEdits { get; set; }
         public DbSet<AttMnData> AttMnDatas { get; set; }
@@ -35,34 +34,19 @@ namespace WMS.Models
         public DbSet<AuditForm> AuditForms { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<AuditOperation> AuditOperations { get; set; }
-        public DbSet<BadliRecord> BadliRecords { get; set; }
-        public DbSet<Card> Cards { get; set; }
-        public DbSet<CardType> CardTypes { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<Crew> Crews { get; set; }
         public DbSet<DailySummary> DailySummaries { get; set; }
         public DbSet<DaysName> DaysNames { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Designation> Designations { get; set; }
-        public DbSet<Division> Divisions { get; set; }
         public DbSet<DownloadTime> DownloadTimes { get; set; }
         public DbSet<DutyCode> DutyCodes { get; set; }
         public DbSet<DutyTime> DutyTimes { get; set; }
         public DbSet<Emp> Emps { get; set; }
-        public DbSet<EmpAccess> EmpAccesses { get; set; }
         public DbSet<EmpFace> EmpFaces { get; set; }
         public DbSet<EmpFp> EmpFps { get; set; }
         public DbSet<EmpPhoto> EmpPhotoes { get; set; }
-        public DbSet<EmpRdr> EmpRdrs { get; set; }
         public DbSet<EmpType> EmpTypes { get; set; }
-        public DbSet<Grade> Grades { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
-        public DbSet<JobCard> JobCards { get; set; }
-        public DbSet<JobCardApp> JobCardApps { get; set; }
-        public DbSet<JobCardEmp> JobCardEmps { get; set; }
-        public DbSet<JobCardTime> JobCardTimes { get; set; }
-        public DbSet<JobTitle> JobTitles { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<LvApplication> LvApplications { get; set; }
         public DbSet<LvConsumed> LvConsumeds { get; set; }
@@ -76,18 +60,11 @@ namespace WMS.Models
         public DbSet<RdrEventLog> RdrEventLogs { get; set; }
         public DbSet<Reader> Readers { get; set; }
         public DbSet<ReaderType> ReaderTypes { get; set; }
-        public DbSet<ReaderVendor> ReaderVendors { get; set; }
         public DbSet<Reason> Reasons { get; set; }
-        public DbSet<Region> Regions { get; set; }
         public DbSet<Remark> Remarks { get; set; }
-        public DbSet<Roster> Rosters { get; set; }
-        public DbSet<RosterApp> RosterApps { get; set; }
-        public DbSet<RosterDetail> RosterDetails { get; set; }
-        public DbSet<RosterType> RosterTypes { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<ServiceLog> ServiceLogs { get; set; }
         public DbSet<Shift> Shifts { get; set; }
-        public DbSet<Site> Sites { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserModule> UserModules { get; set; }
@@ -95,7 +72,6 @@ namespace WMS.Models
         public DbSet<UserRoleData> UserRoleDatas { get; set; }
         public DbSet<EmpView> EmpViews { get; set; }
         public DbSet<ViewAttData> ViewAttDatas { get; set; }
-        public DbSet<ViewBadli> ViewBadlis { get; set; }
         public DbSet<ViewDepartment> ViewDepartments { get; set; }
         public DbSet<ViewDetailAttData> ViewDetailAttDatas { get; set; }
         public DbSet<ViewEmpPic> ViewEmpPics { get; set; }

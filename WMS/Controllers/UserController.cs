@@ -479,17 +479,17 @@ namespace WMS.Controllers
             if (Request.Form["uCityCount"] != "" && Request.Form["UserRoleL"] == "C")
             {
                 int cityCount = Convert.ToInt32(Request.Form["uCityCount"]);
-                List<City> cities = new List<City>();
-                cities = db.Cities.ToList();
+                //List<City> cities = new List<City>();
+                //cities = db.Cities.ToList();
                 for (int i = 1; i <= cityCount; i++)
                 {
                     string uCityID = "uCity" + i;
                     string CityName = Request.Form[uCityID].ToString();
-                    int cityID = cities.Where(aa => aa.CityName == CityName).FirstOrDefault().CityID;
+                    //int cityID = cities.Where(aa => aa.CityName == CityName).FirstOrDefault().CityID;
                     UserRoleData urd = new UserRoleData();
                     urd.RoleDataLegend = "C";
                     urd.UserRoleLegend = "L";
-                    urd.RoleDataValue = (short)cityID;
+                    //urd.RoleDataValue = (short)cityID;
                     urd.RoleUserID = user.UserID;
                     db.UserRoleDatas.Add(urd);
                     db.SaveChanges();
@@ -499,17 +499,17 @@ namespace WMS.Controllers
             if (Request.Form["uRegionCount"] != "" && Request.Form["UserRoleL"] == "R")
             {
                 int regionCount = Convert.ToInt32(Request.Form["uRegionCount"]);
-                List<Region> regions = new List<Region>();
-                regions = db.Regions.ToList();
+                //List<Region> regions = new List<Region>();
+                //regions = db.Regions.ToList();
                 for (int i = 1; i <= regionCount; i++)
                 {
                     string uRegionID = "uRegion" + i;
                     string RegionName = Request.Form[uRegionID].ToString();
-                    int regionID = regions.Where(aa => aa.RegionName == RegionName).FirstOrDefault().RegionID;
+                    //int regionID = regions.Where(aa => aa.RegionName == RegionName).FirstOrDefault().RegionID;
                     UserRoleData urd = new UserRoleData();
                     urd.RoleDataLegend = "R";
                     urd.UserRoleLegend = "L";
-                    urd.RoleDataValue = (short)regionID;
+                    //urd.RoleDataValue = (short)regionID;
                     urd.RoleUserID = user.UserID;
                     db.UserRoleDatas.Add(urd);
                     db.SaveChanges();
@@ -556,25 +556,25 @@ namespace WMS.Controllers
                 }
             }
             //Save User Division
-            if (Request.Form["uDivisionCount"] != "" && Request.Form["UserRoleD"] == "V")
-            {
-                int divisionCount = Convert.ToInt32(Request.Form["uDivisionCount"]);
-                List<Division> divisions = new List<Division>();
-                divisions = db.Divisions.ToList();
-                for (int i = 1; i <= divisionCount; i++)
-                {
-                    string uDivisionID = "uDivision" + i;
-                    string DivisionName = Request.Form[uDivisionID].ToString();
-                    int divisionID = divisions.Where(aa => aa.DivisionName == DivisionName).FirstOrDefault().DivisionID;
-                    UserRoleData urd = new UserRoleData();
-                    urd.RoleDataLegend = "V";
-                    urd.UserRoleLegend = "D";
-                    urd.RoleDataValue = (short)divisionID;
-                    urd.RoleUserID = user.UserID;
-                    db.UserRoleDatas.Add(urd);
-                    db.SaveChanges();
-                }
-            }
+            //if (Request.Form["uDivisionCount"] != "" && Request.Form["UserRoleD"] == "V")
+            //{
+            //    int divisionCount = Convert.ToInt32(Request.Form["uDivisionCount"]);
+            //    List<Division> divisions = new List<Division>();
+            //    divisions = db.Divisions.ToList();
+            //    for (int i = 1; i <= divisionCount; i++)
+            //    {
+            //        string uDivisionID = "uDivision" + i;
+            //        string DivisionName = Request.Form[uDivisionID].ToString();
+            //        int divisionID = divisions.Where(aa => aa.DivisionName == DivisionName).FirstOrDefault().DivisionID;
+            //        UserRoleData urd = new UserRoleData();
+            //        urd.RoleDataLegend = "V";
+            //        urd.UserRoleLegend = "D";
+            //        urd.RoleDataValue = (short)divisionID;
+            //        urd.RoleUserID = user.UserID;
+            //        db.UserRoleDatas.Add(urd);
+            //        db.SaveChanges();
+            //    }
+            //}
         }
 
         // GET: /User/Delete/5
@@ -651,25 +651,25 @@ namespace WMS.Controllers
 
             
 
-            public ActionResult UserCityList()
-            {
-                var cities = db.Cities.ToList();
-                return Json(new SelectList(
-                                cities.ToArray(),
-                                "CityID",
-                                "CityName")
-                           , JsonRequestBehavior.AllowGet);
-            }
+            //public ActionResult UserCityList()
+            //{
+            //    //var cities = db.Cities.ToList();
+            //    //return Json(new SelectList(
+            //    //                cities.ToArray(),
+            //    //                "CityID",
+            //    //                "CityName")
+            //    //           , JsonRequestBehavior.AllowGet);
+            //}
 
-            public ActionResult UserRegionList()
-            {
-                var regions = db.Regions.ToList();
-                return Json(new SelectList(
-                                regions.ToArray(),
-                                "RegionID",
-                                "RegionName")
-                           , JsonRequestBehavior.AllowGet);
-            }
+            //public ActionResult UserRegionList()
+            //{
+            //    //var regions = db.Regions.ToList();
+            //    return Json(new SelectList(
+            //                    regions.ToArray(),
+            //                    "RegionID",
+            //                    "RegionName")
+            //               , JsonRequestBehavior.AllowGet);
+            //}
 
             public ActionResult UserSectionList()
             {
@@ -691,15 +691,15 @@ namespace WMS.Controllers
                            , JsonRequestBehavior.AllowGet);
             }
 
-            public ActionResult UserDivisionList()
-            {
-                var divisions = db.Divisions.ToList();
-                return Json(new SelectList(
-                                divisions.ToArray(),
-                                "DivisionID",
-                                "DivisionName")
-                           , JsonRequestBehavior.AllowGet);
-            }
+            //public ActionResult UserDivisionList()
+            //{
+            //    var divisions = db.Divisions.ToList();
+            //    return Json(new SelectList(
+            //                    divisions.ToArray(),
+            //                    "DivisionID",
+            //                    "DivisionName")
+            //               , JsonRequestBehavior.AllowGet);
+            //}
         
         #endregion
 
@@ -724,45 +724,45 @@ namespace WMS.Controllers
                           , JsonRequestBehavior.AllowGet);
             }
 
-            public ActionResult SelectedUserCityList(int id)
-            {
-                List<City> _cities = db.Cities.ToList();
-                List<City> cities = new List<City>();
-                List<UserRoleData> listUserCityRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "C").ToList();
-                var userCity = new List<City>();
+            //public ActionResult SelectedUserCityList(int id)
+            //{
+            //    //List<City> _cities = db.Cities.ToList();
+            //    //List<City> cities = new List<City>();
+            //    //List<UserRoleData> listUserCityRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "C").ToList();
+            //    //var userCity = new List<City>();
 
-                foreach (var ucity in listUserCityRoleData)
-                {
-                    City ll = db.Cities.FirstOrDefault(aa => aa.CityID == ucity.RoleDataValue);
-                    cities.Add(ll);
-                }
+            //    //foreach (var ucity in listUserCityRoleData)
+            //    //{
+            //    //    City ll = db.Cities.FirstOrDefault(aa => aa.CityID == ucity.RoleDataValue);
+            //    //    cities.Add(ll);
+            //    //}
 
-                return Json(new SelectList(
-                               cities.ToArray(),
-                               "CityID",
-                               "CityName")
-                          , JsonRequestBehavior.AllowGet);
-            }
+            //    //return Json(new SelectList(
+            //    //               cities.ToArray(),
+            //    //               "CityID",
+            //    //               "CityName")
+            //    //          , JsonRequestBehavior.AllowGet);
+            //}
 
-            public ActionResult SelectedUserRegionList(int id)
-            {
-                List<Region> _regions = db.Regions.ToList();
-                List<Region> regions = new List<Region>();
-                List<UserRoleData> listUserRegionRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "R").ToList();
-                var userRegion = new List<Region>();
+            //public ActionResult SelectedUserRegionList(int id)
+            //{
+            //    List<Region> _regions = db.Regions.ToList();
+            //    List<Region> regions = new List<Region>();
+            //    List<UserRoleData> listUserRegionRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "R").ToList();
+            //    var userRegion = new List<Region>();
 
-                foreach (var uregion in listUserRegionRoleData)
-                {
-                    Region ll = db.Regions.FirstOrDefault(aa => aa.RegionID == uregion.RoleDataValue);
-                    regions.Add(ll);
-                }
+            //    foreach (var uregion in listUserRegionRoleData)
+            //    {
+            //        Region ll = db.Regions.FirstOrDefault(aa => aa.RegionID == uregion.RoleDataValue);
+            //        regions.Add(ll);
+            //    }
 
-                return Json(new SelectList(
-                               regions.ToArray(),
-                               "RegionID",
-                               "RegionName")
-                          , JsonRequestBehavior.AllowGet);
-            }
+            //    return Json(new SelectList(
+            //                   regions.ToArray(),
+            //                   "RegionID",
+            //                   "RegionName")
+            //              , JsonRequestBehavior.AllowGet);
+            //}
 
             public ActionResult SelectedUserSectionList(int id)
             {
@@ -803,25 +803,25 @@ namespace WMS.Controllers
                                "DeptName")
                           , JsonRequestBehavior.AllowGet);
             }
-            public ActionResult SelectedUserDivisionList(int id)
-            {
-                List<Division> _divisions = db.Divisions.ToList();
-                List<Division> divisions = new List<Division>();
-                List<UserRoleData> listUserDivisionRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "V").ToList();
-                var userDivision = new List<Division>();
+            //public ActionResult SelectedUserDivisionList(int id)
+            //{
+            //    List<Division> _divisions = db.Divisions.ToList();
+            //    List<Division> divisions = new List<Division>();
+            //    List<UserRoleData> listUserDivisionRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == id && aa.RoleDataLegend == "V").ToList();
+            //    var userDivision = new List<Division>();
 
-                foreach (var udivision in listUserDivisionRoleData)
-                {
-                    Division ll = db.Divisions.FirstOrDefault(aa => aa.DivisionID == udivision.RoleDataValue);
-                    divisions.Add(ll);
-                }
+            //    foreach (var udivision in listUserDivisionRoleData)
+            //    {
+            //        Division ll = db.Divisions.FirstOrDefault(aa => aa.DivisionID == udivision.RoleDataValue);
+            //        divisions.Add(ll);
+            //    }
 
-                return Json(new SelectList(
-                               divisions.ToArray(),
-                               "DivisionID",
-                               "DivisionName")
-                          , JsonRequestBehavior.AllowGet);
-            }
+            //    return Json(new SelectList(
+            //                   divisions.ToArray(),
+            //                   "DivisionID",
+            //                   "DivisionName")
+            //              , JsonRequestBehavior.AllowGet);
+            //}
         #endregion
 
 

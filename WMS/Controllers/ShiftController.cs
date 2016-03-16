@@ -90,7 +90,7 @@ namespace WMS.Controllers
             string query = qb.QueryForLocationTableSegerationForLinq(LoggedInUser);
           
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
-            ViewBag.RosterType = new SelectList(db.RosterTypes.OrderBy(s=>s.Name), "ID", "Name");
+            //ViewBag.RosterType = new SelectList(db.RosterTypes.OrderBy(s=>s.Name), "ID", "Name");
             return View();
         }
 
@@ -165,8 +165,7 @@ namespace WMS.Controllers
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
             ViewBag.DayOff1 = new SelectList(db.DaysNames.OrderBy(s=>s.Name), "ID", "Name", shift.DayOff1);
             ViewBag.DayOff2 = new SelectList(db.DaysNames.OrderBy(s=>s.Name), "ID", "Name", shift.DayOff2);
-            ViewBag.RosterType = new SelectList(db.RosterTypes.OrderBy(s=>s.Name), "ID", "Name", shift.RosterType);
-            return View(shift);
+             return View(shift);
         }
 
         // GET: /Shift/Edit/5
@@ -185,7 +184,6 @@ namespace WMS.Controllers
             ViewBag.LocationID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName",shift.LocationID);
             ViewBag.DayOff1 = new SelectList(db.DaysNames.OrderBy(s=>s.Name), "ID", "Name", shift.DayOff1);
             ViewBag.DayOff2 = new SelectList(db.DaysNames.OrderBy(s=>s.Name), "ID", "Name", shift.DayOff2);
-            ViewBag.RosterType = new SelectList(db.RosterTypes.OrderBy(s=>s.Name), "ID", "Name", shift.RosterType);
             return View(shift);
         }
 
@@ -231,8 +229,7 @@ namespace WMS.Controllers
             }
             ViewBag.DayOff1 = new SelectList(db.DaysNames.OrderBy(s=>s.Name), "ID", "Name", shift.DayOff1);
             ViewBag.DayOff2 = new SelectList(db.DaysNames.OrderBy(s=>s.Name), "ID", "Name", shift.DayOff2);
-            ViewBag.RosterType = new SelectList(db.RosterTypes.OrderBy(s=>s.Name), "ID", "Name", shift.RosterType);
-            return View(shift);
+              return View(shift);
         }
 
         // GET: /Shift/Delete/5
@@ -261,13 +258,10 @@ namespace WMS.Controllers
            
                 try
                 {
-                    if (db.RosterApps.Where(aa => aa.ShiftID == shift.ShiftID).Count() == 0)
-                    {
                         db.Shifts.Remove(shift);
                         db.SaveChanges();
                         int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                         HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Shift, (byte)MyEnums.Operation.Delete, DateTime.Now);
-                    }
                     return RedirectToAction("Index");
 
                 }

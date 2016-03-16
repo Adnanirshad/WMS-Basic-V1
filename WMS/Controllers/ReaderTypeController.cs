@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using WMS.Models;
 using WMS.CustomClass;
 using WMS.Controllers.Filters;
+using PagedList;
 namespace WMS.Controllers
 {
      [CustomControllerAttributes]
@@ -17,7 +18,7 @@ namespace WMS.Controllers
         private TAS2013Entities db = new TAS2013Entities();
         CustomFunc myClass = new CustomFunc();
         // GET: /ReaderType/
-        public ActionResult Index(string sortOrder, string searchString, string currentFilter)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -32,31 +33,31 @@ namespace WMS.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            var readertypes = db.ReaderTypes.Include(r => r.ReaderVendor);
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                readertypes = readertypes.Where(s => s.RdrTypeName.ToUpper().Contains(searchString.ToUpper()));
-            }
+            var readertypes = db.ReaderTypes.ToList();
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    readertypes = readertypes.Where(s => s.RdrTypeName.ToUpper().Contains(searchString.ToUpper()));
+            //}
 
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    readertypes = readertypes.OrderByDescending(s => s.RdrTypeName);
-                    break;
-                case "vendor_desc":
-                    readertypes = readertypes.OrderByDescending(s => s.VendorID);
-                    break;
-                case "vendor":
-                    readertypes = readertypes.OrderBy(s => s.RdrTypeName);
-                    break;
-                default:
-                    readertypes = readertypes.OrderBy(s => s.RdrTypeName);
-                    break;
-            }
-            //int pageSize = 8;
-            //int pageNumber = (page ?? 1);
-            //return View(readertypes.ToPagedList(pageNumber, pageSize));
-            return View(readertypes.ToList());
+            //switch (sortOrder)
+            //{
+            //    case "name_desc":
+            //        readertypes = readertypes.OrderByDescending(s => s.RdrTypeName);
+            //        break;
+            //    case "vendor_desc":
+            //        readertypes = readertypes.OrderByDescending(s => s.VendorID);
+            //        break;
+            //    case "vendor":
+            //        readertypes = readertypes.OrderBy(s => s.RdrTypeName);
+            //        break;
+            //    default:
+            //        readertypes = readertypes.OrderBy(s => s.RdrTypeName);
+            //        break;
+            //}
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(readertypes.ToPagedList(pageNumber, pageSize));
+            //return View(readertypes.ToList());
         }
 
         // GET: /ReaderType/Details/5
@@ -79,7 +80,6 @@ namespace WMS.Controllers
          [CustomActionAttribute]
         public ActionResult Create()
         {
-            ViewBag.VendorID = new SelectList(db.ReaderVendors.OrderBy(s=>s.VendorName), "VendorID", "VendorName");
             return View();
         }
 
@@ -109,8 +109,7 @@ namespace WMS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.VendorID = new SelectList(db.ReaderVendors.OrderBy(s=>s.VendorName), "VendorID", "VendorName", readertype.VendorID);
-            return View(readertype);
+             return View(readertype);
         }
 
         // GET: /ReaderType/Edit/5
@@ -127,8 +126,7 @@ namespace WMS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.VendorID = new SelectList(db.ReaderVendors.OrderBy(s=>s.VendorName), "VendorID", "VendorName", readertype.VendorID);
-            return View(readertype);
+             return View(readertype);
         }
 
         // POST: /ReaderType/Edit/5
@@ -156,8 +154,7 @@ namespace WMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.VendorID = new SelectList(db.ReaderVendors.OrderBy(s=>s.VendorName), "VendorID", "VendorName", readertype.VendorID);
-            return View(readertype);
+             return View(readertype);
         }
 
         // GET: /ReaderType/Delete/5

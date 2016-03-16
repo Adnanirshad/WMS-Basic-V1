@@ -46,18 +46,18 @@ namespace WMS.Controllers
           //  var locations = qb.GetUserLocationsLinq(locations, LoggedInUser);
 
             var locations = db.Locations.AsQueryable();
-                locations = locations.Include(l => l.City).Include(l => l.City.Region);
+
             // 
            // var locations = dt.ToList<DerivedLocation>();
          //   var locations = db.Locations.Include(l => l.City).Include(l => l.City.Region);
            // String searchParameter = "SELECT [Extent1].[LocID] AS [LocID],[Extent1].[LocName] AS [LocName], [Extent1].[CityID] AS [CityID] FROM   [dbo].[Location] AS [Extent1] LEFT OUTER JOIN [dbo].[City] AS [Extent2] ON [Extent1].[CityID] = [Extent2].[CityID] LEFT OUTER JOIN [dbo].[Region] AS [Extent3] ON [Extent2].[RegionID] = [Extent3].[RegionID] WHERE (( CAST(CHARINDEX(UPPER(N"+searchString+"), UPPER([Extent1].[LocName])) AS int)) > 0) OR (( CAST(CHARINDEX(UPPER(N"+searchString+"), UPPER([Extent2].[CityName])) AS int)) > 0) OR (( CAST(CHARINDEX(UPPER(N" + searchString + "), UPPER([Extent3].[RegionName])) AS int)) > 0) ";
             
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                locations = locations.Where(s => s.LocName.ToUpper().Contains(searchString.ToUpper())
-                     || s.City.CityName.ToUpper().Contains(searchString.ToUpper())
-                     || s.City.Region.RegionName.ToUpper().Contains(searchString.ToUpper()));
-            }
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    locations = locations.Where(s => s.LocName.ToUpper().Contains(searchString.ToUpper())
+            //         || s.City.CityName.ToUpper().Contains(searchString.ToUpper())
+            //         || s.City.Region.RegionName.ToUpper().Contains(searchString.ToUpper()));
+            //}
             //
             switch (sortOrder)
             {
@@ -70,18 +70,18 @@ namespace WMS.Controllers
                 //case "site":
                 //    locations = locations.OrderBy(s => s.Site.SiteName);
                 //    break;
-                case "city_desc":
-                    locations = locations.OrderByDescending(s => s.City.CityName);
-                    break;
-                case "city":
-                    locations = locations.OrderBy(s => s.City.CityName);
-                    break;
-                case "region_desc":
-                    locations = locations.OrderByDescending(s => s.City.Region.RegionName);
-                    break;
-                case "region":
-                    locations = locations.OrderBy(s => s.City.Region.RegionName);
-                    break;
+                //case "city_desc":
+                //    locations = locations.OrderByDescending(s => s.City.CityName);
+                //    break;
+                //case "city":
+                //    locations = locations.OrderBy(s => s.City.CityName);
+                //    break;
+                //case "region_desc":
+                //    locations = locations.OrderByDescending(s => s.City.Region.RegionName);
+                //    break;
+                //case "region":
+                //    locations = locations.OrderBy(s => s.City.Region.RegionName);
+                //    break;
                 default:
                     locations = locations.OrderBy(s => s.LocName);
                     break;
@@ -117,42 +117,38 @@ namespace WMS.Controllers
           [CustomActionAttribute]
         public ActionResult Create()
         {
-            ViewBag.SiteID = new SelectList(db.Sites.OrderBy(s=>s.SiteName), "SiteID", "SiteName");
-            ViewBag.CityID= new SelectList(db.Cities.OrderBy(s=>s.CityName), "CityID", "CityName");
             return View();
         }
 
         // POST: /Location/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [CustomActionAttribute]
-        public ActionResult Create([Bind(Include = "LocID,LocName,CityID")] Location location)
-        {
-            if (string.IsNullOrEmpty(location.LocName))
-                ModelState.AddModelError("LocName", "This field is required!");
-            if (location.LocName != null)
-            {
-                if (location.LocName.Length > 50)
-                    ModelState.AddModelError("LocName", "String length exceeds!");
-                if (!myClass.IsAllLetters(location.LocName))
-                {
-                    ModelState.AddModelError("LocName", "This field only contain Alphabets");
-                }
-                //if (CheckDuplicate(location.LocName))
-                //    ModelState.AddModelError("SectionName", "This Type already exist in record, Please select an unique name");
-            }
-            if (ModelState.IsValid)
-            {
-                db.Locations.Add(location);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CityID = new SelectList(db.Cities.OrderBy(s=>s.CityName), "CityID", "CityName");
-            //ViewBag.SiteID = new SelectList(db.Sites, "SiteID", "SiteName", location.SiteID);
-            return View(location);
-        }
+          [HttpPost]
+          [ValidateAntiForgeryToken]
+          [CustomActionAttribute]
+          public ActionResult Create([Bind(Include = "LocID,LocName")] Location location)
+          {
+              if (string.IsNullOrEmpty(location.LocName))
+                  ModelState.AddModelError("LocName", "This field is required!");
+              if (location.LocName != null)
+              {
+                  if (location.LocName.Length > 50)
+                      ModelState.AddModelError("LocName", "String length exceeds!");
+                  if (!myClass.IsAllLetters(location.LocName))
+                  {
+                      ModelState.AddModelError("LocName", "This field only contain Alphabets");
+                  }
+                  if (ModelState.IsValid)
+                  {
+                      db.Locations.Add(location);
+                      db.SaveChanges();
+                      return RedirectToAction("Index");
+                  }
+                  //ViewBag.SiteID = new SelectList(db.Sites, "SiteID", "SiteName", location.SiteID);
+                  
+              }
+              return View(location);
+          }
 
         // GET: /Location/Edit/5
           [CustomActionAttribute]
@@ -163,7 +159,6 @@ namespace WMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Location location = db.Locations.Find(id);
-            ViewBag.CityID = new SelectList(db.Cities.OrderBy(s=>s.CityName), "CityID", "CityName");
             if (location == null)
             {
                 return HttpNotFound();
@@ -199,7 +194,6 @@ namespace WMS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CityID = new SelectList(db.Cities.OrderBy(s=>s.CityName), "CityID", "CityName");
             //ViewBag.SiteID = new SelectList(db.Sites, "SiteID", "SiteName", location.SiteID);
             return View(location);
         }

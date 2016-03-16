@@ -16,6 +16,7 @@ using System.DirectoryServices;
 using System.Linq.Dynamic;
 using System.DirectoryServices.AccountManagement;
 using System.Data;
+using System.Drawing;
 
 namespace WMS.Controllers
 {
@@ -65,6 +66,28 @@ namespace WMS.Controllers
             }
         }
 
+        private void SaveImage()
+        {
+            //image to byteArray
+            Image img = Image.FromFile("E:\\air.png");
+            byte[] bArr = imgToByteArray(img);
+            //byte[] bArr = imgToByteConverter(img);
+            //Again convert byteArray to image and displayed in a picturebox
+            TAS2013Entities ctx = new TAS2013Entities();
+            Option oo = new Option();
+            oo = ctx.Options.First(aa=>aa.ID==1);
+            oo.CompanyLogo = bArr;
+            ctx.SaveChanges();
+        }
+        //convert image to bytearray
+        public byte[] imgToByteArray(Image img)
+        {
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                img.Save(mStream, img.RawFormat);
+                return mStream.ToArray();
+            }
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(User u)
@@ -82,7 +105,7 @@ namespace WMS.Controllers
                                  Session["LogedUserID"] = v.UserID.ToString();
                                  Session["LogedUserFullname"] = v.UserName;
                                  Session["LoggedUser"] = v;
-                                 return RedirectToAction("index", "ESSLeave", new { area = "ESS" });
+                                 return RedirectToAction("Create", "ESSLeave", new { area = "ESS" });
                               }
                               else
                               if (v != null)
@@ -253,14 +276,14 @@ namespace WMS.Controllers
             DashboardValues dv = new DashboardValues();
             TAS2013Entities db = new TAS2013Entities();
             List<DailySummary> ds = new List<DailySummary>();
-            List<JobCardEmp> jcEmp = new List<JobCardEmp>();
-            if (dt.DayOfWeek == DayOfWeek.Saturday)
-                dt = dt.AddDays(-1);
-            if (dt.DayOfWeek == DayOfWeek.Sunday)
-                dt = dt.AddDays(-2);
-            jcEmp = db.JobCardEmps.Where(aa => aa.Dated == dt).ToList();
-            List<JobCardTime> jcEmpT = new List<JobCardTime>();
-            jcEmpT = db.JobCardTimes.Where(aa => aa.DutyDate == dt).ToList();
+            //List<JobCardEmp> jcEmp = new List<JobCardEmp>();
+            //if (dt.DayOfWeek == DayOfWeek.Saturday)
+            //    dt = dt.AddDays(-1);
+            //if (dt.DayOfWeek == DayOfWeek.Sunday)
+            //    dt = dt.AddDays(-2);
+            //jcEmp = db.JobCardEmps.Where(aa => aa.Dated == dt).ToList();
+            //List<JobCardTime> jcEmpT = new List<JobCardTime>();
+            //jcEmpT = db.JobCardTimes.Where(aa => aa.DutyDate == dt).ToList();
             ds = db.DailySummaries.Where(aa => aa.Date == dt && aa.Criteria == "C").ToList();
             if (ds.Count > 0)
             {
@@ -275,10 +298,10 @@ namespace WMS.Controllers
                 dv.EarlyOut = (short)ds.FirstOrDefault().EOEmps;
                 dv.OverTime = (short)ds.FirstOrDefault().OTEmps;
                 dv.ShortLeaves = (short)ds.FirstOrDefault().ShortLvEmps;
-                dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 11).Count();
-                dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 9).Count();
-                dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 8).Count();
-                dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 10).Count();
+                //dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 11).Count();
+                //dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 9).Count();
+                //dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 8).Count();
+                //dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 10).Count();
                 dv.EWork = (int)(ds.FirstOrDefault().ExpectedWorkMins / 60);
                 dv.AWork = (int)(ds.FirstOrDefault().ActualWorkMins / 60);
                 dv.LWork = (int)(ds.FirstOrDefault().LossWorkMins / 60);
@@ -296,10 +319,10 @@ namespace WMS.Controllers
                 dv.EarlyOut = 0;
                 dv.OverTime = 0;
                 dv.ShortLeaves = 0;
-                dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count;
-                dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count;
-                dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count;
-                dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count;
+                //dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count;
+                //dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count;
+                //dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count;
+                //dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count;
             }
             if (HttpContext.Request.IsAjaxRequest())
                 return Json(dv
