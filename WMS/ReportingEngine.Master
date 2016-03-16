@@ -44,19 +44,7 @@
             </div>
             <div class="navbar-collapse collapse pull-right">
                 <ul class="nav navbar-nav">
-                     <% if (Session["MGraph"].ToString() == "1") %> 
-                     <% { %> 
-                    <li class="dropdown">
-                        <a href="/WMS/Reports/Graphs/Graphs.aspx"><span class="glyphicon glyphicon-stats"></span><span> Graphs</span></a> 
-                    </li>
-                    <% }%> 
-                    <% if (Session["MRSummary"].ToString() == "1") %> 
-                     <% { %> 
-                     <li class="dropdown">
-                        <a href="/WMS/Reports/Filters/SummaryReports.aspx"><span class="glyphicon glyphicon-book"></span><span> Summaries</span></a> 
-                    </li>
-                    <% }%> 
-                   <%--  
+                     
 
                     <% if (Session["MRDailyAtt"].ToString() == "1") %> 
                      <% { %>

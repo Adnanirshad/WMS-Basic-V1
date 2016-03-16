@@ -22,7 +22,7 @@ namespace WMS.Controllers
         public ActionResult Index()
         {
             User LoggedInUser = Session["LoggedUser"] as User;
-            var users = db.Users.Include(u => u.UserRole);
+            var users = db.Users;
             return View(users.ToList());
         }
 
@@ -207,27 +207,6 @@ namespace WMS.Controllers
                     user.MRDetail = true;
                 else
                     user.MRDetail = false;
-                if (Request.Form["MRSummary"] == "1")
-                    user.MRSummary = true;
-                else
-                    user.MRSummary = false;
-                if (Request.Form["MRGraph"] == "1")
-                    user.MRGraph = true;
-                else
-                    user.MRGraph = false;
-
-                if (Request.Form["ViewPermanentStaff"] == "1")
-                    user.ViewPermanentStaff = true;
-                else
-                    user.ViewPermanentStaff = false;
-                if (Request.Form["ViewPermanentMgm"] == "1")
-                    user.ViewPermanentMgm = true;
-                else
-                    user.ViewPermanentMgm = false;
-                if (Request.Form["ViewContractual"] == "1")
-                    user.ViewContractual = true;
-                else
-                    user.ViewContractual = false;
 
                 if (check == false)
                 {
@@ -238,8 +217,6 @@ namespace WMS.Controllers
                         user.DateCreated = DateTime.Today;
                         user.EmpID = _emp.FirstOrDefault().EmpID;
 
-                        user.UserRoleL = Request.Form["UserRoleL"];
-                        user.UserRoleD = Request.Form["UserRoleD"];
                         db.Users.Add(user);
                         db.SaveChanges();
                         SetUserAccessLevelData(user);
@@ -294,8 +271,6 @@ namespace WMS.Controllers
             //ViewBag.RoleIDL = new SelectList(db.UserRoles, "RoleID", "RoleName", user.UserRoleL);
 
             ViewBag.LocationID = new SelectList(db.Locations, "LocID", "LocName");
-            ViewBag.UserRoleL = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "L"), "RoleLegend", "RoleName", user.UserRoleL);
-            ViewBag.UserRoleD = new SelectList(db.UserRoles.Where(aa => aa.RoleType == "D"), "RoleLegend", "RoleName", user.UserRoleD);
             
 
 
@@ -403,21 +378,10 @@ namespace WMS.Controllers
                 user.MRDetail = true;
             else
                 user.MRDetail = false;
-            if (Request.Form["MRSummary"].ToString() == "true")
-                user.MRSummary = true;
-            else
-                user.MRSummary = false;
-            if (Request.Form["MRGraph"].ToString() == "true")
-                user.MRGraph = true;
-            else
-                user.MRGraph = false;
-
+            
             if (check == false)
             {
 
-                
-                user.UserRoleL = Request.Form["UserRoleL"];
-                user.UserRoleD = Request.Form["UserRoleD"];
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 RemoveUserRoleDatas(user);

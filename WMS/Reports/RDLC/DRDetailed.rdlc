@@ -65,12 +65,12 @@
           <DataField>NicNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="FatherName">
-          <DataField>FatherName</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="JoinDate">
           <DataField>JoinDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ValidDate">
+          <DataField>ValidDate</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="Status">
@@ -89,17 +89,21 @@
           <DataField>ShiftName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EmpID">
-          <DataField>EmpID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="EmpDate">
+          <DataField>EmpDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="AttDate">
           <DataField>AttDate</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="EmpDate">
-          <DataField>EmpDate</DataField>
+        <Field Name="Expr1">
+          <DataField>Expr1</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EmpID">
+          <DataField>EmpID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="DutyCode">
           <DataField>DutyCode</DataField>
@@ -233,6 +237,70 @@
           <DataField>Remarks</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Tin0">
+          <DataField>Tin0</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout0">
+          <DataField>Tout0</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tin1">
+          <DataField>Tin1</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout1">
+          <DataField>Tout1</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tin2">
+          <DataField>Tin2</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout2">
+          <DataField>Tout2</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tin3">
+          <DataField>Tin3</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout3">
+          <DataField>Tout3</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tin4">
+          <DataField>Tin4</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout4">
+          <DataField>Tout4</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tin5">
+          <DataField>Tin5</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tin6">
+          <DataField>Tin6</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout5">
+          <DataField>Tout5</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout6">
+          <DataField>Tout6</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tin7">
+          <DataField>Tin7</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Tout7">
+          <DataField>Tout7</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
         <Field Name="DeptID">
           <DataField>DeptID</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
@@ -241,10 +309,10 @@
       <rd:DataSetInfo>
         <rd:DataSetName>TASReportDataSet</rd:DataSetName>
         <rd:SchemaPath>F:\WMS Basic\SCP FOR Bubbloo\SCP Project\SCP\WMS\Models\TASReportDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>ViewAttData</rd:TableName>
+        <rd:TableName>ViewDetailAttData</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>ViewAttDataTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>ViewDetailAttDataTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="DataSet2">
@@ -1056,18 +1124,18 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.03125in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="CompName">
+                        <Textbox Name="Textbox14">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CompName.Value</Value>
+                                  <Value />
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>DimGray</Color>
@@ -1079,7 +1147,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>CompName</rd:DefaultName>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>White</Color>
@@ -1987,68 +2055,6 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox26">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>="Crew: "+Fields!CrewName.Value</Value>
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>DimGray</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox26</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                            </LeftBorder>
-                            <VerticalAlign>Middle</VerticalAlign>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>19</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.25in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="EmpNo">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -2429,6 +2435,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -2680,7 +2687,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Expr3.Value</Value>
+                                  <Value>=Fields!Remarks.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -3515,71 +3522,14 @@
                             </CellContents>
                           </TablixHeader>
                           <TablixMembers>
-                            <TablixMember>
-                              <TablixHeader>
-                                <Size>0.03125in</Size>
-                                <CellContents>
-                                  <Textbox Name="Textbox58">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value />
-                                            <Style>
-                                              <FontSize>8pt</FontSize>
-                                              <FontWeight>Bold</FontWeight>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style />
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox58</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Color>White</Color>
-                                        <Style>Solid</Style>
-                                      </Border>
-                                      <TopBorder>
-                                        <Color>White</Color>
-                                      </TopBorder>
-                                      <LeftBorder>
-                                        <Color>White</Color>
-                                      </LeftBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixHeader>
-                              <TablixMembers>
-                                <TablixMember />
-                              </TablixMembers>
-                            </TablixMember>
+                            <TablixMember />
                           </TablixMembers>
                         </TablixMember>
                       </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
-                  <KeepWithGroup>After</KeepWithGroup>
-                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
-                  <Group Name="CompName">
-                    <GroupExpressions>
-                      <GroupExpression>=Fields!CompName.Value</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
-                  <SortExpressions>
-                    <SortExpression>
-                      <Value>=Fields!CompName.Value</Value>
-                    </SortExpression>
-                  </SortExpressions>
                   <TablixHeader>
                     <Size>0.03125in</Size>
                     <CellContents>
@@ -3706,55 +3656,7 @@
                             </CellContents>
                           </TablixHeader>
                           <TablixMembers>
-                            <TablixMember>
-                              <TablixHeader>
-                                <Size>0.03125in</Size>
-                                <CellContents>
-                                  <Textbox Name="Textbox39">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value />
-                                            <Style>
-                                              <FontSize>9pt</FontSize>
-                                              <FontWeight>Bold</FontWeight>
-                                              <Color>DimGray</Color>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style>
-                                          <TextAlign>Left</TextAlign>
-                                        </Style>
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox39</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Color>White</Color>
-                                        <Style>Solid</Style>
-                                      </Border>
-                                      <TopBorder>
-                                        <Color>White</Color>
-                                      </TopBorder>
-                                      <LeftBorder>
-                                        <Color>White</Color>
-                                      </LeftBorder>
-                                      <RightBorder>
-                                        <Color>White</Color>
-                                      </RightBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixHeader>
-                            </TablixMember>
+                            <TablixMember />
                           </TablixMembers>
                         </TablixMember>
                       </TablixMembers>
@@ -3858,58 +3760,7 @@
                             </CellContents>
                           </TablixHeader>
                           <TablixMembers>
-                            <TablixMember>
-                              <TablixHeader>
-                                <Size>0.03125in</Size>
-                                <CellContents>
-                                  <Textbox Name="Textbox16">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value />
-                                            <Style>
-                                              <FontSize>9pt</FontSize>
-                                              <FontWeight>Bold</FontWeight>
-                                              <Color>DimGray</Color>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style>
-                                          <TextAlign>Left</TextAlign>
-                                        </Style>
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox16</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Color>White</Color>
-                                        <Style>Solid</Style>
-                                      </Border>
-                                      <TopBorder>
-                                        <Color>White</Color>
-                                      </TopBorder>
-                                      <LeftBorder>
-                                        <Color>White</Color>
-                                      </LeftBorder>
-                                      <RightBorder>
-                                        <Color>White</Color>
-                                      </RightBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixHeader>
-                              <TablixMembers>
-                                <TablixMember />
-                              </TablixMembers>
-                            </TablixMember>
+                            <TablixMember />
                           </TablixMembers>
                           <KeepWithGroup>After</KeepWithGroup>
                         </TablixMember>
@@ -3972,119 +3823,17 @@
                             </CellContents>
                           </TablixHeader>
                           <TablixMembers>
+                            <TablixMember />
                             <TablixMember>
-                              <TablixHeader>
-                                <Size>0.03125in</Size>
-                                <CellContents>
-                                  <Textbox Name="Textbox17">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value />
-                                            <Style>
-                                              <FontSize>9pt</FontSize>
-                                              <FontWeight>Bold</FontWeight>
-                                              <Color>DimGray</Color>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style>
-                                          <TextAlign>Left</TextAlign>
-                                        </Style>
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox17</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Color>White</Color>
-                                        <Style>Solid</Style>
-                                      </Border>
-                                      <LeftBorder>
-                                        <Color>White</Color>
-                                      </LeftBorder>
-                                      <RightBorder>
-                                        <Color>White</Color>
-                                      </RightBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixHeader>
-                              <TablixMembers>
-                                <TablixMember />
-                              </TablixMembers>
-                            </TablixMember>
-                            <TablixMember>
-                              <Group Name="CrewName">
-                                <GroupExpressions>
-                                  <GroupExpression>=Fields!CrewName.Value</GroupExpression>
-                                </GroupExpressions>
-                              </Group>
+                              <Group Name="Details" />
                               <SortExpressions>
                                 <SortExpression>
-                                  <Value>=Fields!CrewName.Value</Value>
+                                  <Value>=Fields!EmpNo.Value</Value>
                                 </SortExpression>
                               </SortExpressions>
-                              <TablixHeader>
-                                <Size>0.03125in</Size>
-                                <CellContents>
-                                  <Textbox Name="Textbox57">
-                                    <CanGrow>true</CanGrow>
-                                    <KeepTogether>true</KeepTogether>
-                                    <Paragraphs>
-                                      <Paragraph>
-                                        <TextRuns>
-                                          <TextRun>
-                                            <Value />
-                                            <Style>
-                                              <FontSize>8pt</FontSize>
-                                            </Style>
-                                          </TextRun>
-                                        </TextRuns>
-                                        <Style />
-                                      </Paragraph>
-                                    </Paragraphs>
-                                    <rd:DefaultName>Textbox57</rd:DefaultName>
-                                    <Style>
-                                      <Border>
-                                        <Color>White</Color>
-                                        <Style>Solid</Style>
-                                      </Border>
-                                      <LeftBorder>
-                                        <Color>White</Color>
-                                      </LeftBorder>
-                                      <VerticalAlign>Middle</VerticalAlign>
-                                      <PaddingLeft>2pt</PaddingLeft>
-                                      <PaddingRight>2pt</PaddingRight>
-                                      <PaddingTop>2pt</PaddingTop>
-                                      <PaddingBottom>2pt</PaddingBottom>
-                                    </Style>
-                                  </Textbox>
-                                </CellContents>
-                              </TablixHeader>
                               <TablixMembers>
-                                <TablixMember>
-                                  <KeepWithGroup>After</KeepWithGroup>
-                                </TablixMember>
-                                <TablixMember>
-                                  <Group Name="Details" />
-                                  <SortExpressions>
-                                    <SortExpression>
-                                      <Value>=Fields!EmpNo.Value</Value>
-                                    </SortExpression>
-                                  </SortExpressions>
-                                  <TablixMembers>
-                                    <TablixMember />
-                                    <TablixMember />
-                                  </TablixMembers>
-                                </TablixMember>
+                                <TablixMember />
+                                <TablixMember />
                               </TablixMembers>
                             </TablixMember>
                           </TablixMembers>
@@ -4097,8 +3846,8 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet1</DataSetName>
             <Top>0.03625in</Top>
-            <Height>1.75in</Height>
-            <Width>10.91394in</Width>
+            <Height>1.28125in</Height>
+            <Width>10.88269in</Width>
             <Style>
               <Border>
                 <Style>None</Style>

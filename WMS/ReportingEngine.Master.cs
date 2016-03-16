@@ -73,8 +73,7 @@ namespace WMS
                         Session["MREmployee"] = "1";
                     if (v.MRDetail == true)
                         Session["MRDetail"] = "1";
-                    if (v.MRSummary == true)
-                        Session["MRSummary"] = "1";
+                   
                     if (v.MRoster == true)
                         Session["MRoster"] = "1";
                 }

@@ -5,65 +5,67 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dcb83b8d7f234d1d9b14f8b366a0acee" Name="Diagram1">
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttData" Width="1.5" PointX="7.1833355683755764" PointY="5.8743130741055651" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttDataManEdit" Width="1.5" PointX="10.372116464363465" PointY="21.892497803034491" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttMnData" Width="1.5" PointX="8.0681074802149588" PointY="31.254154532800502" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttMnDataPer" Width="1.5" PointX="8.2738144659780968" PointY="11.249575143330533" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttProcess" Width="1.5" PointX="1.9323094533441165" PointY="5.2238559151179418" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttProcessorScheduler" Width="1.5" PointX="1.8115040947736725" PointY="15.31905683098317" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AuditForm" Width="1.5" PointX="4.0777382161830271" PointY="11.359048699661646" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AuditLog" Width="1.5" PointX="11.225438525539561" PointY="6.9043510439360283" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.AuditOperation" Width="1.5" PointX="8.4863266351103448" PointY="5.46180707470598" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.DailySummary" Width="1.5" PointX="1.1578406045017022" PointY="6.6610526920580551" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.DaysName" Width="1.5" PointX="10.659802598254663" PointY="24.386777516634567" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Department" Width="1.5" PointX="2.7274071437899989" PointY="28.12860590039222" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Designation" Width="1.5" PointX="5.1661793725407588" PointY="2.2169930796218074" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.DownloadTime" Width="1.5" PointX="7.8299133609188321" PointY="31.265407502309142" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.DutyCode" Width="1.5" PointX="9.2912073476664752" PointY="16.278894059489897" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.DutyTime" Width="1.5" PointX="8.4541735930620572" PointY="11.844336798342102" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Emp" Width="1.5" PointX="6.6876844701765492" PointY="18.126704760886124" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpFace" Width="1.5" PointX="11.752326998744312" PointY="13.994192100127316" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpFp" Width="1.5" PointX="11.308370992219249" PointY="0.45727436265781257" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpPhoto" Width="1.5" PointX="10.551728646527849" PointY="25.687434729974452" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpType" Width="1.5" PointX="8.2556952444164526" PointY="29.215274884000085" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Holiday" Width="1.5" PointX="2.8960531535074363" PointY="4.374078007589131" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Location" Width="1.5" PointX="2.6554337975827202" PointY="25.701701369928987" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvApplication" Width="1.5" PointX="0.16324496835621305" PointY="15.278548739514569" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvConsumed" Width="1.5" PointX="4.5471865351065937" PointY="2.4818477046125791" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvData" Width="1.5" PointX="5.4675969246158358" PointY="26.021677178340813" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvShort" Width="1.5" PointX="1.6274300411471305" PointY="7.1079039010721745" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvType" Width="1.5" PointX="9.0493339193283262" PointY="26.768783999033637" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Option" Width="1.5" PointX="11.475460258999588" PointY="31.530371337910356" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.PollData" Width="1.5" PointX="3.0435073035971762" PointY="19.297960200951415" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.PollDataError" Width="1.5" PointX="3.8903945888813558" PointY="22.798097740299113" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.RdrDutyCode" Width="1.5" PointX="6.9273833310824742" PointY="20.873931149427747" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.RdrEventLog" Width="1.5" PointX="5.5047723751071711" PointY="24.986340787721026" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Reader" Width="1.5" PointX="11.056961841442138" PointY="24.747263815601944" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ReaderType" Width="1.5" PointX="4.5073162636288053" PointY="15.940310634644847" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Reason" Width="1.5" PointX="3.2807606492567625" PointY="22.172929997636437" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Remark" Width="1.5" PointX="3.4964490064868929" PointY="9.4001402153634182" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Section" Width="1.5" PointX="6.2421995151053178" PointY="31.210865378012354" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ServiceLog" Width="1.5" PointX="6.2489884152305262" PointY="2.8990077091841995" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.Shift" Width="1.5" PointX="7.8927934150643608" PointY="20.074776956846367" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.sysdiagram" Width="1.5" PointX="0.6681274365019646" PointY="5.6012202229356491" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.User" Width="1.5" PointX="7.1773412782593358" PointY="22.294705222498024" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.UserModule" Width="1.5" PointX="0.63698834769287538" PointY="28.52278573649134" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.UserRole" Width="1.5" PointX="2.8141962582311577" PointY="10.725921352731959" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.UserRoleData" Width="1.5" PointX="9.74818036600397" PointY="4.5707546642845287" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpView" Width="1.5" PointX="5.7723617785481558" PointY="30.625284641340972" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewAttData" Width="1.5" PointX="9.1279705823995041" PointY="8.8399828564561815" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewDepartment" Width="1.5" PointX="5.7423934348590642" PointY="31.217089578144758" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewDetailAttData" Width="1.5" PointX="4.0283447504175571" PointY="18.848877259925416" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewEmpPic" Width="1.5" PointX="8.1355068777387523" PointY="14.094816005832895" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewJobCardApp" Width="1.5" PointX="10.581176172281232" PointY="7.6880561000146237" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewJobCardEmp" Width="1.5" PointX="1.2221395136891582" PointY="28.1855201256394" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewJobCardTime" Width="1.5" PointX="9.649932239972955" PointY="24.40732846800579" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewLocation" Width="1.5" PointX="6.2616799353909123" PointY="26.939673227695597" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewLvApplication" Width="1.5" PointX="8.4232644477967469" PointY="24.920691740196521" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewMonthlyData" Width="1.5" PointX="3.7893055844070886" PointY="27.702219648148034" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewMonthlyDataPer" Width="1.5" PointX="3.9310958366520214" PointY="20.041242519412769" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewMultipleInOut" Width="1.5" PointX="6.5686076388548162" PointY="4.7731653474146336" />
-        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewSection" Width="1.5" PointX="1.371945374352832" PointY="28.178316993721907" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttData" Width="1.5" PointX="7.1907358333425293" PointY="18.156607263794452" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttDataManEdit" Width="1.5" PointX="6.5556815371642276" PointY="18.759310224447077" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttMnData" Width="1.5" PointX="11.532043564846759" PointY="7.4487553720589519" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttMnDataPer" Width="1.5" PointX="0.2052547094436617" PointY="10.123410423343726" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttProcess" Width="1.5" PointX="11.186878166714161" PointY="0.4838811608421994" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AttProcessorScheduler" Width="1.5" PointX="9.7826591459022172" PointY="17.42877579546942" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AuditForm" Width="1.5" PointX="7.6757297663370752" PointY="29.815091847355987" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AuditLog" Width="1.5" PointX="4.9516210132053224" PointY="6.9526331010054019" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.AuditOperation" Width="1.5" PointX="8.9468651865361561" PointY="26.093617063990617" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.DailySummary" Width="1.5" PointX="0.87831806991170991" PointY="22.954056616385493" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.DaysName" Width="1.5" PointX="10.710582218463804" PointY="9.2913071258418753" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Department" Width="1.5" PointX="4.43436471579334" PointY="12.564850127587491" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Designation" Width="1.5" PointX="7.5989560594777377" PointY="1.0744559024807325" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.DownloadTime" Width="1.5" PointX="9.92472741469961" PointY="19.690745094647045" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.DutyCode" Width="1.5" PointX="7.5533859038508435" PointY="4.3000123669859081" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.DutyTime" Width="1.5" PointX="8.7463859323162509" PointY="10.539883812209537" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Emp" Width="1.5" PointX="10.334463217451454" PointY="14.563935674058243" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpFace" Width="1.5" PointX="11.877593139129502" PointY="3.538077743508889" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpFp" Width="1.5" PointX="10.729874465023109" PointY="9.457159568302874" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpPhoto" Width="1.5" PointX="3.350977472658724" PointY="27.810283331112135" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpType" Width="1.5" PointX="10.364315337671114" PointY="15.609742216584152" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Holiday" Width="1.5" PointX="9.965870008788011" PointY="16.213932000200231" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.LicenseDeviceInfo" Width="1.5" PointX="0.31971831448363064" PointY="5.0332627319885708" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.LicenseInfo" Width="1.5" PointX="1.66952963623662" PointY="12.289723044396249" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Location" Width="1.5" PointX="5.4367113548501917" PointY="3.5302891300666559" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvApplication" Width="1.5" PointX="10.568600758243633" PointY="23.422669972955561" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvConsumed" Width="1.5" PointX="0.91161893536877758" PointY="12.704464381888725" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvData" Width="1.5" PointX="11.856286654181913" PointY="9.8839884297382028" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvShort" Width="1.5" PointX="2.3743630081295795" PointY="4.9169673048504476" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.LvType" Width="1.5" PointX="11.435785274689918" PointY="29.677660270443958" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Option" Width="1.5" PointX="4.8685558498224966" PointY="12.856600797202718" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.PollData" Width="1.5" PointX="8.2428930049030544" PointY="25.531662744251854" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.PollDataError" Width="1.5" PointX="3.435069502999573" PointY="15.54720724352971" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.RdrDutyCode" Width="1.5" PointX="8.20132770584958" PointY="5.9046770361739567" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.RdrEventLog" Width="1.5" PointX="11.303066303628993" PointY="9.66624495837197" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Reader" Width="1.5" PointX="3.8773629478539169" PointY="14.401147595793542" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ReaderType" Width="1.5" PointX="6.4341289263377561" PointY="6.5318981886524234" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Reason" Width="1.5" PointX="10.243455893473445" PointY="12.95181036598599" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Remark" Width="1.5" PointX="5.5183701634026923" PointY="27.611040575248673" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Section" Width="1.5" PointX="4.3921004833616788" PointY="15.230620093285396" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ServiceLog" Width="1.5" PointX="10.733391327193655" PointY="14.176216728136044" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.Shift" Width="1.5" PointX="1.9473180556424512" PointY="16.61207328020226" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.sysdiagram" Width="1.5" PointX="3.0439038793760833" PointY="31.901025846554443" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.User" Width="1.5" PointX="3.0408374942097982" PointY="14.854104197981815" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.UserModule" Width="1.5" PointX="5.605189223589929" PointY="21.789593274607135" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.UserRole" Width="1.5" PointX="10.952416145686254" PointY="23.696031268544509" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.UserRoleData" Width="1.5" PointX="4.11064956342366" PointY="11.258279656645971" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.EmpView" Width="1.5" PointX="5.5603003993445546" PointY="14.781573436586919" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewAttData" Width="1.5" PointX="9.6107603263160026" PointY="1.0439906125161753" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewDepartment" Width="1.5" PointX="2.6451549970755144" PointY="17.305374928426637" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewDetailAttData" Width="1.5" PointX="5.6861458186461338" PointY="30.547401993790363" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewEmpPic" Width="1.5" PointX="5.3055798380196" PointY="4.8316519878952073" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewJobCardApp" Width="1.5" PointX="9.4464954759210791" PointY="13.781787759522809" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewJobCardEmp" Width="1.5" PointX="2.3493723135205791" PointY="27.899085638997651" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewJobCardTime" Width="1.5" PointX="6.5207182497348253" PointY="18.664954045165775" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewLocation" Width="1.5" PointX="10.188125497749134" PointY="10.720594113096871" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewLvApplication" Width="1.5" PointX="9.4517622559572381" PointY="15.264807305887718" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewMonthlyData" Width="1.5" PointX="0.39573127422283" PointY="30.806598871390616" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewMonthlyDataPer" Width="1.5" PointX="2.8739072433085679" PointY="5.3689747328725526" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewMultipleInOut" Width="1.5" PointX="6.5304696497183627" PointY="9.25915949477775" />
+        <EntityTypeShape EntityType="TAS2015_PPAFModel.ViewSection" Width="1.5" PointX="2.7893652221138425" PointY="7.0161030176170653" />
         <AssociationConnector Association="TAS2015_PPAFModel.FK_AttData_Emp" />
         <AssociationConnector Association="TAS2015_PPAFModel.FK_AttDataManEdit_Emp" />
         <AssociationConnector Association="TAS2015_PPAFModel.FK_AttDataManEdit_User" />
@@ -89,8 +91,6 @@
         <AssociationConnector Association="TAS2015_PPAFModel.FK_Reader_RdrID" />
         <AssociationConnector Association="TAS2015_PPAFModel.FK_Reader_RdrDutyCode" />
         <AssociationConnector Association="TAS2015_PPAFModel.FK_Reader_ReaderType1" />
-        <AssociationConnector Association="TAS2015_PPAFModel.FK_User_UserRole" />
-        <AssociationConnector Association="TAS2015_PPAFModel.FK_User_UserRole1" />
         <AssociationConnector Association="TAS2015_PPAFModel.FK_UserRoleData_User" />
       </Diagram>
     </edmx:Diagrams>

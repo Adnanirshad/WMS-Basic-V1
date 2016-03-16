@@ -79,10 +79,6 @@ namespace WMS.HelperClass
                         if (_User.MREmployee == true)
                             check = true;
                         break;
-                    case ReportName.Grpah:
-                        if (_User.MRGraph == true)
-                            check = true;
-                        break;
                     case ReportName.Leave:
                         if (_User.MRLeave == true)
                             check = true;
@@ -93,10 +89,6 @@ namespace WMS.HelperClass
                         break;
                     case ReportName.Monthly:
                         if (_User.MRMonthly == true)
-                            check = true;
-                        break;
-                    case ReportName.Summary:
-                        if (_User.MRSummary == true)
                             check = true;
                         break;
                 }

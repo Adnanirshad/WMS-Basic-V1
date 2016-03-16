@@ -517,6 +517,12 @@
     <Compile Include="Models\Holiday.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LicenseDeviceInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LicenseInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Location.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -832,9 +838,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\RDLC\AttDepartmentSummary.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\BadliReport.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\DetailedAbsent.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRAbsent.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRAttendance.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRDetailed.rdlc" />
@@ -842,35 +845,12 @@
     <EmbeddedResource Include="Reports\RDLC\DREarlyOut.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRLateIn.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRLateOut.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\DRLeave.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\DRLeaveQuota.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRMissingAtt.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRMultipleInOut.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DROverTime.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRPresent.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\DRShortLeave.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\DSConsolidated.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\DSEmpStrength.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\DSWorkSummary.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\EmpAttSummary.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\EmpAttSummaryNew.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\Employee.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\EmployeeDetail.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MLvApplication.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MLvConsumed.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MRDetailExcelC.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MRDetailExcelP.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MRLeaveBal.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MRSheetC.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MRSheetP.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MRSummary.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MRSummaryC.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\MYLeaveSummary.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\RAuditLog.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\REditAttendance.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\RLeaveQuota.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\RShortLeave.rdlc" />
-    <EmbeddedResource Include="Reports\RDLC\SummarizedMonthlyReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

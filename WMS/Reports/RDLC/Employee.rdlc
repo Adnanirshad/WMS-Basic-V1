@@ -791,10 +791,6 @@
           <DataField>DesignationName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="EmpID">
-          <DataField>EmpID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="EmpNo">
           <DataField>EmpNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -835,28 +831,8 @@
           <DataField>FatherName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="BloodGroup">
-          <DataField>BloodGroup</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="JoinDate">
           <DataField>JoinDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="BirthDate">
-          <DataField>BirthDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="ValidDate">
-          <DataField>ValidDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="IssueDate">
-          <DataField>IssueDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="ResignDate">
-          <DataField>ResignDate</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="Status">
@@ -875,6 +851,150 @@
           <DataField>ShiftName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="EmpID">
+          <DataField>EmpID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="AttDate">
+          <DataField>AttDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="EmpDate">
+          <DataField>EmpDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DutyCode">
+          <DataField>DutyCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DutyTime">
+          <DataField>DutyTime</DataField>
+          <rd:TypeName>System.TimeSpan</rd:TypeName>
+        </Field>
+        <Field Name="TimeIn">
+          <DataField>TimeIn</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="TimeOut">
+          <DataField>TimeOut</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="WorkMin">
+          <DataField>WorkMin</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="LateIn">
+          <DataField>LateIn</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="LateOut">
+          <DataField>LateOut</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="EarlyIn">
+          <DataField>EarlyIn</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="EarlyOut">
+          <DataField>EarlyOut</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="OTMin">
+          <DataField>OTMin</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="GZOTMin">
+          <DataField>GZOTMin</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="BreakMin">
+          <DataField>BreakMin</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="SLMin">
+          <DataField>SLMin</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="StatusP">
+          <DataField>StatusP</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusAB">
+          <DataField>StatusAB</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusLI">
+          <DataField>StatusLI</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusLO">
+          <DataField>StatusLO</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusEI">
+          <DataField>StatusEI</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusEO">
+          <DataField>StatusEO</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusOT">
+          <DataField>StatusOT</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusGZOT">
+          <DataField>StatusGZOT</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusGZ">
+          <DataField>StatusGZ</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusDO">
+          <DataField>StatusDO</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusHD">
+          <DataField>StatusHD</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusSL">
+          <DataField>StatusSL</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusOD">
+          <DataField>StatusOD</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusHL">
+          <DataField>StatusHL</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusLeave">
+          <DataField>StatusLeave</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusMN">
+          <DataField>StatusMN</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusIN">
+          <DataField>StatusIN</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="StatusBreak">
+          <DataField>StatusBreak</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ShifMin">
+          <DataField>ShifMin</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="DeptID">
           <DataField>DeptID</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
@@ -883,10 +1003,10 @@
       <rd:DataSetInfo>
         <rd:DataSetName>TASReportDataSet</rd:DataSetName>
         <rd:SchemaPath>F:\WMS Basic\SCP FOR Bubbloo\SCP Project\SCP\WMS\Models\TASReportDataSet.xsd</rd:SchemaPath>
-        <rd:TableName>EmpView</rd:TableName>
+        <rd:TableName>ViewAttData</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>EmpViewTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>ViewAttDataTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="DataSet2">

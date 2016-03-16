@@ -48,61 +48,61 @@ namespace WMS.CustomClass
             //{
             //    CategoryUser.Add(" CatID = 3  ");
             //}
-            userRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID).ToList();
-            switch (_user.UserRoleD)
-            {
-                case "A"://Admin
+            //userRoleData = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID).ToList();
+            //switch (_user.UserRoleD)
+            //{
+            //    case "A"://Admin
 
-                    break;
-                case "C"://City
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" CityID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "D"://Department
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" DeptID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "E"://Single Employee
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" EmpID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "L"://Location
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" LocID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "R"://Region
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" RegionID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "S"://Section
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" SecID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "V"://Division
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" DivID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "W"://Crew
-                    foreach (var urd in userRoleData)
-                    {
-                        UserRoleString.Add(" CrewID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-            }
+            //        break;
+            //    case "C"://City
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" CityID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "D"://Department
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" DeptID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "E"://Single Employee
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" EmpID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "L"://Location
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" LocID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "R"://Region
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" RegionID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "S"://Section
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" SecID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "V"://Division
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" DivID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "W"://Crew
+            //        foreach (var urd in userRoleData)
+            //        {
+            //            UserRoleString.Add(" CrewID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //}
             if (UserRoleString.Count == 1)
             {
                 RoleQuery = " and (" + RoleQuery + UserRoleString[0] + " ) ";
@@ -535,27 +535,27 @@ namespace WMS.CustomClass
             List<string> queryList = new List<string>();
             foreach (var access in uAcc)
             {
-                switch (LoggedInUser.UserRoleD)
-                {
-                    case "G"://Super ADmin
-                        query = "";
-                        break;
-                    case "v"://division
-                        //list<department> dept = depts.where(aa => aa.divid == access.roledatavalue).tolist();
-                        //foreach (var c in dept)
-                        {
-                            //querylist.add(" deptid =" + c.deptid);
-                        }
-                        break;
-                    case "D"://dept
-                        string deptID = depts.Where(aa => aa.DeptID == access.RoleDataValue).FirstOrDefault().DeptID.ToString();
-                        queryList.Add(" DeptID =" + deptID);
-                        break;
-                    case "S"://section
-                        deptID = secs.Where(aa => aa.SectionID == access.RoleDataValue).FirstOrDefault().DeptID.ToString();
-                        queryList.Add(" DeptID =" + deptID);
-                        break;
-                }
+                //switch (LoggedInUser.UserRoleD)
+                //{
+                //    case "G"://Super ADmin
+                //        query = "";
+                //        break;
+                //    case "v"://division
+                //        //list<department> dept = depts.where(aa => aa.divid == access.roledatavalue).tolist();
+                //        //foreach (var c in dept)
+                //        {
+                //            //querylist.add(" deptid =" + c.deptid);
+                //        }
+                //        break;
+                //    case "D"://dept
+                //        string deptID = depts.Where(aa => aa.DeptID == access.RoleDataValue).FirstOrDefault().DeptID.ToString();
+                //        queryList.Add(" DeptID =" + deptID);
+                //        break;
+                //    case "S"://section
+                //        deptID = secs.Where(aa => aa.SectionID == access.RoleDataValue).FirstOrDefault().DeptID.ToString();
+                //        queryList.Add(" DeptID =" + deptID);
+                //        break;
+                //}
             }
             if (queryList.Count == 1)
             {
@@ -594,56 +594,56 @@ namespace WMS.CustomClass
             //{
             //    CategoryUser.Add(" CatID = 3  ");
             //}
-            userRoleDataD = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID && aa.UserRoleLegend=="D").ToList();
-            userRoleDataL = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID && aa.UserRoleLegend == "L").ToList();
-            switch (_user.UserRoleD)
-            {
-                case "G"://Admin
+            //userRoleDataD = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID && aa.UserRoleLegend=="D").ToList();
+            //userRoleDataL = db.UserRoleDatas.Where(aa => aa.RoleUserID == _user.UserID && aa.UserRoleLegend == "L").ToList();
+            //switch (_user.UserRoleD)
+            //{
+            //    case "G"://Admin
                    
-                    break;
-                case "D"://Department
-                    foreach (var urd in userRoleDataD)
-                    {
-                        UserRoleString.Add(" DeptID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "S"://Section
-                    foreach (var urd in userRoleDataD)
-                    {
-                        UserRoleString.Add(" SecID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "V"://Division
-                    foreach (var urd in userRoleDataD)
-                    {
-                        UserRoleString.Add(" DivID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-            }
-            switch (_user.UserRoleL)
-            {
-                case "A"://Admin
+            //        break;
+            //    case "D"://Department
+            //        foreach (var urd in userRoleDataD)
+            //        {
+            //            UserRoleString.Add(" DeptID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "S"://Section
+            //        foreach (var urd in userRoleDataD)
+            //        {
+            //            UserRoleString.Add(" SecID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "V"://Division
+            //        foreach (var urd in userRoleDataD)
+            //        {
+            //            UserRoleString.Add(" DivID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //}
+            //switch (_user.UserRoleL)
+            //{
+            //    case "A"://Admin
 
-                    break;
-                case "C"://City
-                    foreach (var urd in userRoleDataL)
-                    {
-                        UserRoleString.Add(" CityID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "L"://Location
-                    foreach (var urd in userRoleDataL)
-                    {
-                        UserRoleString.Add(" LocID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-                case "R"://Region
-                    foreach (var urd in userRoleDataL)
-                    {
-                        UserRoleString.Add(" RegionID = " + urd.RoleDataValue + " ");
-                    }
-                    break;
-            }
+            //        break;
+            //    case "C"://City
+            //        foreach (var urd in userRoleDataL)
+            //        {
+            //            UserRoleString.Add(" CityID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "L"://Location
+            //        foreach (var urd in userRoleDataL)
+            //        {
+            //            UserRoleString.Add(" LocID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //    case "R"://Region
+            //        foreach (var urd in userRoleDataL)
+            //        {
+            //            UserRoleString.Add(" RegionID = " + urd.RoleDataValue + " ");
+            //        }
+            //        break;
+            //}
             if (UserRoleString.Count == 1)
             {
                 RoleQuery = " and (" + RoleQuery + UserRoleString[0] + " ) ";

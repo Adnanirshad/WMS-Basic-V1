@@ -12,12 +12,9 @@ namespace WMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserRole
+    public partial class LicenseDeviceInfo
     {
-        public string RoleLegend { get; set; }
-        public string RoleName { get; set; }
-        public string Description { get; set; }
-        public string TableName { get; set; }
-        public string RoleType { get; set; }
+        public byte DeviceID { get; set; }
+        public string DeviceMAC { get; set; }
     }
 }

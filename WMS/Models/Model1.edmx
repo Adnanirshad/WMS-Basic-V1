@@ -28,6 +28,8 @@
           <EntitySet Name="EmpPhoto" EntityType="TAS2015_PPAFModel.Store.EmpPhoto" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmpType" EntityType="TAS2015_PPAFModel.Store.EmpType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Holiday" EntityType="TAS2015_PPAFModel.Store.Holiday" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LicenseDeviceInfo" EntityType="TAS2015_PPAFModel.Store.LicenseDeviceInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LicenseInfo" EntityType="TAS2015_PPAFModel.Store.LicenseInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Location" EntityType="TAS2015_PPAFModel.Store.Location" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LvApplication" EntityType="TAS2015_PPAFModel.Store.LvApplication" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LvConsumed" EntityType="TAS2015_PPAFModel.Store.LvConsumed" store:Type="Tables" Schema="dbo" />
@@ -893,14 +895,6 @@
             <End Role="DaysName" EntitySet="DaysName" />
             <End Role="Shift" EntitySet="Shift" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_UserRole" Association="TAS2015_PPAFModel.Store.FK_User_UserRole">
-            <End Role="UserRole" EntitySet="UserRole" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserRole1" Association="TAS2015_PPAFModel.Store.FK_User_UserRole1">
-            <End Role="UserRole" EntitySet="UserRole" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserRoleData_User" Association="TAS2015_PPAFModel.Store.FK_UserRoleData_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserRoleData" EntitySet="UserRoleData" />
@@ -1429,6 +1423,28 @@
           <Property Name="HolDate" Type="date" Nullable="false" />
           <Property Name="HolDesc" Type="varchar" Nullable="false" MaxLength="30" />
         </EntityType>
+        <EntityType Name="LicenseDeviceInfo">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="tinyint" Nullable="false" />
+          <Property Name="DeviceMAC" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LicenseInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="InvoiceNo" Type="nvarchar" MaxLength="500" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="500" />
+          <Property Name="LicenseType" Type="nvarchar(max)" />
+          <Property Name="DeviceType" Type="nvarchar(max)" />
+          <Property Name="ClientMAC" Type="nvarchar(max)" />
+          <Property Name="NoOfEmps" Type="nvarchar(max)" />
+          <Property Name="NoOfUsers" Type="nvarchar(max)" />
+          <Property Name="NoOfDevices" Type="nvarchar(max)" />
+          <Property Name="ValidLicense" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="LocID" />
@@ -1691,8 +1707,6 @@
           <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="300" />
-          <Property Name="UserRoleL" Type="char" MaxLength="1" />
-          <Property Name="UserRoleD" Type="char" MaxLength="1" />
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
           <Property Name="Status" Type="bit" />
@@ -1715,11 +1729,6 @@
           <Property Name="MRManualEditAtt" Type="bit" />
           <Property Name="MREmployee" Type="bit" />
           <Property Name="MRDetail" Type="bit" />
-          <Property Name="MRSummary" Type="bit" />
-          <Property Name="MRGraph" Type="bit" />
-          <Property Name="ViewPermanentStaff" Type="bit" />
-          <Property Name="ViewPermanentMgm" Type="bit" />
-          <Property Name="ViewContractual" Type="bit" />
           <Property Name="MRoster" Type="bit" />
           <Property Name="MProcess" Type="bit" />
         </EntityType>
@@ -2897,30 +2906,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_UserRole">
-          <End Role="UserRole" Type="TAS2015_PPAFModel.Store.UserRole" Multiplicity="0..1" />
-          <End Role="User" Type="TAS2015_PPAFModel.Store.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="RoleLegend" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserRoleL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_UserRole1">
-          <End Role="UserRole" Type="TAS2015_PPAFModel.Store.UserRole" Multiplicity="0..1" />
-          <End Role="User" Type="TAS2015_PPAFModel.Store.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="RoleLegend" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserRoleD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserRoleData_User">
           <End Role="User" Type="TAS2015_PPAFModel.Store.User" Multiplicity="0..1" />
           <End Role="UserRoleData" Type="TAS2015_PPAFModel.Store.UserRoleData" Multiplicity="*" />
@@ -2960,6 +2945,8 @@
           <EntitySet Name="EmpPhotoes" EntityType="TAS2015_PPAFModel.EmpPhoto" />
           <EntitySet Name="EmpTypes" EntityType="TAS2015_PPAFModel.EmpType" />
           <EntitySet Name="Holidays" EntityType="TAS2015_PPAFModel.Holiday" />
+          <EntitySet Name="LicenseDeviceInfoes" EntityType="TAS2015_PPAFModel.LicenseDeviceInfo" />
+          <EntitySet Name="LicenseInfoes" EntityType="TAS2015_PPAFModel.LicenseInfo" />
           <EntitySet Name="Locations" EntityType="TAS2015_PPAFModel.Location" />
           <EntitySet Name="LvApplications" EntityType="TAS2015_PPAFModel.LvApplication" />
           <EntitySet Name="LvConsumeds" EntityType="TAS2015_PPAFModel.LvConsumed" />
@@ -3096,14 +3083,6 @@
           <AssociationSet Name="FK_Reader_ReaderType1" Association="TAS2015_PPAFModel.FK_Reader_ReaderType1">
             <End Role="ReaderType" EntitySet="ReaderTypes" />
             <End Role="Reader" EntitySet="Readers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserRole" Association="TAS2015_PPAFModel.FK_User_UserRole">
-            <End Role="UserRole" EntitySet="UserRoles" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserRole1" Association="TAS2015_PPAFModel.FK_User_UserRole1">
-            <End Role="UserRole" EntitySet="UserRoles" />
-            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRoleData_User" Association="TAS2015_PPAFModel.FK_UserRoleData_User">
             <End Role="User" EntitySet="Users" />
@@ -3654,6 +3633,28 @@
           <Property Type="DateTime" Name="HolDate" Nullable="false" Precision="0" />
           <Property Type="String" Name="HolDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="LicenseDeviceInfo">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Type="Byte" Name="DeviceID" Nullable="false" />
+          <Property Type="String" Name="DeviceMAC" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LicenseInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="InvoiceNo" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CustomerName" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LicenseType" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DeviceType" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ClientMAC" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NoOfEmps" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NoOfUsers" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NoOfDevices" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ValidLicense" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="LocID" />
@@ -3938,8 +3939,6 @@
           <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Password" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="UserRoleL" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="UserRoleD" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="DateTime" Name="DateCreated" Precision="3" />
           <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Status" />
@@ -3962,19 +3961,12 @@
           <Property Type="Boolean" Name="MRManualEditAtt" />
           <Property Type="Boolean" Name="MREmployee" />
           <Property Type="Boolean" Name="MRDetail" />
-          <Property Type="Boolean" Name="MRSummary" />
-          <Property Type="Boolean" Name="MRGraph" />
-          <Property Type="Boolean" Name="ViewPermanentStaff" />
-          <Property Type="Boolean" Name="ViewPermanentMgm" />
-          <Property Type="Boolean" Name="ViewContractual" />
           <Property Type="Boolean" Name="MRoster" />
           <Property Type="Boolean" Name="MProcess" />
           <NavigationProperty Name="AttDataManEdits" Relationship="TAS2015_PPAFModel.FK_AttDataManEdit_User" FromRole="User" ToRole="AttDataManEdit" />
           <NavigationProperty Name="AttProcessorSchedulers" Relationship="TAS2015_PPAFModel.FK_AttProcessorScheduler_User" FromRole="User" ToRole="AttProcessorScheduler" />
           <NavigationProperty Name="AuditLogs" Relationship="TAS2015_PPAFModel.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
           <NavigationProperty Name="LvApplications" Relationship="TAS2015_PPAFModel.FK_LvApplication_User" FromRole="User" ToRole="LvApplication" />
-          <NavigationProperty Name="UserRole" Relationship="TAS2015_PPAFModel.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
-          <NavigationProperty Name="UserRole1" Relationship="TAS2015_PPAFModel.FK_User_UserRole1" FromRole="User" ToRole="UserRole" />
           <NavigationProperty Name="UserRoleDatas" Relationship="TAS2015_PPAFModel.FK_UserRoleData_User" FromRole="User" ToRole="UserRoleData" />
         </EntityType>
         <EntityType Name="UserModule">
@@ -3993,8 +3985,6 @@
           <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="TableName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="RoleType" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Users" Relationship="TAS2015_PPAFModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
-          <NavigationProperty Name="Users1" Relationship="TAS2015_PPAFModel.FK_User_UserRole1" FromRole="UserRole" ToRole="User" />
         </EntityType>
         <EntityType Name="UserRoleData">
           <Key>
@@ -5112,30 +5102,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_UserRole">
-          <End Type="TAS2015_PPAFModel.UserRole" Role="UserRole" Multiplicity="0..1" />
-          <End Type="TAS2015_PPAFModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="RoleLegend" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserRoleL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_UserRole1">
-          <End Type="TAS2015_PPAFModel.UserRole" Role="UserRole" Multiplicity="0..1" />
-          <End Type="TAS2015_PPAFModel.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRole">
-              <PropertyRef Name="RoleLegend" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserRoleD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserRoleData_User">
           <End Type="TAS2015_PPAFModel.User" Role="User" Multiplicity="0..1" />
           <End Type="TAS2015_PPAFModel.UserRoleData" Role="UserRoleData" Multiplicity="*" />
@@ -5699,6 +5665,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LicenseDeviceInfoes">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.LicenseDeviceInfo">
+              <MappingFragment StoreEntitySet="LicenseDeviceInfo">
+                <ScalarProperty Name="DeviceMAC" ColumnName="DeviceMAC" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicenseInfoes">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.LicenseInfo">
+              <MappingFragment StoreEntitySet="LicenseInfo">
+                <ScalarProperty Name="ValidLicense" ColumnName="ValidLicense" />
+                <ScalarProperty Name="NoOfDevices" ColumnName="NoOfDevices" />
+                <ScalarProperty Name="NoOfUsers" ColumnName="NoOfUsers" />
+                <ScalarProperty Name="NoOfEmps" ColumnName="NoOfEmps" />
+                <ScalarProperty Name="ClientMAC" ColumnName="ClientMAC" />
+                <ScalarProperty Name="DeviceType" ColumnName="DeviceType" />
+                <ScalarProperty Name="LicenseType" ColumnName="LicenseType" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="TAS2015_PPAFModel.Location">
               <MappingFragment StoreEntitySet="Location">
@@ -5975,11 +5965,6 @@
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="MProcess" ColumnName="MProcess" />
                 <ScalarProperty Name="MRoster" ColumnName="MRoster" />
-                <ScalarProperty Name="ViewContractual" ColumnName="ViewContractual" />
-                <ScalarProperty Name="ViewPermanentMgm" ColumnName="ViewPermanentMgm" />
-                <ScalarProperty Name="ViewPermanentStaff" ColumnName="ViewPermanentStaff" />
-                <ScalarProperty Name="MRGraph" ColumnName="MRGraph" />
-                <ScalarProperty Name="MRSummary" ColumnName="MRSummary" />
                 <ScalarProperty Name="MRDetail" ColumnName="MRDetail" />
                 <ScalarProperty Name="MREmployee" ColumnName="MREmployee" />
                 <ScalarProperty Name="MRManualEditAtt" ColumnName="MRManualEditAtt" />
@@ -6002,8 +5987,6 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="UserRoleD" ColumnName="UserRoleD" />
-                <ScalarProperty Name="UserRoleL" ColumnName="UserRoleL" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
