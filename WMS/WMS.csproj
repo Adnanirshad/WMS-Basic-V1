@@ -344,6 +344,7 @@
     <Content Include="Scripts\rosterScript.js" />
     <Content Include="Scripts\Shift\GetUserSpecificShifts.js" />
     <Content Include="Scripts\site.avatar.js" />
+    <Content Include="Scripts\UserScripts.js" />
     <Content Include="Scripts\wingSection.js" />
     <Content Include="Scripts\wingSectionCreate.js" />
     <Content Include="Scripts\toastr.js" />

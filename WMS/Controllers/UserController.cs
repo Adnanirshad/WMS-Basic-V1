@@ -111,23 +111,30 @@ namespace WMS.Controllers
             user.MRAudit = (bool)ValueProvider.GetValue("MRAudit").ConvertTo(typeof(bool));
             user.MRManualEditAtt = (bool)ValueProvider.GetValue("MRManualEditAtt").ConvertTo(typeof(bool));
             user.MRDetail = (bool)ValueProvider.GetValue("MRDetail").ConvertTo(typeof(bool));
+            if (Request.Form["UserType"].ToString() == "1")
+                user.UserType = true;
+            else
+                user.UserType = false;
             user.DateCreated = DateTime.Today;
 
                 db.Users.Add(user);
                 db.SaveChanges();
-                List<Section> secs = new List<Section>();
-                secs = db.Sections.ToList();
-                int count = Convert.ToInt32(Request.Form["uSectionCount"]);
-                for (int i = 1; i <= count; i++)
+                if (user.UserType == true)
                 {
-                    string uSecID = "uSection" + i;
-                    string secName = Request.Form[uSecID].ToString();
-                    int locID = secs.Where(aa => aa.SectionName == secName).FirstOrDefault().SectionID;
-                    UserSection uSec = new UserSection();
-                    uSec.UserID = user.UserID;
-                    uSec.SecID = (short)locID;
-                    db.UserSections.Add(uSec);
-                    db.SaveChanges();
+                    List<Section> secs = new List<Section>();
+                    secs = db.Sections.ToList();
+                    int count = Convert.ToInt32(Request.Form["uSectionCount"]);
+                    for (int i = 1; i <= count; i++)
+                    {
+                        string uSecID = "uSection" + i;
+                        string secName = Request.Form[uSecID].ToString();
+                        int locID = secs.Where(aa => aa.SectionName == secName).FirstOrDefault().SectionID;
+                        UserSection uSec = new UserSection();
+                        uSec.UserID = user.UserID;
+                        uSec.SecID = (short)locID;
+                        db.UserSections.Add(uSec);
+                        db.SaveChanges();
+                    }
                 }
             return View(user);
         }
@@ -164,107 +171,34 @@ namespace WMS.Controllers
         public ActionResult Edit([Bind(Include = "UserID,UserName,Password,EmpID,DateCreated,Name,Status,Department,CanEdit,CanDelete,CanAdd,CanView,RoleID,MHR,MDevice,MLeave,MDesktop,MEditAtt,MUser,MOption,MRDailyAtt,MRLeave,MRMonthly,MRAudit,MRManualEditAtt,MREmployee,MRDetail,MRSummary,MRGraph,ViewPermanentStaff,ViewPermanentMgm,ViewContractual,ViewLocation,LocationID,MProcess")] User user)
         {
             bool check = false;
-            
-            
-            //user.UserRoleD = Request.Form["RoleID"].ToString();
-
-
-            if (Request.Form["Status"].ToString() == "true")
-                user.Status = true;
+            user.CanAdd = (bool)ValueProvider.GetValue("CanAdd").ConvertTo(typeof(bool));
+            user.CanEdit = (bool)ValueProvider.GetValue("CanEdit").ConvertTo(typeof(bool));
+            user.CanDelete = (bool)ValueProvider.GetValue("CanDelete").ConvertTo(typeof(bool));
+            user.CanView = (bool)ValueProvider.GetValue("CanView").ConvertTo(typeof(bool));
+            user.MHR = (bool)ValueProvider.GetValue("MHR").ConvertTo(typeof(bool));
+            user.MOption = (bool)ValueProvider.GetValue("MOption").ConvertTo(typeof(bool));
+            user.MLeave = (bool)ValueProvider.GetValue("MLeave").ConvertTo(typeof(bool));
+            user.MRoster = (bool)ValueProvider.GetValue("MRoster").ConvertTo(typeof(bool));
+            user.MUser = (bool)ValueProvider.GetValue("MUser").ConvertTo(typeof(bool));
+            user.MDevice = (bool)ValueProvider.GetValue("MDevice").ConvertTo(typeof(bool));
+            user.MDesktop = (bool)ValueProvider.GetValue("MDesktop").ConvertTo(typeof(bool));
+            user.MEditAtt = (bool)ValueProvider.GetValue("MEditAtt").ConvertTo(typeof(bool));
+            user.MProcess = (bool)ValueProvider.GetValue("MProcess").ConvertTo(typeof(bool));
+            user.MRLeave = (bool)ValueProvider.GetValue("MRLeave").ConvertTo(typeof(bool));
+            user.MRDailyAtt = (bool)ValueProvider.GetValue("MRDailyAtt").ConvertTo(typeof(bool));
+            user.MRMonthly = (bool)ValueProvider.GetValue("MRMonthly").ConvertTo(typeof(bool));
+            user.MRAudit = (bool)ValueProvider.GetValue("MRAudit").ConvertTo(typeof(bool));
+            user.MRManualEditAtt = (bool)ValueProvider.GetValue("MRManualEditAtt").ConvertTo(typeof(bool));
+            user.MRDetail = (bool)ValueProvider.GetValue("MRDetail").ConvertTo(typeof(bool));
+            if (Request.Form["UserType"].ToString() == "1")
+                user.UserType = true;
             else
-                user.Status = false;
-
-            if (Request.Form["CanEdit"].ToString() == "true")
-                user.CanEdit = true;
-            else
-                user.CanEdit = false;
-
-            if (Request.Form["CanDelete"].ToString() == "true")
-                user.CanDelete = true;
-            else
-                user.CanDelete = false;
-
-            if (Request.Form["CanAdd"].ToString() == "true")
-                user.CanAdd = true;
-            else
-                user.CanAdd = false;
-
-            if (Request.Form["CanView"].ToString() == "true")
-                user.CanView = true;
-            else
-                user.CanView = false;
-            if (Request.Form["MUser"].ToString() == "true")
-                user.MUser = true;
-            else
-                user.MUser = false;
-            if (Request.Form["MRoster"].ToString() == "true")
-                user.MRoster = true;
-            else
-                user.MRoster = false;
-            if (Request.Form["MHR"].ToString() == "true")
-                user.MHR = true;
-            else
-                user.MHR = false;
-            //if (Request.Form["MOption"].ToString() == "true")
-            //    user.MOption = true;
-            //else
-            //    user.MOption = false;
-            if (Request.Form["MDevice"].ToString() == "true")
-                user.MDevice = true;
-            else
-                user.MDevice = false;
-            if (Request.Form["MDesktop"].ToString() == "true")
-                user.MDesktop = true;
-            else
-                user.MDesktop = false;
-            if (Request.Form["MEditAtt"].ToString() == "true")
-                user.MEditAtt = true;
-            else
-                user.MEditAtt = false;
-            if (Request.Form["MLeave"].ToString() == "true")
-                user.MLeave = true;
-            else
-                user.MLeave = false;
-            if (Request.Form["MRLeave"].ToString() == "true")
-                user.MRLeave = true;
-            else
-                user.MRLeave = false;
-            if (Request.Form["MRDailyAtt"].ToString() == "true")
-                user.MRDailyAtt = true;
-            else
-                user.MRDailyAtt = false;
-            if (Request.Form["MRMonthly"].ToString() == "true")
-                user.MRMonthly = true;
-            else
-                user.MRMonthly = false;
-            if (Request.Form["MRAudit"].ToString() == "true")
-                user.MRAudit = true;
-            else
-                user.MRAudit = false;
-            if (Request.Form["MRManualEditAtt"].ToString() == "true")
-                user.MRManualEditAtt = true;
-            else
-                user.MRManualEditAtt = false;
-            if (Request.Form["MProcess"].ToString() == "true")
-                user.MProcess = true;
-            else
-                user.MProcess = false;
-            if (Request.Form["MREmployee"].ToString() == "true")
-                user.MREmployee = true;
-            else
-                user.MREmployee = false;
-            if (Request.Form["MRDetail"].ToString() == "true")
-                user.MRDetail = true;
-            else
-                user.MRDetail = false;
-            
-            if (check == false)
-            {
-
+                user.UserType = false;
+            user.DateCreated = DateTime.Today;
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
 
-                int count = Convert.ToInt32(Request.Form["uLocationCount"]);
+                int count = Convert.ToInt32(Request.Form["uSectionCount"]);
                 List<Section> secs = new List<Section>();
                 List<UserSection> userLocs = db.UserSections.Where(aa => aa.UserID == user.UserID).ToList();
                 secs = db.Sections.ToList();
@@ -278,7 +212,7 @@ namespace WMS.Controllers
                 userLocs = new List<UserSection>();
                 for (int i = 1; i <= count; i++)
                 {
-                    string uLocID = "uLocation" + i;
+                    string uLocID = "uSection" + i;
                     string LocName = Request.Form[uLocID].ToString();
                     int locID = secs.Where(aa => aa.SectionName == LocName).FirstOrDefault().SectionID;
                     currentLocIDs.Add(locID);
@@ -295,18 +229,10 @@ namespace WMS.Controllers
                         userLocs.Add(uloc);
                         db.SaveChanges();
                     }
-                }
                 
                 return RedirectToAction("Index");
 
             }
-
-            //ViewBag.RoleID = new SelectList(db.UserRoles, "RoleID", "RoleName", user.UserRole);
-             
-
-            // todo to be verified - user data missing
-            ViewBag.LocationID = new SelectList(db.Locations, "LocID", "LocName");
-            
             return View(user);
         }
         // GET: /User/Delete/5
@@ -353,7 +279,7 @@ namespace WMS.Controllers
                        , JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult SelectedUserLocList(int id)
+        public ActionResult SelectedUserSecList(int id)
         {
             List<UserSection> userLoc = db.UserSections.Where(aa => aa.UserID == id).ToList();
             List<Section> _locs = db.Sections.ToList();

@@ -79,7 +79,7 @@ namespace WMS.Controllers
             if (uploadFile.ContentLength > 0)
             {
                 string filePath = Path.GetFileName(uploadFile.FileName);
-                uploadFile.SaveAs("E:\\"+filePath);
+                uploadFile.SaveAs("C:\\" + filePath);
                 ReadFile();
             }
             return View();
@@ -87,7 +87,7 @@ namespace WMS.Controllers
 
         private void ReadFile()
         {
-            System.IO.StreamReader file = new System.IO.StreamReader("E:\\AirBlueLicense.cns");
+            System.IO.StreamReader file = new System.IO.StreamReader("C:\\CNSLicense.cns");
             string line;
             int CurrentlineNo = 0;
             string InvoiceNo="";
