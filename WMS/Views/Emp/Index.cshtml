@@ -15,7 +15,7 @@
           <div class="form-group pull-right"  style="margin-top:15px">
               @using (Html.BeginForm("Index", "Emp", FormMethod.Get))
                 {<p><span style="font-weight:bold">Find: </span>  @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" } )  
-                    <input class="btn btn-sm btn-success" type="submit" value="Search" /></p>}
+                    <input class="btn btn-sm btn-success " type="submit" value="Search" /></p>}
           </div> 
       </form>  
        
@@ -48,9 +48,6 @@
                 </th>
                  <th>
                      @Html.ActionLink("Department", "Index", new { sortOrder = ViewBag.DepartmentSortParm })
-                </th>
-                <th>
-                    Division
                 </th>
                 <th>
                     Status

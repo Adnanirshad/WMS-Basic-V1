@@ -20,7 +20,6 @@ namespace WMS.Models
             this.AttProcessorSchedulers = new HashSet<AttProcessorScheduler>();
             this.AuditLogs = new HashSet<AuditLog>();
             this.LvApplications = new HashSet<LvApplication>();
-            this.UserRoleDatas = new HashSet<UserRoleData>();
         }
     
         public int UserID { get; set; }
@@ -29,11 +28,11 @@ namespace WMS.Models
         public Nullable<System.DateTime> DateCreated { get; set; }
         public string Name { get; set; }
         public Nullable<bool> Status { get; set; }
+        public Nullable<bool> UserType { get; set; }
         public Nullable<bool> CanEdit { get; set; }
         public Nullable<bool> CanDelete { get; set; }
         public Nullable<bool> CanView { get; set; }
         public Nullable<bool> CanAdd { get; set; }
-        public Nullable<int> EmpID { get; set; }
         public Nullable<bool> MHR { get; set; }
         public Nullable<bool> MDevice { get; set; }
         public Nullable<bool> MLeave { get; set; }
@@ -55,6 +54,5 @@ namespace WMS.Models
         public virtual ICollection<AttProcessorScheduler> AttProcessorSchedulers { get; set; }
         public virtual ICollection<AuditLog> AuditLogs { get; set; }
         public virtual ICollection<LvApplication> LvApplications { get; set; }
-        public virtual ICollection<UserRoleData> UserRoleDatas { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace WMS.CustomClass
             string RoleQuery = "";
             string CatQuery = "";
             TAS2013Entities db = new TAS2013Entities();
-            List<UserRoleData> userRoleData = new List<UserRoleData>();
+            //List<UserRoleData> userRoleData = new List<UserRoleData>();
             List<string> UserRoleString = new List<string>();
             List<string> CategoryUser = new List<string>();
             //CategoryUser.Add(" where (CatID=1 ");
@@ -528,13 +528,13 @@ namespace WMS.CustomClass
         {
             string query = " where ";
             TAS2013Entities db = new TAS2013Entities();
-            List<UserRoleData> uAcc = new List<UserRoleData>();
-            uAcc = db.UserRoleDatas.Where(aa => aa.RoleUserID == LoggedInUser.UserID && aa.UserRoleLegend == "D").ToList();
+            //List<UserRoleData> uAcc = new List<UserRoleData>();
+            //uAcc = db.UserRoleDatas.Where(aa => aa.RoleUserID == LoggedInUser.UserID && aa.UserRoleLegend == "D").ToList();
             List<Department> depts = db.Departments.ToList();
             List<Section> secs = db.Sections.ToList();
             List<string> queryList = new List<string>();
-            foreach (var access in uAcc)
-            {
+            //foreach (var access in uAcc)
+            //{
                 //switch (LoggedInUser.UserRoleD)
                 //{
                 //    case "G"://Super ADmin
@@ -556,7 +556,7 @@ namespace WMS.CustomClass
                 //        queryList.Add(" DeptID =" + deptID);
                 //        break;
                 //}
-            }
+            //}
             if (queryList.Count == 1)
             {
                 query = query + queryList[0];
@@ -577,8 +577,6 @@ namespace WMS.CustomClass
             string RoleQuery = "";
             string CatQuery = "";
             TAS2013Entities db = new TAS2013Entities();
-            List<UserRoleData> userRoleDataD = new List<UserRoleData>();
-            List<UserRoleData> userRoleDataL = new List<UserRoleData>();
             List<string> UserRoleString = new List<string>();
             //List<string> CategoryUser = new List<string>();
             //CategoryUser.Add(" where (CatID=1 ");

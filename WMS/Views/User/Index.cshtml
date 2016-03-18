@@ -21,21 +21,21 @@
         <th>
             User Name
         </th>
-        @*<th>
-            Employee No
-        </th>*@
         <th>
             Name
         </th>
          <th>
-            User Type
+            Add
         </th>
-         @*<th>
-            Location
-        </th>*@
-         @*<th>
-            Company
-        </th> *@  
+            <th>
+            Edit
+        </th>
+            <th>
+            Delete
+        </th>
+            <th>
+            View
+        </th>
         <th>
             Status
         </th>
@@ -59,14 +59,49 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UserRole.RoleName)
+            @if (item.CanAdd==true)
+                {
+                    <div>Yes</div>
+                }
+            
+                else
+                {
+                    <div>No</div>
+                }
         </td>
-       @* <td>
-            @Html.DisplayFor(modelItem => item.Location.LocName)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Company.CompName)
-        </td>*@
+        <td>
+            @if (item.CanEdit==true)
+                {
+                    <div>Yes</div>
+                }
+            
+                else
+                {
+                    <div>No</div>
+                }
+        </td>
+        <td>
+            @if (item.CanDelete==true)
+                {
+                    <div>Yes</div>
+                }
+            
+                else
+                {
+                    <div>No</div>
+                }
+        </td>
+        <td>
+            @if (item.CanView==true)
+                {
+                    <div>Yes</div>
+                }
+            
+                else
+                {
+                    <div>No</div>
+                }
+        </td>
         <td>
             @if (item.Status==true)
                 {
@@ -78,9 +113,6 @@
                     <div>Inactive</div>
                 }
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Company.CompName)
-        </td>*@
         
         <td>
             @Html.ActionLink(" " , "Edit", new { id=item.UserID },new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" })

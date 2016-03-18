@@ -269,8 +269,6 @@ namespace WMSLibrary
                 ((CheckBox)gv.Rows[j].FindControl("CheckOne")).Checked = chk;
             }
         }
-
-
        
     }
 

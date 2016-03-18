@@ -70,8 +70,7 @@ namespace WMS.Models
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserModule> UserModules { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<UserRoleData> UserRoleDatas { get; set; }
+        public DbSet<UserSection> UserSections { get; set; }
         public DbSet<EmpView> EmpViews { get; set; }
         public DbSet<ViewAttData> ViewAttDatas { get; set; }
         public DbSet<ViewDepartment> ViewDepartments { get; set; }

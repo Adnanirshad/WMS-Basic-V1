@@ -57,8 +57,7 @@
           <EntitySet Name="sysdiagrams" EntityType="TAS2015_PPAFModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="TAS2015_PPAFModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserModule" EntityType="TAS2015_PPAFModel.Store.UserModule" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserRole" EntityType="TAS2015_PPAFModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserRoleData" EntityType="TAS2015_PPAFModel.Store.UserRoleData" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserSection" EntityType="TAS2015_PPAFModel.Store.UserSection" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmpView" EntityType="TAS2015_PPAFModel.Store.EmpView" store:Type="Views" store:Schema="dbo" store:Name="EmpView">
             <DefiningQuery>SELECT 
       [EmpView].[DeptName] AS [DeptName], 
@@ -895,10 +894,6 @@
             <End Role="DaysName" EntitySet="DaysName" />
             <End Role="Shift" EntitySet="Shift" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserRoleData_User" Association="TAS2015_PPAFModel.Store.FK_UserRoleData_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserRoleData" EntitySet="UserRoleData" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AttData">
           <Key>
@@ -1710,11 +1705,11 @@
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
           <Property Name="Status" Type="bit" />
+          <Property Name="UserType" Type="bit" />
           <Property Name="CanEdit" Type="bit" />
           <Property Name="CanDelete" Type="bit" />
           <Property Name="CanView" Type="bit" />
           <Property Name="CanAdd" Type="bit" />
-          <Property Name="EmpID" Type="int" />
           <Property Name="MHR" Type="bit" />
           <Property Name="MDevice" Type="bit" />
           <Property Name="MLeave" Type="bit" />
@@ -1739,25 +1734,13 @@
           <Property Name="UMID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UMName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="UserRole">
+        <EntityType Name="UserSection">
           <Key>
-            <PropertyRef Name="RoleLegend" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="RoleLegend" Type="char" Nullable="false" MaxLength="1" />
-          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="TableName" Type="nvarchar" MaxLength="100" />
-          <Property Name="RoleType" Type="char" MaxLength="1" />
-        </EntityType>
-        <EntityType Name="UserRoleData">
-          <Key>
-            <PropertyRef Name="RoleDataID" />
-          </Key>
-          <Property Name="RoleDataID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="RoleDataLegend" Type="nvarchar" MaxLength="50" />
-          <Property Name="RoleDataValue" Type="int" />
-          <Property Name="RoleUserID" Type="int" />
-          <Property Name="UserRoleLegend" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="SecID" Type="smallint" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.EmpView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2906,18 +2889,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserRoleData_User">
-          <End Role="User" Type="TAS2015_PPAFModel.Store.User" Multiplicity="0..1" />
-          <End Role="UserRoleData" Type="TAS2015_PPAFModel.Store.UserRoleData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="UserRoleData">
-              <PropertyRef Name="RoleUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -2968,8 +2939,7 @@
           <EntitySet Name="sysdiagrams" EntityType="TAS2015_PPAFModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="TAS2015_PPAFModel.User" />
           <EntitySet Name="UserModules" EntityType="TAS2015_PPAFModel.UserModule" />
-          <EntitySet Name="UserRoles" EntityType="TAS2015_PPAFModel.UserRole" />
-          <EntitySet Name="UserRoleDatas" EntityType="TAS2015_PPAFModel.UserRoleData" />
+          <EntitySet Name="UserSections" EntityType="TAS2015_PPAFModel.UserSection" />
           <EntitySet Name="EmpViews" EntityType="TAS2015_PPAFModel.EmpView" />
           <EntitySet Name="ViewAttDatas" EntityType="TAS2015_PPAFModel.ViewAttData" />
           <EntitySet Name="ViewDepartments" EntityType="TAS2015_PPAFModel.ViewDepartment" />
@@ -3083,10 +3053,6 @@
           <AssociationSet Name="FK_Reader_ReaderType1" Association="TAS2015_PPAFModel.FK_Reader_ReaderType1">
             <End Role="ReaderType" EntitySet="ReaderTypes" />
             <End Role="Reader" EntitySet="Readers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserRoleData_User" Association="TAS2015_PPAFModel.FK_UserRoleData_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserRoleData" EntitySet="UserRoleDatas" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AttData">
@@ -3942,11 +3908,11 @@
           <Property Type="DateTime" Name="DateCreated" Precision="3" />
           <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Status" />
+          <Property Type="Boolean" Name="UserType" />
           <Property Type="Boolean" Name="CanEdit" />
           <Property Type="Boolean" Name="CanDelete" />
           <Property Type="Boolean" Name="CanView" />
           <Property Type="Boolean" Name="CanAdd" />
-          <Property Type="Int32" Name="EmpID" />
           <Property Type="Boolean" Name="MHR" />
           <Property Type="Boolean" Name="MDevice" />
           <Property Type="Boolean" Name="MLeave" />
@@ -3967,7 +3933,6 @@
           <NavigationProperty Name="AttProcessorSchedulers" Relationship="TAS2015_PPAFModel.FK_AttProcessorScheduler_User" FromRole="User" ToRole="AttProcessorScheduler" />
           <NavigationProperty Name="AuditLogs" Relationship="TAS2015_PPAFModel.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
           <NavigationProperty Name="LvApplications" Relationship="TAS2015_PPAFModel.FK_LvApplication_User" FromRole="User" ToRole="LvApplication" />
-          <NavigationProperty Name="UserRoleDatas" Relationship="TAS2015_PPAFModel.FK_UserRoleData_User" FromRole="User" ToRole="UserRoleData" />
         </EntityType>
         <EntityType Name="UserModule">
           <Key>
@@ -3976,26 +3941,13 @@
           <Property Type="Byte" Name="UMID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="UMName" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="UserRole">
+        <EntityType Name="UserSection">
           <Key>
-            <PropertyRef Name="RoleLegend" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Type="String" Name="RoleLegend" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="TableName" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="RoleType" MaxLength="1" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="UserRoleData">
-          <Key>
-            <PropertyRef Name="RoleDataID" />
-          </Key>
-          <Property Type="Int32" Name="RoleDataID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="RoleDataLegend" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="RoleDataValue" />
-          <Property Type="Int32" Name="RoleUserID" />
-          <Property Type="String" Name="UserRoleLegend" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="TAS2015_PPAFModel.FK_UserRoleData_User" FromRole="UserRoleData" ToRole="User" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="Int16" Name="SecID" />
         </EntityType>
         <EntityType Name="EmpView">
           <Key>
@@ -5102,18 +5054,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserRoleData_User">
-          <End Type="TAS2015_PPAFModel.User" Role="User" Multiplicity="0..1" />
-          <End Type="TAS2015_PPAFModel.UserRoleData" Role="UserRoleData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="UserRoleData">
-              <PropertyRef Name="RoleUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5979,11 +5919,11 @@
                 <ScalarProperty Name="MLeave" ColumnName="MLeave" />
                 <ScalarProperty Name="MDevice" ColumnName="MDevice" />
                 <ScalarProperty Name="MHR" ColumnName="MHR" />
-                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="CanAdd" ColumnName="CanAdd" />
                 <ScalarProperty Name="CanView" ColumnName="CanView" />
                 <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
                 <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -6001,25 +5941,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="TAS2015_PPAFModel.UserRole">
-              <MappingFragment StoreEntitySet="UserRole">
-                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
-                <ScalarProperty Name="TableName" ColumnName="TableName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleLegend" ColumnName="RoleLegend" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserRoleDatas">
-            <EntityTypeMapping TypeName="TAS2015_PPAFModel.UserRoleData">
-              <MappingFragment StoreEntitySet="UserRoleData">
-                <ScalarProperty Name="UserRoleLegend" ColumnName="UserRoleLegend" />
-                <ScalarProperty Name="RoleUserID" ColumnName="RoleUserID" />
-                <ScalarProperty Name="RoleDataValue" ColumnName="RoleDataValue" />
-                <ScalarProperty Name="RoleDataLegend" ColumnName="RoleDataLegend" />
-                <ScalarProperty Name="RoleDataID" ColumnName="RoleDataID" />
+          <EntitySetMapping Name="UserSections">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.UserSection">
+              <MappingFragment StoreEntitySet="UserSection">
+                <ScalarProperty Name="SecID" ColumnName="SecID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

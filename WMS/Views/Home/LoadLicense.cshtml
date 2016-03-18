@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "LoadLicense";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LoadLicense</h2>
+
+<div class="jumbotron">
+@*@using (Html.BeginForm("LoadLicense", "Home", FormMethod.Post))
+{
+ 
+*@<h2>FileUpload</h2>
+    
+     @using (Html.BeginForm("LoadLicense", "Home", 
+                    FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+        <input name="uploadFile" type="file" />
+        <input type="submit" value="Upload File" />
+     }
+</div>

@@ -153,8 +153,6 @@
   <ItemGroup>
     <Content Include="AppForms\WebForm1.aspx" />
     <Content Include="App_Data\ExportService.mdb" />
-    <Content Include="Areas\ESS\Scripts\ESSLeave.js" />
-    <Content Include="Areas\ESS\Scripts\LeaveForwardController.js" />
     <Content Include="Content\bootstrap-combined.min.css" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
@@ -249,13 +247,6 @@
     </Content>
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <Content Include="Areas\ESS\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\ESS\Views\ESSLeave\Create.cshtml" />
-    <Content Include="Areas\ESS\Views\ESSLeave\Delete.cshtml" />
-    <Content Include="Areas\ESS\Views\ESSLeave\Details.cshtml" />
-    <Content Include="Areas\ESS\Views\ESSLeave\Edit.cshtml" />
-    <Content Include="Areas\ESS\Views\ESSLeave\Index.cshtml" />
-    <Content Include="Areas\ESS\Views\LeaveForward\Index.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -363,8 +354,9 @@
     <Content Include="Views\LvType\Details.cshtml" />
     <Content Include="Views\LvType\Edit.cshtml" />
     <Content Include="Views\LvType\Index.cshtml" />
-    <Content Include="Views\ESSUser\Index.cshtml" />
     <Content Include="Views\LeaveApproval\Index.cshtml" />
+    <Content Include="Views\Home\LoadLicense.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -403,9 +395,6 @@
     </Compile>
     <Compile Include="App_Start\DatePickerHelperBundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\ESS\Controllers\ESSLeaveController.cs" />
-    <Compile Include="Areas\ESS\Controllers\LeaveForwardController.cs" />
-    <Compile Include="Areas\ESS\ESSAreaRegistration.cs" />
     <Compile Include="Bootstrap Html Helpers\DatePickerFor.cs" />
     <Compile Include="Bootstrap Html Helpers\HelperMethods.cs" />
     <Compile Include="Controllers\AttProcessorsController.cs" />
@@ -415,7 +404,6 @@
     <Compile Include="Controllers\EditAttendance\ManualAttendanceProcess.cs" />
     <Compile Include="Controllers\EmpController.cs" />
     <Compile Include="Controllers\EmpTypeController.cs" />
-    <Compile Include="Controllers\ESSUserController.cs" />
     <Compile Include="Controllers\Filters\CustomActionAttribute.cs" />
     <Compile Include="Controllers\Filters\CustomControllerAttributes.cs" />
     <Compile Include="Controllers\GraphController.cs" />
@@ -437,6 +425,7 @@
     <Compile Include="CustomClass\CriteriaFoAngular.cs" />
     <Compile Include="CustomClass\CustomFunc.cs" />
     <Compile Include="CustomClass\DatatableToList.cs" />
+    <Compile Include="CustomClass\QueryBuilder.cs" />
     <Compile Include="CustomClass\ValueForAngular.cs" />
     <Compile Include="ErrorPages\ErrorPage.aspx.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
@@ -447,6 +436,7 @@
     </Compile>
     <Compile Include="HelperClass\AttDeptSummary.cs" />
     <Compile Include="HelperClass\GraphClass.cs" />
+    <Compile Include="HelperClass\StringCipher.cs" />
     <Compile Include="MannualAttendance\ManualProcess.cs" />
     <Compile Include="Models\AttData.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -601,10 +591,7 @@
     <Compile Include="Models\UserModule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserRole.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserRoleData.cs">
+    <Compile Include="Models\UserSection.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewAttData.cs">
@@ -667,7 +654,6 @@
     <Compile Include="Reports\Graphs\Graphs.aspx.designer.cs">
       <DependentUpon>Graphs.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CustomClass\QueryBuilder.cs" />
     <Compile Include="CustomClass\SessionManager.cs" />
     <Compile Include="HelperClass\ImageConversion.cs" />
     <Compile Include="HelperClass\MyGeneralClass.cs" />
@@ -828,7 +814,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\ESS\Models\" />
     <Folder Include="Scripts\Leaves\" />
   </ItemGroup>
   <ItemGroup>

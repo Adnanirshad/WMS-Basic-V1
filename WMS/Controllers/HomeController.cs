@@ -17,7 +17,8 @@ using System.Linq.Dynamic;
 using System.DirectoryServices.AccountManagement;
 using System.Data;
 using System.Drawing;
-
+using System.Management;
+using System.Net.NetworkInformation;
 namespace WMS.Controllers
 {
     public class HomeController : Controller
@@ -28,42 +29,189 @@ namespace WMS.Controllers
         {
             try
             {
-                if (Session["LogedUserID"] == null)
+                if (CheckForValidLicense())
                 {
-                    Session["LogedUserID"] = "";
-                    Session["Role"] = "";
-                    Session["MHR"] = "0";
-                    Session["MDevice"] = "0";
-                    Session["MLeave"] = "0";
-                    Session["MEditAtt"] = "0";
-                    Session["MUser"] = "0";
-                    Session["LogedUserFullname"] = "";
-                    Session["UserCompany"] = "";
-                    Session["MRDailyAtt"] = "0";
-                    Session["MRLeave"] = "0";
-                    Session["MRMonthly"] = "0";
-                    Session["MRAudit"] = "0";
-                    Session["MRManualEditAtt"] = "0";
-                    Session["MREmployee"] = "0";
-                    Session["MRoster"] = "0";
-                    Session["MRDetail"] = "0";
-                    Session["MRSummary"] = "0";
-                    Session["MProcess"] = "0";
-                    return View();
-                }
-                else if (Session["LogedUserID"].ToString() == "")
-                {
-                    return View();
+                    if (Session["LogedUserID"] == null)
+                    {
+                        Session["LogedUserID"] = "";
+                        Session["Role"] = "";
+                        Session["MHR"] = "0";
+                        Session["MDevice"] = "0";
+                        Session["MLeave"] = "0";
+                        Session["MEditAtt"] = "0";
+                        Session["MUser"] = "0";
+                        Session["LogedUserFullname"] = "";
+                        Session["UserCompany"] = "";
+                        Session["MRDailyAtt"] = "0";
+                        Session["MRLeave"] = "0";
+                        Session["MRMonthly"] = "0";
+                        Session["MRAudit"] = "0";
+                        Session["MRManualEditAtt"] = "0";
+                        Session["MREmployee"] = "0";
+                        Session["MRoster"] = "0";
+                        Session["MRDetail"] = "0";
+                        Session["MRSummary"] = "0";
+                        Session["MProcess"] = "0";
+                        return View();
+                    }
+                    else if (Session["LogedUserID"].ToString() == "")
+                    {
+                        return View();
+                    }
+                    else
+                    {
+                        return View("AfterLogin");
+                    }
                 }
                 else
                 {
-                    return View("AfterLogin");
+                    return View("LoadLicense");
                 }
             }
             catch (Exception ex)
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public ActionResult LoadLicense(HttpPostedFileBase uploadFile)
+        {
+            if (uploadFile.ContentLength > 0)
+            {
+                string filePath = Path.GetFileName(uploadFile.FileName);
+                uploadFile.SaveAs("E:\\"+filePath);
+                ReadFile();
+            }
+            return View();
+        }
+
+        private void ReadFile()
+        {
+            System.IO.StreamReader file = new System.IO.StreamReader("E:\\AirBlueLicense.cns");
+            string line;
+            int CurrentlineNo = 0;
+            string InvoiceNo="";
+            string CustomerName="";
+            string LicenseType="";
+            string DeviceType="";
+            string ClientMac="";
+            string NoOfEmps="";
+            string NoOfUsers="";
+            string NoOfDevices="";
+            List<string> DeviceMacs = new List<string>();
+            var fileLines = new List<string>();
+            while ((line = file.ReadLine()) != null)
+            {
+                if (CurrentlineNo == 0)
+                    InvoiceNo = line;
+                if (CurrentlineNo == 1)
+                    CustomerName = line;
+                if (CurrentlineNo == 2)
+                    LicenseType = line;
+                if (CurrentlineNo == 3)
+                    DeviceType = line;
+                if (CurrentlineNo == 4)
+                    ClientMac = line;
+                if (CurrentlineNo == 5)
+                    NoOfEmps = line;
+                if (CurrentlineNo == 6)
+                    NoOfUsers = line;
+                if (CurrentlineNo == 7)
+                    NoOfDevices = line;
+                if (CurrentlineNo > 7)
+                    DeviceMacs.Add(line);
+                CurrentlineNo++;
+            }
+            TAS2013Entities db = new TAS2013Entities();
+            if(GetClientMacAddress()==StringCipher.Decrypt(ClientMac,"1234"))
+            {
+                LicenseInfo li = new LicenseInfo();
+                if (db.LicenseInfoes.Count() > 0)
+                {
+                    li = db.LicenseInfoes.FirstOrDefault();
+                }
+                li.ID = 1;
+                li.InvoiceNo = InvoiceNo;
+                li.LicenseType = LicenseType;
+                li.NoOfDevices = NoOfDevices;
+                li.NoOfEmps = NoOfEmps;
+                li.NoOfUsers = NoOfUsers;
+                li.CustomerName = CustomerName;
+                li.ClientMAC = ClientMac;
+                li.DeviceType = DeviceType;
+                li.ValidLicense = StringCipher.Encrypt("1","1234");
+                if (db.LicenseInfoes.Count() == 0)
+                {
+                    db.LicenseInfoes.Add(li);
+                }
+                db.SaveChanges();
+                foreach (var item in db.LicenseDeviceInfoes.ToList())
+                {
+                    db.LicenseDeviceInfoes.Remove(item);
+                }
+                db.SaveChanges();
+                byte count =1;
+                foreach (var item in DeviceMacs)
+                {
+                    LicenseDeviceInfo ldi = new LicenseDeviceInfo();
+                    ldi.DeviceID = count;
+                    ldi.DeviceMAC = item;
+                    db.LicenseDeviceInfoes.Add(ldi);
+                    count++;
+                }
+                db.SaveChanges();
+            }
+        }
+        
+        private bool CheckForValidLicense()
+        {
+            bool valid = false;
+            try
+            {
+                using (var db = new TAS2013Entities())
+                {
+                    if (db.LicenseInfoes.ToList().Count > 0)
+                    {
+                        LicenseInfo li = new LicenseInfo();
+                        li = db.LicenseInfoes.FirstOrDefault();
+                        string val = StringCipher.Decrypt(li.ValidLicense, "1234");
+                        if (val == "1")
+                        {
+                            string ClientMAC = GetClientMacAddress();
+                            string DatabaseMac = StringCipher.Decrypt(li.ClientMAC, "1234");
+                            if (ClientMAC==DatabaseMac)
+                                valid = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                valid = false;
+            }
+            return valid;
+        }
+
+        public static string GetClientMacAddress()
+        {
+            String sMacAddress = string.Empty;
+            try
+            {
+                NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+                foreach (NetworkInterface adapter in nics)
+                {
+                    if (sMacAddress == String.Empty)// only return MAC Address from first card  
+                    {
+                        //IPInterfaceProperties properties = adapter.GetIPProperties(); Line is not required
+                        sMacAddress = adapter.GetPhysicalAddress().ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                sMacAddress = "";
+            }
+            return sMacAddress;
         }
 
         private void SaveImage()
