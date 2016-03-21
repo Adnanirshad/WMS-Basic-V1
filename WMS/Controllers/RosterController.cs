@@ -125,7 +125,7 @@ namespace WMS.Controllers
                 db.RosterApps.Add(ra);
                 db.SaveChanges();
 
-                return View(CalculateRosterFields(_RosterType, _StartDate, _WorkMin, _DutyTime, Criteria, RosterCriteriaValue, _Shift, ra.RotaApplD));
+                return View(CalculateRosterFields(_RosterType, _StartDate, _WorkMin, _DutyTime, Criteria, RosterCriteriaValue, _Shift, ra.RotaAppID));
             }
             else
             {
@@ -228,7 +228,7 @@ namespace WMS.Controllers
             //_RosterApp = db.RosterApps.First(aa => aa.RotaApplD == id);
             ////_RosterDetails
             var rosterdetails = db.RosterDetails.Where(aa => aa.RosterAppID == id).ToList();
-            RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaApplD == id);
+            RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaAppID == id);
             return View(CalculateRosterDetails(rosterdetails, rosterApp));
         }
 
@@ -286,8 +286,8 @@ namespace WMS.Controllers
             //RosterApp _RosterApp = new RosterApp();
             //_RosterApp = db.RosterApps.First(aa => aa.RotaApplD == id);
             //_RosterDetails
-            RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaApplD == id);
-            return View(CalculateRosterFields((int)rosterApp.RotaTypeID, (DateTime)rosterApp.DateEnded.Value.AddDays(1), (int)rosterApp.WorkMin, (TimeSpan)rosterApp.DutyTime, rosterApp.RosterCriteria, (int)rosterApp.CriteriaData, (int)rosterApp.ShiftID, (int)rosterApp.RotaApplD));
+            RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaAppID == id);
+            return View(CalculateRosterFields((int)rosterApp.RotaTypeID, (DateTime)rosterApp.DateEnded.Value.AddDays(1), (int)rosterApp.WorkMin, (TimeSpan)rosterApp.DutyTime, rosterApp.RosterCriteria, (int)rosterApp.CriteriaData, (int)rosterApp.ShiftID, (int)rosterApp.RotaAppID));
         }
         private RosterModel CalculateRosterFields(int _RosterType, DateTime _StartDate, int _WorkMin, TimeSpan _DutyTime, string _Criteria, int _CriteriaValue, int _Shift, int _RotaAppID)
         {
@@ -324,7 +324,7 @@ namespace WMS.Controllers
                     _objstudentmodel._RosterAttributes.Add(new RosterAttributes { ID = i, DateString = _date, Day = _day, DutyDate = _StartDate.Date, DutyTimeString = _DTime, DutyTime = _DutyTime, WorkMin = _WorkMin });
                     _StartDate = _StartDate.AddDays(1);
                 }
-                RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaApplD == _RotaAppID);
+                RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaAppID == _RotaAppID);
                 rosterApp.DateEnded = _StartDate.AddDays(-1);
                 db.SaveChanges();
                 return _objstudentmodel;
@@ -344,7 +344,7 @@ namespace WMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaApplD == id);
+            RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaAppID == id);
             List<RosterDetail> rosterDetails = db.RosterDetails.Where(aa => aa.RosterAppID == id).ToList();
 
             return View(CalculateRosterEditEntries(rosterApp, rosterDetails));
@@ -482,7 +482,7 @@ namespace WMS.Controllers
 
         private void SaveEditRosterEntries(List<RosterAttributes> rosters, int _RotaAppID)
         {
-            RosterApp rotaApp = db.RosterApps.First(aa => aa.RotaApplD == _RotaAppID);
+            RosterApp rotaApp = db.RosterApps.First(aa => aa.RotaAppID == _RotaAppID);
             Shift shift = db.Shifts.First(aa => aa.ShiftID == rotaApp.ShiftID);
 
             foreach (var roster in rosters)
@@ -542,7 +542,7 @@ namespace WMS.Controllers
         {
             RosterApp RApp = new RosterApp();
             //User uid = new User();
-            RApp = db.RosterApps.First(rr => rr.RotaApplD == RosterAppID);
+            RApp = db.RosterApps.First(rr => rr.RotaAppID == RosterAppID);
             if (RApp.UserID == LoggedUserID)
             {
                 try
