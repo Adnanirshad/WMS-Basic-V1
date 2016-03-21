@@ -359,6 +359,8 @@
     <Content Include="Views\LeaveApproval\Index.cshtml" />
     <Content Include="Views\Home\LoadLicense.cshtml" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\JobCard\JCCreate.cshtml" />
+    <Content Include="Views\JobCard\JobCardList.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -411,6 +413,7 @@
     <Compile Include="Controllers\GraphController.cs" />
     <Compile Include="Controllers\HolidayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobCardController.cs" />
     <Compile Include="Controllers\LeaveApprovalController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\LeaveSettingsController.cs" />
@@ -420,6 +423,7 @@
     <Compile Include="Controllers\LvTypeController.cs" />
     <Compile Include="Controllers\ReaderController.cs" />
     <Compile Include="Controllers\ReaderTypeController.cs" />
+    <Compile Include="Controllers\RosterController.cs" />
     <Compile Include="Controllers\Roster\RosterModel.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -467,6 +471,9 @@
     <Compile Include="Models\AuditOperation.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Crew.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DailySummary.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -507,6 +514,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Holiday.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobCardApp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobCardDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LicenseDeviceInfo.cs">
@@ -573,6 +586,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Remark.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RosterApp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RosterDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RosterType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Section.cs">

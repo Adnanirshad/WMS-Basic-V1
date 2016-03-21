@@ -15,6 +15,7 @@
           <EntitySet Name="AuditForm" EntityType="TAS2015_PPAFModel.Store.AuditForm" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AuditLog" EntityType="TAS2015_PPAFModel.Store.AuditLog" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AuditOperation" EntityType="TAS2015_PPAFModel.Store.AuditOperation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Crew" EntityType="TAS2015_PPAFModel.Store.Crew" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DailySummary" EntityType="TAS2015_PPAFModel.Store.DailySummary" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DaysName" EntityType="TAS2015_PPAFModel.Store.DaysName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Department" EntityType="TAS2015_PPAFModel.Store.Department" store:Type="Tables" Schema="dbo" />
@@ -28,6 +29,8 @@
           <EntitySet Name="EmpPhoto" EntityType="TAS2015_PPAFModel.Store.EmpPhoto" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmpType" EntityType="TAS2015_PPAFModel.Store.EmpType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Holiday" EntityType="TAS2015_PPAFModel.Store.Holiday" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="JobCardApp" EntityType="TAS2015_PPAFModel.Store.JobCardApp" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="JobCardDetail" EntityType="TAS2015_PPAFModel.Store.JobCardDetail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LicenseDeviceInfo" EntityType="TAS2015_PPAFModel.Store.LicenseDeviceInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LicenseInfo" EntityType="TAS2015_PPAFModel.Store.LicenseInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Location" EntityType="TAS2015_PPAFModel.Store.Location" store:Type="Tables" Schema="dbo" />
@@ -51,6 +54,9 @@
       [Remarks].[RemarksLegend] AS [RemarksLegend]
       FROM [dbo].[Remarks] AS [Remarks]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="RosterApp" EntityType="TAS2015_PPAFModel.Store.RosterApp" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RosterDetail" EntityType="TAS2015_PPAFModel.Store.RosterDetail" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RosterType" EntityType="TAS2015_PPAFModel.Store.RosterType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Section" EntityType="TAS2015_PPAFModel.Store.Section" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ServiceLog" EntityType="TAS2015_PPAFModel.Store.ServiceLog" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Shift" EntityType="TAS2015_PPAFModel.Store.Shift" store:Type="Tables" Schema="dbo" />
@@ -814,6 +820,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="AuditLog" EntitySet="AuditLog" />
           </AssociationSet>
+          <AssociationSet Name="FK_Emp_Crew" Association="TAS2015_PPAFModel.Store.FK_Emp_Crew">
+            <End Role="Crew" EntitySet="Crew" />
+            <End Role="Emp" EntitySet="Emp" />
+          </AssociationSet>
           <AssociationSet Name="FK_Emp_Designation" Association="TAS2015_PPAFModel.Store.FK_Emp_Designation">
             <End Role="Designation" EntitySet="Designation" />
             <End Role="Emp" EntitySet="Emp" />
@@ -833,6 +843,14 @@
           <AssociationSet Name="FK_Emp_Shift" Association="TAS2015_PPAFModel.Store.FK_Emp_Shift">
             <End Role="Shift" EntitySet="Shift" />
             <End Role="Emp" EntitySet="Emp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCardDetail_Emp" Association="TAS2015_PPAFModel.Store.FK_JobCardDetail_Emp">
+            <End Role="Emp" EntitySet="Emp" />
+            <End Role="JobCardDetail" EntitySet="JobCardDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCardDetail_JobCardApp" Association="TAS2015_PPAFModel.Store.FK_JobCardDetail_JobCardApp">
+            <End Role="JobCardApp" EntitySet="JobCardApp" />
+            <End Role="JobCardDetail" EntitySet="JobCardDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_LvApplication_Emp" Association="TAS2015_PPAFModel.Store.FK_LvApplication_Emp">
             <End Role="Emp" EntitySet="Emp" />
@@ -881,6 +899,18 @@
           <AssociationSet Name="FK_Reader_ReaderType1" Association="TAS2015_PPAFModel.Store.FK_Reader_ReaderType1">
             <End Role="ReaderType" EntitySet="ReaderType" />
             <End Role="Reader" EntitySet="Reader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RosterApp_RosterType" Association="TAS2015_PPAFModel.Store.FK_RosterApp_RosterType">
+            <End Role="RosterType" EntitySet="RosterType" />
+            <End Role="RosterApp" EntitySet="RosterApp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RosterApp_Shift" Association="TAS2015_PPAFModel.Store.FK_RosterApp_Shift">
+            <End Role="Shift" EntitySet="Shift" />
+            <End Role="RosterApp" EntitySet="RosterApp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RosterDetail_RosterApp" Association="TAS2015_PPAFModel.Store.FK_RosterDetail_RosterApp">
+            <End Role="RosterApp" EntitySet="RosterApp" />
+            <End Role="RosterDetail" EntitySet="RosterDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_Section_Department" Association="TAS2015_PPAFModel.Store.FK_Section_Department">
             <End Role="Department" EntitySet="Department" />
@@ -1256,6 +1286,13 @@
           <Property Name="OperationID" Type="smallint" Nullable="false" />
           <Property Name="OperationName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Crew">
+          <Key>
+            <PropertyRef Name="CrewID" />
+          </Key>
+          <Property Name="CrewID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CrewName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="DailySummary">
           <Key>
             <PropertyRef Name="SummaryDateCriteria" />
@@ -1349,6 +1386,7 @@
           <Property Name="Gender" Type="tinyint" />
           <Property Name="ShiftID" Type="tinyint" />
           <Property Name="LocID" Type="smallint" />
+          <Property Name="CrewID" Type="smallint" />
           <Property Name="TypeID" Type="tinyint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
@@ -1417,6 +1455,33 @@
           <Property Name="HolID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="HolDate" Type="date" Nullable="false" />
           <Property Name="HolDesc" Type="varchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="JobCardApp">
+          <Key>
+            <PropertyRef Name="JobCardID" />
+          </Key>
+          <Property Name="JobCardID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DateStarted" Type="date" />
+          <Property Name="DateEnded" Type="date" />
+          <Property Name="CardType" Type="smallint" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="JobCardCriteria" Type="char" MaxLength="1" />
+          <Property Name="CriteriaDate" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="JobCardDetail">
+          <Key>
+            <PropertyRef Name="JCDetailID" />
+          </Key>
+          <Property Name="EmpDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="JCDetailID" Type="bigint" Nullable="false" />
+          <Property Name="EmpID" Type="int" />
+          <Property Name="Dated" Type="date" />
+          <Property Name="WrkCardID" Type="smallint" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="JCAppID" Type="int" />
         </EntityType>
         <EntityType Name="LicenseDeviceInfo">
           <Key>
@@ -1636,6 +1701,46 @@
           <Property Name="RemarksID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RemarksName" Type="nvarchar" MaxLength="50" />
           <Property Name="RemarksLegend" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RosterApp">
+          <Key>
+            <PropertyRef Name="RotaAppID" />
+          </Key>
+          <Property Name="RotaAppID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RosterName" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DateStarted" Type="date" />
+          <Property Name="DateEnded" Type="date" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RosterCriteria" Type="char" MaxLength="1" />
+          <Property Name="CriteriaData" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="RotaTypeID" Type="tinyint" />
+          <Property Name="WorkMin" Type="smallint" />
+          <Property Name="DutyTime" Type="time" />
+          <Property Name="ShiftID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="RosterDetail">
+          <Key>
+            <PropertyRef Name="CriteriaValueDate" />
+          </Key>
+          <Property Name="CriteriaValueDate" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RosterAppID" Type="int" />
+          <Property Name="DutyCode" Type="char" MaxLength="1" />
+          <Property Name="DutyTime" Type="time" />
+          <Property Name="WorkMin" Type="smallint" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenShift" Type="bit" />
+          <Property Name="RosterDate" Type="date" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="RosterType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Repeat" Type="bit" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -2649,6 +2754,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Emp_Crew">
+          <End Role="Crew" Type="TAS2015_PPAFModel.Store.Crew" Multiplicity="0..1" />
+          <End Role="Emp" Type="TAS2015_PPAFModel.Store.Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crew">
+              <PropertyRef Name="CrewID" />
+            </Principal>
+            <Dependent Role="Emp">
+              <PropertyRef Name="CrewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Emp_Designation">
           <End Role="Designation" Type="TAS2015_PPAFModel.Store.Designation" Multiplicity="0..1" />
           <End Role="Emp" Type="TAS2015_PPAFModel.Store.Emp" Multiplicity="*" />
@@ -2706,6 +2823,30 @@
             </Principal>
             <Dependent Role="Emp">
               <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCardDetail_Emp">
+          <End Role="Emp" Type="TAS2015_PPAFModel.Store.Emp" Multiplicity="0..1" />
+          <End Role="JobCardDetail" Type="TAS2015_PPAFModel.Store.JobCardDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="JobCardDetail">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCardDetail_JobCardApp">
+          <End Role="JobCardApp" Type="TAS2015_PPAFModel.Store.JobCardApp" Multiplicity="0..1" />
+          <End Role="JobCardDetail" Type="TAS2015_PPAFModel.Store.JobCardDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCardApp">
+              <PropertyRef Name="JobCardID" />
+            </Principal>
+            <Dependent Role="JobCardDetail">
+              <PropertyRef Name="JCAppID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2853,6 +2994,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RosterApp_RosterType">
+          <End Role="RosterType" Type="TAS2015_PPAFModel.Store.RosterType" Multiplicity="0..1" />
+          <End Role="RosterApp" Type="TAS2015_PPAFModel.Store.RosterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RosterType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RosterApp">
+              <PropertyRef Name="RotaTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RosterApp_Shift">
+          <End Role="Shift" Type="TAS2015_PPAFModel.Store.Shift" Multiplicity="0..1" />
+          <End Role="RosterApp" Type="TAS2015_PPAFModel.Store.RosterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="RosterApp">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RosterDetail_RosterApp">
+          <End Role="RosterApp" Type="TAS2015_PPAFModel.Store.RosterApp" Multiplicity="0..1" />
+          <End Role="RosterDetail" Type="TAS2015_PPAFModel.Store.RosterDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RosterApp">
+              <PropertyRef Name="RotaAppID" />
+            </Principal>
+            <Dependent Role="RosterDetail">
+              <PropertyRef Name="RosterAppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Section_Department">
           <End Role="Department" Type="TAS2015_PPAFModel.Store.Department" Multiplicity="1" />
           <End Role="Section" Type="TAS2015_PPAFModel.Store.Section" Multiplicity="*" />
@@ -2903,6 +3080,7 @@
           <EntitySet Name="AuditForms" EntityType="TAS2015_PPAFModel.AuditForm" />
           <EntitySet Name="AuditLogs" EntityType="TAS2015_PPAFModel.AuditLog" />
           <EntitySet Name="AuditOperations" EntityType="TAS2015_PPAFModel.AuditOperation" />
+          <EntitySet Name="Crews" EntityType="TAS2015_PPAFModel.Crew" />
           <EntitySet Name="DailySummaries" EntityType="TAS2015_PPAFModel.DailySummary" />
           <EntitySet Name="DaysNames" EntityType="TAS2015_PPAFModel.DaysName" />
           <EntitySet Name="Departments" EntityType="TAS2015_PPAFModel.Department" />
@@ -2916,6 +3094,8 @@
           <EntitySet Name="EmpPhotoes" EntityType="TAS2015_PPAFModel.EmpPhoto" />
           <EntitySet Name="EmpTypes" EntityType="TAS2015_PPAFModel.EmpType" />
           <EntitySet Name="Holidays" EntityType="TAS2015_PPAFModel.Holiday" />
+          <EntitySet Name="JobCardApps" EntityType="TAS2015_PPAFModel.JobCardApp" />
+          <EntitySet Name="JobCardDetails" EntityType="TAS2015_PPAFModel.JobCardDetail" />
           <EntitySet Name="LicenseDeviceInfoes" EntityType="TAS2015_PPAFModel.LicenseDeviceInfo" />
           <EntitySet Name="LicenseInfoes" EntityType="TAS2015_PPAFModel.LicenseInfo" />
           <EntitySet Name="Locations" EntityType="TAS2015_PPAFModel.Location" />
@@ -2933,6 +3113,9 @@
           <EntitySet Name="ReaderTypes" EntityType="TAS2015_PPAFModel.ReaderType" />
           <EntitySet Name="Reasons" EntityType="TAS2015_PPAFModel.Reason" />
           <EntitySet Name="Remarks" EntityType="TAS2015_PPAFModel.Remark" />
+          <EntitySet Name="RosterApps" EntityType="TAS2015_PPAFModel.RosterApp" />
+          <EntitySet Name="RosterDetails" EntityType="TAS2015_PPAFModel.RosterDetail" />
+          <EntitySet Name="RosterTypes" EntityType="TAS2015_PPAFModel.RosterType" />
           <EntitySet Name="Sections" EntityType="TAS2015_PPAFModel.Section" />
           <EntitySet Name="ServiceLogs" EntityType="TAS2015_PPAFModel.ServiceLog" />
           <EntitySet Name="Shifts" EntityType="TAS2015_PPAFModel.Shift" />
@@ -2974,6 +3157,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="AuditLog" EntitySet="AuditLogs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Emp_Crew" Association="TAS2015_PPAFModel.FK_Emp_Crew">
+            <End Role="Crew" EntitySet="Crews" />
+            <End Role="Emp" EntitySet="Emps" />
+          </AssociationSet>
           <AssociationSet Name="FK_Shift_DaysName" Association="TAS2015_PPAFModel.FK_Shift_DaysName">
             <End Role="DaysName" EntitySet="DaysNames" />
             <End Role="Shift" EntitySet="Shifts" />
@@ -3006,6 +3193,10 @@
             <End Role="Shift" EntitySet="Shifts" />
             <End Role="Emp" EntitySet="Emps" />
           </AssociationSet>
+          <AssociationSet Name="FK_JobCardDetail_Emp" Association="TAS2015_PPAFModel.FK_JobCardDetail_Emp">
+            <End Role="Emp" EntitySet="Emps" />
+            <End Role="JobCardDetail" EntitySet="JobCardDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_LvApplication_Emp" Association="TAS2015_PPAFModel.FK_LvApplication_Emp">
             <End Role="Emp" EntitySet="Emps" />
             <End Role="LvApplication" EntitySet="LvApplications" />
@@ -3021,6 +3212,10 @@
           <AssociationSet Name="FK_PollData_Emp" Association="TAS2015_PPAFModel.FK_PollData_Emp">
             <End Role="Emp" EntitySet="Emps" />
             <End Role="PollData" EntitySet="PollDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCardDetail_JobCardApp" Association="TAS2015_PPAFModel.FK_JobCardDetail_JobCardApp">
+            <End Role="JobCardApp" EntitySet="JobCardApps" />
+            <End Role="JobCardDetail" EntitySet="JobCardDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Reader_Location" Association="TAS2015_PPAFModel.FK_Reader_Location">
             <End Role="Location" EntitySet="Locations" />
@@ -3053,6 +3248,18 @@
           <AssociationSet Name="FK_Reader_ReaderType1" Association="TAS2015_PPAFModel.FK_Reader_ReaderType1">
             <End Role="ReaderType" EntitySet="ReaderTypes" />
             <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RosterApp_RosterType" Association="TAS2015_PPAFModel.FK_RosterApp_RosterType">
+            <End Role="RosterType" EntitySet="RosterTypes" />
+            <End Role="RosterApp" EntitySet="RosterApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RosterApp_Shift" Association="TAS2015_PPAFModel.FK_RosterApp_Shift">
+            <End Role="Shift" EntitySet="Shifts" />
+            <End Role="RosterApp" EntitySet="RosterApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RosterDetail_RosterApp" Association="TAS2015_PPAFModel.FK_RosterDetail_RosterApp">
+            <End Role="RosterApp" EntitySet="RosterApps" />
+            <End Role="RosterDetail" EntitySet="RosterDetails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AttData">
@@ -3421,6 +3628,14 @@
           <Property Type="Int16" Name="OperationID" Nullable="false" />
           <Property Type="String" Name="OperationName" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Crew">
+          <Key>
+            <PropertyRef Name="CrewID" />
+          </Key>
+          <Property Type="Int16" Name="CrewID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CrewName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Emps" Relationship="TAS2015_PPAFModel.FK_Emp_Crew" FromRole="Crew" ToRole="Emp" />
+        </EntityType>
         <EntityType Name="DailySummary">
           <Key>
             <PropertyRef Name="SummaryDateCriteria" />
@@ -3518,6 +3733,7 @@
           <Property Type="Byte" Name="Gender" />
           <Property Type="Byte" Name="ShiftID" />
           <Property Type="Int16" Name="LocID" />
+          <Property Type="Int16" Name="CrewID" />
           <Property Type="Byte" Name="TypeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
@@ -3545,11 +3761,13 @@
           <Property Type="Boolean" Name="HasOT" />
           <NavigationProperty Name="AttDatas" Relationship="TAS2015_PPAFModel.FK_AttData_Emp" FromRole="Emp" ToRole="AttData" />
           <NavigationProperty Name="AttDataManEdits" Relationship="TAS2015_PPAFModel.FK_AttDataManEdit_Emp" FromRole="Emp" ToRole="AttDataManEdit" />
+          <NavigationProperty Name="Crew" Relationship="TAS2015_PPAFModel.FK_Emp_Crew" FromRole="Emp" ToRole="Crew" />
           <NavigationProperty Name="Designation" Relationship="TAS2015_PPAFModel.FK_Emp_Designation" FromRole="Emp" ToRole="Designation" />
           <NavigationProperty Name="EmpType" Relationship="TAS2015_PPAFModel.FK_Emp_EmpType" FromRole="Emp" ToRole="EmpType" />
           <NavigationProperty Name="Location" Relationship="TAS2015_PPAFModel.FK_Emp_Location" FromRole="Emp" ToRole="Location" />
           <NavigationProperty Name="Section" Relationship="TAS2015_PPAFModel.FK_Emp_Section" FromRole="Emp" ToRole="Section" />
           <NavigationProperty Name="Shift" Relationship="TAS2015_PPAFModel.FK_Emp_Shift" FromRole="Emp" ToRole="Shift" />
+          <NavigationProperty Name="JobCardDetails" Relationship="TAS2015_PPAFModel.FK_JobCardDetail_Emp" FromRole="Emp" ToRole="JobCardDetail" />
           <NavigationProperty Name="LvApplications" Relationship="TAS2015_PPAFModel.FK_LvApplication_Emp" FromRole="Emp" ToRole="LvApplication" />
           <NavigationProperty Name="LvConsumeds" Relationship="TAS2015_PPAFModel.FK_LvConsumed_Emp" FromRole="Emp" ToRole="LvConsumed" />
           <NavigationProperty Name="LvShorts" Relationship="TAS2015_PPAFModel.FK_LvShort_Emp" FromRole="Emp" ToRole="LvShort" />
@@ -3598,6 +3816,36 @@
           <Property Type="Int16" Name="HolID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="HolDate" Nullable="false" Precision="0" />
           <Property Type="String" Name="HolDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="JobCardApp">
+          <Key>
+            <PropertyRef Name="JobCardID" />
+          </Key>
+          <Property Type="Int32" Name="JobCardID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="DateCreated" Precision="3" />
+          <Property Type="DateTime" Name="DateStarted" Precision="0" />
+          <Property Type="DateTime" Name="DateEnded" Precision="0" />
+          <Property Type="Int16" Name="CardType" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="String" Name="JobCardCriteria" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="CriteriaDate" />
+          <Property Type="Boolean" Name="Status" />
+          <Property Type="String" Name="Remarks" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JobCardDetails" Relationship="TAS2015_PPAFModel.FK_JobCardDetail_JobCardApp" FromRole="JobCardApp" ToRole="JobCardDetail" />
+        </EntityType>
+        <EntityType Name="JobCardDetail">
+          <Key>
+            <PropertyRef Name="JCDetailID" />
+          </Key>
+          <Property Type="String" Name="EmpDate" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="JCDetailID" Nullable="false" />
+          <Property Type="Int32" Name="EmpID" />
+          <Property Type="DateTime" Name="Dated" Precision="0" />
+          <Property Type="Int16" Name="WrkCardID" />
+          <Property Type="String" Name="Remarks" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="JCAppID" />
+          <NavigationProperty Name="Emp" Relationship="TAS2015_PPAFModel.FK_JobCardDetail_Emp" FromRole="JobCardDetail" ToRole="Emp" />
+          <NavigationProperty Name="JobCardApp" Relationship="TAS2015_PPAFModel.FK_JobCardDetail_JobCardApp" FromRole="JobCardDetail" ToRole="JobCardApp" />
         </EntityType>
         <EntityType Name="LicenseDeviceInfo">
           <Key>
@@ -3835,6 +4083,51 @@
           <Property Type="String" Name="RemarksName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="RemarksLegend" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="RosterApp">
+          <Key>
+            <PropertyRef Name="RotaAppID" />
+          </Key>
+          <Property Type="Int32" Name="RotaAppID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="RosterName" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateCreated" Precision="3" />
+          <Property Type="DateTime" Name="DateStarted" Precision="0" />
+          <Property Type="DateTime" Name="DateEnded" Precision="0" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="String" Name="RosterCriteria" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="CriteriaData" />
+          <Property Type="Boolean" Name="Status" />
+          <Property Type="Byte" Name="RotaTypeID" />
+          <Property Type="Int16" Name="WorkMin" />
+          <Property Type="Time" Name="DutyTime" Precision="7" />
+          <Property Type="Byte" Name="ShiftID" />
+          <NavigationProperty Name="RosterType" Relationship="TAS2015_PPAFModel.FK_RosterApp_RosterType" FromRole="RosterApp" ToRole="RosterType" />
+          <NavigationProperty Name="Shift" Relationship="TAS2015_PPAFModel.FK_RosterApp_Shift" FromRole="RosterApp" ToRole="Shift" />
+          <NavigationProperty Name="RosterDetails" Relationship="TAS2015_PPAFModel.FK_RosterDetail_RosterApp" FromRole="RosterApp" ToRole="RosterDetail" />
+        </EntityType>
+        <EntityType Name="RosterDetail">
+          <Key>
+            <PropertyRef Name="CriteriaValueDate" />
+          </Key>
+          <Property Type="String" Name="CriteriaValueDate" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="RosterAppID" />
+          <Property Type="String" Name="DutyCode" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Time" Name="DutyTime" Precision="7" />
+          <Property Type="Int16" Name="WorkMin" />
+          <Property Type="String" Name="Remarks" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="OpenShift" />
+          <Property Type="DateTime" Name="RosterDate" Precision="0" />
+          <Property Type="Int32" Name="UserID" />
+          <NavigationProperty Name="RosterApp" Relationship="TAS2015_PPAFModel.FK_RosterDetail_RosterApp" FromRole="RosterDetail" ToRole="RosterApp" />
+        </EntityType>
+        <EntityType Name="RosterType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Byte" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Repeat" />
+          <NavigationProperty Name="RosterApps" Relationship="TAS2015_PPAFModel.FK_RosterApp_RosterType" FromRole="RosterType" ToRole="RosterApp" />
+        </EntityType>
         <EntityType Name="Section">
           <Key>
             <PropertyRef Name="SectionID" />
@@ -3887,6 +4180,7 @@
           <NavigationProperty Name="DaysName" Relationship="TAS2015_PPAFModel.FK_Shift_DaysName" FromRole="Shift" ToRole="DaysName" />
           <NavigationProperty Name="DaysName1" Relationship="TAS2015_PPAFModel.FK_Shift_DaysName1" FromRole="Shift" ToRole="DaysName" />
           <NavigationProperty Name="Emps" Relationship="TAS2015_PPAFModel.FK_Emp_Shift" FromRole="Shift" ToRole="Emp" />
+          <NavigationProperty Name="RosterApps" Relationship="TAS2015_PPAFModel.FK_RosterApp_Shift" FromRole="Shift" ToRole="RosterApp" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -4814,6 +5108,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Emp_Crew">
+          <End Type="TAS2015_PPAFModel.Crew" Role="Crew" Multiplicity="0..1" />
+          <End Type="TAS2015_PPAFModel.Emp" Role="Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crew">
+              <PropertyRef Name="CrewID" />
+            </Principal>
+            <Dependent Role="Emp">
+              <PropertyRef Name="CrewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Shift_DaysName">
           <End Type="TAS2015_PPAFModel.DaysName" Role="DaysName" Multiplicity="1" />
           <End Type="TAS2015_PPAFModel.Shift" Role="Shift" Multiplicity="*" />
@@ -4910,6 +5216,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JobCardDetail_Emp">
+          <End Type="TAS2015_PPAFModel.Emp" Role="Emp" Multiplicity="0..1" />
+          <End Type="TAS2015_PPAFModel.JobCardDetail" Role="JobCardDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="JobCardDetail">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LvApplication_Emp">
           <End Type="TAS2015_PPAFModel.Emp" Role="Emp" Multiplicity="1" />
           <End Type="TAS2015_PPAFModel.LvApplication" Role="LvApplication" Multiplicity="*" />
@@ -4955,6 +5273,18 @@
             </Principal>
             <Dependent Role="PollData">
               <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCardDetail_JobCardApp">
+          <End Type="TAS2015_PPAFModel.JobCardApp" Role="JobCardApp" Multiplicity="0..1" />
+          <End Type="TAS2015_PPAFModel.JobCardDetail" Role="JobCardDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobCardApp">
+              <PropertyRef Name="JobCardID" />
+            </Principal>
+            <Dependent Role="JobCardDetail">
+              <PropertyRef Name="JCAppID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5051,6 +5381,42 @@
             </Principal>
             <Dependent Role="Reader">
               <PropertyRef Name="RdrTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RosterApp_RosterType">
+          <End Type="TAS2015_PPAFModel.RosterType" Role="RosterType" Multiplicity="0..1" />
+          <End Type="TAS2015_PPAFModel.RosterApp" Role="RosterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RosterType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RosterApp">
+              <PropertyRef Name="RotaTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RosterApp_Shift">
+          <End Type="TAS2015_PPAFModel.Shift" Role="Shift" Multiplicity="0..1" />
+          <End Type="TAS2015_PPAFModel.RosterApp" Role="RosterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="RosterApp">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RosterDetail_RosterApp">
+          <End Type="TAS2015_PPAFModel.RosterApp" Role="RosterApp" Multiplicity="0..1" />
+          <End Type="TAS2015_PPAFModel.RosterDetail" Role="RosterDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RosterApp">
+              <PropertyRef Name="RotaAppID" />
+            </Principal>
+            <Dependent Role="RosterDetail">
+              <PropertyRef Name="RosterAppID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5430,6 +5796,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Crews">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.Crew">
+              <MappingFragment StoreEntitySet="Crew">
+                <ScalarProperty Name="CrewName" ColumnName="CrewName" />
+                <ScalarProperty Name="CrewID" ColumnName="CrewID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DailySummaries">
             <EntityTypeMapping TypeName="TAS2015_PPAFModel.DailySummary">
               <MappingFragment StoreEntitySet="DailySummary">
@@ -5547,6 +5921,7 @@
                 <ScalarProperty Name="CardNo" ColumnName="CardNo" />
                 <ScalarProperty Name="SecID" ColumnName="SecID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="CrewID" ColumnName="CrewID" />
                 <ScalarProperty Name="LocID" ColumnName="LocID" />
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
@@ -5602,6 +5977,35 @@
                 <ScalarProperty Name="HolDesc" ColumnName="HolDesc" />
                 <ScalarProperty Name="HolDate" ColumnName="HolDate" />
                 <ScalarProperty Name="HolID" ColumnName="HolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobCardApps">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.JobCardApp">
+              <MappingFragment StoreEntitySet="JobCardApp">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CriteriaDate" ColumnName="CriteriaDate" />
+                <ScalarProperty Name="JobCardCriteria" ColumnName="JobCardCriteria" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+                <ScalarProperty Name="DateEnded" ColumnName="DateEnded" />
+                <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="JobCardID" ColumnName="JobCardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobCardDetails">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.JobCardDetail">
+              <MappingFragment StoreEntitySet="JobCardDetail">
+                <ScalarProperty Name="JCAppID" ColumnName="JCAppID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WrkCardID" ColumnName="WrkCardID" />
+                <ScalarProperty Name="Dated" ColumnName="Dated" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="JCDetailID" ColumnName="JCDetailID" />
+                <ScalarProperty Name="EmpDate" ColumnName="EmpDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5835,6 +6239,49 @@
                 <ScalarProperty Name="RemarksLegend" ColumnName="RemarksLegend" />
                 <ScalarProperty Name="RemarksName" ColumnName="RemarksName" />
                 <ScalarProperty Name="RemarksID" ColumnName="RemarksID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RosterApps">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.RosterApp">
+              <MappingFragment StoreEntitySet="RosterApp">
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="DutyTime" ColumnName="DutyTime" />
+                <ScalarProperty Name="WorkMin" ColumnName="WorkMin" />
+                <ScalarProperty Name="RotaTypeID" ColumnName="RotaTypeID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CriteriaData" ColumnName="CriteriaData" />
+                <ScalarProperty Name="RosterCriteria" ColumnName="RosterCriteria" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateEnded" ColumnName="DateEnded" />
+                <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="RosterName" ColumnName="RosterName" />
+                <ScalarProperty Name="RotaAppID" ColumnName="RotaAppID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RosterDetails">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.RosterDetail">
+              <MappingFragment StoreEntitySet="RosterDetail">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RosterDate" ColumnName="RosterDate" />
+                <ScalarProperty Name="OpenShift" ColumnName="OpenShift" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WorkMin" ColumnName="WorkMin" />
+                <ScalarProperty Name="DutyTime" ColumnName="DutyTime" />
+                <ScalarProperty Name="DutyCode" ColumnName="DutyCode" />
+                <ScalarProperty Name="RosterAppID" ColumnName="RosterAppID" />
+                <ScalarProperty Name="CriteriaValueDate" ColumnName="CriteriaValueDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RosterTypes">
+            <EntityTypeMapping TypeName="TAS2015_PPAFModel.RosterType">
+              <MappingFragment StoreEntitySet="RosterType">
+                <ScalarProperty Name="Repeat" ColumnName="Repeat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

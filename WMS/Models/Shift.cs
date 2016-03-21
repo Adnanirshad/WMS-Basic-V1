@@ -17,6 +17,7 @@ namespace WMS.Models
         public Shift()
         {
             this.Emps = new HashSet<Emp>();
+            this.RosterApps = new HashSet<RosterApp>();
         }
     
         public byte ShiftID { get; set; }
@@ -47,5 +48,6 @@ namespace WMS.Models
         public virtual DaysName DaysName { get; set; }
         public virtual DaysName DaysName1 { get; set; }
         public virtual ICollection<Emp> Emps { get; set; }
+        public virtual ICollection<RosterApp> RosterApps { get; set; }
     }
 }

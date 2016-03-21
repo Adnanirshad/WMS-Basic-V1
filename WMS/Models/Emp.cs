@@ -18,6 +18,7 @@ namespace WMS.Models
         {
             this.AttDatas = new HashSet<AttData>();
             this.AttDataManEdits = new HashSet<AttDataManEdit>();
+            this.JobCardDetails = new HashSet<JobCardDetail>();
             this.LvApplications = new HashSet<LvApplication>();
             this.LvConsumeds = new HashSet<LvConsumed>();
             this.LvShorts = new HashSet<LvShort>();
@@ -31,6 +32,7 @@ namespace WMS.Models
         public Nullable<byte> Gender { get; set; }
         public Nullable<byte> ShiftID { get; set; }
         public Nullable<short> LocID { get; set; }
+        public Nullable<short> CrewID { get; set; }
         public Nullable<byte> TypeID { get; set; }
         public Nullable<short> SecID { get; set; }
         public string CardNo { get; set; }
@@ -59,11 +61,13 @@ namespace WMS.Models
     
         public virtual ICollection<AttData> AttDatas { get; set; }
         public virtual ICollection<AttDataManEdit> AttDataManEdits { get; set; }
+        public virtual Crew Crew { get; set; }
         public virtual Designation Designation { get; set; }
         public virtual EmpType EmpType { get; set; }
         public virtual Location Location { get; set; }
         public virtual Section Section { get; set; }
         public virtual Shift Shift { get; set; }
+        public virtual ICollection<JobCardDetail> JobCardDetails { get; set; }
         public virtual ICollection<LvApplication> LvApplications { get; set; }
         public virtual ICollection<LvConsumed> LvConsumeds { get; set; }
         public virtual ICollection<LvShort> LvShorts { get; set; }

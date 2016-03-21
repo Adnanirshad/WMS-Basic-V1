@@ -34,6 +34,7 @@ namespace WMS.Models
         public DbSet<AuditForm> AuditForms { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
         public DbSet<AuditOperation> AuditOperations { get; set; }
+        public DbSet<Crew> Crews { get; set; }
         public DbSet<DailySummary> DailySummaries { get; set; }
         public DbSet<DaysName> DaysNames { get; set; }
         public DbSet<Department> Departments { get; set; }
@@ -47,6 +48,8 @@ namespace WMS.Models
         public DbSet<EmpPhoto> EmpPhotoes { get; set; }
         public DbSet<EmpType> EmpTypes { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<JobCardApp> JobCardApps { get; set; }
+        public DbSet<JobCardDetail> JobCardDetails { get; set; }
         public DbSet<LicenseDeviceInfo> LicenseDeviceInfoes { get; set; }
         public DbSet<LicenseInfo> LicenseInfoes { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -64,6 +67,9 @@ namespace WMS.Models
         public DbSet<ReaderType> ReaderTypes { get; set; }
         public DbSet<Reason> Reasons { get; set; }
         public DbSet<Remark> Remarks { get; set; }
+        public DbSet<RosterApp> RosterApps { get; set; }
+        public DbSet<RosterDetail> RosterDetails { get; set; }
+        public DbSet<RosterType> RosterTypes { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<ServiceLog> ServiceLogs { get; set; }
         public DbSet<Shift> Shifts { get; set; }
