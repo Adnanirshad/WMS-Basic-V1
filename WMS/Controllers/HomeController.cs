@@ -179,7 +179,7 @@ namespace WMS.Controllers
                         {
                             string ClientMAC = GetClientMacAddress();
                             string DatabaseMac = StringCipher.Decrypt(li.ClientMAC, "1234");
-                            if (ClientMAC==DatabaseMac)
+                            //if (ClientMAC==DatabaseMac)
                                 valid = true;
                         }
                     }
