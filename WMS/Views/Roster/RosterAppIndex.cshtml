@@ -9,8 +9,11 @@
 <p>
     @Html.ActionLink("Back", "Index")
 </p>
-<table class="table">
-    <tr>
+<table class="table table-bordered table-hover table-condensed" >
+    <tr class="table-header">
+        <th>
+            Name
+        </th>
         <th>
             Start
         </th>
@@ -23,24 +26,26 @@
         <th>
             Cariteria Value
         </th>
-        <th>
+        @*<th>
             Work Mins
         </th>
         <th>
             Duty Time
-        </th>
+        </th>*@
         <th>
             Roster Type
         </th>
         <th>
             Shift
         </th>
-        <th>Details</th>
-        <th>Continue</th>
+        <th>Options</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @item.Name
+        </td>
         <td>
             @item.DateStarted.Value.ToString("dd-MMM-yyyy")
         </td>
@@ -67,19 +72,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.CriteriaData)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.WorkMin)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DutyTime)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.RosterType)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Shift)
         </td>
-        <td>
+@*        <td>
             @Html.ActionLink("Details", "RosterDetail", new { id=item.RotaApplD })
         </td>
         <td>
@@ -87,8 +92,35 @@
         </td>
          <td>
             @Html.ActionLink("Delete", "RosterDelete", new { id=item.RotaApplD })
+
         </td>
+        <td>
+            @Html.ActionLink("Edit", "RosterEdit", new { id=item.RotaApplD })
+
+        </td>*@
+        <td>@Html.DropDownList(
+    "url",
+    new SelectList(new[]
+    {
+        new SelectListItem { Text = "Details", Value = Url.Action("RosterDetail", "Roster", new { id=item.RotaApplD }) },
+        new SelectListItem { Text = "Continue", Value = Url.Action("RosterContinue", "Roster", new { id=item.RotaApplD }) },
+        new SelectListItem { Text = "Edit", Value = Url.Action("RosterEdit", "Roster", new { id=item.RotaApplD }) },
+        new SelectListItem { Text = "Delete", Value = Url.Action("RosterDelete", "Roster", new { id=item.RotaApplD }) },
+    }, "Value", "Text"),
+    "Options",
+    new { @class = "urlddl" }
+)</td>
     </tr>
 }
 
 </table>
+<script type="text/javascript">
+    $(function () {
+        $(".urlddl").on('change', function () {
+            var url = $(this).val();
+            if (url != null && url != '') {
+                window.location.href = url;
+            }
+        });
+    });
+</script>

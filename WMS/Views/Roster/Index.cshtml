@@ -23,14 +23,14 @@
                  <div class="row" style="margin-left:10%; margin-bottom:3%">
                     <div class="control-label col-md-3">Shift</div>
                     <div class="col-md-6">
-                         @Html.DropDownList("ShiftList",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                         @Html.DropDownList("ShiftList",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthRoster"})
                     </div>
                 </div>
 
                 <div class="row" style="margin-left:10%; margin-bottom:3%">
                     <div class="control-label col-md-3">Roster Type</div>
                     <div class="col-md-6">
-                          @Html.DropDownList("RosterType",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                          @Html.DropDownList("RosterType",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthRoster"})
                     </div>
                 </div>
     
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="margin-left:10%; margin-bottom:3%">
+                @*<div class="row" style="margin-left:10%; margin-bottom:3%">
                     <div class="control-label col-md-3">Work Minutes</div>
                     <div class="col-md-6">
                          <input type="text" id="mints" name="mints" value="585"  class="form-control" />
@@ -77,7 +77,7 @@
                     <div class="col-md-6">
                          <input type="text" id="dutyTime" name="dutyTime" value="0800"  class="form-control" />
                     </div>
-                </div>
+                </div>*@
             </section>
             <section class="col-md-6">
                 <header>
@@ -87,6 +87,7 @@
                     <div class="radio"><label><input type="radio" style="margin-left:-45px;" checked value="shift" name="cars">Shift</label></div>
                     <div class="radio"><label><input type="radio" style="margin-left:-45px;" value="crew" name="cars">Crew</label></div>
                     <div class="radio"><label><input type="radio" style="margin-left:-45px;" value="section"name="cars">Section</label></div>
+                     <div class="radio"><label><input type="radio" style="margin-left:-45px;" value="employee"name="cars">Employee</label></div>
                     @*<div class="radio"><label><input type="radio" style="margin-left:-45px;"  value="employee" name="cars">Employee</label></div>*@
                 </div>
                 
@@ -123,22 +124,22 @@
                     </div>
                 </div>
                 
-              @*  <div id="Option4" class="desc">
+                <div id="Option4" class="desc">
                     <div class="row" style="margin-bottom:3%">
                         <div class="col-md-3">
-                                <h5 style="font-size:14px; font-weight:bold">Enter P.No</h5>
+                                <h5 style="font-size:14px; font-weight:bold">Enter EmpNo</h5>
                             </div>
                         <div class="col-md-6">
-                            <input id="JobEmpNo" name="JobEmpNo" type="text" class="form-control"/>
+                            <input id="RosterEmpNo" name="RosterEmpNo" type="text" class="form-control"/>
                         </div>
                     </div>
-                </div>*@
+                </div>
             </section>
             </article>
                 
                 <div class="form-group">
                     <div class="col-md-offset-3 col-md-9">
-                        <input type="submit" value="Create" class="btn btn-small btn-default btn-success" />
+                        <input type="submit" value="Create" class="btn btn-default btn-success" />
                     </div>
                 </div>   
       

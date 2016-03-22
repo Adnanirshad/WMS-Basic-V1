@@ -34,6 +34,7 @@ $(document).ready(function () {
             case '4':
                 cycles = 1;
                 $("#cyclesDiv").hide();
+
                 rosterDays = 30;
                 break;
             case '5':

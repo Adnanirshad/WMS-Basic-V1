@@ -12,6 +12,7 @@ $(document).ready(function () {
 
     $("#Option1").hide();
     $("#Option2").hide();
+    $("#Option4").hide();
     $("#Option3").hide();
     $("#Option6").show();
     $("input[name$='cars']").click(function () {

@@ -4,14 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Roster Edit</h2>
+<h4 style="padding-top:20px;">Edit Roster for @Model.CriteriaValueName</h4>
 
 
 @{
     ViewBag.Title = "Roster";
 }
 <div>
-   <p>Edit roster for <b>@Model.Criteria</b> : <b>@Model.CriteriaValueName</b> </p>
+   
    <p>Roster will only be applied to the employees of the <b>@Model.ShiftName</b> shift</p>
 </div>
 @using (Html.BeginForm("EditRosterSave", "Roster", FormMethod.Post))

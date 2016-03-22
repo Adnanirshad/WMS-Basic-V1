@@ -225,6 +225,7 @@
     <Content Include="Scripts\HR\DeptCompanyCreate.js" />
     <Content Include="Scripts\HR\DivisionCompany.js" />
     <Content Include="Scripts\HR\DivisionCompanyCreate.js" />
+    <Content Include="Scripts\JavaScript1.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.maskedinput.js" />

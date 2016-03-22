@@ -17,7 +17,7 @@ namespace WMS.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.RosterType = new SelectList(db.RosterTypes.OrderBy(s => s.Name), "ID", "Name");
+            ViewBag.RosterType = new SelectList(db.RosterTypes, "ID", "Name");
             ViewBag.ShiftList = new SelectList(db.Shifts.OrderBy(s => s.ShiftName), "ShiftID", "ShiftName");
             ViewBag.CrewList = new SelectList(db.Crews.OrderBy(s => s.CrewName), "CrewID", "CrewName");
             ViewBag.SectionList = new SelectList(db.Sections.OrderBy(s => s.SectionName), "SectionID", "SectionName");
@@ -41,6 +41,7 @@ namespace WMS.Controllers
                 try
                 {
                     RosterApplication _RosterApplication = new RosterApplication();
+                    _RosterApplication.Name = item.RosterName;
                     _RosterApplication.RotaApplD = item.RotaAppID;
                     _RosterApplication.DateStarted = item.DateStarted;
                     _RosterApplication.DateEnded = item.DateEnded;
@@ -80,11 +81,12 @@ namespace WMS.Controllers
         public ActionResult Create(FormCollection form)
         {
             int _Shift = Convert.ToInt32(Request.Form["ShiftList"].ToString());
+            string _RosterName = Request.Form["rostername"].ToString();
             int _RosterType = Convert.ToInt32(Request.Form["RosterType"].ToString());
             DateTime _StartDate = Convert.ToDateTime(Request.Form["dateStart"]);
             DateTime _EndDate = Convert.ToDateTime(Request.Form["dateEndHidden"]);
-            TimeSpan _DutyTime = MyHelper.ConvertTime(Request.Form["dutyTime"]);
-            int _WorkMin = Convert.ToInt16(Request.Form["mints"]);
+            //TimeSpan _DutyTime = MyHelper.ConvertTime(Request.Form["dutyTime"]);
+            //int _WorkMin = Convert.ToInt16(Request.Form["mints"]);
             string Criteria = "";
             bool check = false;
             int RosterCriteriaValue = 0;
@@ -103,7 +105,14 @@ namespace WMS.Controllers
                     Criteria = "T";
                     break;
                 case "employee":
-
+                    string EmpNo = Request.Form["RosterEmpNo"].ToString();
+                    if (db.Emps.Where(aa => aa.EmpNo == EmpNo).Count() > 0)
+                    {
+                        RosterCriteriaValue = db.Emps.Where(aa => aa.EmpNo == EmpNo).FirstOrDefault().EmpID;
+                        Criteria = "E";
+                    }
+                    else
+                        check = false;
                     break;
             }
             if (check == false)
@@ -113,11 +122,12 @@ namespace WMS.Controllers
                     DateStarted = _StartDate,
                     DateEnded = _EndDate.AddDays(-1),
                     DateCreated = DateTime.Now,
+                    RosterName=_RosterName,
                     RosterCriteria = Criteria,
                     CriteriaData = RosterCriteriaValue,
-                    DutyTime = _DutyTime,
+                    //DutyTime = _DutyTime,
                     RotaTypeID = (byte)_RosterType,
-                    WorkMin = (short)_WorkMin,
+                    //WorkMin = (short)_WorkMin,
                     Status = true,
                     ShiftID = (byte)_Shift,
                     UserID = Convert.ToInt32(Session["LogedUserID"].ToString())
@@ -125,7 +135,7 @@ namespace WMS.Controllers
                 db.RosterApps.Add(ra);
                 db.SaveChanges();
 
-                return View(CalculateRosterFields(_RosterType, _StartDate, _WorkMin, _DutyTime, Criteria, RosterCriteriaValue, _Shift, ra.RotaAppID));
+                return View(CalculateRosterFields(_RosterType, _StartDate, 0, new TimeSpan(0,0,0), Criteria, RosterCriteriaValue, _Shift, ra.RotaAppID));
             }
             else
             {
@@ -240,12 +250,32 @@ namespace WMS.Controllers
             shift = db.Shifts.First(aa => aa.ShiftID == rosterApp.ShiftID);
             DateTime currentDate = rosterApp.DateStarted.Value;
             List<RosterDetail> tempRotaDetails = new List<RosterDetail>();
+            string Criteria="";
+            switch(rosterApp.RosterCriteria)
+            {
+                case "S":
+                    Criteria = "Applied on Shift: "+rosterApp.Shift.ShiftName;
+                    break;
+                    case "T":
+                    Criteria = "Applied on Section :"+db.Sections.Where(aa=>aa.SectionID==rosterApp.CriteriaData).First().SectionName;
+                    break;
+                    case "C":
+                    Criteria = "Applied on Crew :"+db.Crews.Where(aa=>aa.CrewID==rosterApp.CriteriaData).First().CrewName;
+                    break;
+                    case "E":
+                    Criteria = "Applied on Employee :"+db.Emps.Where(aa=>aa.EmpID==rosterApp.CriteriaData).First().EmpName;
+                    break;
+            }
+            string _Date = "Date: " + rosterApp.DateStarted.Value.ToString("dd-MMM-yyyy") + "   TO   " + rosterApp.DateEnded.Value.ToString("dd-MMM-yyyy");
             while (currentDate <= rosterApp.DateEnded)
             {
                 RosterDetailAttributes rdaS = new RosterDetailAttributes();
                 tempRotaDetails = rosterdetails.Where(aa => aa.RosterDate == currentDate).ToList();
                 if (tempRotaDetails.Count > 0)
                 {
+                    rdaS.Date = _Date;
+                    rdaS.Shift = rosterApp.Shift.ShiftName;
+                    rdaS.Criteria = Criteria;
                     rdaS.Changed = true;
                     rdaS.Day = tempRotaDetails.FirstOrDefault().RosterDate.Value.ToString("dddd");
                     rdaS.DutyCode = tempRotaDetails.FirstOrDefault().DutyCode;
@@ -255,6 +285,9 @@ namespace WMS.Controllers
                 }
                 else
                 {
+                    rdaS.Date = _Date;
+                    rdaS.Shift = rosterApp.Shift.ShiftName;
+                    rdaS.Criteria = Criteria;
                     rdaS.Changed = false;
                     rdaS.Day = currentDate.ToString("dddd");
                     int wrkMin = CalculateDutyCode(shift, currentDate);
@@ -308,6 +341,9 @@ namespace WMS.Controllers
                     endPoint = 84;
                 }
                 _objstudentmodel._RosterAttributes = new List<RosterAttributes>();
+                 RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaAppID == _RotaAppID);
+                 Shift shift = db.Shifts.First(aa => aa.ShiftID == rosterApp.ShiftID);
+                 _DutyTime = shift.StartTime;
                 for (int i = 1; i <= endPoint; i++)
                 {
                     string _day = _StartDate.Date.ToString("dddd");
@@ -321,10 +357,9 @@ namespace WMS.Controllers
                     _objstudentmodel.NoOfDays = endPoint;
                     _objstudentmodel.CriteriaValueName = GetCriteriaValueName(_Criteria, _CriteriaValue);
                     _objstudentmodel.ShiftName = db.Shifts.FirstOrDefault(ss => ss.ShiftID == _Shift).ShiftName;
-                    _objstudentmodel._RosterAttributes.Add(new RosterAttributes { ID = i, DateString = _date, Day = _day, DutyDate = _StartDate.Date, DutyTimeString = _DTime, DutyTime = _DutyTime, WorkMin = _WorkMin });
+                    _objstudentmodel._RosterAttributes.Add(new RosterAttributes { ID = i, DateString = _date, Day = _day, DutyDate = _StartDate.Date, DutyTimeString = _DTime, DutyTime = _DutyTime, WorkMin = GetWorkMins(_StartDate, shift) });
                     _StartDate = _StartDate.AddDays(1);
                 }
-                RosterApp rosterApp = db.RosterApps.First(aa => aa.RotaAppID == _RotaAppID);
                 rosterApp.DateEnded = _StartDate.AddDays(-1);
                 db.SaveChanges();
                 return _objstudentmodel;
@@ -334,6 +369,38 @@ namespace WMS.Controllers
                 return _objstudentmodel;
             }
         }
+
+        private int GetWorkMins(DateTime _StartDate, Shift shift)
+        {
+            int _workMins = 0;
+            switch (_StartDate.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    _workMins = shift.MonMin;
+                    break;
+                case DayOfWeek.Tuesday:
+                    _workMins = shift.TueMin;
+                    break;
+                case DayOfWeek.Wednesday:
+                    _workMins = shift.WedMin;
+                    break;
+                case DayOfWeek.Thursday:
+                    _workMins = shift.ThuMin;
+                    break;
+                case DayOfWeek.Friday:
+                    _workMins = shift.FriMin;
+                    break;
+                case DayOfWeek.Saturday:
+                    _workMins = shift.SatMin;
+                    break;
+                case DayOfWeek.Sunday:
+                    _workMins = shift.SunMin;
+                    break;
+            }
+            return _workMins;
+        }
+
+        
 
         #endregion
 
@@ -364,16 +431,16 @@ namespace WMS.Controllers
                 switch (rosterApp.RosterCriteria)
                 {
                     case "S":
-
+                        _objmodel.CriteriaValueName = "Shift: " +db.Shifts.Where(aa => aa.ShiftID == rosterApp.CriteriaData).First().ShiftName;
                         break;
                     case "C":
-                        _objmodel.CriteriaValueName = db.Crews.Where(aa => aa.CrewID == rosterApp.CriteriaData).First().CrewName;
+                        _objmodel.CriteriaValueName = "Crew: " + db.Crews.Where(aa => aa.CrewID == rosterApp.CriteriaData).First().CrewName;
                         break;
                     case "T":
-
+                        _objmodel.CriteriaValueName = "Section: " + db.Sections.Where(aa => aa.SectionID == rosterApp.CriteriaData).First().SectionName;
                         break;
-                    case "employee":
-
+                    case "E":
+                        _objmodel.CriteriaValueName = "Employee: " + db.Emps.Where(aa => aa.EmpID == rosterApp.CriteriaData).First().EmpName;
                         break;
                 }
                 while (_StartDate <= rosterApp.DateEnded)
@@ -684,6 +751,7 @@ namespace WMS.Controllers
     public class RosterApplication
     {
         public int RotaApplD { get; set; }
+        public string Name { get; set; }
         public Nullable<System.DateTime> DateStarted { get; set; }
         public Nullable<System.DateTime> DateEnded { get; set; }
         public string RosterCriteria { get; set; }
@@ -730,6 +798,9 @@ namespace WMS.Controllers
     }
     public class RosterDetailAttributes
     {
+        public string Shift { get; set; }
+        public string Date { get; set; }
+        public string Criteria { get; set; }
         public string CriteriaValueDate { get; set; }
         public string Day { get; set; }
         public DateTime DutyDate { get; set; }
