@@ -12,6 +12,10 @@ namespace WMS.Controllers
         // GET: /JobCard/
         public ActionResult Index()
         {
+            return RedirectToAction("JCCreate");
+        }
+        public ActionResult JCCreate()
+        {
             return View();
         }
 	}

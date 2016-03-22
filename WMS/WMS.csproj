@@ -369,6 +369,7 @@
     <Content Include="Views\Crew\Details.cshtml" />
     <Content Include="Views\Crew\Edit.cshtml" />
     <Content Include="Views\Crew\Index.cshtml" />
+    <Content Include="Views\JobCard\Index.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
