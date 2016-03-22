@@ -48,6 +48,7 @@ namespace WMS.Models
         public DbSet<EmpPhoto> EmpPhotoes { get; set; }
         public DbSet<EmpType> EmpTypes { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
+        public DbSet<JobCard> JobCards { get; set; }
         public DbSet<JobCardApp> JobCardApps { get; set; }
         public DbSet<JobCardDetail> JobCardDetails { get; set; }
         public DbSet<LicenseDeviceInfo> LicenseDeviceInfoes { get; set; }
