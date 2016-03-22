@@ -5,23 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Section Details</h2>
 
 <div>
-    <h4>Crew</h4>
+    
 	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CrewName)
+          Crew Name:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CrewName)
         </dd>
-
     </dl>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.CrewID }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+            </div>
+        </div>
+    <hr />
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CrewID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -81,6 +81,13 @@
                                 @Html.ValidationMessageFor(model => model.ShiftID)
                             </div>
                         </div>
+                       <div class="form-group">
+                            <label class="control-label col-md-3">Crew Name</label>
+                            <div class="col-md-3">
+                               @Html.DropDownList("CrewID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+                                @Html.ValidationMessageFor(model => model.CrewID)
+                            </div>
+                        </div>
                          <div class="form-group" id="DeptDivID">
                             <div class = "control-label col-md-3">
                                 <label for="Deptartment">Department</label>
@@ -284,7 +291,6 @@
     <script src="~/Scripts/jquery.form.js"></script>
     <script src="~/Scripts/respond.js"></script>
     <script src="~/Scripts/site.avatar.js"></script>
-
 
 <link href="~/Content/site.avatar.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/jquery.jcrop.css" rel="stylesheet" type="text/css" />

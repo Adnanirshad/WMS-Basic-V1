@@ -158,7 +158,7 @@ namespace WMS.Controllers
                 //_wings = context.Divisions.ToList();
             }
              
-            //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s => s.CrewName), "CrewID", "CrewName");
+            ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s => s.CrewName), "CrewID", "CrewName");
             ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s => s.DesignationName), "DesignationID", "DesignationName");
             //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
             //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
@@ -286,7 +286,7 @@ namespace WMS.Controllers
             {
                 EmpType et = db.EmpTypes.Where(aa => aa.TypeID == emp.TypeID).FirstOrDefault();
                 //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName", et.CatID);
-                //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName", emp.CrewID);
+                ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName", emp.CrewID);
                 ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName", emp.DesigID);
                 //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName", emp.GradeID);
                 //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1", emp.JobID);
@@ -361,7 +361,7 @@ namespace WMS.Controllers
                     return RedirectToAction("Index");
                 }
                 User LoggedInUser = Session["LoggedUser"] as User;
-                //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
+              ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
                 ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName");
                 //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
                 //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
@@ -379,7 +379,7 @@ namespace WMS.Controllers
             {
                 ViewBag.Message = ex.InnerException.ToString();
                 User LoggedInUser = Session["LoggedUser"] as User;
-                //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
+                ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
                 ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName");
                 //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
                 //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");

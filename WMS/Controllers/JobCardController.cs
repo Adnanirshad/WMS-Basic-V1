@@ -12,9 +12,9 @@ namespace WMS.Controllers
         // GET: /JobCard/
         public ActionResult Index()
         {
-            return RedirectToAction("JCCreate");
+            return RedirectToAction("JobCardList");
         }
-        public ActionResult JCCreate()
+        public ActionResult JobCardList()
         {
             return View();
         }
