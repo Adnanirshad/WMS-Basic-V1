@@ -442,6 +442,7 @@
     <Compile Include="CustomClass\CriteriaFoAngular.cs" />
     <Compile Include="CustomClass\CustomFunc.cs" />
     <Compile Include="CustomClass\DatatableToList.cs" />
+    <Compile Include="CustomClass\GlobalVaribales.cs" />
     <Compile Include="CustomClass\QueryBuilder.cs" />
     <Compile Include="CustomClass\ValueForAngular.cs" />
     <Compile Include="ErrorPages\ErrorPage.aspx.cs">

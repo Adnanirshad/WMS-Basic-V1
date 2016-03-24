@@ -392,8 +392,8 @@ namespace WMS.Controllers
                         _attdata.StatusDO = false;
                         _attdata.StatusLeave = false;
                         _attdata.StatusP = true;
-                        _attdata.WorkMin = _jcCard.WorkMin;
-                        _attdata.ShifMin = _jcCard.WorkMin;
+                        //_attdata.WorkMin = _jcCard.WorkMin;
+                        //_attdata.ShifMin = _jcCard.WorkMin;
                         _attdata.Remarks = "[Present][Manual]";
                         _attdata.TimeIn = null;
                         _attdata.TimeOut = null;

@@ -21,7 +21,8 @@ namespace WMS.Models
     
         public byte RdrTypeID { get; set; }
         public string RdrTypeName { get; set; }
-        public Nullable<byte> VendorID { get; set; }
+        public string Category { get; set; }
+        public Nullable<bool> Enable { get; set; }
     
         public virtual ICollection<Reader> Readers { get; set; }
     }

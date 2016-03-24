@@ -19,6 +19,7 @@ using System.Data;
 using System.Drawing;
 using System.Management;
 using System.Net.NetworkInformation;
+using WMS.CustomClass;
 namespace WMS.Controllers
 {
     public class HomeController : Controller
@@ -29,6 +30,7 @@ namespace WMS.Controllers
         {
             try
             {
+                SetGlobalVaribale();
                 if (CheckForValidLicense())
                 {
                     if (Session["LogedUserID"] == null)
@@ -73,21 +75,42 @@ namespace WMS.Controllers
                 return View();
             }
         }
+
+        private void SetGlobalVaribale()
+        {
+            using (var db = new TAS2013Entities())
+            {
+                GlobalVaribales.ServerPath = db.Options.FirstOrDefault().ServerFilePath;
+                if (db.LicenseInfoes.Count() > 0)
+                {
+                    LicenseInfo li = new LicenseInfo();
+                    li = db.LicenseInfoes.FirstOrDefault();
+                    GlobalVaribales.NoOfDevices = StringCipher.Decrypt(li.NoOfDevices, "1234");
+                    GlobalVaribales.NoOfEmps = StringCipher.Decrypt(li.NoOfEmps, "1234");
+                    GlobalVaribales.NoOfUsers = StringCipher.Decrypt(li.NoOfUsers, "1234");
+                    GlobalVaribales.DeviceType = StringCipher.Decrypt(li.DeviceType, "1234");
+                    GlobalVaribales.LicenseType = StringCipher.Decrypt(li.LicenseType, "1234");
+                }
+                db.Dispose();
+            }
+        }
+
+        #region --License--
         [HttpPost]
         public ActionResult LoadLicense(HttpPostedFileBase uploadFile)
         {
             if (uploadFile.ContentLength > 0)
             {
                 string filePath = Path.GetFileName(uploadFile.FileName);
-                uploadFile.SaveAs("C:\\" + filePath);
-                ReadFile();
+                uploadFile.SaveAs(GlobalVaribales.ServerPath + filePath);
+                ReadFile(GlobalVaribales.ServerPath + filePath);
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
-        private void ReadFile()
+        private void ReadFile(string LicensePath)
         {
-            System.IO.StreamReader file = new System.IO.StreamReader("C:\\CNSLicense.cns");
+            System.IO.StreamReader file = new System.IO.StreamReader(LicensePath);
             string line;
             int CurrentlineNo = 0;
             string InvoiceNo="";
@@ -123,7 +146,9 @@ namespace WMS.Controllers
                 CurrentlineNo++;
             }
             TAS2013Entities db = new TAS2013Entities();
-            if(GetClientMacAddress()==StringCipher.Decrypt(ClientMac,"1234"))
+            string DBMACAddress = StringCipher.Decrypt(ClientMac,"1234");
+            string SystemMACAdress = GetClientMacAddress();
+            if (DBMACAddress == SystemMACAdress)
             {
                 LicenseInfo li = new LicenseInfo();
                 if (db.LicenseInfoes.Count() > 0)
@@ -179,7 +204,7 @@ namespace WMS.Controllers
                         {
                             string ClientMAC = GetClientMacAddress();
                             string DatabaseMac = StringCipher.Decrypt(li.ClientMAC, "1234");
-                            //if (ClientMAC==DatabaseMac)
+                            if (ClientMAC==DatabaseMac)
                                 valid = true;
                         }
                     }
@@ -191,29 +216,23 @@ namespace WMS.Controllers
             }
             return valid;
         }
-
         public static string GetClientMacAddress()
         {
-            String sMacAddress = string.Empty;
-            try
+            IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            string mac="";
+            foreach (NetworkInterface adapter in nics)
             {
-                NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
-                foreach (NetworkInterface adapter in nics)
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
-                    if (sMacAddress == String.Empty)// only return MAC Address from first card  
-                    {
-                        //IPInterfaceProperties properties = adapter.GetIPProperties(); Line is not required
-                        sMacAddress = adapter.GetPhysicalAddress().ToString();
-                    }
+                    
+                             mac=  adapter.GetPhysicalAddress().ToString();
+                    
                 }
             }
-            catch (Exception)
-            {
-                sMacAddress = "";
-            }
-            return sMacAddress;
+            return mac;
         }
-
+        #endregion
         private void SaveImage()
         {
             //image to byteArray
@@ -402,7 +421,7 @@ namespace WMS.Controllers
             var xmlStream = new StringReader(myObject.ToString());
             return xmlSerial.Deserialize(xmlStream);
         }
-
+        #region --Dashboard--
         public ActionResult GetDahboard()
         {
             DateTime dt = DateTime.Today.AddDays(-1);
@@ -516,6 +535,7 @@ namespace WMS.Controllers
 
             return RedirectToAction("Index");
         }
+        #endregion
     }
     public class DashboardValues
     {

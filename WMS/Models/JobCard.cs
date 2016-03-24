@@ -16,6 +16,6 @@ namespace WMS.Models
     {
         public short WorkCardID { get; set; }
         public string WorkCardName { get; set; }
-        public Nullable<short> WorkMin { get; set; }
+        public Nullable<short> WorMin { get; set; }
     }
 }

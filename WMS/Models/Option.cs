@@ -19,5 +19,6 @@ namespace WMS.Models
         public byte[] CompanyLogo { get; set; }
         public Nullable<System.DateTime> MonthlyStart { get; set; }
         public Nullable<System.DateTime> MonthlyEnd { get; set; }
+        public string ServerFilePath { get; set; }
     }
 }

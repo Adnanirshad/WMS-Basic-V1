@@ -10,6 +10,7 @@ using WMS.Models;
 using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
 using WMS.Controllers.Filters;
+using WMS.CustomClass;
 
 namespace WMS.Controllers
 {
@@ -92,6 +93,8 @@ namespace WMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( [Bind(Include = "UserID,UserName,Password,EmpID,DateCreated,Name,Status,Department,CanEdit,CanDelete,CanAdd,CanView,RoleID,MHR,MDevice,MLeave,MDesktop,MEditAtt,MUser,MOption,MRoster,MRDailyAtt,MRLeave,MRMonthly,MRAudit,MRManualEditAtt,MREmployee,MRDetail,MRSummary,MRGraph,ViewPermanentStaff,ViewPermanentMgm,ViewContractual,ViewLocation,LocationID,MProcess")] User user)
         {
+            if (db.Users.Where(aa => aa.Status == true).Count() > Convert.ToInt32(GlobalVaribales.NoOfUsers))
+                ModelState.AddModelError("UserName", "Your Users has exceeded from License, Please upgrade your license");
             user.CanAdd = (bool)ValueProvider.GetValue("CanAdd").ConvertTo(typeof(bool));
             user.CanEdit = (bool)ValueProvider.GetValue("CanEdit").ConvertTo(typeof(bool));
             user.CanDelete = (bool)ValueProvider.GetValue("CanDelete").ConvertTo(typeof(bool));
@@ -117,6 +120,8 @@ namespace WMS.Controllers
                 user.UserType = false;
             user.DateCreated = DateTime.Today;
 
+            if (ModelState.IsValid)
+            {
                 db.Users.Add(user);
                 db.SaveChanges();
                 if (user.UserType == true)
@@ -135,7 +140,8 @@ namespace WMS.Controllers
                         db.UserSections.Add(uSec);
                         db.SaveChanges();
                     }
-                }
+                } 
+            }
             return View(user);
         }
 

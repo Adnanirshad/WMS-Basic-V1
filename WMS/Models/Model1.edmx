@@ -1463,7 +1463,7 @@
           </Key>
           <Property Name="WorkCardID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="WorkCardName" Type="nvarchar" MaxLength="100" />
-          <Property Name="WorkMin" Type="smallint" />
+          <Property Name="WorMin" Type="smallint" />
         </EntityType>
         <EntityType Name="JobCardApp">
           <Key>
@@ -1627,6 +1627,7 @@
           <Property Name="CompanyLogo" Type="image" />
           <Property Name="MonthlyStart" Type="date" />
           <Property Name="MonthlyEnd" Type="date" />
+          <Property Name="ServerFilePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PollData">
           <Key>
@@ -1691,7 +1692,8 @@
           </Key>
           <Property Name="RdrTypeID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RdrTypeName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="VendorID" Type="tinyint" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Enable" Type="bit" />
         </EntityType>
         <EntityType Name="Reason">
           <Key>
@@ -3833,7 +3835,7 @@
           </Key>
           <Property Type="Int16" Name="WorkCardID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="WorkCardName" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Int16" Name="WorkMin" />
+          <Property Type="Int16" Name="WorMin" />
         </EntityType>
         <EntityType Name="JobCardApp">
           <Key>
@@ -4012,6 +4014,7 @@
           <Property Type="Binary" Name="CompanyLogo" MaxLength="Max" FixedLength="false" />
           <Property Type="DateTime" Name="MonthlyStart" Precision="0" />
           <Property Type="DateTime" Name="MonthlyEnd" Precision="0" />
+          <Property Type="String" Name="ServerFilePath" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PollData">
           <Key>
@@ -4083,7 +4086,8 @@
           </Key>
           <Property Type="Byte" Name="RdrTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="RdrTypeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Byte" Name="VendorID" />
+          <Property Type="String" Name="Category" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Enable" />
           <NavigationProperty Name="Readers" Relationship="TAS201Model.FK_Reader_ReaderType1" FromRole="ReaderType" ToRole="Reader" />
         </EntityType>
         <EntityType Name="Reason">
@@ -6001,7 +6005,7 @@
           <EntitySetMapping Name="JobCards">
             <EntityTypeMapping TypeName="TAS201Model.JobCard">
               <MappingFragment StoreEntitySet="JobCard">
-                <ScalarProperty Name="WorkMin" ColumnName="WorkMin" />
+                <ScalarProperty Name="WorMin" ColumnName="WorMin" />
                 <ScalarProperty Name="WorkCardName" ColumnName="WorkCardName" />
                 <ScalarProperty Name="WorkCardID" ColumnName="WorkCardID" />
               </MappingFragment>
@@ -6173,6 +6177,7 @@
           <EntitySetMapping Name="Options">
             <EntityTypeMapping TypeName="TAS201Model.Option">
               <MappingFragment StoreEntitySet="Option">
+                <ScalarProperty Name="ServerFilePath" ColumnName="ServerFilePath" />
                 <ScalarProperty Name="MonthlyEnd" ColumnName="MonthlyEnd" />
                 <ScalarProperty Name="MonthlyStart" ColumnName="MonthlyStart" />
                 <ScalarProperty Name="CompanyLogo" ColumnName="CompanyLogo" />
@@ -6246,7 +6251,8 @@
           <EntitySetMapping Name="ReaderTypes">
             <EntityTypeMapping TypeName="TAS201Model.ReaderType">
               <MappingFragment StoreEntitySet="ReaderType">
-                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="RdrTypeName" ColumnName="RdrTypeName" />
                 <ScalarProperty Name="RdrTypeID" ColumnName="RdrTypeID" />
               </MappingFragment>

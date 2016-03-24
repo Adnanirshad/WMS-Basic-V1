@@ -12,6 +12,7 @@ using PagedList;
 using System.Text.RegularExpressions;
 using WMS.Controllers.Filters;
 using WMS.HelperClass;
+using WMS.CustomClass;
 namespace WMS.Controllers
 {
     [CustomControllerAttributes]
@@ -19,27 +20,7 @@ namespace WMS.Controllers
     {
         private TAS2013Entities db = new TAS2013Entities();
 
-        // GET: /Reader/
-
-        //public ActionResult RegionList()
-        //{
-        //    List<Region> _Region = db.Regions.ToList();
-        //    if (HttpContext.Request.IsAjaxRequest())
-        //    {
-        //        return Json(_Region, JsonRequestBehavior.AllowGet);
-        //    }
-        //    return View(_Region);
-        //}
-
-        //public ActionResult CityList(string region)
-        //{
-        //    List<City> _City = db.Cities.Where(aa=>aa.Region.RegionName == region).ToList();
-        //    if (HttpContext.Request.IsAjaxRequest())
-        //    {
-        //        return Json(_City, JsonRequestBehavior.AllowGet);
-        //    }
-        //    return View(_City);
-        //}
+        
 
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
@@ -61,43 +42,49 @@ namespace WMS.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            var readers = db.Readers.Include(r => r.Location).Include(r => r.RdrDutyCode).Include(r => r.ReaderType);
+            List<Reader> readers = new List<Models.Reader>();
+            if(GlobalVaribales.DeviceType=="1")
+                readers = db.Readers.Where(aa=>aa.ReaderType.Category=="CNS-Card").ToList();
+            if (GlobalVaribales.DeviceType == "2")
+                readers = db.Readers.Where(aa => aa.ReaderType.Category == "CNS-FP").ToList();
+            if (GlobalVaribales.DeviceType == "3")
+                readers = db.Readers.Where(aa => aa.ReaderType.Category == "CNS-Face").ToList();
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 readers = readers.Where(s => s.RdrName.ToUpper().Contains(searchString.ToUpper())
                      || s.ReaderType.RdrTypeName.ToUpper().Contains(searchString.ToUpper())
                      || s.Location.LocName.ToUpper().Contains(searchString.ToUpper())
-                     || s.IpAdd.ToUpper().Contains(searchString.ToUpper()));
+                     || s.IpAdd.ToUpper().Contains(searchString.ToUpper())).ToList();
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    readers = readers.OrderByDescending(s => s.RdrName);
+                    readers = readers.OrderByDescending(s => s.RdrName).ToList();
                     break;
 
                 case "Location_desc":
-                    readers = readers.OrderByDescending(s => s.Location.LocName);
+                    readers = readers.OrderByDescending(s => s.Location.LocName).ToList();
                     break;
                 case "Location":
-                    readers = readers.OrderBy(s => s.Location.LocName);
+                    readers = readers.OrderBy(s => s.Location.LocName).ToList();
                     break;
                 case "RdrType_desc":
-                    readers = readers.OrderByDescending(s => s.ReaderType.RdrTypeName);
+                    readers = readers.OrderByDescending(s => s.ReaderType.RdrTypeName).ToList();
                     break;
                 case "RdrType":
-                    readers = readers.OrderBy(s => s.ReaderType.RdrTypeName);
+                    readers = readers.OrderBy(s => s.ReaderType.RdrTypeName).ToList();
                     break;
                 
                 case "Status_desc":
-                    readers = readers.OrderByDescending(s => s.Status);
+                    readers = readers.OrderByDescending(s => s.Status).ToList();
                     break;
                 case "Status":
-                    readers = readers.OrderBy(s => s.Status);
+                    readers = readers.OrderBy(s => s.Status).ToList();
                     break;
                 default:
-                    readers = readers.OrderBy(s => s.RdrName);
+                    readers = readers.OrderBy(s => s.RdrName).ToList();
                     break;
             }
             int pageSize = 8;
@@ -128,7 +115,13 @@ namespace WMS.Controllers
         {
             ViewBag.LocID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
             ViewBag.RdrDutyID = new SelectList(db.RdrDutyCodes.OrderBy(s=>s.RdrDutyName), "RdrDutyID", "RdrDutyName");
-            ViewBag.RdrTypeID = new SelectList(db.ReaderTypes.OrderBy(s=>s.RdrTypeName), "RdrTypeID", "RdrTypeName");
+            if (GlobalVaribales.DeviceType == "1")
+                ViewBag.RdrTypeID = new SelectList(db.ReaderTypes.Where(aa => aa.Category == "CNS-Card").OrderBy(s => s.RdrTypeName), "RdrTypeID", "RdrTypeName");
+            if (GlobalVaribales.DeviceType == "2")
+                ViewBag.RdrTypeID = new SelectList(db.ReaderTypes.Where(aa => aa.Category == "CNS-FP").OrderBy(s => s.RdrTypeName), "RdrTypeID", "RdrTypeName");
+            if (GlobalVaribales.DeviceType == "3")
+                ViewBag.RdrTypeID = new SelectList(db.ReaderTypes.Where(aa => aa.Category == "CNS-Face").OrderBy(s => s.RdrTypeName), "RdrTypeID", "RdrTypeName");
+            
             return View();
         }
 
@@ -141,6 +134,8 @@ namespace WMS.Controllers
         public ActionResult Create([Bind(Include = "RdrID,RdrName,RdrDutyID,IpAdd,IpPort,RdrTypeID,Status,LocID")] Reader reader)
         {
             // Regex for IP [0-9]+(\.[0-9][0-9]?)?
+            if (db.Readers.Where(aa => aa.Status == true).Count() > Convert.ToInt32(GlobalVaribales.NoOfDevices))
+                ModelState.AddModelError("RdrName", "Your Readers has exceeded from License, Please upgrade your license");
             if (string.IsNullOrEmpty(reader.IpAdd))
                 ModelState.AddModelError("IpAdd", "Required");
             if (string.IsNullOrEmpty(reader.RdrName))

@@ -212,12 +212,22 @@ namespace WMS.Controllers
                 ModelState.AddModelError("TypeID", "Please Specify Type!");
             //if (emp.GradeID == null)
                 //ModelState.AddModelError("GradeID", "Please Specify Grade!");
-
+            if(db.Emps.Where(aa=>aa.Status==true).Count()> Convert.ToInt32(GlobalVaribales.NoOfEmps))
+                ModelState.AddModelError("EmpNo", "Your Employees has exceeded from License, Please upgrade your license");
             if (ModelState.IsValid)
             {
                 emp.ProcessAtt = true;
                 //emp.ProcessI = true;
                 emp.EmpNo = emp.EmpNo.ToUpper();
+                if (emp.CardNo != "")
+                {
+                    int card = Convert.ToInt32(emp.CardNo);
+                    emp.CardNo = card.ToString("0000000000");
+                }
+                else
+                {
+                    emp.CardNo = "0000000000";
+                }
                 empNo = emp.EmpNo;
                 //emp.FpID = emp.EmpID;
                 db.Emps.Add(emp);
@@ -352,6 +362,15 @@ namespace WMS.Controllers
                 //    ModelState.AddModelError("GradeID", "Please Specify Grade!");
                 if (ModelState.IsValid)
                 {
+                    if (emp.CardNo != "")
+                    {
+                        int card = Convert.ToInt32(emp.CardNo);
+                        emp.CardNo = card.ToString("0000000000");
+                    }
+                    else
+                    {
+                        emp.CardNo = "0000000000";
+                    }
                     emp.EmpNo = emp.EmpNo.ToUpper();
                     db.Entry(emp).State = EntityState.Modified;
                    
