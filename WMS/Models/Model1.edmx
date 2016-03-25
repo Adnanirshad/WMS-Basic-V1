@@ -1685,6 +1685,7 @@
           <Property Name="RdrTypeID" Type="tinyint" Nullable="false" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="LocID" Type="smallint" />
+          <Property Name="ClearRecords" Type="bit" />
         </EntityType>
         <EntityType Name="ReaderType">
           <Key>
@@ -4075,6 +4076,7 @@
           <Property Type="Byte" Name="RdrTypeID" Nullable="false" />
           <Property Type="Boolean" Name="Status" Nullable="false" />
           <Property Type="Int16" Name="LocID" />
+          <Property Type="Boolean" Name="ClearRecords" />
           <NavigationProperty Name="Location" Relationship="TAS201Model.FK_Reader_Location" FromRole="Reader" ToRole="Location" />
           <NavigationProperty Name="PollDatas" Relationship="TAS201Model.FK_Reader_RdrID" FromRole="Reader" ToRole="PollData" />
           <NavigationProperty Name="RdrDutyCode" Relationship="TAS201Model.FK_Reader_RdrDutyCode" FromRole="Reader" ToRole="RdrDutyCode" />
@@ -6237,6 +6239,7 @@
           <EntitySetMapping Name="Readers">
             <EntityTypeMapping TypeName="TAS201Model.Reader">
               <MappingFragment StoreEntitySet="Reader">
+                <ScalarProperty Name="ClearRecords" ColumnName="ClearRecords" />
                 <ScalarProperty Name="LocID" ColumnName="LocID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="RdrTypeID" ColumnName="RdrTypeID" />

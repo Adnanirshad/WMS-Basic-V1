@@ -68,12 +68,19 @@
          <div class="form-group">
             <div class="control-label col-md-2">Status</div>
             <div class="col-md-10">
-                 @Html.DropDownList("Status", new List<SelectListItem>
+                 @*@Html.DropDownList("Status", new List<SelectListItem>
                                     { 
                                         new SelectListItem { Text = "Active", Value = "true", Selected=true},
                                         new SelectListItem { Text = "Inactive", Value = "false"}
                                     },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                @Html.ValidationMessageFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status)*@
+                @Html.CheckBox("Status") <label>Active Device</label>
+            </div>
+        </div>
+<div class="form-group">
+            <div class="control-label col-md-2"></div>
+            <div class="col-md-4">
+                 @Html.CheckBox("ClearRecords") <label>Clear Records After Downloading</label>
             </div>
         </div>
         <div class="form-group">

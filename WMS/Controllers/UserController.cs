@@ -23,7 +23,8 @@ namespace WMS.Controllers
         public ActionResult Index()
         {
             User LoggedInUser = Session["LoggedUser"] as User;
-            var users = db.Users;
+            int NoOfUsres = Convert.ToInt32(GlobalVaribales.NoOfUsers);
+            var users = db.Users.Take(NoOfUsres);
             return View(users.ToList());
         }
 
@@ -48,43 +49,6 @@ namespace WMS.Controllers
             return View();
         }
 
-
-        private ADUsersModel GetADUsers()
-        {
-            ADUsersModel _objstudentmodel = new ADUsersModel();
-            _objstudentmodel._ADUsersAttributes = new List<ADUsersAttributes>();
-            //using (var context = new PrincipalContext(ContextType.Domain, "fatima-group.com", "ffl.ithelpdesk@fatima-group.com", "fatima@0202"))
-            using (var context = new PrincipalContext(ContextType.Domain, "fatima-group.com", "wms.ffl@fatima-group.com", "fflWMS.net"))
-            {
-                using (var searcher = new PrincipalSearcher(new UserPrincipal(context)))
-                {
-                    int i = 1;
-                    foreach (var result in searcher.FindAll())
-                    {
-                        DirectoryEntry de = result.GetUnderlyingObject() as DirectoryEntry;
-                        string name = result.Name;
-                        string displayName = result.DisplayName;
-                        string userPrincipleName = result.UserPrincipalName;
-                        string samAccountName = result.SamAccountName;
-                        string distinguishedName = result.DistinguishedName;
-                        //label1.Text += "Name:    " + result.Name;
-                        //label1.Text += "      account name   :    " + result.UserPrincipalName;
-                        //label1.Text += "      Server:    " + result.Context.ConnectedServer + "\r";
-                        _objstudentmodel._ADUsersAttributes.Add(new ADUsersAttributes
-                        {
-                            ID = i,
-                            UserName = name,
-                            DisplayName = displayName,
-                            PrincipleName = userPrincipleName,
-                            DistingushedName = distinguishedName,
-                            SAMName = samAccountName
-                        });
-                        i++;
-                    }
-                }
-            }
-            return _objstudentmodel;
-        }
         // POST: /User/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -93,7 +57,7 @@ namespace WMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( [Bind(Include = "UserID,UserName,Password,EmpID,DateCreated,Name,Status,Department,CanEdit,CanDelete,CanAdd,CanView,RoleID,MHR,MDevice,MLeave,MDesktop,MEditAtt,MUser,MOption,MRoster,MRDailyAtt,MRLeave,MRMonthly,MRAudit,MRManualEditAtt,MREmployee,MRDetail,MRSummary,MRGraph,ViewPermanentStaff,ViewPermanentMgm,ViewContractual,ViewLocation,LocationID,MProcess")] User user)
         {
-            if (db.Users.Where(aa => aa.Status == true).Count() > Convert.ToInt32(GlobalVaribales.NoOfUsers))
+            if (db.Users.Where(aa => aa.Status == true).Count() >= Convert.ToInt32(GlobalVaribales.NoOfUsers))
                 ModelState.AddModelError("UserName", "Your Users has exceeded from License, Please upgrade your license");
             user.CanAdd = (bool)ValueProvider.GetValue("CanAdd").ConvertTo(typeof(bool));
             user.CanEdit = (bool)ValueProvider.GetValue("CanEdit").ConvertTo(typeof(bool));

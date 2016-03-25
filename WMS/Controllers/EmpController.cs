@@ -44,12 +44,14 @@ namespace WMS.Controllers
                 searchString = currentFilter;
             }
             User LoggedInUser = Session["LoggedUser"] as User;
+            int NoOfEmps = Convert.ToInt32(GlobalVaribales.NoOfEmps);
             QueryBuilder qb = new QueryBuilder();
             string query = qb.MakeCustomizeQuery(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from EmpView"+query);
             List<EmpView> emps = new List<EmpView>();
             emps = dt.ToList<EmpView>();
-            
+
+            emps = emps.Take(NoOfEmps).ToList();
             ViewBag.CurrentFilter = searchString;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -182,6 +184,8 @@ namespace WMS.Controllers
             string empNo = "";
             int cardno = Convert.ToInt32(emp.CardNo);
             emp.CardNo = cardno.ToString("0000000000");
+            if(db.Emps.Where(aa=>aa.Status==true).Count()>=Convert.ToInt32(GlobalVaribales.NoOfEmps))
+                ModelState.AddModelError("EmpNo", "Emp No is required!");
             if (string.IsNullOrEmpty(emp.EmpNo))
                 ModelState.AddModelError("EmpNo", "Emp No is required!");
             if (string.IsNullOrEmpty(emp.EmpName))
