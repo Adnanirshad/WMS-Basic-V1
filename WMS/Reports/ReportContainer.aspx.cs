@@ -91,7 +91,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListLvApp, _ViewListLvApp), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "detailed_att": DataTable dt2 = qb.GetValuesfromDB("select * from ViewDetailAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "detailed_att": DataTable dt2 = qb.GetValuesfromDB("select * from ViewDetailAttData  where(AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )");
                         List<ViewDetailAttData> _ViewList2 = dt2.ToList<ViewDetailAttData>();
                         List<ViewDetailAttData> _TempViewList2 = new List<ViewDetailAttData>();

@@ -205,8 +205,8 @@
     <Content Include="Scripts\Dashboard\jquery-jvectormap-world-mill-en.js" />
     <Content Include="Scripts\Dashboard\jquery.sparkline.min.js" />
     <Content Include="Scripts\EditAttendance.js" />
-    <Content Include="Scripts\Employee\catEmpTypeCompanyCreate.js" />
     <Content Include="Scripts\dx.chartjs.js" />
+    <Content Include="Scripts\Employee\catEmpTypeCompanyCreate.js" />
     <Content Include="Scripts\Employee\companyGrade.js" />
     <Content Include="Scripts\Employee\companyGradeCreate.js" />
     <Content Include="Scripts\Employee\crewCompany.js" />
@@ -215,9 +215,9 @@
     <Content Include="Scripts\Employee\desigCompanyCreate.js" />
     <Content Include="Scripts\Employee\empTypeCategory.js" />
     <Content Include="Scripts\Employee\empTypeCategoryCreate.js" />
-    <Content Include="Scripts\Filters\ClearSessionOnPageClose.js" />
-    <Content Include="Scripts\Filters\DeleteSingleFilters.js" />
-    <Content Include="Scripts\Filters\FilterScripts.js" />
+    <Content Include="Scripts\Employee\Filters\ClearSessionOnPageClose.js" />
+    <Content Include="Scripts\Employee\Filters\DeleteSingleFilters.js" />
+    <Content Include="Scripts\Employee\Filters\FilterScripts.js" />
     <Content Include="Scripts\globalize.min.js" />
     <Content Include="Scripts\highcharts-3d.js" />
     <Content Include="Scripts\highcharts.js" />
@@ -231,6 +231,7 @@
     <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
+    <Content Include="Scripts\LeaveQuota.js" />
     <Content Include="Scripts\LogIn.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.avatar.css" />

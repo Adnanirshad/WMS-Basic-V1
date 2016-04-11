@@ -33,16 +33,16 @@ namespace WMS.Controllers
            
          
             
-            string di = Convert.ToString(Request.Form["CatID"].ToString());//CatID is 4,4
+            //string di = Convert.ToString(Request.Form["CatID"].ToString());//CatID is 4,4
 
-            int comma = di.IndexOf(',');
-            string b = di;
-            if (comma != -1)
-            {
-                b = di.Substring(0, comma);//CatID is 4
-            }
+            //int comma = di.IndexOf(',');
+            //string b = di;
+            //if (comma != -1)
+            //{
+            //    b = di.Substring(0, comma);//CatID is 4
+            //}
             //byte catID = Convert.ToByte(Request.Form["CatID"].ToString());
-            byte catID = Convert.ToByte(b);
+            //byte catID = Convert.ToByte(b);
             string de = Request.Form["CreateLeaveCriteria"].ToString();
             switch (de)
             {

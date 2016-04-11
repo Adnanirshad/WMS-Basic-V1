@@ -81,9 +81,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.NoOfDays)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.UserName)
-        </td>
+        </td>*@
         <td>
            @* @Html.ActionLink(" ", "Edit", new { id=item.LvID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) *@
             @Html.ActionLink(" ", "Details", new { id=item.LvID }, new { @class = "glyphicon glyphicon-list btn btn-warning btn-xs" }) 

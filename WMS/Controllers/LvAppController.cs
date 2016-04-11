@@ -35,11 +35,11 @@ namespace WMS.Controllers
             }
             User LoggedInUser = Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
-            string query = qb.MakeCustomizeQuery(LoggedInUser);
+            //string query = qb.MakeCustomizeQuery(LoggedInUser);
             DateTime dt1 = DateTime.Today;
             DateTime dt2 = new DateTime(dt1.Year, 1, 1);
             string date = dt2.Year.ToString()+"-"+dt2.Month.ToString()+"-"+dt2.Day.ToString()+" ";
-            DataTable dt = qb.GetValuesfromDB("select * from ViewLvApplication " + query + " and (ToDate >= '" + date + "')");
+            DataTable dt = qb.GetValuesfromDB("select * from ViewLvApplication  where(ToDate >= '" + date + "')");
             List<ViewLvApplication> lvapplications = dt.ToList<ViewLvApplication>();
 
 
