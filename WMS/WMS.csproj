@@ -281,7 +281,6 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\a.pubxml" />
     <Content Include="ReportingEngine.Master" />
-    <None Include="Properties\PublishProfiles\SCP-Publish.pubxml" />
     <None Include="Properties\PublishProfiles\WMSProfile.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
