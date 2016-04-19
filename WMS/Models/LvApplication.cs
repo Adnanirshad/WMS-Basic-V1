@@ -21,7 +21,7 @@ namespace WMS.Models
     
         public int LvID { get; set; }
         public System.DateTime LvDate { get; set; }
-        public string LvType { get; set; }
+        public string LvTypeID { get; set; }
         public int EmpID { get; set; }
         public System.DateTime FromDate { get; set; }
         public System.DateTime ToDate { get; set; }
@@ -40,8 +40,8 @@ namespace WMS.Models
         public Nullable<bool> Active { get; set; }
     
         public virtual Emp Emp { get; set; }
+        public virtual LvType LvType { get; set; }
         public virtual User User { get; set; }
-        public virtual LvType LvType1 { get; set; }
         public virtual ICollection<LvData> LvDatas { get; set; }
     }
 }

@@ -131,7 +131,7 @@ namespace WMS.Controllers
                 _LVData.Remarks = lvappl.LvReason;
                 _LVData.LvID = lvappl.LvID;
                 _LVData.AttDate = datetime.Date;
-                _LVData.LvCode = lvappl.LvType;
+                _LVData.LvCode = lvappl.LvTypeID;
                 try
                 {
                     using (var context = new TAS2013Entities())
@@ -450,7 +450,7 @@ namespace WMS.Controllers
             _LVData.HalfLeave = true;
             _LVData.LvID = lvappl.LvID;
             _LVData.AttDate = datetime.Date;
-            _LVData.LvCode = lvappl.LvType;
+            _LVData.LvCode = lvappl.LvTypeID;
             _LVData.FirstHalf = lvappl.FirstHalf;
             try
             {

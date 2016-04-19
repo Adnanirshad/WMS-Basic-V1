@@ -126,9 +126,9 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                LvType lvType = db.LvTypes.First(aa => aa.LvType1 == lvapplication.LvType);
+                LvType lvType = db.LvTypes.First(aa => aa.LvType1 == lvapplication.LvTypeID);
                 LeaveController LvProcessController = new LeaveController();
-                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LvType, lvType))
+                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LvTypeID, lvType))
                 {
                     if (lvapplication.IsHalf != true)
                     {

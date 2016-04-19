@@ -86,13 +86,21 @@
               @if(item.Criteria=="C")
               {<div>Company</div>}
         </td>
-        @*<td>
+        <td>
             @if(item.Criteria=="L")
             {
-			@item.Location.LocationID
+			@item.Location.LocName
+            }
+            @if(item.Criteria=="C")
+            {
+			<span>All</span>
+            }
+            @if(item.Criteria=="E")
+            {
+			@item.EmpNo
             }
            
-        </td>*@
+        </td>
        
         <td>
             @if(item.ProcessingDone==true)

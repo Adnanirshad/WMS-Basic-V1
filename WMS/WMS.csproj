@@ -853,6 +853,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="Scripts\Leaves\" />
   </ItemGroup>
   <ItemGroup>

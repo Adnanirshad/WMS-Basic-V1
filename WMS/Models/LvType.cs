@@ -17,7 +17,6 @@ namespace WMS.Models
         public LvType()
         {
             this.LvApplications = new HashSet<LvApplication>();
-            this.LvDatas = new HashSet<LvData>();
         }
     
         public string LvType1 { get; set; }
@@ -33,6 +32,5 @@ namespace WMS.Models
         public Nullable<bool> CountVacDays { get; set; }
     
         public virtual ICollection<LvApplication> LvApplications { get; set; }
-        public virtual ICollection<LvData> LvDatas { get; set; }
     }
 }

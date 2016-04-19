@@ -41,7 +41,7 @@ namespace WMS.Controllers
                 page = 1;
              else
                searchString = currentFilter;
-            DateTime dtS = DateTime.Today.AddDays(-2);
+            DateTime dtS = DateTime.Today.AddDays(-10);
             DateTime dtE = DateTime.Today.AddDays(1);
             List<AttProcessorScheduler> attprocess = context.AttProcessorSchedulers.Where(aa=>aa.CreatedDate>=dtS&&aa.CreatedDate<=dtE).ToList();
             switch (sortOrder)
@@ -58,12 +58,6 @@ namespace WMS.Controllers
                     break;
                 case "to":
                     attprocess = attprocess.OrderBy(s => s.DateTo).ToList();
-                    break;
-                case "whento_desc":
-                    attprocess = attprocess.OrderByDescending(s => s.WhenToProcess).ToList();
-                    break;
-                case "whento":
-                    attprocess = attprocess.OrderBy(s => s.WhenToProcess).ToList();
                     break;
                
                 default:
@@ -105,12 +99,7 @@ namespace WMS.Controllers
             {
                 new SelectListItem { Selected = true, Text = "Company", Value = "C"},
                 new SelectListItem { Selected = false, Text = "Location", Value = "L"},
-
-            }, "Value", "Text", 1);
-            ViewBag.ProcessCats = new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Selected = true, Text = "Yes", Value = "1"},
-                new SelectListItem { Selected = false, Text = "No", Value = "0"},
+                new SelectListItem { Selected = false, Text = "Employee", Value = "E"},
 
             }, "Value", "Text", 1);
             query = qb.QueryForLocationTableSegerationForLinq(LoggedInUser);
@@ -134,19 +123,26 @@ namespace WMS.Controllers
                     attprocessor.Criteria = "C";
                     break;
                 case "L": attprocessor.Criteria = "L"; break;
-                case "A": attprocessor.Criteria = "A"; break;
+                case "E":
+                    {
+                        attprocessor.Criteria = "E";
+                        string ee = Request.Form["EmpNo"].ToString();
+                        List<Emp> empss = new List<Emp>();
+                        empss = context.Emps.Where(aa => aa.EmpNo == ee).ToList();
+                        if (empss.Count() > 0)
+                        {
+                            attprocessor.EmpID = empss.First().EmpID;
+                            attprocessor.EmpNo = empss.First().EmpNo;
+                        }
+                    }
+                    break;
             }
-            int a = Convert.ToInt16(Request.Form["ProcessCats"].ToString());
-            if (a == 1)
-                attprocessor.ProcessCat = true;
-            else
-                attprocessor.ProcessCat = false;
             attprocessor.ProcessingDone = false;
-            attprocessor.WhenToProcess = DateTime.Today;
             int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
             if (ModelState.IsValid)
             {
                 attprocessor.UserID = _userID;
+                attprocessor.CreatedDate = DateTime.Today;
                 context.AttProcessorSchedulers.Add(attprocessor);
                 context.SaveChanges();
                 return RedirectToAction("Index");  

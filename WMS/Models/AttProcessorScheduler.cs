@@ -15,20 +15,19 @@ namespace WMS.Models
     public partial class AttProcessorScheduler
     {
         public int AttProcesserSchedulerID { get; set; }
-        public System.DateTime WhenToProcess { get; set; }
         public string PeriodTag { get; set; }
         public System.DateTime DateFrom { get; set; }
         public System.DateTime DateTo { get; set; }
-        public short CompanyID { get; set; }
         public short LocationID { get; set; }
         public Nullable<bool> ProcessingDone { get; set; }
         public string Criteria { get; set; }
-        public Nullable<bool> ProcessCat { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<int> EmpID { get; set; }
         public string EmpNo { get; set; }
     
+        public virtual Location Location { get; set; }
         public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

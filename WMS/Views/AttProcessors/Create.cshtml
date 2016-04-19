@@ -29,33 +29,32 @@
         </div>
          </div>
      <div id="location">
-    @* <div class="form-group" >
+     <div class="form-group" >
             <div class="control-label col-md-2">Location</div>
             <div class="col-md-10">
               @Html.DropDownList("LocationID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                    @Html.ValidationMessageFor(model => model.Location.LocID)
+                    @Html.ValidationMessageFor(model => model.LocationID)
             </div>
         </div>
-         </div>*@
-     <div id="CatProcess">
-     <div class="form-group" >
-            <div class="control-label col-md-2">Process Category</div>
+    </div>
+    <div id="employee">
+        <div class="form-group" >
+            <div class="control-label col-md-2">Employee No</div>
             <div class="col-md-10">
-              @Html.DropDownList("ProcessCats",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
+              @Html.TextBox("EmpNo",null,new { @class = "form-control"})
             </div>
         </div>
-         </div>
-    
+    </div>
      <div class="form-group" >
             <div class="control-label col-md-2">From</div>
-            <div class="col-md-10">
+            <div class="col-md-3">
             @Html.EditorFor(model => model.DateFrom,@DateTime.Today.ToString("dd-MMM-yyyy"))
                 @Html.ValidationMessageFor(model => model.DateFrom)
             </div>
         </div>
      <div class="form-group" >
             <div class="control-label col-md-2">To</div>
-            <div class="col-md-10">
+            <div class="col-md-3">
             @Html.EditorFor(model => model.DateTo,@DateTime.Today.ToString("dd-MMM-yyyy"))
                 @Html.ValidationMessageFor(model => model.DateTo)
             </div>
