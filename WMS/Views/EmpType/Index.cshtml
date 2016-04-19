@@ -21,9 +21,9 @@
         <th>
              @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
-        <th>
+        @*<th>
             @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CatSortParm })
-        </th>
+        </th>*@
        
         <th>Edit | View | Delete</th>
     </tr>
@@ -33,9 +33,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.TypeName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Category.CatName)
-        </td>
+        </td>*@
         
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
