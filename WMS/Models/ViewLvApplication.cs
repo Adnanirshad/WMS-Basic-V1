@@ -14,38 +14,12 @@ namespace WMS.Models
     
     public partial class ViewLvApplication
     {
-        public string DesignationName { get; set; }
-        public string GradeName { get; set; }
-        public string CityName { get; set; }
-        public string RegionName { get; set; }
-        public string LocName { get; set; }
-        public string CrewName { get; set; }
-        public string TypeName { get; set; }
-        public string CatName { get; set; }
-        public string ShiftName { get; set; }
-        public string EmpNo { get; set; }
-        public string EmpName { get; set; }
-        public Nullable<int> DesigID { get; set; }
-        public string NicNo { get; set; }
-        public Nullable<System.DateTime> JoinDate { get; set; }
-        public Nullable<System.DateTime> ResignDate { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public string SectionName { get; set; }
-        public string DeptName { get; set; }
-        public string DivisionName { get; set; }
-        public Nullable<short> CatID { get; set; }
-        public Nullable<short> SecID { get; set; }
-        public Nullable<byte> ShiftID { get; set; }
-        public Nullable<byte> TypeID { get; set; }
-        public Nullable<short> LocID { get; set; }
-        public Nullable<short> GradeID { get; set; }
-        public Nullable<short> DeptID { get; set; }
-        public Nullable<short> DivID { get; set; }
-        public Nullable<short> CrewID { get; set; }
-        public Nullable<int> EmpID { get; set; }
+        public int EmpID { get; set; }
+        public string LvDesc { get; set; }
+        public string LvType { get; set; }
+        public string FldName { get; set; }
         public System.DateTime LvDate { get; set; }
         public int LvID { get; set; }
-        public string LvType { get; set; }
         public System.DateTime FromDate { get; set; }
         public System.DateTime ToDate { get; set; }
         public float NoOfDays { get; set; }
@@ -55,10 +29,23 @@ namespace WMS.Models
         public string LvReason { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public string LvAddress { get; set; }
-        public Nullable<int> ApprovedBy { get; set; }
         public string LvStatus { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public string LvDesc { get; set; }
-        public string UserName { get; set; }
+        public string DeptName { get; set; }
+        public string SectionName { get; set; }
+        public string DesignationName { get; set; }
+        public string EmpNo { get; set; }
+        public string EmpName { get; set; }
+        public Nullable<byte> ShiftID { get; set; }
+        public Nullable<int> DesigID { get; set; }
+        public Nullable<short> LocID { get; set; }
+        public Nullable<byte> TypeID { get; set; }
+        public Nullable<short> SecID { get; set; }
+        public string CardNo { get; set; }
+        public Nullable<System.DateTime> JoinDate { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public string TypeName { get; set; }
+        public string LocName { get; set; }
+        public string ShiftName { get; set; }
+        public short DeptID { get; set; }
     }
 }

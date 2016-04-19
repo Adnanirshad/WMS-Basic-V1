@@ -27,6 +27,5 @@ namespace WMS.Models
         public Nullable<bool> Active { get; set; }
     
         public virtual LvApplication LvApplication { get; set; }
-        public virtual LvType LvType { get; set; }
     }
 }

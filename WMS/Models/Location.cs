@@ -16,6 +16,7 @@ namespace WMS.Models
     {
         public Location()
         {
+            this.AttProcessorSchedulers = new HashSet<AttProcessorScheduler>();
             this.Emps = new HashSet<Emp>();
             this.Readers = new HashSet<Reader>();
         }
@@ -23,6 +24,7 @@ namespace WMS.Models
         public short LocID { get; set; }
         public string LocName { get; set; }
     
+        public virtual ICollection<AttProcessorScheduler> AttProcessorSchedulers { get; set; }
         public virtual ICollection<Emp> Emps { get; set; }
         public virtual ICollection<Reader> Readers { get; set; }
     }

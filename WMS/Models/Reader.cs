@@ -27,6 +27,7 @@ namespace WMS.Models
         public byte RdrTypeID { get; set; }
         public bool Status { get; set; }
         public Nullable<short> LocID { get; set; }
+        public Nullable<bool> ClearRecords { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual ICollection<PollData> PollDatas { get; set; }
