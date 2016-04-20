@@ -83,7 +83,8 @@
                                         <ItemStyle Width="10%" />
                                     </asp:TemplateField>
                                         
-                                        <asp:BoundField DataField="SectionName" HeaderText="Name" />  
+                                        <asp:BoundField DataField="SectionName" HeaderText="Units" />
+                                        <asp:BoundField DataField ="DeptName" HeaderText ="Groups" />  
                                 </Columns>
                                 <EditRowStyle BackColor="#999999" />
                                 <FooterStyle BackColor="#EEEEEE" Font-Bold="False" ForeColor="Black" Wrap="False" />
