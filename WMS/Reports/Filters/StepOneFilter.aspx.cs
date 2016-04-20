@@ -65,7 +65,7 @@ namespace WMS.Reports.Filters
 
             //change page index
             GridViewSection.PageIndex = e.NewPageIndex;
-            BindGridView(TextBoxSearch.Text.Trim());
+            BindGridViewSection(TextBoxSearch.Text.Trim());
             // Check and set Check box state
             WMSLibrary.Filters.SetGridViewCheckState(GridViewSection, Session["FiltersModel"] as FiltersModel, "Section");
         }
@@ -120,16 +120,7 @@ namespace WMS.Reports.Filters
             //fml = Session["FiltersModel"] as FiltersModel;
         }
 
-        private void BindGridView(string search)
-        {
-            User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
-            QueryBuilder qb = new QueryBuilder();
-            string query = qb.QueryForCompanyViewLinq(LoggedInUser);
-            //List<Company> _View = da.Companies.Where(query).OrderBy(s => s.CompName).ToList();
-            //GridViewCompany.DataSource = _View.Where(aa => aa.CompName.ToUpper().Contains(search.ToUpper())).ToList();
-            GridViewSection.DataBind();
-            
-        }
+       
 
        
         #region --DeleteAll Filters--

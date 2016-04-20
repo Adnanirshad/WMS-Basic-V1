@@ -14,8 +14,8 @@
     <script type="text/javascript" src="../../Scripts/Filters/FilterScripts.js" ></script>
     <link href="Content/style/filter-navigation.css" type="text/css" rel="stylesheet" />
     <link href="Content/style/filters-page.css" type="text/css" rel="stylesheet" />
-    <script src="Scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
-    <script src="Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/bootstrap.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.maskedinput.js" type="text/javascript"></script>
    
     <script src="../../Scripts/angular.min.js"></script>
