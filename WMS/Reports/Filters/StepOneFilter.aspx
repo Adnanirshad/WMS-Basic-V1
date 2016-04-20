@@ -23,7 +23,7 @@
                         <h4>Filters Navigation</h4>
                     </li>
                     <li >
-                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="active-link" OnClick="btnStepOne_Click" >Step One<p>Sections, Locations</p></asp:LinkButton>
+                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="active-link" OnClick="btnStepOne_Click" >Step One<p>Units, Locations</p></asp:LinkButton>
                     </li>
                     <li>
                         <asp:LinkButton ID="btnStepFour" runat="server" CssClass="inactive-link" OnClick="btnStepFour_Click" >Step Two<p>Types, Shifts</p></asp:LinkButton>
@@ -45,7 +45,7 @@
                     <div class="col-md-8">
                         <div class="row"> 
                             <div class="col-md-8">
-                                <h3>Choose Sections or Location</h3>
+                                <h3>Choose Units or Location</h3>
                                  </div>
                             
                                <div class="col-md-3">
@@ -63,7 +63,7 @@
                         </div>
                         <hr />
                          <div class="row">
-                             <div class="filterHeader"><span class="FilterNameHeading">Sections</span>
+                             <div class="filterHeader"><span class="FilterNameHeading">Units</span>
                                  <span style="margin-left:10px"><asp:TextBox ID="TextBoxSearch" CssClass="input-field" runat="server" /> <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn-primary" OnClick="ButtonSearchSection_Click" /></span>
                         </div>
                              <section>

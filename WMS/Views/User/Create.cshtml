@@ -52,9 +52,9 @@
             </div>
 
             <div class="form-group" name="ForAdminOnly" id="ForAdminOnly">
-            <div class="col-md-2 text-right">Sections</div>
+            <div class="col-md-2 text-right"></div>
             <div class="col-md-3">
-                <input type="hidden" placeholder="e.g Lahore" data-ng-model="section.name" id="uSectionCount" name="uSectionCount" class="form-control" value="{{sections.length}}">
+                <input type="hidden" placeholder="eUnits.g Lahore" data-ng-model="section.name" id="uSectionCount" name="uSectionCount" class="form-control" value="{{sections.length}}">
                 <div class="input-group" ng-repeat="sec in sections">
                     <input disabled type="text" placeholder="e.g Lahore" id="testSection{{$index + 1}}" data-ng-model="sec.name" class="form-control">
                     <input type="hidden" placeholder="e.g Lahore" data-ng-model="sec.name" id="uSection{{$index + 1}}" name="uSection{{$index + 1}}" class="form-control" value="{{sec.name}}">
@@ -70,7 +70,7 @@
                     <a class="btn btn-default btn-sm" ng-click="addSection()">Add</a>
                     <a href="" ng-click="isAddingSection = false">Done Adding</a>
                 </div>
-                <p><a href="" ng-click="isAddingSection = true">+ Add Section</a></p>
+                <p><a href="" ng-click="isAddingSection = true">+ Add Units</a></p>
             </div>
           </div>
           
