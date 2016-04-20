@@ -800,15 +800,7 @@
             <End Role="User" EntitySet="User" />
             <End Role="AttDataManEdit" EntitySet="AttDataManEdit" />
           </AssociationSet>
-          <AssociationSet Name="FK_AttProcessorScheduler_Location" Association="TAS201Model.Store.FK_AttProcessorScheduler_Location">
-            <End Role="Location" EntitySet="Location" />
-            <End Role="AttProcessorScheduler" EntitySet="AttProcessorScheduler" />
-          </AssociationSet>
           <AssociationSet Name="FK_AttProcessorScheduler_User" Association="TAS201Model.Store.FK_AttProcessorScheduler_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="AttProcessorScheduler" EntitySet="AttProcessorScheduler" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AttProcessorScheduler_User1" Association="TAS201Model.Store.FK_AttProcessorScheduler_User1">
             <End Role="User" EntitySet="User" />
             <End Role="AttProcessorScheduler" EntitySet="AttProcessorScheduler" />
           </AssociationSet>
@@ -864,6 +856,10 @@
             <End Role="Emp" EntitySet="Emp" />
             <End Role="LvConsumed" EntitySet="LvConsumed" />
           </AssociationSet>
+          <AssociationSet Name="FK_LvData_Emp" Association="TAS201Model.Store.FK_LvData_Emp">
+            <End Role="Emp" EntitySet="Emp" />
+            <End Role="LvData" EntitySet="LvData" />
+          </AssociationSet>
           <AssociationSet Name="FK_LvData_LvApplications" Association="TAS201Model.Store.FK_LvData_LvApplications">
             <End Role="LvApplication" EntitySet="LvApplication" />
             <End Role="LvData" EntitySet="LvData" />
@@ -914,6 +910,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Shift_DaysName1" Association="TAS201Model.Store.FK_Shift_DaysName1">
             <End Role="DaysName" EntitySet="DaysName" />
+            <End Role="Shift" EntitySet="Shift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_Location" Association="TAS201Model.Store.FK_Shift_Location">
+            <End Role="Location" EntitySet="Location" />
             <End Role="Shift" EntitySet="Shift" />
           </AssociationSet>
         </EntityContainer>
@@ -1239,13 +1239,16 @@
           <Key>
             <PropertyRef Name="AttProcesserSchedulerID" />
           </Key>
-          <Property Name="AttProcesserSchedulerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AttProcesserSchedulerID" Type="int" Nullable="false" />
+          <Property Name="WhenToProcess" Type="datetime" Nullable="false" />
           <Property Name="PeriodTag" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DateFrom" Type="date" Nullable="false" />
           <Property Name="DateTo" Type="date" Nullable="false" />
+          <Property Name="CompanyID" Type="smallint" Nullable="false" />
           <Property Name="LocationID" Type="smallint" Nullable="false" />
           <Property Name="ProcessingDone" Type="bit" />
           <Property Name="Criteria" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProcessCat" Type="bit" />
           <Property Name="UserID" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="EmpID" Type="int" />
@@ -1368,7 +1371,7 @@
           <Key>
             <PropertyRef Name="EmpID" />
           </Key>
-          <Property Name="EmpID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="EmpNo" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="EmpName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DesigID" Type="int" />
@@ -1380,7 +1383,7 @@
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
           <Property Name="PinCode" Type="char" MaxLength="4" />
-          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
           <Property Name="BloodGroup" Type="nvarchar" MaxLength="6" />
           <Property Name="BirthDate" Type="date" />
@@ -1515,7 +1518,7 @@
           </Key>
           <Property Name="LvID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="LvDate" Type="date" Nullable="false" />
-          <Property Name="LvTypeID" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="LeaveTypeID" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="FromDate" Type="date" Nullable="false" />
           <Property Name="ToDate" Type="date" Nullable="false" />
@@ -1592,9 +1595,9 @@
         </EntityType>
         <EntityType Name="LvType">
           <Key>
-            <PropertyRef Name="LvType" />
+            <PropertyRef Name="LvTypeID" />
           </Key>
-          <Property Name="LvType" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="LvTypeID" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="LvDesc" Type="nvarchar" Nullable="false" MaxLength="30" />
           <Property Name="FldName" Type="nvarchar" Nullable="false" MaxLength="10" />
           <Property Name="HalfLeave" Type="bit" Nullable="false" />
@@ -1765,7 +1768,7 @@
           <Key>
             <PropertyRef Name="ShiftID" />
           </Key>
-          <Property Name="ShiftID" Type="tinyint" Nullable="false" />
+          <Property Name="ShiftID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="StartTime" Type="time" Nullable="false" />
           <Property Name="DayOff1" Type="tinyint" Nullable="false" />
@@ -1789,6 +1792,10 @@
           <Property Name="GZDays" Type="bit" />
           <Property Name="OpenShift" Type="bit" />
           <Property Name="LocationID" Type="smallint" />
+          <Property Name="RoundOffWorkMin" Type="bit" />
+          <Property Name="SubtractOTFromWork" Type="bit" />
+          <Property Name="SubtractEIFromWork" Type="bit" />
+          <Property Name="AddEIInOT" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -2728,31 +2735,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AttProcessorScheduler_Location">
-          <End Role="Location" Type="TAS201Model.Store.Location" Multiplicity="1" />
-          <End Role="AttProcessorScheduler" Type="TAS201Model.Store.AttProcessorScheduler" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocID" />
-            </Principal>
-            <Dependent Role="AttProcessorScheduler">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AttProcessorScheduler_User">
-          <End Role="User" Type="TAS201Model.Store.User" Multiplicity="0..1" />
-          <End Role="AttProcessorScheduler" Type="TAS201Model.Store.AttProcessorScheduler" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="AttProcessorScheduler">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AttProcessorScheduler_User1">
           <End Role="User" Type="TAS201Model.Store.User" Multiplicity="0..1" />
           <End Role="AttProcessorScheduler" Type="TAS201Model.Store.AttProcessorScheduler" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2889,10 +2872,10 @@
           <End Role="LvApplication" Type="TAS201Model.Store.LvApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LvType">
-              <PropertyRef Name="LvType" />
+              <PropertyRef Name="LvTypeID" />
             </Principal>
             <Dependent Role="LvApplication">
-              <PropertyRef Name="LvTypeID" />
+              <PropertyRef Name="LeaveTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2916,6 +2899,18 @@
               <PropertyRef Name="EmpID" />
             </Principal>
             <Dependent Role="LvConsumed">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvData_Emp">
+          <End Role="Emp" Type="TAS201Model.Store.Emp" Multiplicity="1" />
+          <End Role="LvData" Type="TAS201Model.Store.LvData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="LvData">
               <PropertyRef Name="EmpID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3076,6 +3071,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Shift_Location">
+          <End Role="Location" Type="TAS201Model.Store.Location" Multiplicity="0..1" />
+          <End Role="Shift" Type="TAS201Model.Store.Shift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocID" />
+            </Principal>
+            <Dependent Role="Shift">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -3160,15 +3167,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="AttDataManEdit" EntitySet="AttDataManEdits" />
           </AssociationSet>
-          <AssociationSet Name="FK_AttProcessorScheduler_Location" Association="TAS201Model.FK_AttProcessorScheduler_Location">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="AttProcessorScheduler" EntitySet="AttProcessorSchedulers" />
-          </AssociationSet>
           <AssociationSet Name="FK_AttProcessorScheduler_User" Association="TAS201Model.FK_AttProcessorScheduler_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="AttProcessorScheduler" EntitySet="AttProcessorSchedulers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AttProcessorScheduler_User1" Association="TAS201Model.FK_AttProcessorScheduler_User1">
             <End Role="User" EntitySet="Users" />
             <End Role="AttProcessorScheduler" EntitySet="AttProcessorSchedulers" />
           </AssociationSet>
@@ -3224,6 +3223,10 @@
             <End Role="Emp" EntitySet="Emps" />
             <End Role="LvConsumed" EntitySet="LvConsumeds" />
           </AssociationSet>
+          <AssociationSet Name="FK_LvData_Emp" Association="TAS201Model.FK_LvData_Emp">
+            <End Role="Emp" EntitySet="Emps" />
+            <End Role="LvData" EntitySet="LvDatas" />
+          </AssociationSet>
           <AssociationSet Name="FK_LvShort_Emp" Association="TAS201Model.FK_LvShort_Emp">
             <End Role="Emp" EntitySet="Emps" />
             <End Role="LvShort" EntitySet="LvShorts" />
@@ -3239,6 +3242,10 @@
           <AssociationSet Name="FK_Reader_Location" Association="TAS201Model.FK_Reader_Location">
             <End Role="Location" EntitySet="Locations" />
             <End Role="Reader" EntitySet="Readers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_Location" Association="TAS201Model.FK_Shift_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Shift" EntitySet="Shifts" />
           </AssociationSet>
           <AssociationSet Name="FK_LvApplication_LvType" Association="TAS201Model.FK_LvApplication_LvType">
             <End Role="LvType" EntitySet="LvTypes" />
@@ -3602,20 +3609,21 @@
           <Key>
             <PropertyRef Name="AttProcesserSchedulerID" />
           </Key>
-          <Property Type="Int32" Name="AttProcesserSchedulerID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AttProcesserSchedulerID" Nullable="false" />
+          <Property Type="DateTime" Name="WhenToProcess" Nullable="false" Precision="3" />
           <Property Type="String" Name="PeriodTag" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="DateFrom" Nullable="false" Precision="0" />
           <Property Type="DateTime" Name="DateTo" Nullable="false" Precision="0" />
+          <Property Type="Int16" Name="CompanyID" Nullable="false" />
           <Property Type="Int16" Name="LocationID" Nullable="false" />
           <Property Type="Boolean" Name="ProcessingDone" />
           <Property Type="String" Name="Criteria" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ProcessCat" />
           <Property Type="Int32" Name="UserID" />
           <Property Type="DateTime" Name="CreatedDate" Precision="3" />
           <Property Type="Int32" Name="EmpID" />
           <Property Type="String" Name="EmpNo" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Location" Relationship="TAS201Model.FK_AttProcessorScheduler_Location" FromRole="AttProcessorScheduler" ToRole="Location" />
           <NavigationProperty Name="User" Relationship="TAS201Model.FK_AttProcessorScheduler_User" FromRole="AttProcessorScheduler" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="TAS201Model.FK_AttProcessorScheduler_User1" FromRole="AttProcessorScheduler" ToRole="User" />
         </EntityType>
         <EntityType Name="AuditForm">
           <Key>
@@ -3740,7 +3748,7 @@
           <Key>
             <PropertyRef Name="EmpID" />
           </Key>
-          <Property Type="Int32" Name="EmpID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="EmpID" Nullable="false" />
           <Property Type="String" Name="EmpNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="DesigID" />
@@ -3752,7 +3760,7 @@
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="PinCode" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="BloodGroup" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="BirthDate" Precision="0" />
@@ -3784,6 +3792,7 @@
           <NavigationProperty Name="JobCardDetails" Relationship="TAS201Model.FK_JobCardDetail_Emp" FromRole="Emp" ToRole="JobCardDetail" />
           <NavigationProperty Name="LvApplications" Relationship="TAS201Model.FK_LvApplication_Emp" FromRole="Emp" ToRole="LvApplication" />
           <NavigationProperty Name="LvConsumeds" Relationship="TAS201Model.FK_LvConsumed_Emp" FromRole="Emp" ToRole="LvConsumed" />
+          <NavigationProperty Name="LvDatas" Relationship="TAS201Model.FK_LvData_Emp" FromRole="Emp" ToRole="LvData" />
           <NavigationProperty Name="LvShorts" Relationship="TAS201Model.FK_LvShort_Emp" FromRole="Emp" ToRole="LvShort" />
           <NavigationProperty Name="PollDatas" Relationship="TAS201Model.FK_PollData_Emp" FromRole="Emp" ToRole="PollData" />
         </EntityType>
@@ -3897,9 +3906,9 @@
           </Key>
           <Property Type="Int16" Name="LocID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AttProcessorSchedulers" Relationship="TAS201Model.FK_AttProcessorScheduler_Location" FromRole="Location" ToRole="AttProcessorScheduler" />
           <NavigationProperty Name="Emps" Relationship="TAS201Model.FK_Emp_Location" FromRole="Location" ToRole="Emp" />
           <NavigationProperty Name="Readers" Relationship="TAS201Model.FK_Reader_Location" FromRole="Location" ToRole="Reader" />
+          <NavigationProperty Name="Shifts" Relationship="TAS201Model.FK_Shift_Location" FromRole="Location" ToRole="Shift" />
         </EntityType>
         <EntityType Name="LvApplication">
           <Key>
@@ -3907,7 +3916,7 @@
           </Key>
           <Property Type="Int32" Name="LvID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="LvDate" Nullable="false" Precision="0" />
-          <Property Type="String" Name="LvTypeID" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="LeaveTypeID" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
           <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="0" />
           <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="0" />
@@ -3969,6 +3978,7 @@
           <Property Type="Boolean" Name="HalfLeave" />
           <Property Type="Boolean" Name="FirstHalf" />
           <Property Type="Boolean" Name="Active" />
+          <NavigationProperty Name="Emp" Relationship="TAS201Model.FK_LvData_Emp" FromRole="LvData" ToRole="Emp" />
           <NavigationProperty Name="LvApplication" Relationship="TAS201Model.FK_LvData_LvApplications" FromRole="LvData" ToRole="LvApplication" />
         </EntityType>
         <EntityType Name="LvShort">
@@ -3991,9 +4001,9 @@
         </EntityType>
         <EntityType Name="LvType">
           <Key>
-            <PropertyRef Name="LvType1" />
+            <PropertyRef Name="LvTypeID" />
           </Key>
-          <Property Type="String" Name="LvType1" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="LvTypeID" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="LvDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FldName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="HalfLeave" Nullable="false" />
@@ -4177,7 +4187,7 @@
           <Key>
             <PropertyRef Name="ShiftID" />
           </Key>
-          <Property Type="Byte" Name="ShiftID" Nullable="false" />
+          <Property Type="Byte" Name="ShiftID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Time" Name="StartTime" Nullable="false" Precision="7" />
           <Property Type="Byte" Name="DayOff1" Nullable="false" />
@@ -4201,9 +4211,14 @@
           <Property Type="Boolean" Name="GZDays" />
           <Property Type="Boolean" Name="OpenShift" />
           <Property Type="Int16" Name="LocationID" />
+          <Property Type="Boolean" Name="RoundOffWorkMin" />
+          <Property Type="Boolean" Name="SubtractOTFromWork" />
+          <Property Type="Boolean" Name="SubtractEIFromWork" />
+          <Property Type="Boolean" Name="AddEIInOT" />
           <NavigationProperty Name="DaysName" Relationship="TAS201Model.FK_Shift_DaysName" FromRole="Shift" ToRole="DaysName" />
           <NavigationProperty Name="DaysName1" Relationship="TAS201Model.FK_Shift_DaysName1" FromRole="Shift" ToRole="DaysName" />
           <NavigationProperty Name="Emps" Relationship="TAS201Model.FK_Emp_Shift" FromRole="Shift" ToRole="Emp" />
+          <NavigationProperty Name="Location" Relationship="TAS201Model.FK_Shift_Location" FromRole="Shift" ToRole="Location" />
           <NavigationProperty Name="RosterApps" Relationship="TAS201Model.FK_RosterApp_Shift" FromRole="Shift" ToRole="RosterApp" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -4249,7 +4264,6 @@
           <Property Type="Boolean" Name="MProcess" />
           <NavigationProperty Name="AttDataManEdits" Relationship="TAS201Model.FK_AttDataManEdit_User" FromRole="User" ToRole="AttDataManEdit" />
           <NavigationProperty Name="AttProcessorSchedulers" Relationship="TAS201Model.FK_AttProcessorScheduler_User" FromRole="User" ToRole="AttProcessorScheduler" />
-          <NavigationProperty Name="AttProcessorSchedulers1" Relationship="TAS201Model.FK_AttProcessorScheduler_User1" FromRole="User" ToRole="AttProcessorScheduler" />
           <NavigationProperty Name="AuditLogs" Relationship="TAS201Model.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
           <NavigationProperty Name="LvApplications" Relationship="TAS201Model.FK_LvApplication_User" FromRole="User" ToRole="LvApplication" />
         </EntityType>
@@ -5107,31 +5121,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AttProcessorScheduler_Location">
-          <End Type="TAS201Model.Location" Role="Location" Multiplicity="1" />
-          <End Type="TAS201Model.AttProcessorScheduler" Role="AttProcessorScheduler" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocID" />
-            </Principal>
-            <Dependent Role="AttProcessorScheduler">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AttProcessorScheduler_User">
-          <End Type="TAS201Model.User" Role="User" Multiplicity="0..1" />
-          <End Type="TAS201Model.AttProcessorScheduler" Role="AttProcessorScheduler" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="AttProcessorScheduler">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AttProcessorScheduler_User1">
           <End Type="TAS201Model.User" Role="User" Multiplicity="0..1" />
           <End Type="TAS201Model.AttProcessorScheduler" Role="AttProcessorScheduler" Multiplicity="*" />
           <ReferentialConstraint>
@@ -5299,6 +5289,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LvData_Emp">
+          <End Type="TAS201Model.Emp" Role="Emp" Multiplicity="1" />
+          <End Type="TAS201Model.LvData" Role="LvData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="LvData">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LvShort_Emp">
           <End Type="TAS201Model.Emp" Role="Emp" Multiplicity="0..1" />
           <End Type="TAS201Model.LvShort" Role="LvShort" Multiplicity="*" />
@@ -5347,15 +5349,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Shift_Location">
+          <End Type="TAS201Model.Location" Role="Location" Multiplicity="0..1" />
+          <End Type="TAS201Model.Shift" Role="Shift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocID" />
+            </Principal>
+            <Dependent Role="Shift">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LvApplication_LvType">
           <End Type="TAS201Model.LvType" Role="LvType" Multiplicity="1" />
           <End Type="TAS201Model.LvApplication" Role="LvApplication" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LvType">
-              <PropertyRef Name="LvType1" />
+              <PropertyRef Name="LvTypeID" />
             </Principal>
             <Dependent Role="LvApplication">
-              <PropertyRef Name="LvTypeID" />
+              <PropertyRef Name="LeaveTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5791,12 +5805,15 @@
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProcessCat" ColumnName="ProcessCat" />
                 <ScalarProperty Name="Criteria" ColumnName="Criteria" />
                 <ScalarProperty Name="ProcessingDone" ColumnName="ProcessingDone" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="DateTo" ColumnName="DateTo" />
                 <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
                 <ScalarProperty Name="PeriodTag" ColumnName="PeriodTag" />
+                <ScalarProperty Name="WhenToProcess" ColumnName="WhenToProcess" />
                 <ScalarProperty Name="AttProcesserSchedulerID" ColumnName="AttProcesserSchedulerID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6101,7 +6118,7 @@
                 <ScalarProperty Name="ToDate" ColumnName="ToDate" />
                 <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="LvTypeID" ColumnName="LvTypeID" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
                 <ScalarProperty Name="LvDate" ColumnName="LvDate" />
                 <ScalarProperty Name="LvID" ColumnName="LvID" />
               </MappingFragment>
@@ -6180,7 +6197,7 @@
                 <ScalarProperty Name="HalfLeave" ColumnName="HalfLeave" />
                 <ScalarProperty Name="FldName" ColumnName="FldName" />
                 <ScalarProperty Name="LvDesc" ColumnName="LvDesc" />
-                <ScalarProperty Name="LvType1" ColumnName="LvType" />
+                <ScalarProperty Name="LvTypeID" ColumnName="LvTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6353,6 +6370,10 @@
           <EntitySetMapping Name="Shifts">
             <EntityTypeMapping TypeName="TAS201Model.Shift">
               <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="AddEIInOT" ColumnName="AddEIInOT" />
+                <ScalarProperty Name="SubtractEIFromWork" ColumnName="SubtractEIFromWork" />
+                <ScalarProperty Name="SubtractOTFromWork" ColumnName="SubtractOTFromWork" />
+                <ScalarProperty Name="RoundOffWorkMin" ColumnName="RoundOffWorkMin" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="OpenShift" ColumnName="OpenShift" />
                 <ScalarProperty Name="GZDays" ColumnName="GZDays" />

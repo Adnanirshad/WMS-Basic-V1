@@ -18,7 +18,6 @@ namespace WMS.Models
         {
             this.AttDataManEdits = new HashSet<AttDataManEdit>();
             this.AttProcessorSchedulers = new HashSet<AttProcessorScheduler>();
-            this.AttProcessorSchedulers1 = new HashSet<AttProcessorScheduler>();
             this.AuditLogs = new HashSet<AuditLog>();
             this.LvApplications = new HashSet<LvApplication>();
         }
@@ -53,7 +52,6 @@ namespace WMS.Models
     
         public virtual ICollection<AttDataManEdit> AttDataManEdits { get; set; }
         public virtual ICollection<AttProcessorScheduler> AttProcessorSchedulers { get; set; }
-        public virtual ICollection<AttProcessorScheduler> AttProcessorSchedulers1 { get; set; }
         public virtual ICollection<AuditLog> AuditLogs { get; set; }
         public virtual ICollection<LvApplication> LvApplications { get; set; }
     }

@@ -19,7 +19,7 @@ namespace WMS.Models
             this.LvApplications = new HashSet<LvApplication>();
         }
     
-        public string LvType1 { get; set; }
+        public string LvTypeID { get; set; }
         public string LvDesc { get; set; }
         public string FldName { get; set; }
         public bool HalfLeave { get; set; }

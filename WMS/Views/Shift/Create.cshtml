@@ -57,16 +57,10 @@
                 </div>
             </div>
 
-            
               <div class="form-group">
-                <div class="control-label col-md-4">Gazetted Holiday</div>
-                <div class="col-md-4">
-                     @Html.DropDownList("Holiday", new List<SelectListItem>
-                                    { 
-                                        new SelectListItem { Text = "Yes", Value = "true", Selected=true},
-                                        new SelectListItem { Text = "No", Value = "false"}
-                                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"}) 
-                                @Html.ValidationMessageFor(model => model.Holiday)
+                <div class="control-label col-md-4"></div>
+                <div class="col-md-8">
+                     @Html.CheckBox("Holiday") <label>Gazetted Holiday</label>
                 </div>
               </div>
              
@@ -180,34 +174,17 @@
                     @Html.ValidationMessageFor(model => model.SunMin)
                 </div>
             </div>
-        @* <div class="form-group">
-                <div class="control-label col-md-4">Open Shift</div>
+            <div class="form-group">
+                <div class="control-label col-md-4"></div>
                 <div class="col-md-4">
-                    
+                    @Html.CheckBox("OpenShift") <label>Open Shift</label>
+                   @* <input type="checkbox" class="checkbox" name="OpenShift" value="OpenShift" id="OpenShift" />*@ 
                 </div>
-              </div>
-          <div class="form-group">
-            <div class="control-label col-md-4">Break Enable</div>
-            <div class="col-md-4">
-                @Html.DropDownList("HasBreak", new List<SelectListItem>
-                                    { 
-                                        new SelectListItem { Text = "Yes", Value = "true", Selected=true},
-                                        new SelectListItem { Text = "No", Value = "false"}
-                                    },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                @Html.ValidationMessageFor(model => model.HasBreak)
             </div>
-        </div>*@
- <div class="form-group">
-            <div class="control-label col-md-4">Open Shift</div>
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.OpenShift,new { @class = "" })
-               @* <input type="checkbox" class="checkbox" name="OpenShift" value="OpenShift" id="OpenShift" />*@ 
-            </div>
-        </div>
          <div class="form-group">
-            <div class="control-label col-md-4">Enable Break</div>
+            <div class="control-label col-md-4"></div>
             <div class="col-md-4">
-                @Html.EditorFor(model => model.HasBreak.Value,new { @class = "form-control" })
+                @Html.CheckBox("HasBreak") <label>Enable Break</label>
                @* <input type="checkbox" class="checkbox" name="HasBreakMin" value="HasBreakMin" id="HasBreakMin" />*@ 
             </div>
         </div>
@@ -216,6 +193,34 @@
             <div class="col-md-4">
                 @Html.TextBoxFor(model => model.BreakMin,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BreakMin)
+            </div>
+        </div>
+         <div class="form-group">
+            <div class="control-label col-md-4"></div>
+            <div class="col-md-8">
+                @Html.CheckBox("RoundOffWorkMin") <label>Roundoff Work Time</label>
+               @* <input type="checkbox" class="checkbox" name="HasBreakMin" value="HasBreakMin" id="HasBreakMin" />*@ 
+            </div>
+        </div>
+         <div class="form-group">
+            <div class="control-label col-md-4"></div>
+            <div class="col-md-8">
+                @Html.CheckBox("SubtractOTFromWork") <label>Subtract Overtime from Work Time</label>
+               @* <input type="checkbox" class="checkbox" name="HasBreakMin" value="HasBreakMin" id="HasBreakMin" />*@ 
+            </div>
+        </div>
+         <div class="form-group">
+            <div class="control-label col-md-4"></div>
+            <div class="col-md-8">
+                @Html.CheckBox("SubtractEIFromWork") <label>Subtract Early In from Work Time</label>
+               @* <input type="checkbox" class="checkbox" name="HasBreakMin" value="HasBreakMin" id="HasBreakMin" />*@ 
+            </div>
+        </div>
+         <div class="form-group">
+            <div class="control-label col-md-4"></div>
+            <div class="col-md-8">
+                @Html.CheckBox("AddEIInOT") <label>Add Early In and Overtime</label>
+               @* <input type="checkbox" class="checkbox" name="HasBreakMin" value="HasBreakMin" id="HasBreakMin" />*@ 
             </div>
         </div>
 
@@ -233,10 +238,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#hasbreakdiv').hide();
-        $('#HasBreak_Value').click(function () {
-            this.checked ? $('#hasbreakdiv').show() : $('#hasbreakdiv').hide(); //time for show
+        $('#HasBreak').change(function () {
+            if ($(this).is(":checked")) {
+                $("#hasbreakdiv").show();
+            }
+            else {
+                $("#hasbreakdiv").hide();
+            }
         });
-        
         $('#OpenShift').click(function () {
             var value = $('#OpenShift').val();
             value == 'false' ? $('#starttimediv').show() : $('#starttimediv').hide(); //time for show

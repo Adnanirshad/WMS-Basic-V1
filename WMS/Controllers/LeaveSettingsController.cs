@@ -289,15 +289,15 @@ namespace WMS.Controllers
                     List<LvConsumed> lvcon = ctx.LvConsumeds.Where(aa => aa.EmpID == emp.EmpID).ToList();
                     foreach (var lvType in _lvType)
                     {
-                        string empLvType = emp.EmpID.ToString()+lvType.LvType1;
+                        string empLvType = emp.EmpID.ToString()+lvType.LvTypeID;
                         List<LvConsumed> lvConsumedlvType = new List<LvConsumed>();
                         if (lvcon.Where(aa => aa.EmpLvType == empLvType).Count() == 0)
                         {
-                            string empType = emp.EmpID.ToString() + lvType.LvType1;
+                            string empType = emp.EmpID.ToString() + lvType.LvTypeID;
                             LvConsumed lvConsumed = new LvConsumed();
                             lvConsumed.EmpLvType = empType;
                             lvConsumed.EmpID = emp.EmpID;
-                            lvConsumed.LeaveType = lvType.LvType1;
+                            lvConsumed.LeaveType = lvType.LvTypeID;
                             lvConsumed.JanConsumed = 0;
                             lvConsumed.FebConsumed = 0;
                             lvConsumed.MarchConsumed = 0;
@@ -310,7 +310,7 @@ namespace WMS.Controllers
                             lvConsumed.OctConsumed = 0;
                             lvConsumed.NovConsumed = 0;
                             lvConsumed.DecConsumed = 0;
-                            switch (lvType.LvType1)
+                            switch (lvType.LvTypeID)
                             {
                                 case "A"://CL
                                     lvConsumed.TotalForYear = CL;

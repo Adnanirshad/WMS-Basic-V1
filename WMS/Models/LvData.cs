@@ -26,6 +26,7 @@ namespace WMS.Models
         public Nullable<bool> FirstHalf { get; set; }
         public Nullable<bool> Active { get; set; }
     
+        public virtual Emp Emp { get; set; }
         public virtual LvApplication LvApplication { get; set; }
     }
 }
