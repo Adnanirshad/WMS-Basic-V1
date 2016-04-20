@@ -99,7 +99,7 @@ namespace WMS.Reports.Filters
             QueryBuilder qb = new QueryBuilder();
             string query = qb.MakeCustomizeQueryForEmpView(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
-            _View = dt.ToList<EmpView>().AsQueryable().SortBy("EmpNo").ToList();
+            _View = dt.ToList<EmpView>().AsQueryable().SortBy("DeptName").ToList();
             _View = _View.Where(aa => aa.Status == true).ToList();
             //if (fm.DivisionFilter.Count > 0)
             //{

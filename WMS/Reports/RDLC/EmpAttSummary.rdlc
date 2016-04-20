@@ -1029,6 +1029,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2501,7 +2502,13 @@
                   <Group Name="Details" />
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!EmpNo.Value</Value>
+                      <Value>=Fields!DeptName.Value</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=Fields!SectionName.Value</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=Fields!EmpName.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                 </TablixMember>

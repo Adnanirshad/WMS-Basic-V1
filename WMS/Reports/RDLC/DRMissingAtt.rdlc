@@ -404,6 +404,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -845,7 +846,7 @@
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>de</Value>
+                      <Value>=Fields!DeptName.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
@@ -901,7 +902,10 @@
                       <Group Name="Details" />
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!EmpNo.Value</Value>
+                          <Value>=Fields!SectionName.Value</Value>
+                        </SortExpression>
+                        <SortExpression>
+                          <Value>=Fields!EmpName.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                       <TablixMembers>

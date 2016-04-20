@@ -86,7 +86,7 @@ namespace WMS.Reports.Filters
             QueryBuilder qb = new QueryBuilder();
             string query = qb.QueryForCompanyViewLinq(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from ViewSection ");
-            _View = dt.ToList<ViewSection>().AsQueryable().SortBy("SectionName").ToList();
+            _View = dt.ToList<ViewSection>().AsQueryable().SortBy("DeptName").ToList();
             if (fm.SectionFilter.Count > 0)
             {
                 foreach (var Sec in fm.SectionFilter)
@@ -107,7 +107,7 @@ namespace WMS.Reports.Filters
                 }
                 _View = _TempView.ToList();
             }
-            GridViewSection.DataSource = _View.Where(aa => aa.SectionName.ToUpper().Contains(search.ToUpper())).ToList();
+            GridViewSection.DataSource = _View.Where(aa => aa.SectionName.ToUpper().Contains(search.ToUpper())|| aa.DeptName.ToUpper().Contains(search.ToUpper())).ToList();
             GridViewSection.DataBind();
         }
 

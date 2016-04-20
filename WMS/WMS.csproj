@@ -218,6 +218,9 @@
     <Content Include="Scripts\Employee\Filters\ClearSessionOnPageClose.js" />
     <Content Include="Scripts\Employee\Filters\DeleteSingleFilters.js" />
     <Content Include="Scripts\Employee\Filters\FilterScripts.js" />
+    <Content Include="Scripts\Filters\ClearSessionOnPageClose.js" />
+    <Content Include="Scripts\Filters\DeleteSingleFilters.js" />
+    <Content Include="Scripts\Filters\FilterScripts.js" />
     <Content Include="Scripts\globalize.min.js" />
     <Content Include="Scripts\highcharts-3d.js" />
     <Content Include="Scripts\highcharts.js" />

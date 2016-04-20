@@ -44,71 +44,7 @@
                 <ul class="nav navbar-nav">
                      
 
-                    <% if (Session["MRDailyAtt"].ToString() == "1") %> 
-                     <% { %>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book"></span><span>  Daily</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/WMS/Reports/DDetailed.aspx">Detailed Attendance</a></li>
-                            <li><a href="/WMS/Reports/DAttendance.aspx">Attendance</a></li>
-                            <li><a href="/WMS/Reports/Dpresent.aspx">Present</a></li>
-                            <li><a href="/WMS/Reports/DAbsent.aspx">Absent</a></li>
-                            <% if (Session["MRLeave"].ToString() == "1") %> 
-                             <% { %>
-                                <li><a href="/WMS/Reports/DLeave.aspx">Leaves</a></li>
-                                <li><a href="/WMS/Reports/DShortLeave.aspx">Short Leave</a></li>
-                            <% } %>
-                            <li class="divider"></li>
-                            <li><a href="/WMS/Reports/DLateIn.aspx">Late In</a></li>
-                            <li><a href="/WMS/Reports/DLateOut.aspx">Late Out</a></li>
-                            <li><a href="/WMS/Reports/DEarlyIn.aspx">Early In</a></li>
-                            <li><a href="/WMS/Reports/DEarlyOut.aspx">Early Out</a></li>
-                            <li><a href="/WMS/Reports/DOverTime.aspx">OverTime</a></li>
-                            <li class="divider"></li>
-                            <li><a href="/WMS/Reports/DMissingAtt.aspx">Missing Attendance</a></li>
-                            <li><a href="/WMS/Reports/DMultipleInOut.aspx">Multiple In/Out</a></li>
-                        </ul>
-                    </li>
-                    <% }%>
-
-                    <% if (Session["MRMonthly"].ToString() == "1") %> 
-                     <% { %>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tower"></span><span> Summary</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu multi-level">
-                            <li><a href="/WMS/Reports/MLvConsumed.aspx">Monthly Leaves</a></li>
-                            <li><a href="/WMS/Reports/MYLeaveSummary.aspx">Yearly Leaves</a></li>
-                            <li><a href="/WMS/Reports/MSheet.aspx">Monthly Sheet (21th to 20th)</a></li>
-                            <li><a href="/WMS/Reports/MSheetC.aspx">Monthly Sheet (1st to 31th) </a></li>
-                            <li><a href="/WMS/Reports/MSummary.aspx">Monthly Summary (21th to 20th)</a></li>
-                            <li><a href="/WMS/Reports/MSummaryC.aspx">Monthly Summary (1st to 31th)</a></li>
-                            <li class="divider"></li>
-                             <li><a href="/WMS/Reports/MDetailExcelP.aspx">Monthly Sheet (21th to 20th)(Excel)</a></li>
-                            <li><a href="/WMS/Reports/MDetailExcelC.aspx">Monthly Sheet (1st to 31th)(Excel)</a></li>
-                        </ul>
-                    </li>
-                    <% } %>
-
-                    <% if (Session["MRAudit"].ToString() == "1") %> 
-                     <% { %>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tower"></span><span> Audit</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu multi-level">
-                            <li><a href="/WMS/Reports/AuditLog.aspx">Audit Log</a></li>
-                        </ul>
-                    </li>
-                    <% } %>
-
-                    <% if (Session["MRDetail"].ToString() == "1") %> 
-                     <% { %>
-                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tower"></span><span> Detiled</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu multi-level">
-                            <li><a href="/WMS/Reports/EmpAttSummary.aspx">Employee Detailed Attendance</a></li>
-                            <li><a href="/WMS/Reports/DetailedAbsent.aspx">Employee Absent</a></li>
-                        </ul>
-                    </li>
-                    <% } %>
+                    
                     <%--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span><span>  Trends</span> <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -121,10 +57,10 @@
                     </li>--%>
 
                    <li class="dropdown">
-                        <a href="/WMS/Home" ><span class="glyphicon glyphicon-home"></span><span>  Home</span></a>
+                        <a href="/Home" ><span class="glyphicon glyphicon-home"></span><span>  Home</span></a>
                     </li>
                     <li class="dropdown">
-                        <a href="/WMS/Home/LogOut" ><span>  LogOut</span></a>
+                        <a href="/Home/LogOut" ><span>  LogOut</span></a>
                     </li>
                   </ul>
             </div>

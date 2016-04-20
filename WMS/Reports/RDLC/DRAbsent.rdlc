@@ -179,7 +179,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Department</Value>
+                              <Value>Group</Value>
                               <Style>
                                 <FontFamily>arial</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -213,7 +213,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Section</Value>
+                              <Value>Unit</Value>
                               <Style>
                                 <FontFamily>arial</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -431,6 +431,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -930,7 +931,10 @@
                       <Group Name="Details1" />
                       <SortExpressions>
                         <SortExpression>
-                          <Value>=Fields!EmpNo.Value</Value>
+                          <Value>=Fields!SectionName.Value</Value>
+                        </SortExpression>
+                        <SortExpression>
+                          <Value>=Fields!EmpName.Value</Value>
                         </SortExpression>
                       </SortExpressions>
                     </TablixMember>
