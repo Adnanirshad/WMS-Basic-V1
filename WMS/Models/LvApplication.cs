@@ -21,7 +21,7 @@ namespace WMS.Models
     
         public int LvID { get; set; }
         public System.DateTime LvDate { get; set; }
-        public string LvTypeID { get; set; }
+        public string LeaveTypeID { get; set; }
         public int EmpID { get; set; }
         public System.DateTime FromDate { get; set; }
         public System.DateTime ToDate { get; set; }

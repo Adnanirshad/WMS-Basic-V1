@@ -44,10 +44,15 @@ namespace WMS.Models
         public Nullable<bool> GZDays { get; set; }
         public Nullable<bool> OpenShift { get; set; }
         public Nullable<short> LocationID { get; set; }
+        public Nullable<bool> RoundOffWorkMin { get; set; }
+        public Nullable<bool> SubtractOTFromWork { get; set; }
+        public Nullable<bool> SubtractEIFromWork { get; set; }
+        public Nullable<bool> AddEIInOT { get; set; }
     
         public virtual DaysName DaysName { get; set; }
         public virtual DaysName DaysName1 { get; set; }
         public virtual ICollection<Emp> Emps { get; set; }
+        public virtual Location Location { get; set; }
         public virtual ICollection<RosterApp> RosterApps { get; set; }
     }
 }

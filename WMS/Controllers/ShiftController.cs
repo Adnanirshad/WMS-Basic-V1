@@ -100,7 +100,7 @@ namespace WMS.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomActionAttribute]
-         public ActionResult Create([Bind(Include = "ShiftID,ShiftName,StartTime,DayOff1,DayOff2,Holiday,RosterType,MonMin,TueMin,WedMin,ThuMin,FriMin,SatMin,SunMin,LateIn,EarlyIn,EarlyOut,LateOut,OverTimeMin,MinHrs,HasBreak,BreakMin,GZDays,LocationID,OpenShift")] Shift shift, FormCollection form)
+         public ActionResult Create([Bind(Include = "ShiftID,ShiftName,StartTime,DayOff1,DayOff2,Holiday,RosterType,MonMin,TueMin,WedMin,ThuMin,FriMin,SatMin,SunMin,LateIn,EarlyIn,EarlyOut,LateOut,OverTimeMin,MinHrs,HasBreak,BreakMin,GZDays,LocationID,OpenShift,RoundOffWorkMin,SubtractOTFromWork,SubtractEIFromWork,AddEIInOT")] Shift shift, FormCollection form)
         {
             if (string.IsNullOrEmpty(shift.ShiftName))
                 ModelState.AddModelError("ShiftName", "Required");
@@ -148,12 +148,17 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                var aaa = form["HasBreak"];
+                
                 User LoggedInUser = Session["LoggedUser"] as User;
+                shift.HasBreak = (bool)ValueProvider.GetValue("HasBreak").ConvertTo(typeof(bool));
+                shift.Holiday = (bool)ValueProvider.GetValue("Holiday").ConvertTo(typeof(bool));
+                shift.OpenShift = (bool)ValueProvider.GetValue("OpenShift").ConvertTo(typeof(bool));
+                shift.RoundOffWorkMin = (bool)ValueProvider.GetValue("RoundOffWorkMin").ConvertTo(typeof(bool));
+                shift.SubtractOTFromWork = (bool)ValueProvider.GetValue("SubtractOTFromWork").ConvertTo(typeof(bool));
+                shift.SubtractEIFromWork = (bool)ValueProvider.GetValue("SubtractEIFromWork").ConvertTo(typeof(bool));
+                shift.AddEIInOT = (bool)ValueProvider.GetValue("AddEIInOT").ConvertTo(typeof(bool));
                 if (shift.OpenShift == true)
                     shift.StartTime = TimeSpan.Zero;
-                //shift.OpenShift = false;
-                //shift.HasBreak = false;
                 shift.GZDays = shift.Holiday;
                 db.Shifts.Add(shift);
                 db.SaveChanges();
@@ -193,7 +198,7 @@ namespace WMS.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomActionAttribute]
-        public ActionResult Edit([Bind(Include="ShiftID,ShiftName,StartTime,DayOff1,DayOff2,Holiday,RosterType,MonMin,TueMin,WedMin,ThuMin,FriMin,SatMin,SunMin,LateIn,EarlyIn,EarlyOut,LateOut,OverTimeMin,MinHrs,HasBreak,BreakMin,GZDays,OpenShift,LocationID")] Shift shift)
+         public ActionResult Edit([Bind(Include = "ShiftID,ShiftName,StartTime,DayOff1,DayOff2,Holiday,RosterType,MonMin,TueMin,WedMin,ThuMin,FriMin,SatMin,SunMin,LateIn,EarlyIn,EarlyOut,LateOut,OverTimeMin,MinHrs,HasBreak,BreakMin,GZDays,OpenShift,LocationID,RoundOffWorkMin,SubtractOTFromWork,SubtractEIFromWork,AddEIInOT")] Shift shift)
         {
             if (string.IsNullOrEmpty(shift.ShiftName))
                 ModelState.AddModelError("ShiftName", "Required");
@@ -220,6 +225,13 @@ namespace WMS.Controllers
             if (ModelState.IsValid)
             {
                 User LoggedInUser = Session["LoggedUser"] as User;
+                shift.HasBreak = (bool)ValueProvider.GetValue("HasBreak").ConvertTo(typeof(bool));
+                shift.Holiday = (bool)ValueProvider.GetValue("Holiday").ConvertTo(typeof(bool));
+                shift.OpenShift = (bool)ValueProvider.GetValue("OpenShift").ConvertTo(typeof(bool));
+                shift.RoundOffWorkMin = (bool)ValueProvider.GetValue("RoundOffWorkMin").ConvertTo(typeof(bool));
+                shift.SubtractOTFromWork = (bool)ValueProvider.GetValue("SubtractOTFromWork").ConvertTo(typeof(bool));
+                shift.SubtractEIFromWork = (bool)ValueProvider.GetValue("SubtractEIFromWork").ConvertTo(typeof(bool));
+                shift.AddEIInOT = (bool)ValueProvider.GetValue("AddEIInOT").ConvertTo(typeof(bool));
                 shift.GZDays = shift.Holiday;
                 db.Entry(shift).State = EntityState.Modified;
                 db.SaveChanges();

@@ -21,6 +21,7 @@ namespace WMS.Models
             this.JobCardDetails = new HashSet<JobCardDetail>();
             this.LvApplications = new HashSet<LvApplication>();
             this.LvConsumeds = new HashSet<LvConsumed>();
+            this.LvDatas = new HashSet<LvData>();
             this.LvShorts = new HashSet<LvShort>();
             this.PollDatas = new HashSet<PollData>();
         }
@@ -70,6 +71,7 @@ namespace WMS.Models
         public virtual ICollection<JobCardDetail> JobCardDetails { get; set; }
         public virtual ICollection<LvApplication> LvApplications { get; set; }
         public virtual ICollection<LvConsumed> LvConsumeds { get; set; }
+        public virtual ICollection<LvData> LvDatas { get; set; }
         public virtual ICollection<LvShort> LvShorts { get; set; }
         public virtual ICollection<PollData> PollDatas { get; set; }
     }

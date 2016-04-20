@@ -99,7 +99,7 @@ namespace WMS.Controllers
         public ActionResult Create()
         {
             ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo");
-            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa=>aa.Enable==true).OrderBy(s=>s.LvType1).ToList(), "LvType1", "LvDesc");
+            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa=>aa.Enable==true).OrderBy(s=>s.LvTypeID).ToList(), "LvType1", "LvDesc");
             return View();
         }
         
@@ -126,9 +126,9 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                LvType lvType = db.LvTypes.First(aa => aa.LvType1 == lvapplication.LvTypeID);
+                LvType lvType = db.LvTypes.First(aa => aa.LvTypeID == lvapplication.LeaveTypeID);
                 LeaveController LvProcessController = new LeaveController();
-                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LvTypeID, lvType))
+                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LeaveTypeID, lvType))
                 {
                     if (lvapplication.IsHalf != true)
                     {
@@ -150,7 +150,7 @@ namespace WMS.Controllers
                                     LvProcessController.AddLeaveToLeaveData(lvapplication,lvType);
                                     LvProcessController.AddLeaveToLeaveAttData(lvapplication,lvType);
                                     ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo");
-                                    ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvType1).ToList(), "LvType1", "LvDesc");
+                                    ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvTypeID).ToList(), "LvType1", "LvDesc");
                                     return RedirectToAction("Create");
                                 }
                                 else
@@ -185,7 +185,7 @@ namespace WMS.Controllers
                                         LvProcessController.AddHalfLeaveToLeaveData(lvapplication,lvType);
                                         LvProcessController.AddHalfLeaveToAttData(lvapplication, lvType);
                                         ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo");
-                                        ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvType1).ToList(), "LvType1", "LvDesc");
+                                        ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvTypeID).ToList(), "LvType1", "LvDesc");
                                         return RedirectToAction("Create");
                                     }
                                 }
@@ -205,7 +205,7 @@ namespace WMS.Controllers
             else
                 ModelState.AddModelError("LvType", "Leave is not created. Please contact with network administrator");
             ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo", lvapplication.EmpID);
-            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa=>aa.Enable==true).OrderBy(s=>s.LvType1), "LvType1", "LvDesc", lvapplication.LvType);
+            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa=>aa.Enable==true).OrderBy(s=>s.LvTypeID), "LvType1", "LvDesc", lvapplication.LvType);
             return View(lvapplication);
         }
 
@@ -222,7 +222,7 @@ namespace WMS.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo", lvapplication.EmpID);
-            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvType1).ToList(), "LvType1", "LvDesc", lvapplication.LvType);
+            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvTypeID).ToList(), "LvType1", "LvDesc", lvapplication.LvType);
             return View(lvapplication);
         }
 
@@ -244,7 +244,7 @@ namespace WMS.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo", lvapplication.EmpID);
-            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvType1).ToList(), "LvType1", "LvDesc", lvapplication.LvType);
+            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s=>s.LvTypeID).ToList(), "LvType1", "LvDesc", lvapplication.LvType);
             return View(lvapplication);
         }
 

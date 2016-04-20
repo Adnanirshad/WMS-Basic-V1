@@ -371,6 +371,7 @@
     <Content Include="Views\Crew\Edit.cshtml" />
     <Content Include="Views\Crew\Index.cshtml" />
     <Content Include="Views\JobCard\Index.cshtml" />
+    <Content Include="Views\Option\Index.cshtml" />
     <None Include="Views\User\Partials\CityAccess.cshtml" />
     <None Include="Views\User\Partials\LocationAccess.cshtml" />
     <None Include="Views\User\Partials\RegionAccess.cshtml" />
@@ -432,6 +433,7 @@
     <Compile Include="Controllers\LvAppController.cs" />
     <Compile Include="Controllers\LvShortController.cs" />
     <Compile Include="Controllers\LvTypeController.cs" />
+    <Compile Include="Controllers\OptionController.cs" />
     <Compile Include="Controllers\ReaderController.cs" />
     <Compile Include="Controllers\ReaderTypeController.cs" />
     <Compile Include="Controllers\RosterController.cs" />
