@@ -79,7 +79,7 @@
                                         
                                          <asp:BoundField DataField="EmpNo" HeaderText="P.No" />
                                         <asp:BoundField DataField="EmpName" HeaderText="Name" />
-                                        <asp:BoundField DataField ="DeptName" HeaderText ="Department" />
+                                        <asp:BoundField DataField ="DeptName" HeaderText ="Groups" />
                                         <%--<asp:BoundField DataField="CompName" HeaderText="Company Name" />--%>
                     
                                 </Columns>
