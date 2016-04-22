@@ -1,6 +1,6 @@
 ﻿@model WMS.Models.AttData
 @{
-    ViewBag.Title = "EditAttWizardOne";
+    ViewBag.Title = "Edit Attendance";
 }
 
 
@@ -14,6 +14,7 @@
 @using (Html.BeginForm("EditAttWizardData", "EditAttendance", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    <br />
     <div class="row">
 <div class="col-md-8">
     <h3>Edit Attendance for  Date:@(" " + Model.AttDate.Value.ToString("dd-MMM-yyyy"))</h3>
@@ -238,11 +239,21 @@
         </div>
             <div class="col-md-6">
             <h4 style="margin-bottom:20px;">Enter New Time In and Out</h4>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        Duty Code
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DropDownList("NewDutyCode", new List<SelectListItem>
+                        { new SelectListItem { Text = "Duty", Value = "D"}, new SelectListItem { Text = "GZ Holiday", Value = "G"}, new SelectListItem { Text = "Rest", Value = "R"}
+                            }, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall" }) 
+                    </div>
+            </div>
              <div class="form-group">
                 <div class="col-md-3">
                     Duty Time
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                      @if (Model.DutyTime != null)
                 {
 
@@ -292,16 +303,6 @@
                     
                 </div>
              </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    Duty Code
-                </div>
-                <div class="col-md-4">
-                    @Html.DropDownList("NewDutyCode", new List<SelectListItem>
-                    { new SelectListItem { Text = "Duty", Value = "D"}, new SelectListItem { Text = "GZ Holiday", Value = "G"}, new SelectListItem { Text = "Rest", Value = "R"}
-                        }, new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthSmall" }) 
-                </div>
-            </div>
             <div class="form-group">
                 <div class="col-md-3">
                     <input type="checkbox"name="checkShiftMin" id="checkShiftMin" onclick="enable_text()" >Shift Minutes

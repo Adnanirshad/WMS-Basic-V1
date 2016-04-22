@@ -12,19 +12,19 @@ $(document).ready(function () {
     var ss = $("#UserType option:selected").text();
    
     if (ss == 'Admin') {
-        $("#ForAdminOnly").show();
+        $("#ForUserOnly").hide();
     }
     if (ss == 'Restricted') {
-        $("#ForAdminOnly").hide();
+        $("#ForUserOnly").show();
     }
 
     $('#UserType').change(function () {
         var test = $(this).val();
         if (test == '0') {
-            $("#ForAdminOnly").hide();
+            $("#ForUserOnly").show();
         }
         if (test == '1') {
-            $("#ForAdminOnly").show();
+            $("#ForUserOnly").hide();
         }
     });
 });

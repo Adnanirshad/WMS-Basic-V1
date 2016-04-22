@@ -25,112 +25,10 @@ namespace WMS.Controllers
             ViewData["JobDateFrom"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DesigSortParm = sortOrder == "designation" ? "designation_desc" : "designation";
-            ViewBag.LocSortParm = sortOrder == "location" ? "location_desc" : "location";
-            ViewBag.SectionSortParm = sortOrder == "section" ? "section_desc" : "section";
-            ViewBag.DepartmentSortParm = sortOrder == "wing" ? "wing_desc" : "wing";
-            ViewBag.ShiftSortParm = sortOrder == "shift" ? "shift_desc" : "shift";
-            ViewBag.TypeSortParm = sortOrder == "type" ? "type_desc" : "type";
-            //List<EmpView> emps = new List<EmpView>();
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-            User LoggedInUser = Session["LoggedUser"] as User;
-            QueryBuilder qb = new QueryBuilder();
-            string query = qb.MakeCustomizeQuery(LoggedInUser);
-            DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
-            List<EmpView> emps1 = dt.ToList<EmpView>();
-
-            // List<EmpView> emps = db.EmpViews.ToList();
-            ViewBag.CurrentFilter = searchString;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                if (searchString == "Active" || searchString == "active")
-                {
-                    emps1 = emps1.Where(aa => aa.Status == true).ToList();
-                }
-                else if (searchString == "Inactive" || searchString == "inactive")
-                {
-                    emps1 = emps1.Where(aa => aa.Status == false).ToList();
-                }
-                else
-                {
-                    try
-                    {
-
-                        emps1 = emps1.Where(s => s.EmpName.ToUpper().Contains(searchString.ToUpper())
-                         || s.EmpNo.ToUpper().Contains(searchString.ToUpper()) || s.DesignationName.ToString().Contains(searchString)
-                        ).ToList();
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
-                }
-            }
-
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    emps1 = emps1.OrderByDescending(s => s.EmpName).ToList();
-                    break;
-                case "designation_desc":
-                    emps1 = emps1.OrderByDescending(s => s.DesignationName).ToList();
-                    break;
-                case "designation":
-                    emps1 = emps1.OrderBy(s => s.DesignationName).ToList();
-                    break;
-                case "location_desc":
-                    emps1 = emps1.OrderByDescending(s => s.LocName).ToList();
-                    break;
-                case "location":
-                    emps1 = emps1.OrderBy(s => s.LocName).ToList();
-                    break;
-                case "section_desc":
-                    emps1 = emps1.OrderByDescending(s => s.SectionName).ToList();
-                    break;
-                case "section":
-                    emps1 = emps1.OrderBy(s => s.SectionName).ToList();
-                    break;
-                case "wing_desc":
-                    emps1 = emps1.OrderByDescending(s => s.DeptName).ToList();
-                    break;
-                case "wing":
-                    emps1 = emps1.OrderBy(s => s.DeptName).ToList();
-                    break;
-                case "shift_desc":
-                    emps1 = emps1.OrderByDescending(s => s.ShiftName).ToList();
-                    break;
-                case "shift":
-                    emps1 = emps1.OrderBy(s => s.ShiftName).ToList();
-                    break;
-                case "type_desc":
-                    emps1 = emps1.OrderByDescending(s => s.TypeName).ToList();
-                    break;
-                case "type":
-                    emps1 = emps1.OrderBy(s => s.TypeName).ToList();
-                    break;
-                default:
-                    emps1 = emps1.OrderBy(s => s.EmpName).ToList();
-                    break;
-            }
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(emps1.ToPagedList(pageNumber, pageSize));
-
-
-
-           
+            
+            return View();
         }
-
+        // Job Card create Action
         [HttpPost]
         public ActionResult EditAttJobCard()
         {
@@ -195,11 +93,7 @@ namespace WMS.Controllers
             ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
             ViewBag.CMessage = Message;
-            ViewBag.CurrentFilter = "";
-            int pageSize = 10;
-            int? page = 1;
-            int pageNumber = (page ?? 1);
-            return View("Index", emps.ToPagedList(pageNumber, pageSize));
+            return View("JCCreate");
         }
 
         public ActionResult JobCardList(string sortOrder, string searchString, string currentFilter, int? page)
@@ -266,6 +160,8 @@ namespace WMS.Controllers
             int pageNumber = (page ?? 1);
             return View(jobCardsApps.ToPagedList(pageNumber, pageSize));
         }
+
+        #region -- Job Card Create Helper --
         private bool ValidateJobCard(JobCardApp jobCardApp)
         {
             List<JobCardApp> _Lc = new List<JobCardApp>();
@@ -312,7 +208,6 @@ namespace WMS.Controllers
             }
         }
 
-
         private bool AddJobCardDataToDatabase(string _empDate, int _empID, DateTime _currentDate, int _userID, JobCardApp jcApp)
         {
             bool check = false;
@@ -353,20 +248,24 @@ namespace WMS.Controllers
                 AddJobCardDataToDatabase(_empDate, _empID, _Date, _userID, jcApp);
                 if (db.AttProcesses.Where(aa => aa.ProcessDate == _Date).Count() > 0)
                 {
+                    //1	Official Duty
+                    //2	Present
+                    //3	Absent
+                    //5	Special Holiday
                     switch (jcApp.CardType)
                     {
 
-                        case 8:// Training
-                            AddJCTrainingToAttData(_empDate, _empID, _Date, _userID, (short)jcApp.CardType);
+                        case 1:// Official Duty
+                            AddJCToAttData(_empDate, _empID, _Date,"O",false,false,false,false,true,"Offical Duty");
                             break;
-                        case 9:// Tour
-                            AddJCTourToAttData(_empDate, _empID, _Date, _userID, (short)jcApp.CardType);
+                        case 2:// Present
+                            AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Present");
                             break;
-                        case 10:// Visit
-                            AddJCVisitToAttData(_empDate, _empID, _Date, _userID, (short)jcApp.CardType);
+                        case 3:// Absent
+                            AddJCToAttData(_empDate, _empID, _Date, "D",true, false, false, false, false, "Absent");
                             break;
-                        case 11:// Official Assignment
-                            AddJCOAToAttData(_empDate, _empID, _Date, _userID, (short)jcApp.CardType);
+                        case 5:// Special Holiday
+                            AddJCToAttData(_empDate, _empID, _Date, "G", false, false, false, true, false, "SH");
                             break;
                     }
                 }
@@ -374,39 +273,30 @@ namespace WMS.Controllers
             }
         }
 
-        #region --Job Cards - AttData ---
-        private bool AddJCNorrmalDayAttData(string _empDate, int _empID, DateTime _Date, int _userID, short _WorkCardID)
+        private bool AddJCToAttData(string _empDate, int _empID, DateTime _Date, string dutyCode, bool statusAB, bool statusDO, 
+            bool statusLeave, bool statusGZ, bool statusP, string Remarks)
         {
             bool check = false;
             try
             {
-                //Normal Duty
                 using (var context = new TAS2013Entities())
                 {
                     AttData _attdata = context.AttDatas.FirstOrDefault(aa => aa.EmpDate == _empDate);
-                    JobCard _jcCard = context.JobCards.FirstOrDefault(aa => aa.WorkCardID == _WorkCardID);
                     if (_attdata != null)
                     {
-                        _attdata.DutyCode = "D";
-                        _attdata.StatusAB = false;
-                        _attdata.StatusDO = false;
-                        _attdata.StatusLeave = false;
-                        _attdata.StatusP = true;
-                        //_attdata.WorkMin = _jcCard.WorkMin;
-                        //_attdata.ShifMin = _jcCard.WorkMin;
-                        _attdata.Remarks = "[Present][Manual]";
-                        _attdata.TimeIn = null;
-                        _attdata.TimeOut = null;
-                        _attdata.EarlyIn = null;
-                        _attdata.EarlyOut = null;
-                        _attdata.LateIn = null;
-                        _attdata.LateOut = null;
-                        _attdata.OTMin = null;
-                        _attdata.StatusEI = null;
-                        _attdata.StatusEO = null;
-                        _attdata.StatusLI = null;
-                        _attdata.StatusLO = null;
-                        _attdata.StatusP = true;
+                        _attdata.DutyCode = dutyCode;
+                        _attdata.StatusAB = statusAB;
+                        _attdata.StatusDO = statusDO;
+                        _attdata.StatusLeave = statusLeave;
+                        _attdata.StatusGZ = statusGZ;
+                        _attdata.StatusP = statusP;
+                        if (_attdata.StatusAB != true)
+                            _attdata.WorkMin = _attdata.ShifMin;
+                        else
+                            _attdata.WorkMin = 0;
+                        if (_attdata.StatusDO == true)
+                            _attdata.WorkMin = 0;
+                        _attdata.Remarks = Remarks;
                     }
                     context.SaveChanges();
                     if (context.SaveChanges() > 0)
@@ -419,177 +309,7 @@ namespace WMS.Controllers
             }
             return check;
         }
-
-        private bool AddJCVisitToAttData(string _empDate, int _empID, DateTime _Date, int _userID, short _WorkCardID)
-        {
-            bool check = false;
-            try
-            {
-                //Normal Duty
-                using (var context = new TAS2013Entities())
-                {
-                    AttData _attdata = context.AttDatas.FirstOrDefault(aa => aa.EmpDate == _empDate);
-                    JobCard _jcCard = context.JobCards.FirstOrDefault(aa => aa.WorkCardID == _WorkCardID);
-                    if (_attdata != null)
-                    {
-                        _attdata.DutyCode = "D";
-                        _attdata.StatusAB = false;
-                        _attdata.StatusDO = false;
-                        _attdata.StatusLeave = false;
-                        _attdata.StatusP = true;
-                        _attdata.WorkMin = _attdata.ShifMin;
-                        _attdata.Remarks = "[OD-Visit]";
-                        _attdata.EarlyIn = null;
-                        _attdata.EarlyOut = null;
-                        _attdata.LateIn = null;
-                        _attdata.LateOut = null;
-                        _attdata.OTMin = null;
-                        _attdata.StatusEI = null;
-                        _attdata.StatusEO = null;
-                        _attdata.StatusLI = null;
-                        _attdata.StatusLO = null;
-                        _attdata.StatusP = true;
-                    }
-                    context.SaveChanges();
-                    if (context.SaveChanges() > 0)
-                        check = true;
-                    context.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return check;
-        }
-        private bool AddJCOAToAttData(string _empDate, int _empID, DateTime _Date, int _userID, short _WorkCardID)
-        {
-            bool check = false;
-            try
-            {
-                //Normal Duty
-                using (var context = new TAS2013Entities())
-                {
-                    AttData _attdata = context.AttDatas.FirstOrDefault(aa => aa.EmpDate == _empDate);
-                    JobCard _jcCard = context.JobCards.FirstOrDefault(aa => aa.WorkCardID == _WorkCardID);
-                    if (_attdata != null)
-                    {
-                        _attdata.DutyCode = "D";
-                        _attdata.StatusAB = false;
-                        _attdata.StatusDO = false;
-                        _attdata.StatusLeave = false;
-                        _attdata.StatusP = true;
-                        _attdata.WorkMin = _attdata.ShifMin;
-                        _attdata.Remarks = "[Oficial Assignment]";
-                        _attdata.EarlyIn = null;
-                        _attdata.EarlyOut = null;
-                        _attdata.LateIn = null;
-                        _attdata.LateOut = null;
-                        _attdata.OTMin = null;
-                        _attdata.StatusEI = null;
-                        _attdata.StatusEO = null;
-                        _attdata.StatusLI = null;
-                        _attdata.StatusLO = null;
-                        _attdata.StatusP = true;
-                    }
-                    context.SaveChanges();
-                    if (context.SaveChanges() > 0)
-                        check = true;
-                    context.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return check;
-        }
-        private bool AddJCTourToAttData(string _empDate, int _empID, DateTime _Date, int _userID, short _WorkCardID)
-        {
-            bool check = false;
-            try
-            {
-                //Normal Duty
-                using (var context = new TAS2013Entities())
-                {
-                    AttData _attdata = context.AttDatas.FirstOrDefault(aa => aa.EmpDate == _empDate);
-                    JobCard _jcCard = context.JobCards.FirstOrDefault(aa => aa.WorkCardID == _WorkCardID);
-                    if (_attdata != null)
-                    {
-                        _attdata.DutyCode = "D";
-                        _attdata.StatusAB = false;
-                        _attdata.StatusDO = false;
-                        _attdata.StatusLeave = false;
-                        _attdata.StatusP = true;
-                        _attdata.WorkMin = _attdata.ShifMin;
-                        _attdata.Remarks = "[OD-Tour]";
-                        _attdata.EarlyIn = null;
-                        _attdata.EarlyOut = null;
-                        _attdata.LateIn = null;
-                        _attdata.LateOut = null;
-                        _attdata.OTMin = null;
-                        _attdata.StatusEI = null;
-                        _attdata.StatusEO = null;
-                        _attdata.StatusLI = null;
-                        _attdata.StatusLO = null;
-                        _attdata.StatusP = true;
-                    }
-                    context.SaveChanges();
-                    if (context.SaveChanges() > 0)
-                        check = true;
-                    context.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return check;
-        }
-
-        private bool AddJCTrainingToAttData(string _empDate, int _empID, DateTime _Date, int _userID, short _WorkCardID)
-        {
-            bool check = false;
-            try
-            {
-                //Normal Duty
-                using (var context = new TAS2013Entities())
-                {
-                    AttData _attdata = context.AttDatas.FirstOrDefault(aa => aa.EmpDate == _empDate);
-                    JobCard _jcCard = context.JobCards.FirstOrDefault(aa => aa.WorkCardID == _WorkCardID);
-                    if (_attdata != null)
-                    {
-                        _attdata.DutyCode = "D";
-                        _attdata.StatusAB = false;
-                        _attdata.StatusDO = false;
-                        _attdata.StatusLeave = false;
-                        _attdata.StatusP = true;
-                        _attdata.WorkMin = _attdata.ShifMin;
-                        _attdata.Remarks = "[OD-Training]";
-                        _attdata.EarlyIn = null;
-                        _attdata.EarlyOut = null;
-                        _attdata.LateIn = null;
-                        _attdata.LateOut = null;
-                        _attdata.OTMin = null;
-                        _attdata.StatusEI = null;
-                        _attdata.StatusEO = null;
-                        _attdata.StatusLI = null;
-                        _attdata.StatusLO = null;
-                        _attdata.StatusP = true;
-                    }
-                    context.SaveChanges();
-                    if (context.SaveChanges() > 0)
-                        check = true;
-                    context.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return check;
-        }
-
         #endregion
-
-
-
 
 
 

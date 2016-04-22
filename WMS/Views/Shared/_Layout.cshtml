@@ -48,11 +48,12 @@
                         <li><a href="~/Designation">Designations</a></li>   
                             <li><a href="~/EmpType">Employee Type</a></li>                                                                                                   <li><a href="~/Crew">Crews</a></li>
                         <li class="divider"></li>
-                        <li><a href="~/Section">Units</a></li>
-                        <li><a href="~/Dept">Groups</a></li>                     
+                        <li><a href="~/Dept">Groups</a></li>
+                        <li><a href="~/Section">Units</a></li>                     
                         <li class="divider"></li>
                         <li><a href="~/Location">Locations</a></li>    
-                        <li><a href="~/Roster">Rosters</a></li>                 
+                        <li><a href="~/Roster">Rosters</a></li>    
+                        <li><a href="~/Option">Options</a></li>             
                         @if(Session["MUser"].ToString() == "1")
                         {
                         <li><a href="~/User">Users</a></li>
@@ -78,7 +79,7 @@
                          @if(Session["MProcess"].ToString() == "1")
                         {
                              <li><a href="~/EditAttendance">Edit Attendance</a></li>
-                             @*<li><a href="~/JobCard">Job Card</a></li>*@
+                             <li><a href="~/JobCard">Job Card</a></li>
                          <li><a href="~/AttProcessors">Process Attendance</a></li>
                            @* <li><a href="~/JobCardDate">Download</a></li>*@
                             
