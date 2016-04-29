@@ -1,0 +1,118 @@
+﻿@model IEnumerable<WMS.Models.LvType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LvDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FldName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfLvCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HalfAbCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarryForward)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarryForwardYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarryForwardDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountGZDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountRestDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxDaysConsective)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxDaysMonth)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FldName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfLvCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HalfAbCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarryForward)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarryForwardYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarryForwardDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountGZDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountRestDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxDaysConsective)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxDaysMonth)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LvTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LvTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LvTypeID })
+        </td>
+    </tr>
+}
+
+</table>

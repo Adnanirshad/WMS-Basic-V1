@@ -112,7 +112,7 @@ namespace WMS.Controllers
                         lvModel.SectionName = emp.FirstOrDefault().Section.SectionName;
                         foreach (var lv in lvType)
                         {
-                            switch (lv.LeaveType)
+                            switch (lv.LeaveTypeID)
                             {
                                 case "A"://CL
                                     lvModel.CL = (float)lv.YearRemaining;
@@ -153,7 +153,7 @@ namespace WMS.Controllers
             {
                 foreach (var lv in lvType)
                 {
-                    switch (lv.LeaveType)
+                    switch (lv.LeaveTypeID)
                     {
                         case "A"://CL
                             lv.YearRemaining = (float)CL;
@@ -291,13 +291,13 @@ namespace WMS.Controllers
                     {
                         string empLvType = emp.EmpID.ToString()+lvType.LvTypeID;
                         List<LvConsumed> lvConsumedlvType = new List<LvConsumed>();
-                        if (lvcon.Where(aa => aa.EmpLvType == empLvType).Count() == 0)
+                        if (lvcon.Where(aa => aa.EmpLvTypeYear == empLvType).Count() == 0)
                         {
                             string empType = emp.EmpID.ToString() + lvType.LvTypeID;
                             LvConsumed lvConsumed = new LvConsumed();
-                            lvConsumed.EmpLvType = empType;
+                            lvConsumed.EmpLvTypeYear = empType;
                             lvConsumed.EmpID = emp.EmpID;
-                            lvConsumed.LeaveType = lvType.LvTypeID;
+                            lvConsumed.LeaveTypeID = lvType.LvTypeID;
                             lvConsumed.JanConsumed = 0;
                             lvConsumed.FebConsumed = 0;
                             lvConsumed.MarchConsumed = 0;
@@ -424,7 +424,7 @@ namespace WMS.Controllers
             {
                 if (_leavesQuotaModel.Where(aa => aa.EmpID == item.EmpID).Count() > 0)
                 {
-                    switch (item.LeaveType)
+                    switch (item.LeaveTypeID)
                     {
                         case "A"://casual
                             _leavesQuotaModel.Where(aa => aa.EmpID == item.EmpID).FirstOrDefault().CL = (float)item.YearRemaining;
@@ -444,7 +444,7 @@ namespace WMS.Controllers
                     lvModel.EmpNo = item.Emp.EmpNo;
                     lvModel.EmpName = item.Emp.EmpName;
                     lvModel.SectionName = item.Emp.Section.SectionName;
-                    switch (item.LeaveType)
+                    switch (item.LeaveTypeID)
                     {
                         case "A"://casual
                             lvModel.CL = (float)item.YearRemaining;

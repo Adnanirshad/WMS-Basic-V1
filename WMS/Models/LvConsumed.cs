@@ -14,9 +14,10 @@ namespace WMS.Models
     
     public partial class LvConsumed
     {
-        public string EmpLvType { get; set; }
+        public string EmpLvTypeYear { get; set; }
+        public string LVYear { get; set; }
         public int EmpID { get; set; }
-        public string LeaveType { get; set; }
+        public string LeaveTypeID { get; set; }
         public Nullable<double> JanConsumed { get; set; }
         public Nullable<double> FebConsumed { get; set; }
         public Nullable<double> MarchConsumed { get; set; }
@@ -35,5 +36,6 @@ namespace WMS.Models
         public Nullable<double> GrandTotalRemaining { get; set; }
     
         public virtual Emp Emp { get; set; }
+        public virtual LvType LvType { get; set; }
     }
 }

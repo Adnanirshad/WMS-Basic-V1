@@ -54,7 +54,7 @@ namespace WMS.Controllers
                 {
                     List<LvConsumed> _lvConsumed = new List<LvConsumed>();
                     string empLvType = _lvapp.EmpID.ToString() + _lvapp.LvType;
-                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                     RemainingLeaves = (decimal)_lvConsumed.FirstOrDefault().YearRemaining;
                     if ((RemainingLeaves - Convert.ToDecimal(_lvapp.NoOfDays)) >= 0)
                     {
@@ -159,7 +159,7 @@ namespace WMS.Controllers
                 {
                     List<LvConsumed> _lvConsumed = new List<LvConsumed>();
                     string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
-                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                     float _NoOfDays = lvappl.NoOfDays;
                     if (_lvConsumed.Count > 0)
                     {
@@ -516,7 +516,7 @@ namespace WMS.Controllers
                 using (var ctx = new TAS2013Entities())
                 {
                     string empLvType = lvapplication.EmpID.ToString() + lvapplication.LvType;
-                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                    _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                     if (_lvConsumed.Count > 0)
                     {
                         RemainingLeaves = (float)_lvConsumed.FirstOrDefault().YearRemaining;
@@ -668,7 +668,7 @@ namespace WMS.Controllers
             using (var ctx = new TAS2013Entities())
             {
                 string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
-                _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                 if (_lvConsumed.Count > 0)
                 {
                     _lvConsumed.FirstOrDefault().YearRemaining = (float)(_lvConsumed.FirstOrDefault().YearRemaining + LvDays);
@@ -749,7 +749,7 @@ namespace WMS.Controllers
             using (var ctx = new TAS2013Entities())
             {
                 string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
-                _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvType == empLvType).ToList();
+                _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                 if (_lvConsumed.Count > 0)
                 {
                     _lvConsumed.FirstOrDefault().YearRemaining = (float)(_lvConsumed.FirstOrDefault().YearRemaining + LvDays);
@@ -796,7 +796,7 @@ namespace WMS.Controllers
                 using (var ctx = new TAS2013Entities())
                 {
                     List<LvConsumed> lv = new List<LvConsumed>();
-                    lv = ctx.LvConsumeds.Where(aa => aa.EmpID == empID && aa.LeaveType == lvType).ToList();
+                    lv = ctx.LvConsumeds.Where(aa => aa.EmpID == empID && aa.LeaveTypeID == lvType).ToList();
                     if (lv.Count > 0)
                         check = true;
                 }

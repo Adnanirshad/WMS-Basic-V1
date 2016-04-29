@@ -1793,7 +1793,7 @@ namespace WMS.Reports
                     DesigID = (short)emp.DesigID;
                     //CrewName = emp.CrewName;
                     //CrewID = (short)emp.CrewID;
-                    switch (leave.LeaveType)
+                    switch (leave.LeaveTypeID)
                     {
                         case "A"://Casual
                             JanCL = (float)leave.JanConsumed;
@@ -1986,9 +1986,9 @@ namespace WMS.Reports
                     float BeforeAL = 0, UsedAL = 0, BalAL = 0;
                     string _month = "";
                     List<LvConsumed> entries = ctx.LvConsumeds.Where(aa => aa.EmpID == emp.EmpID).ToList();
-                    LvConsumed eCL = entries.FirstOrDefault(lv => lv.LeaveType == "A");
-                    LvConsumed eSL = entries.FirstOrDefault(lv => lv.LeaveType == "C");
-                    LvConsumed eAL = entries.FirstOrDefault(lv => lv.LeaveType == "B");
+                    LvConsumed eCL = entries.FirstOrDefault(lv => lv.LeaveTypeID == "A");
+                    LvConsumed eSL = entries.FirstOrDefault(lv => lv.LeaveTypeID == "C");
+                    LvConsumed eAL = entries.FirstOrDefault(lv => lv.LeaveTypeID == "B");
                     if (entries.Count > 0)
                     {
                         switch (month)

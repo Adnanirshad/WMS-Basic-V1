@@ -17,6 +17,7 @@ namespace WMS.Models
         public LvType()
         {
             this.LvApplications = new HashSet<LvApplication>();
+            this.LvConsumeds = new HashSet<LvConsumed>();
         }
     
         public string LvTypeID { get; set; }
@@ -29,8 +30,14 @@ namespace WMS.Models
         public bool UpdateBalance { get; set; }
         public Nullable<bool> Enable { get; set; }
         public Nullable<bool> CarryForward { get; set; }
-        public Nullable<bool> CountVacDays { get; set; }
+        public Nullable<bool> CarryForwardYear { get; set; }
+        public Nullable<bool> CarryForwardDays { get; set; }
+        public Nullable<bool> CountGZDays { get; set; }
+        public Nullable<bool> CountRestDays { get; set; }
+        public Nullable<byte> MaxDaysConsective { get; set; }
+        public Nullable<byte> MaxDaysMonth { get; set; }
     
         public virtual ICollection<LvApplication> LvApplications { get; set; }
+        public virtual ICollection<LvConsumed> LvConsumeds { get; set; }
     }
 }

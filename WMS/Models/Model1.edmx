@@ -768,7 +768,8 @@
       [ViewMultipleInOut].[Tin11] AS [Tin11], 
       [ViewMultipleInOut].[Tout11] AS [Tout11], 
       [ViewMultipleInOut].[Tin12] AS [Tin12], 
-      [ViewMultipleInOut].[Tout12] AS [Tout12]
+      [ViewMultipleInOut].[Tout12] AS [Tout12], 
+      [ViewMultipleInOut].[Deleted] AS [Deleted]
       FROM [dbo].[ViewMultipleInOut] AS [ViewMultipleInOut]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewSection" EntityType="TAS201Model.Store.ViewSection" store:Type="Views" store:Schema="dbo" store:Name="ViewSection">
@@ -845,6 +846,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_LvConsumed_Emp" Association="TAS201Model.Store.FK_LvConsumed_Emp">
             <End Role="Emp" EntitySet="Emp" />
+            <End Role="LvConsumed" EntitySet="LvConsumed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvConsumed_LvType" Association="TAS201Model.Store.FK_LvConsumed_LvType">
+            <End Role="LvType" EntitySet="LvType" />
             <End Role="LvConsumed" EntitySet="LvConsumed" />
           </AssociationSet>
           <AssociationSet Name="FK_LvData_Emp" Association="TAS201Model.Store.FK_LvData_Emp">
@@ -1529,11 +1534,12 @@
         </EntityType>
         <EntityType Name="LvConsumed">
           <Key>
-            <PropertyRef Name="EmpLvType" />
+            <PropertyRef Name="EmpLvTypeYear" />
           </Key>
-          <Property Name="EmpLvType" Type="nvarchar" Nullable="false" MaxLength="8" />
+          <Property Name="EmpLvTypeYear" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="LVYear" Type="nvarchar" MaxLength="50" />
           <Property Name="EmpID" Type="int" Nullable="false" />
-          <Property Name="LeaveType" Type="char" MaxLength="1" />
+          <Property Name="LeaveTypeID" Type="char" MaxLength="1" />
           <Property Name="JanConsumed" Type="float" />
           <Property Name="FebConsumed" Type="float" />
           <Property Name="MarchConsumed" Type="float" />
@@ -1598,7 +1604,12 @@
           <Property Name="UpdateBalance" Type="bit" Nullable="false" />
           <Property Name="Enable" Type="bit" />
           <Property Name="CarryForward" Type="bit" />
-          <Property Name="CountVacDays" Type="bit" />
+          <Property Name="CarryForwardYear" Type="bit" />
+          <Property Name="CarryForwardDays" Type="bit" />
+          <Property Name="CountGZDays" Type="bit" />
+          <Property Name="CountRestDays" Type="bit" />
+          <Property Name="MaxDaysConsective" Type="tinyint" />
+          <Property Name="MaxDaysMonth" Type="tinyint" />
         </EntityType>
         <EntityType Name="Option">
           <Key>
@@ -2678,6 +2689,7 @@
           <Property Name="Tout11" Type="datetime" />
           <Property Name="Tin12" Type="datetime" />
           <Property Name="Tout12" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewSection' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2894,6 +2906,18 @@
             </Principal>
             <Dependent Role="LvConsumed">
               <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvConsumed_LvType">
+          <End Role="LvType" Type="TAS201Model.Store.LvType" Multiplicity="0..1" />
+          <End Role="LvConsumed" Type="TAS201Model.Store.LvConsumed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvType">
+              <PropertyRef Name="LvTypeID" />
+            </Principal>
+            <Dependent Role="LvConsumed">
+              <PropertyRef Name="LeaveTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3252,6 +3276,10 @@
           <AssociationSet Name="FK_LvData_LvApplications" Association="TAS201Model.FK_LvData_LvApplications">
             <End Role="LvApplication" EntitySet="LvApplications" />
             <End Role="LvData" EntitySet="LvDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvConsumed_LvType" Association="TAS201Model.FK_LvConsumed_LvType">
+            <End Role="LvType" EntitySet="LvTypes" />
+            <End Role="LvConsumed" EntitySet="LvConsumeds" />
           </AssociationSet>
           <AssociationSet Name="FK_Reader_RdrID" Association="TAS201Model.FK_Reader_RdrID">
             <End Role="Reader" EntitySet="Readers" />
@@ -3934,11 +3962,12 @@
         </EntityType>
         <EntityType Name="LvConsumed">
           <Key>
-            <PropertyRef Name="EmpLvType" />
+            <PropertyRef Name="EmpLvTypeYear" />
           </Key>
-          <Property Type="String" Name="EmpLvType" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmpLvTypeYear" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LVYear" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
-          <Property Type="String" Name="LeaveType" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="LeaveTypeID" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="Double" Name="JanConsumed" />
           <Property Type="Double" Name="FebConsumed" />
           <Property Type="Double" Name="MarchConsumed" />
@@ -3956,6 +3985,7 @@
           <Property Type="Double" Name="GrandTotal" />
           <Property Type="Double" Name="GrandTotalRemaining" />
           <NavigationProperty Name="Emp" Relationship="TAS201Model.FK_LvConsumed_Emp" FromRole="LvConsumed" ToRole="Emp" />
+          <NavigationProperty Name="LvType" Relationship="TAS201Model.FK_LvConsumed_LvType" FromRole="LvConsumed" ToRole="LvType" />
         </EntityType>
         <EntityType Name="LvData">
           <Key>
@@ -4007,8 +4037,14 @@
           <Property Type="Boolean" Name="UpdateBalance" Nullable="false" />
           <Property Type="Boolean" Name="Enable" />
           <Property Type="Boolean" Name="CarryForward" />
-          <Property Type="Boolean" Name="CountVacDays" />
+          <Property Type="Boolean" Name="CarryForwardYear" />
+          <Property Type="Boolean" Name="CarryForwardDays" />
+          <Property Type="Boolean" Name="CountGZDays" />
+          <Property Type="Boolean" Name="CountRestDays" />
+          <Property Type="Byte" Name="MaxDaysConsective" />
+          <Property Type="Byte" Name="MaxDaysMonth" />
           <NavigationProperty Name="LvApplications" Relationship="TAS201Model.FK_LvApplication_LvType" FromRole="LvType" ToRole="LvApplication" />
+          <NavigationProperty Name="LvConsumeds" Relationship="TAS201Model.FK_LvConsumed_LvType" FromRole="LvType" ToRole="LvConsumed" />
         </EntityType>
         <EntityType Name="Option">
           <Key>
@@ -5070,6 +5106,7 @@
           <Property Type="DateTime" Name="Tout11" Precision="3" />
           <Property Type="DateTime" Name="Tin12" Precision="3" />
           <Property Type="DateTime" Name="Tout12" Precision="3" />
+          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewSection">
           <Key>
@@ -5391,6 +5428,18 @@
             </Principal>
             <Dependent Role="LvData">
               <PropertyRef Name="LvID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvConsumed_LvType">
+          <End Type="TAS201Model.LvType" Role="LvType" Multiplicity="0..1" />
+          <End Type="TAS201Model.LvConsumed" Role="LvConsumed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvType">
+              <PropertyRef Name="LvTypeID" />
+            </Principal>
+            <Dependent Role="LvConsumed">
+              <PropertyRef Name="LeaveTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6140,9 +6189,10 @@
                 <ScalarProperty Name="MarchConsumed" ColumnName="MarchConsumed" />
                 <ScalarProperty Name="FebConsumed" ColumnName="FebConsumed" />
                 <ScalarProperty Name="JanConsumed" ColumnName="JanConsumed" />
-                <ScalarProperty Name="LeaveType" ColumnName="LeaveType" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="EmpLvType" ColumnName="EmpLvType" />
+                <ScalarProperty Name="LVYear" ColumnName="LVYear" />
+                <ScalarProperty Name="EmpLvTypeYear" ColumnName="EmpLvTypeYear" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6184,7 +6234,12 @@
           <EntitySetMapping Name="LvTypes">
             <EntityTypeMapping TypeName="TAS201Model.LvType">
               <MappingFragment StoreEntitySet="LvType">
-                <ScalarProperty Name="CountVacDays" ColumnName="CountVacDays" />
+                <ScalarProperty Name="MaxDaysMonth" ColumnName="MaxDaysMonth" />
+                <ScalarProperty Name="MaxDaysConsective" ColumnName="MaxDaysConsective" />
+                <ScalarProperty Name="CountRestDays" ColumnName="CountRestDays" />
+                <ScalarProperty Name="CountGZDays" ColumnName="CountGZDays" />
+                <ScalarProperty Name="CarryForwardDays" ColumnName="CarryForwardDays" />
+                <ScalarProperty Name="CarryForwardYear" ColumnName="CarryForwardYear" />
                 <ScalarProperty Name="CarryForward" ColumnName="CarryForward" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="UpdateBalance" ColumnName="UpdateBalance" />
@@ -7114,6 +7169,7 @@
           <EntitySetMapping Name="ViewMultipleInOuts">
             <EntityTypeMapping TypeName="TAS201Model.ViewMultipleInOut">
               <MappingFragment StoreEntitySet="ViewMultipleInOut">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="Tout12" ColumnName="Tout12" />
                 <ScalarProperty Name="Tin12" ColumnName="Tin12" />
                 <ScalarProperty Name="Tout11" ColumnName="Tout11" />
