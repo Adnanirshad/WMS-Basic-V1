@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS", "WMS\WMS.csproj", "{60EA4F4B-0BE9-4134-AF05-7E0425AF90D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS-PPAF", "WMS\WMS-PPAF.csproj", "{60EA4F4B-0BE9-4134-AF05-7E0425AF90D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMSLibrary", "WMSLibrary\WMSLibrary.csproj", "{BEE16D41-5976-4142-97D7-AE43D44519C9}"
 EndProject

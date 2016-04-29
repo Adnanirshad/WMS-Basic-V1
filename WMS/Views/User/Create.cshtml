@@ -38,8 +38,8 @@
                 <div class="col-md-10">
                     @Html.DropDownList("UserType", new List<SelectListItem>
                     { 
-                        new SelectListItem { Text = "Admin", Value = "1"},
-                        new SelectListItem { Text = "Restricted", Value = "0"}
+                        new SelectListItem { Text = "Admin", Value = "true"},
+                        new SelectListItem { Text = "Restricted", Value = "false"}
                     },new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"}) 
                 </div>
              </div>

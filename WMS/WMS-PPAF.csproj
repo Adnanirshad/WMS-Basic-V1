@@ -284,6 +284,7 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\a.pubxml" />
     <Content Include="ReportingEngine.Master" />
+    <None Include="Properties\PublishProfiles\PPAF-New.pubxml" />
     <None Include="Properties\PublishProfiles\WMSProfile.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -448,6 +449,7 @@
     <Compile Include="CustomClass\CustomFunc.cs" />
     <Compile Include="CustomClass\DatatableToList.cs" />
     <Compile Include="CustomClass\GlobalVaribales.cs" />
+    <Compile Include="CustomClass\PermanentMonthly.cs" />
     <Compile Include="CustomClass\QueryBuilder.cs" />
     <Compile Include="CustomClass\ValueForAngular.cs" />
     <Compile Include="ErrorPages\ErrorPage.aspx.cs">
@@ -881,6 +883,10 @@
     <EmbeddedResource Include="Reports\RDLC\DRPresent.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\EmpAttSummary.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\Employee.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmployeeDetail.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MLvApplication.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\MRFlexyDetailExcelP.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\DRShortLeave.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

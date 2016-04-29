@@ -39,5 +39,6 @@ namespace WMS.Models
         public string LocName { get; set; }
         public string ShiftName { get; set; }
         public short DeptID { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     }
 }

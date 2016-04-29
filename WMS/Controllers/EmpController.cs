@@ -46,7 +46,7 @@ namespace WMS.Controllers
             User LoggedInUser = Session["LoggedUser"] as User;
             int NoOfEmps = Convert.ToInt32(GlobalVaribales.NoOfEmps);
             QueryBuilder qb = new QueryBuilder();
-            string query = qb.MakeCustomizeQuery(LoggedInUser);
+            string query = qb.MakeCustomizeQueryForEmp(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from EmpView"+query);
             List<EmpView> emps = new List<EmpView>();
             emps = dt.ToList<EmpView>();
@@ -233,6 +233,7 @@ namespace WMS.Controllers
                     emp.CardNo = "0000000000";
                 }
                 empNo = emp.EmpNo;
+                emp.Deleted = false;
                 //emp.FpID = emp.EmpID;
                 db.Emps.Add(emp);
                 db.SaveChanges();
@@ -376,6 +377,7 @@ namespace WMS.Controllers
                         emp.CardNo = "0000000000";
                     }
                     emp.EmpNo = emp.EmpNo.ToUpper();
+                    emp.Deleted = false;
                     db.Entry(emp).State = EntityState.Modified;
                    
                     db.SaveChanges();
@@ -441,7 +443,7 @@ namespace WMS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Emp emp = db.Emps.Find(id);
-            db.Emps.Remove(emp);
+            emp.Deleted = true;
             ViewBag.JS = "toastr.success('" + emp.EmpName + " removed');";
             db.SaveChanges();
             return RedirectToAction("Index");

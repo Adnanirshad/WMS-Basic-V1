@@ -97,7 +97,7 @@ namespace WMS.Reports.Filters
             List<EmpView> _TempView = new List<EmpView>();
             User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
-            string query = qb.MakeCustomizeQueryForEmpView(LoggedInUser);
+            string query = qb.MakeCustomizeQueryForEmp(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
             _View = dt.ToList<EmpView>().AsQueryable().SortBy("DeptName").ToList();
             _View = _View.Where(aa => aa.Status == true).ToList();

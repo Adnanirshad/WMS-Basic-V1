@@ -29,7 +29,7 @@ namespace WMS.CustomClass
         }
         public string MakeCustomizeQuery(User _user)
         {
-            string RoleQuery = "";
+            string RoleQuery = " where Deleted='0' ";
             string CatQuery = "";
             TAS2013Entities db = new TAS2013Entities();
             //List<UserRoleData> userRoleData = new List<UserRoleData>();
@@ -668,6 +668,72 @@ namespace WMS.CustomClass
 
             return CatQuery + RoleQuery;
         }
-        
+
+
+        internal string MakeCustomizeQueryForEmp(User LoggedInUser)
+        {
+            string query = " where Deleted='0' ";
+            if (LoggedInUser.UserType == "Admin")
+            {
+
+            }
+            else
+            {
+                TAS2013Entities ctx = new TAS2013Entities();
+                List<UserSection> userSection = new List<UserSection>();
+                userSection = ctx.UserSections.Where(aa => aa.UserID == LoggedInUser.UserID).ToList();
+                if (userSection.Count == 1)
+                { query = query + " and SecID = "+userSection.FirstOrDefault().SecID; }
+                else
+                {
+                    List<string> _CriteriaForSection = new List<string>();
+                    string querySec = "";
+                    foreach (var usec in userSection)
+                    {
+                        _CriteriaForSection.Add(" SecID = " + usec.SecID + " ");
+                    }
+                    for (int i = 0; i < _CriteriaForSection.Count - 1; i++)
+                    {
+                        querySec = querySec + _CriteriaForSection[i] + " or ";
+                    }
+                    querySec = querySec + _CriteriaForSection[_CriteriaForSection.Count - 1];
+                    query = query +"and ( "+querySec+" )";
+                }
+            }
+            return query;
+        }
+
+        internal string QueryForSectionRptFilters(User LoggedInUser)
+        {
+            string query = " ";
+            if (LoggedInUser.UserType == "Admin")
+            {
+
+            }
+            else
+            {
+                TAS2013Entities ctx = new TAS2013Entities();
+                List<UserSection> userSection = new List<UserSection>();
+                userSection = ctx.UserSections.Where(aa => aa.UserID == LoggedInUser.UserID).ToList();
+                if (userSection.Count == 1)
+                { query = query + " where SectionID = " + userSection.FirstOrDefault().SecID; }
+                else
+                {
+                    List<string> _CriteriaForSection = new List<string>();
+                    string querySec = "";
+                    foreach (var usec in userSection)
+                    {
+                        _CriteriaForSection.Add(" SectionID = " + usec.SecID + " ");
+                    }
+                    for (int i = 0; i < _CriteriaForSection.Count - 1; i++)
+                    {
+                        querySec = querySec + _CriteriaForSection[i] + " or ";
+                    }
+                    querySec = querySec + _CriteriaForSection[_CriteriaForSection.Count - 1];
+                    query = query + "where " + querySec + " ";
+                }
+            }
+            return query;
+        }
     }
 }

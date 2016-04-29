@@ -69,10 +69,7 @@
                                 <li>
                                     <h5>Monthly</h5>
                                     <ul>
-                                        <li><a href="../ReportContainer.aspx?reportname=monthly_leave_sheet">Monthly Leave Sheet</a></li>
-                                        <li><a href="../ReportContainer.aspx?reportname=monthly_1-31">Monthly Sheet (1st to 31th)</a></li>
-                                        <li><a href="../ReportContainer.aspx?reportname=monthlysummary_1-31">Monthly Summary (1st to 31th)</a></li>
-                                        <li><a href="../ReportContainer.aspx?reportname=monthly_1-31_consolidated">Monthly Consolidated (1st to 31th)</a></li>
+                                        <li><a href="../ReportContainer.aspx?reportname=monthly_21-20_flexy">Monthly Sheet</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -95,7 +92,7 @@
                        {
                            {
                                int d = ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter.Count;
-                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Sections</a>  <span style ='float:right;' class='badge' id='SectionSpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
+                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Units</a>  <span style ='float:right;' class='badge' id='SectionSpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
                            }
                            foreach (var item in ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter)
                            {

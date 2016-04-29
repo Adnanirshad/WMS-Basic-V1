@@ -39,15 +39,15 @@
         
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
-            @Html.ActionLink(" ", "Details", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-pencil btn btn-info btn-xs" }) 
+            @Html.ActionLink(" ", "Details", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" }) 
             @Html.ActionLink(" ", "Delete", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
         </td>
     </tr>
 }
 
 </table>
-<div class="form-inline">
+@*<div class="form-inline">
           <div class="form-group ">@Html.PagedListPager(Model, page => Url.Action("Index", 
                 new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))</div>
           <div class="form-group pull-right">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
-</div>
+</div>*@

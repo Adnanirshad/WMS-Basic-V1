@@ -15,7 +15,6 @@ namespace WMS.Models
     public partial class AttProcessorScheduler
     {
         public int AttProcesserSchedulerID { get; set; }
-        public System.DateTime WhenToProcess { get; set; }
         public string PeriodTag { get; set; }
         public System.DateTime DateFrom { get; set; }
         public System.DateTime DateTo { get; set; }

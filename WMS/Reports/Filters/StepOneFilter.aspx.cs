@@ -84,8 +84,8 @@ namespace WMS.Reports.Filters
             List<ViewSection> _TempView = new List<ViewSection>();
             User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
-            string query = qb.QueryForCompanyViewLinq(LoggedInUser);
-            DataTable dt = qb.GetValuesfromDB("select * from ViewSection ");
+            string query = qb.QueryForSectionRptFilters(LoggedInUser);
+            DataTable dt = qb.GetValuesfromDB("select * from ViewSection "+query);
             _View = dt.ToList<ViewSection>().AsQueryable().SortBy("DeptName").ToList();
             if (fm.SectionFilter.Count > 0)
             {

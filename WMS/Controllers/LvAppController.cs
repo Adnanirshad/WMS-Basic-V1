@@ -58,10 +58,10 @@ namespace WMS.Controllers
                     break;
 
                 case "LvType_desc":
-                    lvapplications = lvapplications.OrderByDescending(s => s.LvType).ToList();
+                    lvapplications = lvapplications.OrderByDescending(s => s.LeaveTypeID).ToList();
                     break;
                 case "LvType":
-                    lvapplications = lvapplications.OrderBy(s => s.LvType).ToList();
+                    lvapplications = lvapplications.OrderBy(s => s.LeaveTypeID).ToList();
                     break;
                 case "Date_desc":
                     lvapplications = lvapplications.OrderByDescending(s => s.LvDate).ToList();
@@ -99,7 +99,7 @@ namespace WMS.Controllers
         public ActionResult Create()
         {
             ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo");
-            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa=>aa.Enable==true).OrderBy(s=>s.LvTypeID).ToList(), "LvType1", "LvDesc");
+            ViewBag.LeaveTypeID = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s => s.LvTypeID).ToList(), "LvTypeID", "LvDesc");
             return View();
         }
         
@@ -205,7 +205,7 @@ namespace WMS.Controllers
             else
                 ModelState.AddModelError("LvType", "Leave is not created. Please contact with network administrator");
             ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s=>s.EmpName), "EmpID", "EmpNo", lvapplication.EmpID);
-            ViewBag.LvType = new SelectList(db.LvTypes.Where(aa=>aa.Enable==true).OrderBy(s=>s.LvTypeID), "LvType1", "LvDesc", lvapplication.LvType);
+            ViewBag.LeaveTypeID = new SelectList(db.LvTypes.Where(aa => aa.Enable == true).OrderBy(s => s.LvTypeID), "LvTypeID", "LvDesc", lvapplication.LvType);
             return View(lvapplication);
         }
 

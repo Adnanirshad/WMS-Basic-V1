@@ -22,10 +22,10 @@ namespace WMS.Controllers
         // GET: /User/
         public ActionResult Index()
         {
-            User LoggedInUser = Session["LoggedUser"] as User;
             int NoOfUsres = Convert.ToInt32(GlobalVaribales.NoOfUsers);
-            var users = db.Users.Take(NoOfUsres);
-            return View(users.ToList());
+            var users = db.Users.Where(aa=>aa.Deleted==false);
+            var usr = users.Take(NoOfUsres);
+            return View(usr.ToList());
         }
 
         // GET: /User/Details/5
@@ -57,7 +57,7 @@ namespace WMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create( [Bind(Include = "UserID,UserName,Password,EmpID,DateCreated,Name,Status,Department,CanEdit,CanDelete,CanAdd,CanView,RoleID,MHR,MDevice,MLeave,MDesktop,MEditAtt,MUser,MOption,MRoster,MRDailyAtt,MRLeave,MRMonthly,MRAudit,MRManualEditAtt,MREmployee,MRDetail,MRSummary,MRGraph,ViewPermanentStaff,ViewPermanentMgm,ViewContractual,ViewLocation,LocationID,MProcess")] User user)
         {
-            if (db.Users.Where(aa => aa.Status == true).Count() >= Convert.ToInt32(GlobalVaribales.NoOfUsers))
+            if (db.Users.Where(aa => aa.Status == true && aa.Deleted==false).Count() >= Convert.ToInt32(GlobalVaribales.NoOfUsers))
                 ModelState.AddModelError("UserName", "Your Users has exceeded from License, Please upgrade your license");
             user.CanAdd = (bool)ValueProvider.GetValue("CanAdd").ConvertTo(typeof(bool));
             user.CanEdit = (bool)ValueProvider.GetValue("CanEdit").ConvertTo(typeof(bool));
@@ -78,17 +78,17 @@ namespace WMS.Controllers
             user.MRAudit = (bool)ValueProvider.GetValue("MRAudit").ConvertTo(typeof(bool));
             user.MRManualEditAtt = (bool)ValueProvider.GetValue("MRManualEditAtt").ConvertTo(typeof(bool));
             user.MRDetail = (bool)ValueProvider.GetValue("MRDetail").ConvertTo(typeof(bool));
-            if (Request.Form["UserType"].ToString() == "1")
-                user.UserType = true;
+            if (Request.Form["UserType"].ToString() == "true")
+                user.UserType = "Admin";
             else
-                user.UserType = false;
+                user.UserType = "Restricted";
             user.DateCreated = DateTime.Today;
-
             if (ModelState.IsValid)
             {
+                user.Deleted = false;
                 db.Users.Add(user);
                 db.SaveChanges();
-                if (user.UserType == true)
+                if (user.UserType == "Restricted")
                 {
                     List<Section> secs = new List<Section>();
                     secs = db.Sections.ToList();
@@ -104,7 +104,8 @@ namespace WMS.Controllers
                         db.UserSections.Add(uSec);
                         db.SaveChanges();
                     }
-                } 
+                }
+                return RedirectToAction("Index");
             }
             return View(user);
         }
@@ -160,26 +161,30 @@ namespace WMS.Controllers
             user.MRAudit = (bool)ValueProvider.GetValue("MRAudit").ConvertTo(typeof(bool));
             user.MRManualEditAtt = (bool)ValueProvider.GetValue("MRManualEditAtt").ConvertTo(typeof(bool));
             user.MRDetail = (bool)ValueProvider.GetValue("MRDetail").ConvertTo(typeof(bool));
-            if (Request.Form["UserType"].ToString() == "1")
-                user.UserType = true;
+            if (Request.Form["UserType"].ToString() == "true")
+                user.UserType = "Admin";
             else
-                user.UserType = false;
+                user.UserType = "Restricted";
             user.DateCreated = DateTime.Today;
-               // db.Entry(user).State = EntityState.Modified;
+            user.Deleted = false;
+            // db.Entry(user).State = EntityState.Modified;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
+            //User Section
+            int count = Convert.ToInt32(Request.Form["uSectionCount"]);
+            List<Section> secs = new List<Section>();
+            List<UserSection> userLocs = db.UserSections.Where(aa => aa.UserID == user.UserID).ToList();
+            secs = db.Sections.ToList();
+            List<int> currentLocIDs = new List<int>();
+            foreach (var uloc in userLocs)
+            {
+                UserSection ul = db.UserSections.First(aa => aa.SecID == uloc.SecID);
+                db.UserSections.Remove(ul);
                 db.SaveChanges();
-
-                int count = Convert.ToInt32(Request.Form["uSectionCount"]);
-                List<Section> secs = new List<Section>();
-                List<UserSection> userLocs = db.UserSections.Where(aa => aa.UserID == user.UserID).ToList();
-                secs = db.Sections.ToList();
-                List<int> currentLocIDs = new List<int>();
-                foreach (var uloc in userLocs)
-                {
-                    UserSection ul = db.UserSections.First(aa => aa.SecID == uloc.SecID);
-                    db.UserSections.Remove(ul);
-                    db.SaveChanges();
-                }
-                userLocs = new List<UserSection>();
+            }
+            userLocs = new List<UserSection>();
+            if (user.UserType=="Restricted")
+            {
                 for (int i = 1; i <= count; i++)
                 {
                     string uLocID = "uSection" + i;
@@ -199,11 +204,9 @@ namespace WMS.Controllers
                         userLocs.Add(uloc);
                         db.SaveChanges();
                     }
-                
-                return RedirectToAction("Index");
-
+                } 
             }
-            return View(user);
+           return RedirectToAction("Index");
         }
         // GET: /User/Delete/5
         public ActionResult Delete(int? id)
@@ -226,7 +229,8 @@ namespace WMS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            user.Deleted = true;
+            //db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

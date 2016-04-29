@@ -82,16 +82,16 @@
                                 @Html.ValidationMessageFor(model => model.ShiftID)
                             </div>
                         </div>
-                       <div class="form-group">
+                      @* <div class="form-group">
                             <label class="control-label col-md-3">Crew Name</label>
                             <div class="col-md-3">
                                @Html.DropDownList("CrewID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
                                 @Html.ValidationMessageFor(model => model.CrewID)
                             </div>
-                        </div>
+                        </div>*@
                          <div class="form-group" id="DeptDivID">
                             <div class = "control-label col-md-3">
-                                <label for="Deptartment">Department</label>
+                                <label for="Deptartment">Group</label>
                             </div>
                             <div class="col-md-3 ">
                                 @Html.DropDownList("DeptID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
@@ -99,7 +99,7 @@
                         </div>
                          <div class="form-group" id="SectionDivID">
                             <div class = "control-label col-md-3">
-                                <label for="Section">Section</label>
+                                <label for="Section">Unit</label>
                             </div>
                             <div class="col-md-3 ">
                                

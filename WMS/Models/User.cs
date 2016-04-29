@@ -28,7 +28,7 @@ namespace WMS.Models
         public Nullable<System.DateTime> DateCreated { get; set; }
         public string Name { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<bool> UserType { get; set; }
+        public string UserType { get; set; }
         public Nullable<bool> CanEdit { get; set; }
         public Nullable<bool> CanDelete { get; set; }
         public Nullable<bool> CanView { get; set; }
@@ -49,6 +49,7 @@ namespace WMS.Models
         public Nullable<bool> MRDetail { get; set; }
         public Nullable<bool> MRoster { get; set; }
         public Nullable<bool> MProcess { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     
         public virtual ICollection<AttDataManEdit> AttDataManEdits { get; set; }
         public virtual ICollection<AttProcessorScheduler> AttProcessorSchedulers { get; set; }

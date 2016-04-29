@@ -15,6 +15,7 @@
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
     @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.UserID)
       <div ng-app="UserLocation" ng-controller="myCtrlEdit" data-ng-init="initFunction(@Model.UserID)">
       
         <section class="col-md-12">
@@ -36,6 +37,7 @@
             <div class="form-group">
                <div class="control-label col-md-2">User Type</div>
                 <div class="col-md-10"> 
+                    <input type="hidden" name="UserTypeHidden" id="UserTypeHidden" value="@Model.UserType"/>
                     @Html.DropDownList("UserType", new List<SelectListItem>
                     { 
                         new SelectListItem { Text = "Admin", Value = "true"},
@@ -51,7 +53,7 @@
                 </div>
             </div>
 
-          <div class="form-group"name="ForAdminOnly" id="ForAdminOnly">
+          <div class="form-group"name="ForUserOnly" id="ForUserOnly">
             <div class="col-md-2 text-right">Section</div>
             <div class="col-md-3">
                 <input type="hidden" placeholder="e.g Lahore" data-ng-model="section.name" id="uSectionCount" name="uSectionCount" class="form-control" value="{{sections.length}}">

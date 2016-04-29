@@ -69,5 +69,6 @@ namespace WMS.Models
         public Nullable<short> ShifMin { get; set; }
         public string Remarks { get; set; }
         public short DeptID { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     }
 }

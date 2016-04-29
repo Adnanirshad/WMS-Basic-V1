@@ -91,7 +91,8 @@
       [EmpView].[TypeName] AS [TypeName], 
       [EmpView].[LocName] AS [LocName], 
       [EmpView].[ShiftName] AS [ShiftName], 
-      [EmpView].[DeptID] AS [DeptID]
+      [EmpView].[DeptID] AS [DeptID], 
+      [EmpView].[Deleted] AS [Deleted]
       FROM [dbo].[EmpView] AS [EmpView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewAttData" EntityType="TAS201Model.Store.ViewAttData" store:Type="Views" store:Schema="dbo" store:Name="ViewAttData">
@@ -150,7 +151,8 @@
       [ViewAttData].[StatusBreak] AS [StatusBreak], 
       [ViewAttData].[ShifMin] AS [ShifMin], 
       [ViewAttData].[Remarks] AS [Remarks], 
-      [ViewAttData].[DeptID] AS [DeptID]
+      [ViewAttData].[DeptID] AS [DeptID], 
+      [ViewAttData].[Deleted] AS [Deleted]
       FROM [dbo].[ViewAttData] AS [ViewAttData]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewDepartment" EntityType="TAS201Model.Store.ViewDepartment" store:Type="Views" store:Schema="dbo" store:Name="ViewDepartment">
@@ -234,7 +236,8 @@
       [ViewDetailAttData].[Tout6] AS [Tout6], 
       [ViewDetailAttData].[Tin7] AS [Tin7], 
       [ViewDetailAttData].[Tout7] AS [Tout7], 
-      [ViewDetailAttData].[DeptID] AS [DeptID]
+      [ViewDetailAttData].[DeptID] AS [DeptID], 
+      [ViewDetailAttData].[Deleted] AS [Deleted]
       FROM [dbo].[ViewDetailAttData] AS [ViewDetailAttData]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewEmpPic" EntityType="TAS201Model.Store.ViewEmpPic" store:Type="Views" store:Schema="dbo" store:Name="ViewEmpPic">
@@ -397,9 +400,6 @@
           <EntitySet Name="ViewLvApplication" EntityType="TAS201Model.Store.ViewLvApplication" store:Type="Views" store:Schema="dbo" store:Name="ViewLvApplication">
             <DefiningQuery>SELECT 
       [ViewLvApplication].[EmpID] AS [EmpID], 
-      [ViewLvApplication].[LvDesc] AS [LvDesc], 
-      [ViewLvApplication].[LvType] AS [LvType], 
-      [ViewLvApplication].[FldName] AS [FldName], 
       [ViewLvApplication].[LvDate] AS [LvDate], 
       [ViewLvApplication].[LvID] AS [LvID], 
       [ViewLvApplication].[FromDate] AS [FromDate], 
@@ -428,7 +428,11 @@
       [ViewLvApplication].[TypeName] AS [TypeName], 
       [ViewLvApplication].[LocName] AS [LocName], 
       [ViewLvApplication].[ShiftName] AS [ShiftName], 
-      [ViewLvApplication].[DeptID] AS [DeptID]
+      [ViewLvApplication].[DeptID] AS [DeptID], 
+      [ViewLvApplication].[LeaveTypeID] AS [LeaveTypeID], 
+      [ViewLvApplication].[FldName] AS [FldName], 
+      [ViewLvApplication].[LvDesc] AS [LvDesc], 
+      [ViewLvApplication].[Deleted] AS [Deleted]
       FROM [dbo].[ViewLvApplication] AS [ViewLvApplication]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewMonthlyData" EntityType="TAS201Model.Store.ViewMonthlyData" store:Type="Views" store:Schema="dbo" store:Name="ViewMonthlyData">
@@ -691,36 +695,23 @@
           <EntitySet Name="ViewMultipleInOut" EntityType="TAS201Model.Store.ViewMultipleInOut" store:Type="Views" store:Schema="dbo" store:Name="ViewMultipleInOut">
             <DefiningQuery>SELECT 
       [ViewMultipleInOut].[EmpNo] AS [EmpNo], 
-      [ViewMultipleInOut].[GradeName] AS [GradeName], 
       [ViewMultipleInOut].[SectionName] AS [SectionName], 
-      [ViewMultipleInOut].[CrewName] AS [CrewName], 
       [ViewMultipleInOut].[DeptID] AS [DeptID], 
       [ViewMultipleInOut].[TypeName] AS [TypeName], 
-      [ViewMultipleInOut].[CatID] AS [CatID], 
-      [ViewMultipleInOut].[CatName] AS [CatName], 
-      [ViewMultipleInOut].[RegionName] AS [RegionName], 
-      [ViewMultipleInOut].[CityName] AS [CityName], 
       [ViewMultipleInOut].[LocName] AS [LocName], 
       [ViewMultipleInOut].[ShiftName] AS [ShiftName], 
       [ViewMultipleInOut].[DesignationName] AS [DesignationName], 
       [ViewMultipleInOut].[EmpName] AS [EmpName], 
       [ViewMultipleInOut].[DesigID] AS [DesigID], 
-      [ViewMultipleInOut].[JobID] AS [JobID], 
       [ViewMultipleInOut].[TypeID] AS [TypeID], 
-      [ViewMultipleInOut].[GradeID] AS [GradeID], 
       [ViewMultipleInOut].[SecID] AS [SecID], 
       [ViewMultipleInOut].[CardNo] AS [CardNo], 
-      [ViewMultipleInOut].[FpID] AS [FpID], 
       [ViewMultipleInOut].[NicNo] AS [NicNo], 
       [ViewMultipleInOut].[Status] AS [Status], 
-      [ViewMultipleInOut].[CrewID] AS [CrewID], 
-      [ViewMultipleInOut].[HasOT] AS [HasOT], 
       [ViewMultipleInOut].[EmpID] AS [EmpID], 
-      [ViewMultipleInOut].[DivisionName] AS [DivisionName], 
       [ViewMultipleInOut].[DeptName] AS [DeptName], 
       [ViewMultipleInOut].[ShiftID] AS [ShiftID], 
       [ViewMultipleInOut].[LocID] AS [LocID], 
-      [ViewMultipleInOut].[DivID] AS [DivID], 
       [ViewMultipleInOut].[EmpDate] AS [EmpDate], 
       [ViewMultipleInOut].[AttDate] AS [AttDate], 
       [ViewMultipleInOut].[DutyCode] AS [DutyCode], 
@@ -1240,7 +1231,6 @@
             <PropertyRef Name="AttProcesserSchedulerID" />
           </Key>
           <Property Name="AttProcesserSchedulerID" Type="int" Nullable="false" />
-          <Property Name="WhenToProcess" Type="datetime" Nullable="false" />
           <Property Name="PeriodTag" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DateFrom" Type="date" Nullable="false" />
           <Property Name="DateTo" Type="date" Nullable="false" />
@@ -1404,6 +1394,7 @@
           <Property Name="FlagCard" Type="bit" />
           <Property Name="EmpImageID" Type="int" />
           <Property Name="HasOT" Type="bit" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <EntityType Name="EmpFace">
           <Key>
@@ -1452,7 +1443,7 @@
           <Key>
             <PropertyRef Name="WorkCardID" />
           </Key>
-          <Property Name="WorkCardID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WorkCardID" Type="smallint" Nullable="false" />
           <Property Name="WorkCardName" Type="nvarchar" MaxLength="100" />
           <Property Name="WorMin" Type="smallint" />
         </EntityType>
@@ -1817,7 +1808,7 @@
           <Property Name="DateCreated" Type="datetime" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" />
           <Property Name="Status" Type="bit" />
-          <Property Name="UserType" Type="bit" />
+          <Property Name="UserType" Type="nvarchar" MaxLength="50" />
           <Property Name="CanEdit" Type="bit" />
           <Property Name="CanDelete" Type="bit" />
           <Property Name="CanView" Type="bit" />
@@ -1838,6 +1829,7 @@
           <Property Name="MRDetail" Type="bit" />
           <Property Name="MRoster" Type="bit" />
           <Property Name="MProcess" Type="bit" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <EntityType Name="UserModule">
           <Key>
@@ -1865,6 +1857,7 @@
             <PropertyRef Name="EmpID" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -1882,7 +1875,7 @@
           <Property Name="TypeID" Type="tinyint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
           <Property Name="BloodGroup" Type="nvarchar" MaxLength="6" />
           <Property Name="JoinDate" Type="date" />
@@ -1895,6 +1888,7 @@
           <Property Name="LocName" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DeptID" Type="smallint" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewAttData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -1906,6 +1900,7 @@
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -1923,7 +1918,7 @@
           <Property Name="TypeID" Type="tinyint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
           <Property Name="JoinDate" Type="date" />
           <Property Name="Status" Type="bit" />
@@ -1967,6 +1962,7 @@
           <Property Name="ShifMin" Type="smallint" />
           <Property Name="Remarks" Type="varchar" MaxLength="100" />
           <Property Name="DeptID" Type="smallint" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewDepartment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -1992,6 +1988,7 @@
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -2009,7 +2006,7 @@
           <Property Name="TypeID" Type="tinyint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="JoinDate" Type="date" />
           <Property Name="ValidDate" Type="date" />
           <Property Name="Status" Type="bit" />
@@ -2070,6 +2067,7 @@
           <Property Name="Tin7" Type="datetime" />
           <Property Name="Tout7" Type="datetime" />
           <Property Name="DeptID" Type="smallint" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewEmpPic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2267,9 +2265,6 @@
         <EntityType Name="ViewLvApplication">
           <Key>
             <PropertyRef Name="EmpID" />
-            <PropertyRef Name="LvDesc" />
-            <PropertyRef Name="LvType" />
-            <PropertyRef Name="FldName" />
             <PropertyRef Name="LvDate" />
             <PropertyRef Name="LvID" />
             <PropertyRef Name="FromDate" />
@@ -2284,11 +2279,11 @@
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
             <PropertyRef Name="DeptID" />
+            <PropertyRef Name="LeaveTypeID" />
+            <PropertyRef Name="FldName" />
+            <PropertyRef Name="LvDesc" />
           </Key>
           <Property Name="EmpID" Type="int" Nullable="false" />
-          <Property Name="LvDesc" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="LvType" Type="char" Nullable="false" MaxLength="1" />
-          <Property Name="FldName" Type="nvarchar" Nullable="false" MaxLength="10" />
           <Property Name="LvDate" Type="date" Nullable="false" />
           <Property Name="LvID" Type="int" Nullable="false" />
           <Property Name="FromDate" Type="date" Nullable="false" />
@@ -2318,6 +2313,10 @@
           <Property Name="LocName" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DeptID" Type="smallint" Nullable="false" />
+          <Property Name="LeaveTypeID" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="FldName" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="LvDesc" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewMonthlyData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2592,41 +2591,36 @@
         <EntityType Name="ViewMultipleInOut">
           <Key>
             <PropertyRef Name="EmpNo" />
+            <PropertyRef Name="SectionName" />
+            <PropertyRef Name="DeptID" />
+            <PropertyRef Name="TypeName" />
+            <PropertyRef Name="LocName" />
+            <PropertyRef Name="ShiftName" />
+            <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="EmpID" />
+            <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
           </Key>
           <Property Name="EmpNo" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="GradeName" Type="nvarchar" MaxLength="20" />
-          <Property Name="SectionName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CrewName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DeptID" Type="smallint" />
-          <Property Name="TypeName" Type="varchar" MaxLength="30" />
-          <Property Name="CatID" Type="smallint" />
-          <Property Name="CatName" Type="nvarchar" MaxLength="50" />
-          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LocName" Type="varchar" MaxLength="30" />
-          <Property Name="ShiftName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DesignationName" Type="nvarchar" MaxLength="200" />
+          <Property Name="SectionName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DeptID" Type="smallint" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="LocName" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DesignationName" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="EmpName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DesigID" Type="int" />
-          <Property Name="JobID" Type="smallint" />
           <Property Name="TypeID" Type="tinyint" />
-          <Property Name="GradeID" Type="smallint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="FpID" Type="int" />
-          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Status" Type="bit" />
-          <Property Name="CrewID" Type="smallint" />
-          <Property Name="HasOT" Type="bit" />
           <Property Name="EmpID" Type="int" Nullable="false" />
-          <Property Name="DivisionName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DeptName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DeptName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="ShiftID" Type="tinyint" />
           <Property Name="LocID" Type="smallint" />
-          <Property Name="DivID" Type="smallint" />
           <Property Name="EmpDate" Type="nvarchar" Nullable="false" MaxLength="15" />
           <Property Name="AttDate" Type="date" />
           <Property Name="DutyCode" Type="char" MaxLength="1" />
@@ -3610,7 +3604,6 @@
             <PropertyRef Name="AttProcesserSchedulerID" />
           </Key>
           <Property Type="Int32" Name="AttProcesserSchedulerID" Nullable="false" />
-          <Property Type="DateTime" Name="WhenToProcess" Nullable="false" Precision="3" />
           <Property Type="String" Name="PeriodTag" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="DateFrom" Nullable="false" Precision="0" />
           <Property Type="DateTime" Name="DateTo" Nullable="false" Precision="0" />
@@ -3781,6 +3774,7 @@
           <Property Type="Boolean" Name="FlagCard" />
           <Property Type="Int32" Name="EmpImageID" />
           <Property Type="Boolean" Name="HasOT" />
+          <Property Type="Boolean" Name="Deleted" />
           <NavigationProperty Name="AttDatas" Relationship="TAS201Model.FK_AttData_Emp" FromRole="Emp" ToRole="AttData" />
           <NavigationProperty Name="AttDataManEdits" Relationship="TAS201Model.FK_AttDataManEdit_Emp" FromRole="Emp" ToRole="AttDataManEdit" />
           <NavigationProperty Name="Crew" Relationship="TAS201Model.FK_Emp_Crew" FromRole="Emp" ToRole="Crew" />
@@ -3844,7 +3838,7 @@
           <Key>
             <PropertyRef Name="WorkCardID" />
           </Key>
-          <Property Type="Int16" Name="WorkCardID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="WorkCardID" Nullable="false" />
           <Property Type="String" Name="WorkCardName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Int16" Name="WorMin" />
         </EntityType>
@@ -4241,7 +4235,7 @@
           <Property Type="DateTime" Name="DateCreated" Precision="3" />
           <Property Type="String" Name="Name" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Status" />
-          <Property Type="Boolean" Name="UserType" />
+          <Property Type="String" Name="UserType" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="CanEdit" />
           <Property Type="Boolean" Name="CanDelete" />
           <Property Type="Boolean" Name="CanView" />
@@ -4262,6 +4256,7 @@
           <Property Type="Boolean" Name="MRDetail" />
           <Property Type="Boolean" Name="MRoster" />
           <Property Type="Boolean" Name="MProcess" />
+          <Property Type="Boolean" Name="Deleted" />
           <NavigationProperty Name="AttDataManEdits" Relationship="TAS201Model.FK_AttDataManEdit_User" FromRole="User" ToRole="AttDataManEdit" />
           <NavigationProperty Name="AttProcessorSchedulers" Relationship="TAS201Model.FK_AttProcessorScheduler_User" FromRole="User" ToRole="AttProcessorScheduler" />
           <NavigationProperty Name="AuditLogs" Relationship="TAS201Model.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
@@ -4290,6 +4285,7 @@
             <PropertyRef Name="EmpID" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -4307,7 +4303,7 @@
           <Property Type="Byte" Name="TypeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="BloodGroup" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="JoinDate" Precision="0" />
@@ -4320,6 +4316,7 @@
           <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int16" Name="DeptID" Nullable="false" />
+          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewAttData">
           <Key>
@@ -4328,6 +4325,7 @@
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -4345,7 +4343,7 @@
           <Property Type="Byte" Name="TypeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="JoinDate" Precision="0" />
           <Property Type="Boolean" Name="Status" />
@@ -4389,6 +4387,7 @@
           <Property Type="Int16" Name="ShifMin" />
           <Property Type="String" Name="Remarks" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="Int16" Name="DeptID" Nullable="false" />
+          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewDepartment">
           <Key>
@@ -4408,6 +4407,7 @@
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpNo" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="TypeName" />
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
@@ -4425,7 +4425,7 @@
           <Property Type="Byte" Name="TypeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="JoinDate" Precision="0" />
           <Property Type="DateTime" Name="ValidDate" Precision="0" />
           <Property Type="Boolean" Name="Status" />
@@ -4486,6 +4486,7 @@
           <Property Type="DateTime" Name="Tin7" Precision="3" />
           <Property Type="DateTime" Name="Tout7" Precision="3" />
           <Property Type="Int16" Name="DeptID" Nullable="false" />
+          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewEmpPic">
           <Key>
@@ -4665,9 +4666,6 @@
         <EntityType Name="ViewLvApplication">
           <Key>
             <PropertyRef Name="EmpID" />
-            <PropertyRef Name="LvDesc" />
-            <PropertyRef Name="LvType" />
-            <PropertyRef Name="FldName" />
             <PropertyRef Name="LvDate" />
             <PropertyRef Name="LvID" />
             <PropertyRef Name="FromDate" />
@@ -4682,11 +4680,11 @@
             <PropertyRef Name="LocName" />
             <PropertyRef Name="ShiftName" />
             <PropertyRef Name="DeptID" />
+            <PropertyRef Name="LeaveTypeID" />
+            <PropertyRef Name="FldName" />
+            <PropertyRef Name="LvDesc" />
           </Key>
           <Property Type="Int32" Name="EmpID" Nullable="false" />
-          <Property Type="String" Name="LvDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LvType" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="FldName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="LvDate" Nullable="false" Precision="0" />
           <Property Type="Int32" Name="LvID" Nullable="false" />
           <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="0" />
@@ -4716,6 +4714,10 @@
           <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int16" Name="DeptID" Nullable="false" />
+          <Property Type="String" Name="LeaveTypeID" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="FldName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LvDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewMonthlyData">
           <Key>
@@ -4981,41 +4983,36 @@
         <EntityType Name="ViewMultipleInOut">
           <Key>
             <PropertyRef Name="EmpNo" />
+            <PropertyRef Name="SectionName" />
+            <PropertyRef Name="DeptID" />
+            <PropertyRef Name="TypeName" />
+            <PropertyRef Name="LocName" />
+            <PropertyRef Name="ShiftName" />
+            <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
+            <PropertyRef Name="NicNo" />
             <PropertyRef Name="EmpID" />
+            <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
           </Key>
           <Property Type="String" Name="EmpNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GradeName" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SectionName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CrewName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int16" Name="DeptID" />
-          <Property Type="String" Name="TypeName" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="Int16" Name="CatID" />
-          <Property Type="String" Name="CatName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="RegionName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CityName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LocName" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ShiftName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DesignationName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SectionName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="DeptID" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DesignationName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="DesigID" />
-          <Property Type="Int16" Name="JobID" />
           <Property Type="Byte" Name="TypeID" />
-          <Property Type="Int16" Name="GradeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="Int32" Name="FpID" />
-          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Status" />
-          <Property Type="Int16" Name="CrewID" />
-          <Property Type="Boolean" Name="HasOT" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
-          <Property Type="String" Name="DivisionName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DeptName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Byte" Name="ShiftID" />
           <Property Type="Int16" Name="LocID" />
-          <Property Type="Int16" Name="DivID" />
           <Property Type="String" Name="EmpDate" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="AttDate" Precision="0" />
           <Property Type="String" Name="DutyCode" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -5813,7 +5810,6 @@
                 <ScalarProperty Name="DateTo" ColumnName="DateTo" />
                 <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
                 <ScalarProperty Name="PeriodTag" ColumnName="PeriodTag" />
-                <ScalarProperty Name="WhenToProcess" ColumnName="WhenToProcess" />
                 <ScalarProperty Name="AttProcesserSchedulerID" ColumnName="AttProcesserSchedulerID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5945,6 +5941,7 @@
           <EntitySetMapping Name="Emps">
             <EntityTypeMapping TypeName="TAS201Model.Emp">
               <MappingFragment StoreEntitySet="Emp">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="HasOT" ColumnName="HasOT" />
                 <ScalarProperty Name="EmpImageID" ColumnName="EmpImageID" />
                 <ScalarProperty Name="FlagCard" ColumnName="FlagCard" />
@@ -6415,6 +6412,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TAS201Model.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="MProcess" ColumnName="MProcess" />
                 <ScalarProperty Name="MRoster" ColumnName="MRoster" />
                 <ScalarProperty Name="MRDetail" ColumnName="MRDetail" />
@@ -6465,6 +6463,7 @@
           <EntitySetMapping Name="EmpViews">
             <EntityTypeMapping TypeName="TAS201Model.EmpView">
               <MappingFragment StoreEntitySet="EmpView">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
                 <ScalarProperty Name="LocName" ColumnName="LocName" />
@@ -6496,6 +6495,7 @@
           <EntitySetMapping Name="ViewAttDatas">
             <EntityTypeMapping TypeName="TAS201Model.ViewAttData">
               <MappingFragment StoreEntitySet="ViewAttData">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="ShifMin" ColumnName="ShifMin" />
@@ -6567,6 +6567,7 @@
           <EntitySetMapping Name="ViewDetailAttDatas">
             <EntityTypeMapping TypeName="TAS201Model.ViewDetailAttData">
               <MappingFragment StoreEntitySet="ViewDetailAttData">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="Tout7" ColumnName="Tout7" />
                 <ScalarProperty Name="Tin7" ColumnName="Tin7" />
@@ -6812,6 +6813,10 @@
           <EntitySetMapping Name="ViewLvApplications">
             <EntityTypeMapping TypeName="TAS201Model.ViewLvApplication">
               <MappingFragment StoreEntitySet="ViewLvApplication">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="LvDesc" ColumnName="LvDesc" />
+                <ScalarProperty Name="FldName" ColumnName="FldName" />
+                <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
                 <ScalarProperty Name="LocName" ColumnName="LocName" />
@@ -6841,9 +6846,6 @@
                 <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="LvID" ColumnName="LvID" />
                 <ScalarProperty Name="LvDate" ColumnName="LvDate" />
-                <ScalarProperty Name="FldName" ColumnName="FldName" />
-                <ScalarProperty Name="LvType" ColumnName="LvType" />
-                <ScalarProperty Name="LvDesc" ColumnName="LvDesc" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7169,36 +7171,23 @@
                 <ScalarProperty Name="DutyCode" ColumnName="DutyCode" />
                 <ScalarProperty Name="AttDate" ColumnName="AttDate" />
                 <ScalarProperty Name="EmpDate" ColumnName="EmpDate" />
-                <ScalarProperty Name="DivID" ColumnName="DivID" />
                 <ScalarProperty Name="LocID" ColumnName="LocID" />
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
-                <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="HasOT" ColumnName="HasOT" />
-                <ScalarProperty Name="CrewID" ColumnName="CrewID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="NicNo" ColumnName="NicNo" />
-                <ScalarProperty Name="FpID" ColumnName="FpID" />
                 <ScalarProperty Name="CardNo" ColumnName="CardNo" />
                 <ScalarProperty Name="SecID" ColumnName="SecID" />
-                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="JobID" ColumnName="JobID" />
                 <ScalarProperty Name="DesigID" ColumnName="DesigID" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
                 <ScalarProperty Name="LocName" ColumnName="LocName" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
-                <ScalarProperty Name="CatName" ColumnName="CatName" />
-                <ScalarProperty Name="CatID" ColumnName="CatID" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
-                <ScalarProperty Name="CrewName" ColumnName="CrewName" />
                 <ScalarProperty Name="SectionName" ColumnName="SectionName" />
-                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
                 <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -15,9 +15,6 @@ namespace WMS.Models
     public partial class ViewLvApplication
     {
         public int EmpID { get; set; }
-        public string LvDesc { get; set; }
-        public string LvType { get; set; }
-        public string FldName { get; set; }
         public System.DateTime LvDate { get; set; }
         public int LvID { get; set; }
         public System.DateTime FromDate { get; set; }
@@ -47,5 +44,9 @@ namespace WMS.Models
         public string LocName { get; set; }
         public string ShiftName { get; set; }
         public short DeptID { get; set; }
+        public string LeaveTypeID { get; set; }
+        public string FldName { get; set; }
+        public string LvDesc { get; set; }
+        public Nullable<bool> Deleted { get; set; }
     }
 }

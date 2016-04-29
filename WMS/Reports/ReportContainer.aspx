@@ -7,7 +7,8 @@
 
     <br />
 
-    <rsweb:ReportViewer ID="ReportViewer1" Height="1500px" Width="1000px" SizeToReportContent="true" runat="server"></rsweb:ReportViewer>
-    <asp:ScriptManager ID="ScriptManager1" runat="server" AsyncPostBackTimeout="3600">
-                 </asp:ScriptManager>
+    <rsweb:ReportViewer ID="ReportViewer1" Height="1500px" Width="1000px" SizeToReportContent="true" runat="server">
+    </rsweb:ReportViewer>
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
 </asp:Content>

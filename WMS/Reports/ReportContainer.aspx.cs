@@ -28,15 +28,17 @@ namespace WMS.Reports
                 CreateDataTable();
                 User LoggedInUser = HttpContext.Current.Session["LoggedUser"] as User;
                 QueryBuilder qb = new QueryBuilder();
-                string query = qb.MakeCustomizeQuery(LoggedInUser);
+                string query = qb.MakeCustomizeQueryForEmp(LoggedInUser);
                 _dateFrom = list[0];
                 string _dateTo = list[1];
+                CreateFlexyMonthlyDataTable();
                 companyimage = GetCompanyImages(fm);
                 string PathString = "";
                 string consolidatedMonth = "";
                 switch (reportName)
                 {
-                    case "emp_record": DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query + " where Status=1 ");
+                    #region --Employee record --
+                    case "emp_record": DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
                         List<EmpView> _ViewList = dt.ToList<EmpView>();
                         List<EmpView> _TempViewList = new List<EmpView>();
                         title = "Employee Record Report";
@@ -46,7 +48,7 @@ namespace WMS.Reports
                             PathString = "/WMS/Reports/RDLC/Employee.rdlc";
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList, _ViewList), _dateFrom + " TO " + _dateTo);
                         break;
-                    case "emp_record_active": dt = qb.GetValuesfromDB("select * from EmpView " + query+ " where Status=1 ");
+                    case "emp_record_active": dt = qb.GetValuesfromDB("select * from EmpView " + query);
                         _ViewList = dt.ToList<EmpView>();
                         _TempViewList = new List<EmpView>();
                         title = "Active Employees Record Report";
@@ -58,7 +60,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList, _ViewList), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "emp_record_inactive": dt = qb.GetValuesfromDB("select * from EmpView " + query + " where Status=0 ");
+                    case "emp_record_inactive": dt = qb.GetValuesfromDB("select * from EmpView " + query);
                         _ViewList = dt.ToList<EmpView>();
                         _TempViewList = new List<EmpView>();
                         title = "Inactive Employees Record Report";
@@ -69,7 +71,7 @@ namespace WMS.Reports
 
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList, _ViewList), _dateFrom + " TO " + _dateTo);
                         break;
-                    case "emp_detail_excel": DataTable dt1 = qb.GetValuesfromDB("select * from EmpView " + query + " where Status=1 ");
+                    case "emp_detail_excel": DataTable dt1 = qb.GetValuesfromDB("select * from EmpView " + query );
                         List<EmpView> _ViewList1 = dt1.ToList<EmpView>();
                         List<EmpView> _TempViewList1 = new List<EmpView>();
                         title = "Employee Detail Report";
@@ -80,6 +82,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList1, _ViewList1), _dateFrom + " TO " + _dateTo);
 
                         break;
+                    #endregion
                     case "leave_application": dt1 = qb.GetValuesfromDB("select * from ViewLvApplication " + query + " and (FromDate >= '" + _dateFrom + "' and ToDate <= '" + _dateTo + "' )");
                         List<ViewLvApplication> _ViewListLvApp = dt1.ToList<ViewLvApplication>();
                         List<ViewLvApplication> _TempViewListLvApp = new List<ViewLvApplication>();
@@ -91,6 +94,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListLvApp, _ViewListLvApp), _dateFrom + " TO " + _dateTo);
 
                         break;
+                    #region -- Daily Reports--
                     case "detailed_att": DataTable dt2 = qb.GetValuesfromDB("select * from ViewDetailAttData  where(AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )");
                         List<ViewDetailAttData> _ViewList2 = dt2.ToList<ViewDetailAttData>();
@@ -104,7 +108,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList2, _ViewList2), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "present": DataTable datatable = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "present": DataTable datatable = qb.GetValuesfromDB("select * from ViewAttData " + query  + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )" + " and StatusP = 1 ");
                         List<ViewAttData> _ViewList4 = datatable.ToList<ViewAttData>();
                         List<ViewAttData> _TempViewList4 = new List<ViewAttData>();
@@ -117,7 +121,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList4, _ViewList4), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "absent": DataTable dt5 = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "absent": DataTable dt5 = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )" + " and StatusAB = 1 ");
                         List<ViewAttData> _ViewList5 = dt5.ToList<ViewAttData>();
                         List<ViewAttData> _TempViewList5 = new List<ViewAttData>();
@@ -130,7 +134,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList5, _ViewList5), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "lv_application": DataTable dt6 = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "lv_application": DataTable dt6 = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                 + _dateTo + "'" + " )" + " and (StatusLeave=1 OR StatusHL=1)");
                         List<ViewAttData> _ViewList6 = dt6.ToList<ViewAttData>();
                         List<ViewAttData> _TempViewList6 = new List<ViewAttData>();
@@ -143,7 +147,7 @@ namespace WMS.Reports
                         //LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList6, _ViewList6), _dateFrom + " TO " + _dateTo);
                         //To-do Develop Leave Attendance Report
                         break;
-                    case "short_lv": DataTable dt7 = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "short_lv": DataTable dt7 = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )" + " and StatusSL=1");
                         List<ViewAttData> _ViewList7 = dt7.ToList<ViewAttData>();
                         List<ViewAttData> _TempViewList7 = new List<ViewAttData>();
@@ -156,7 +160,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList7, _ViewList7), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "late_in": DataTable dt8 = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "late_in": DataTable dt8 = qb.GetValuesfromDB("select * from ViewAttData " + query  + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                     + _dateTo + "'" + " )" + " and StatusLI=1 ");
                         List<ViewAttData> _ViewList8 = dt8.ToList<ViewAttData>();
                         List<ViewAttData> _TempViewList8 = new List<ViewAttData>();
@@ -170,7 +174,7 @@ namespace WMS.Reports
 
                         break;
 
-                    case "late_out": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "late_out": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                             + _dateTo + "'" + " )" + " and StatusLO=1 ");
                         _ViewList8 = dt.ToList<ViewAttData>();
                         _TempViewList8 = new List<ViewAttData>();
@@ -183,7 +187,7 @@ namespace WMS.Reports
 
                         break;
 
-                    case "early_in": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "early_in": dt = qb.GetValuesfromDB("select * from ViewAttData " + query  + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                            + _dateTo + "'" + " )" + " and StatusEI=1 ");
                         _ViewList8 = dt.ToList<ViewAttData>();
                         _TempViewList8 = new List<ViewAttData>();
@@ -195,7 +199,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "early_out": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "early_out": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                              + _dateTo + "'" + " )" + " and StatusEO=1 ");
                         _ViewList8 = dt.ToList<ViewAttData>();
                         _TempViewList8 = new List<ViewAttData>();
@@ -207,7 +211,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "overtime": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "overtime": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                          + _dateTo + "'" + " )" + " and StatusOT=1 ");
                         _ViewList8 = dt.ToList<ViewAttData>();
                         _TempViewList8 = new List<ViewAttData>();
@@ -219,7 +223,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "missing_attendance": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1 " + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "missing_attendance": dt = qb.GetValuesfromDB("select * from ViewAttData " + query  + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                     + _dateTo + "'" + " )" + " and ((TimeIn is null and TimeOut is not null) or (TimeIn is not null and TimeOut is null)) ");
 
                         _ViewList8 = dt.ToList<ViewAttData>();
@@ -232,7 +236,7 @@ namespace WMS.Reports
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
 
                         break;
-                    case "multiple_in_out": dt = qb.GetValuesfromDB("select * from ViewMultipleInOut " + query + " where Status=1" + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
+                    case "multiple_in_out": dt = qb.GetValuesfromDB("select * from ViewMultipleInOut " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'"
                                                      + _dateTo + "'" + " )" + " and (Tin1 is not null or TOut1 is not null)");
                         //change query for multiple_in_out
                         List<ViewMultipleInOut> _ViewList9 = dt.ToList<ViewMultipleInOut>();
@@ -246,182 +250,20 @@ namespace WMS.Reports
 
                         break;
 
+                    #endregion
+                    case "monthly_21-20_flexy":
+                        dt = qb.GetValuesfromDB("select * from EmpView " + query + " and Status=1 ");
+                        _ViewList = dt.ToList<EmpView>();
+                        _TempViewList = new List<EmpView>();
+                        title = "Employee Record Report";
 
-                    case "monthly_leave_sheet": string _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        dt = qb.GetValuesfromDB("select * from EmpView " + query + " where Status=1 ");
-                        title = "Monthly Leave Sheet for Permanent Employees";
-                        _ViewList1 = dt.ToList<EmpView>();
-                        _TempViewList1 = new List<EmpView>();
                         if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MLvConsumed.rdlc";
+                            PathString = "/Reports/RDLC/MRFlexyDetailExcelP.rdlc";
                         else
-                            PathString = "/WMS/Reports/RDLC/MLvConsumed.rdlc";
-                        int monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        int monthTo = Convert.ToDateTime(_dateTo).Month;
-                        //int totalMonths = monthfrom < monthTo ? monthTo : monthfrom;
-                        for (int ul = monthfrom > monthTo ? monthTo : monthfrom; ul <= (monthfrom < monthTo ? monthTo : monthfrom); ul++)
-                        {
-                            LoadReport(PathString, GetLV(ReportsFilterImplementation(fm, _TempViewList1, _ViewList1), 2), ul);
-
-                        }
-
-                        // LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList1, _ViewList1), _dateFrom);
+                            PathString = "/WMS/Reports/RDLC/MRFlexyDetailExcelP.rdlc";
+                        LoadReport(LoadPermanentMonthlyDT(ReportsFilterImplementation(fm, _TempViewList, _ViewList), Convert.ToDateTime(_dateFrom), Convert.ToDateTime(_dateTo)), PathString, _dateFrom + " TO " + _dateTo);
                         break;
-
-                    case "monthly_21-20": _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        monthTo = Convert.ToDateTime(_dateTo).Month;
-                        for (int i = monthfrom; i <= monthTo; i++)
-                        {
-                            consolidatedMonth = consolidatedMonth + "  Period =" + i + Convert.ToDateTime(_dateFrom).Year.ToString() + " OR";
-                        }
-                        if (consolidatedMonth.Length > 4)
-                            consolidatedMonth = consolidatedMonth.Substring(0, consolidatedMonth.Length - 3);
-                        dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " where Status=1 " + " and" + consolidatedMonth);
-                        //dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " and Period = " + _period);
-                        title = "Monthly Sheet (21st to 20th)";
-                        List<ViewMonthlyDataPer> _ViewListMonthlyDataPer = dt.ToList<ViewMonthlyDataPer>();
-                        List<ViewMonthlyDataPer> _TempViewListMonthlyDataPer = new List<ViewMonthlyDataPer>();
-                        //Change the Paths
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRSheetP.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRSheetP.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyDataPer, _ViewListMonthlyDataPer), _dateFrom);
-                        break;
-
-
-                    case "monthly_1-31": _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        monthTo = Convert.ToDateTime(_dateTo).Month;
-                        for (int i = monthfrom; i <= monthTo; i++)
-                        {
-                            consolidatedMonth = consolidatedMonth + "  Period =" + i + Convert.ToDateTime(_dateFrom).Year.ToString() + " OR";
-                        }
-                        if (consolidatedMonth.Length > 4)
-                            consolidatedMonth = consolidatedMonth.Substring(0, consolidatedMonth.Length - 3);
-                        dt = qb.GetValuesfromDB("select * from ViewMonthlyData " + query + " where Status=1" + " and" + consolidatedMonth);
-                        //dt = qb.GetValuesfromDB("select * from ViewMonthlyData " + query + " and Period = " + _period);
-                        title = "Monthly Sheet (1st to 31st)";
-                        List<ViewMonthlyData> _ViewListMonthlyData = dt.ToList<ViewMonthlyData>();
-                        List<ViewMonthlyData> _TempViewListMonthlyData = new List<ViewMonthlyData>();
-                        //Change the Paths
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRSheetC.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRSheetC.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyData, _ViewListMonthlyData), _dateFrom);
-                        break;
-
-                    case "monthlysummary_21-20": _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        monthTo = Convert.ToDateTime(_dateTo).Month;
-                        for (int i = monthfrom; i <= monthTo; i++)
-                        {
-                            consolidatedMonth = consolidatedMonth + "  Period =" + i + Convert.ToDateTime(_dateFrom).Year.ToString() + " OR";
-                        }
-                        if (consolidatedMonth.Length > 4)
-                            consolidatedMonth = consolidatedMonth.Substring(0, consolidatedMonth.Length - 3);
-                        dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " where Status=1" + " and" + consolidatedMonth);
-                        //dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " and Period = " + _period);
-                        title = "Monthly Summary Report (21st to 20th)";
-                        _ViewListMonthlyDataPer = dt.ToList<ViewMonthlyDataPer>();
-                        _TempViewListMonthlyDataPer = new List<ViewMonthlyDataPer>();
-                        //Change the Paths
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyDataPer, _ViewListMonthlyDataPer), _dateFrom);
-                        break;
-                    case "monthlysummary_1-31": _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        monthTo = Convert.ToDateTime(_dateTo).Month;
-                        for (int i = monthfrom; i <= monthTo; i++)
-                        {
-                            consolidatedMonth = consolidatedMonth + "  Period =" + i + Convert.ToDateTime(_dateFrom).Year.ToString() + " OR";
-                        }
-                        if (consolidatedMonth.Length > 4)
-                            consolidatedMonth = consolidatedMonth.Substring(0, consolidatedMonth.Length - 3);
-                        dt = qb.GetValuesfromDB("select * from ViewMonthlyData " + query + " where Status=1" + " and" + consolidatedMonth);
-                        //dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " and Period = " + _period);
-                        title = "Monthly Summary (1st to 31st)";
-                        _ViewListMonthlyData = dt.ToList<ViewMonthlyData>();
-                        _TempViewListMonthlyData = new List<ViewMonthlyData>();
-                        //Change the Paths
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRSummaryC.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRSummaryC.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyData, _ViewListMonthlyData), _dateFrom);
-                        break;
-
-                    case "monthly_21-20_excel": _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                         monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        monthTo = Convert.ToDateTime(_dateTo).Month;
-                        for (int i = monthfrom; i <= monthTo; i++)
-                        {
-                            consolidatedMonth = consolidatedMonth + "  Period =" + i + Convert.ToDateTime(_dateFrom).Year.ToString() + " OR";
-                        }
-                        if (consolidatedMonth.Length > 4)
-                            consolidatedMonth = consolidatedMonth.Substring(0, consolidatedMonth.Length - 3);
-                        dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " where Status=1" + " and" + consolidatedMonth);
-                        //dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " and Period = " + _period);
-                        title = "Monthly Sheet (21st to 20th)";
-                        _ViewListMonthlyDataPer = dt.ToList<ViewMonthlyDataPer>();
-                        _TempViewListMonthlyDataPer = new List<ViewMonthlyDataPer>();
-                        //Change the Paths
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRDetailExcelP.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRDetailExcelP.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyDataPer, _ViewListMonthlyDataPer), _dateFrom);
-                        break;
-
-                    case "monthly_1-31_consolidated": _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        monthTo = Convert.ToDateTime(_dateTo).Month;
-                        
-                        for (int i = monthfrom; i <= monthTo; i++)
-                        {
-                            consolidatedMonth = consolidatedMonth + "  Period =" + i + Convert.ToDateTime(_dateFrom).Year.ToString() + " OR";
-                        }
-                        if (consolidatedMonth.Length > 4)
-                            consolidatedMonth = consolidatedMonth.Substring(0, consolidatedMonth.Length - 3);
-                        dt = qb.GetValuesfromDB("select * from ViewMonthlyData " + query + " where Status=1" + " and" + consolidatedMonth);
-                        title = "Monthly Consolidated Attendance Sheet (1st to 31th)";
-                        _ViewListMonthlyData = dt.ToList<ViewMonthlyData>();
-                        _TempViewListMonthlyData = new List<ViewMonthlyData>();
-                        //Change the Paths
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRDetailExcelC.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRDetailExcelC.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyData, _ViewListMonthlyData), _dateFrom + " to " + _dateTo);
-                        break;
-
-                    case "monthly_21-20_consolidated": _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        consolidatedMonth = "";
-                        monthfrom = Convert.ToDateTime(_dateFrom).Month;
-                        monthTo = Convert.ToDateTime(_dateTo).Month;
-                        for (int i = monthfrom; i <= monthTo; i++)
-                        {
-                            consolidatedMonth = consolidatedMonth + "  Period =" + i + Convert.ToDateTime(_dateFrom).Year.ToString() + " OR";
-                        }
-                        if (consolidatedMonth.Length > 4)
-                            consolidatedMonth = consolidatedMonth.Substring(0, consolidatedMonth.Length - 3);
-                        dt = qb.GetValuesfromDB("select * from ViewMonthlyDataPer " + query + " where Status=1" + " and" + consolidatedMonth);
-                        title = "Monthly Consolidated (21th to 20th)(Excel)";
-                        _ViewListMonthlyDataPer = dt.ToList<ViewMonthlyDataPer>();
-                        _TempViewListMonthlyDataPer = new List<ViewMonthlyDataPer>();
-                        //Change the Paths
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRDetailExcelP.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRDetailExcelP.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyDataPer, _ViewListMonthlyDataPer), _dateFrom + " to " + _dateTo);
-                        break;
-                    case "emp_att": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1" + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'" + _dateTo + "'" + " )");
+                    case "emp_att": dt = qb.GetValuesfromDB("select * from ViewAttData " + query  + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'" + _dateTo + "'" + " )");
                         title = "Employee Attendance";
                         _ViewList8 = dt.ToList<ViewAttData>();
                         _TempViewList8 = new List<ViewAttData>();
@@ -432,183 +274,6 @@ namespace WMS.Reports
                             PathString = "/WMS/Reports/RDLC/EmpAttSummary.rdlc";
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
                         break;
-
-                    case "emp_absent":
-                        _period = Convert.ToDateTime(_dateFrom).Month.ToString() + Convert.ToDateTime(_dateFrom).Year.ToString();
-                        dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " where Status=1" + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'" + _dateTo + "'" + " )" + " and StatusAB = 1 ");
-                        title = "Employee Absent";
-                        _ViewListMonthlyDataPer = dt.ToList<ViewMonthlyDataPer>();
-                        _TempViewListMonthlyDataPer = new List<ViewMonthlyDataPer>();
-                        //Change the Paths
-
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MRSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MRSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyDataPer, _ViewListMonthlyDataPer), _dateFrom);
-                        break;
-                    case "lv_quota": dt = qb.GetValuesfromDB("select * from EmpView " + query + " where Status=1");
-                        _ViewList1 = dt.ToList<EmpView>();
-                        _TempViewList1 = new List<EmpView>();
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/MYLeaveSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/MYLeaveSummary.rdlc";
-                        LoadReport(PathString, GYL(ReportsFilterImplementation(fm, _TempViewList1, _ViewList1)));
-                        // LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewListMonthlyDataPer, _ViewListMonthlyDataPer), _dateFrom);
-                        break;
-                        /////////////////////////////////////////////////////////////   
-                        /////////////////Summary Reports////////////////////////////
-                        ///////////////////////////////////////////////////////////
-                    case "company_consolidated":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSConsolidated.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSConsolidated.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm,_dateFrom,_dateTo,"C"), _dateFrom + " TO " + _dateTo,"Company Consolidated Summary");
-                        break;
-                    case "company_strength":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSEmpStrength.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSEmpStrength.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "C"), _dateFrom + " TO " + _dateTo, "Company Strength Summary");
-                        break;
-                    case "company_worktimes":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSWorkSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSWorkSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "C"), _dateFrom + " TO " + _dateTo, "Company Work Times Summary");
-                        break;
-                    case "location_consolidated":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSConsolidated.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSConsolidated.rdlc";
-                        ReportsFilterImplementation(fm, _dateFrom, _dateTo, "L");
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "L"), _dateFrom + " TO " + _dateTo, "Location Consolidated Summary");
-                        break;
-                    case "location_strength":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSEmpStrength.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSEmpStrength.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "L"), _dateFrom + " TO " + _dateTo, "Location Strength Summary");
-                        break;
-                    case "location_worktimes":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSWorkSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSWorkSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "L"), _dateFrom + " TO " + _dateTo, "Location Work Times Summary");
-                        break;
-                    case "shift_consolidated":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSConsolidated.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSConsolidated.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "S"), _dateFrom + " TO " + _dateTo, "Shift Consolidated Summary");
-                        break;
-                    case "shift_strength":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSEmpStrength.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSEmpStrength.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "S"), _dateFrom + " TO " + _dateTo, "Shift Strength Summary");
-                        break;
-                    case "shift_worktimes":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSWorkSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSWorkSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "S"), _dateFrom + " TO " + _dateTo, "Shift Work Times Summary");
-                        break;
-                    case "category_consolidated":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSConsolidated.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSConsolidated.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "A"), _dateFrom + " TO " + _dateTo, "Category Consolidated Summary");
-                        break;
-                    case "category_strength":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSEmpStrength.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSEmpStrength.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "A"), _dateFrom + " TO " + _dateTo, "Category Strength Summary");
-                        break;
-                    case "category_worktimes":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSWorkSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSWorkSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "A"), _dateFrom + " TO " + _dateTo, "Category Work Times Summary");
-                        break;
-                    case "type_consolidated":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSConsolidated.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSConsolidated.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "T"), _dateFrom + " TO " + _dateTo, "Employee Type Consolidated Summary");
-                        break;
-                    case "type_strength":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSEmpStrength.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSEmpStrength.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "T"), _dateFrom + " TO " + _dateTo, "Employee Type Strength Summary");
-                        break;
-                    case "type_worktimes":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSWorkSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSWorkSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "T"), _dateFrom + " TO " + _dateTo, "Employee Type Work Times Summary");
-                        break;
-                    case "dept_consolidated":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSConsolidated.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSConsolidated.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "D"), _dateFrom + " TO " + _dateTo, "Department Consolidated Summary");
-                        break;
-                    case "dept_strength":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSEmpStrength.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSEmpStrength.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "D"), _dateFrom + " TO " + _dateTo, "Department Strength Summary");
-                        break;
-                    case "dept_worktimes":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSWorkSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSWorkSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "D"), _dateFrom + " TO " + _dateTo, "Department Work Times Summary");
-                        break;
-                    case "section_consolidated":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSConsolidated.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSConsolidated.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "E"), _dateFrom + " TO " + _dateTo, "Section Consolidated Summary");
-                        break;
-                    case "section_strength":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSEmpStrength.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSEmpStrength.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "E"), _dateFrom + " TO " + _dateTo, "Section Strength Summary");
-                        break;
-                    case "section_worktimes":
-                        if (GlobalVariables.DeploymentType == false)
-                            PathString = "/Reports/RDLC/DSWorkSummary.rdlc";
-                        else
-                            PathString = "/WMS/Reports/RDLC/DSWorkSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _dateFrom, _dateTo, "E"), _dateFrom + " TO " + _dateTo, "Section Work Times Summary");
-                        break;
-
 
                 }
 
@@ -621,7 +286,160 @@ namespace WMS.Reports
 
             }
         }
+        #region -- AttSummaryReport--
 
+        private void LoadReport(DataTable dataTable, string PathString, string p)
+        {
+            string _Header = "Flexy Monthly Sheet";
+            //string Date = Convert.ToDateTime(_dateFrom).Date.ToString("dd-MMM-yyyy");
+            this.ReportViewer1.LocalReport.DisplayName = "Flexy Monthly Sheet";
+            string Date = p;
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath(PathString);
+            System.Security.PermissionSet sec = new System.Security.PermissionSet(System.Security.Permissions.PermissionState.Unrestricted);
+            ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
+            ReportDataSource datasource1 = new ReportDataSource("DataSet1", dataTable);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.HyperlinkTarget = "_blank";
+            IEnumerable<Option> companyImage;
+            companyImage = companyimage.AsQueryable();
+            ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
+
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            ReportViewer1.LocalReport.DataSources.Add(datasource1);
+            ReportViewer1.LocalReport.DataSources.Add(datasource2);
+            ReportParameter rp = new ReportParameter("Header", _Header, false);
+            ReportParameter rp1 = new ReportParameter("Date", Date, false);
+            this.ReportViewer1.LocalReport.SetParameters(new ReportParameter[] { rp, rp1 });
+            ReportViewer1.LocalReport.Refresh();
+        }
+        private DataTable LoadPermanentMonthlyDT(List<EmpView> list, DateTime datefrom, DateTime dateto)
+        {
+            TAS2013Entities db = new TAS2013Entities();
+            List<AttData> attData = new List<AttData>();
+            List<AttData> _EmpAttData = new List<AttData>();
+            foreach (EmpView emp in list)
+            {
+                try
+                {
+                    attData = db.AttDatas.Where(aa => aa.EmpID == emp.EmpID && aa.AttDate >= datefrom && aa.AttDate <= dateto).ToList();
+                    PermanentMonthly cmp = new PermanentMonthly();
+                    _EmpAttData = attData.Where(aa => aa.EmpID == emp.EmpID).ToList();
+                    AttMnDataPer attMn = new AttMnDataPer();
+                    attMn = cmp.processPermanentMonthlyAttSingle((DateTime)datefrom, (DateTime)dateto, emp, _EmpAttData);
+                    AddDataToMonthlyDataAtable(attMn.Period.ToString(), attMn.EmpMonth.ToString(), (DateTime)attMn.StartDate, (DateTime)attMn.EndDate, attMn.EmpNo, (int)attMn.EmpID, attMn.EmpName, emp.SectionName, emp.DeptName, emp.TypeName, emp.LocName, emp.ShiftName, attMn.D21, attMn.D22, attMn.D23, attMn.D24, attMn.D25, attMn.D26, attMn.D27, attMn.D28, attMn.D29, attMn.D30, attMn.D31, attMn.D1, attMn.D2, attMn.D3, attMn.D4, attMn.D5, attMn.D6, attMn.D7, attMn.D8, attMn.D9, attMn.D10, attMn.D11, attMn.D12, attMn.D13, attMn.D14, attMn.D15, attMn.D16, attMn.D17, attMn.D18, attMn.D19, attMn.D20, (short)attMn.TotalDays, (short)attMn.WorkDays, (short)attMn.PreDays, (short)attMn.AbDays, (short)attMn.RestDays, (short)attMn.GZDays, (short)attMn.LeaveDays, (short)attMn.OfficialDutyDays, (short)attMn.TEarlyIn, (short)attMn.TEarlyOut, (short)attMn.TLateIn, (short)attMn.TLateOut, (short)attMn.TWorkTime, (short)attMn.TNOT, (short)attMn.TGZOT, (short)attMn.ExpectedWrkTime, (short)attMn.OT1, (short)attMn.OT2, (short)attMn.OT3, (short)attMn.OT4, (short)attMn.OT5, (short)attMn.OT6, (short)attMn.OT7, (short)attMn.OT8, (short)attMn.OT9, (short)attMn.OT10, (short)attMn.OT11, (short)attMn.OT12, (short)attMn.OT13, (short)attMn.OT14, (short)attMn.OT15, (short)attMn.OT16, (short)attMn.OT17, (short)attMn.OT18, (short)attMn.OT19, (short)attMn.OT20, (short)attMn.OT21, (short)attMn.OT22, (short)attMn.OT23, (short)attMn.OT24, (short)attMn.OT25, (short)attMn.OT26, (short)attMn.OT27, (short)attMn.OT28, (short)attMn.OT29, (short)attMn.OT30, (short)attMn.OT31);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return FlexyMonthlyReportDT;
+        }
+        DataTable FlexyMonthlyReportDT = new DataTable();
+
+        public void CreateFlexyMonthlyDataTable()
+        {
+            FlexyMonthlyReportDT.Columns.Add("Period", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("EmpMonth", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("StartDate", typeof(DateTime));
+            FlexyMonthlyReportDT.Columns.Add("EndDate", typeof(DateTime));
+            FlexyMonthlyReportDT.Columns.Add("EmpNo", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("EmpID", typeof(int));
+            FlexyMonthlyReportDT.Columns.Add("EmpName", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("SectionName", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("DeptName", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("TypeName", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("LocName", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("ShiftName", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D21", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D22", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D23", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D24", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D25", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D26", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D27", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D28", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D29", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D30", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D31", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D1", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D2", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D3", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D4", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D5", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D6", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D7", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D8", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D9", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D10", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D11", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D12", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D13", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D14", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D15", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D16", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D17", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D18", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D19", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("D20", typeof(string));
+            FlexyMonthlyReportDT.Columns.Add("TotalDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("WorkDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("PreDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("AbDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("RestDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("GZDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("LeaveDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OfficialDutyDays", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("TEarlyIn", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("TEarlyOut", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("TLateIn", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("TLateOut", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("TWorkTime", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("TNOT", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("TGZOT", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("ExpectedWrkTime", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT1", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT2", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT3", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT4", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT5", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT6", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT7", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT8", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT9", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT10", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT11", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT12", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT13", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT14", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT15", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT16", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT17", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT18", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT19", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT20", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT21", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT22", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT23", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT24", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT25", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT26", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT27", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT28", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT29", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT30", typeof(Int16));
+            FlexyMonthlyReportDT.Columns.Add("OT31", typeof(Int16));
+
+        }
+
+        public void AddDataToMonthlyDataAtable(string Period, string EmpMonth, DateTime StartDate, DateTime EndDate, string EmpNo, int EmpID, string EmpName, string SectionName, string DeptName, string TypeName, string LocName, string ShiftName, string D21, string D22, string D23, string D24, string D25, string D26, string D27, string D28, string D29, string D30, string D31, string D1, string D2, string D3, string D4, string D5, string D6, string D7, string D8, string D9, string D10, string D11, string D12, string D13, string D14, string D15, string D16, string D17, string D18, string D19, string D20, Int16 TotalDays, Int16 WorkDays, Int16 PreDays, Int16 AbDays, Int16 RestDays, Int16 GZDays, Int16 LeaveDays, Int16 OfficialDutyDays, Int16 TEarlyIn, Int16 TEarlyOut, Int16 TLateIn, Int16 TLateOut, Int16 TWorkTime, Int16 TNOT, Int16 TGZOT, Int16 ExpectedWrkTime, Int16 OT1, Int16 OT2, Int16 OT3, Int16 OT4, Int16 OT5, Int16 OT6, Int16 OT7, Int16 OT8, Int16 OT9, Int16 OT10, Int16 OT11, Int16 OT12, Int16 OT13, Int16 OT14, Int16 OT15, Int16 OT16, Int16 OT17, Int16 OT18, Int16 OT19, Int16 OT20, Int16 OT21, Int16 OT22, Int16 OT23, Int16 OT24, Int16 OT25, Int16 OT26, Int16 OT27, Int16 OT28, Int16 OT29, Int16 OT30, Int16 OT31)
+        {
+            FlexyMonthlyReportDT.Rows.Add(Period, EmpMonth, StartDate, EndDate, EmpNo, EmpID, EmpName, SectionName, DeptName, TypeName, LocName, ShiftName, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, TotalDays, WorkDays, PreDays, AbDays, RestDays, GZDays, LeaveDays, OfficialDutyDays, TEarlyIn, TEarlyOut, TLateIn, TLateOut, TWorkTime, TNOT, TGZOT, ExpectedWrkTime, OT1, OT2, OT3, OT4, OT5, OT6, OT7, OT8, OT9, OT10, OT11, OT12, OT13, OT14, OT15, OT16, OT17, OT18, OT19, OT20, OT21, OT22, OT23, OT24, OT25, OT26, OT27, OT28, OT29, OT30, OT31);
+
+        }
+        #endregion
         private void LoadReport(string PathString, List<DailySummary> list, string p,string Header)
         {
             this.ReportViewer1.LocalReport.DisplayName = title;
