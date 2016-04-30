@@ -17,141 +17,132 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LvTypeID, new { @class = "control-label col-md-2" })
+           <div class="col-md-2 text-right">LvTypeID</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LvTypeID)
+                @Html.TextBoxFor(model => model.LvTypeID,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LvTypeID)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LvDesc, new { @class = "control-label col-md-2" })
+           <div class="col-md-2 text-right">LvDesc</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LvDesc)
+                @Html.TextBoxFor(model => model.LvDesc,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LvDesc)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FldName, new { @class = "control-label col-md-2" })
+           <div class="col-md-2 text-right">FldName</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FldName)
+                @Html.TextBoxFor(model => model.FldName,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FldName)
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.HalfLeave, new { @class = "control-label col-md-2" })
+            <div class=" col-md-2 text-right">HalfLeave</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HalfLeave)
+                 @Html.CheckBox("HalfLeave")
                 @Html.ValidationMessageFor(model => model.HalfLeave)
             </div>
-        </div>
-
+        </div> 
         <div class="form-group">
-            @Html.LabelFor(model => model.HalfLvCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-2 text-right">HalfLvCode</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HalfLvCode)
+                @Html.TextBoxFor(model => model.HalfLvCode,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.HalfLvCode)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HalfAbCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-2 text-right">HalfAbCode</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HalfAbCode)
+                @Html.TextBoxFor(model => model.HalfAbCode,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.HalfAbCode)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaxDays, new { @class = "control-label col-md-2" })
+             <div class="col-md-2 text-right">MaxDays</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxDays)
+                @Html.TextBoxFor(model => model.MaxDays,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaxDays)
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.UpdateBalance, new { @class = "control-label col-md-2" })
+            <div class=" col-md-2 text-right">UpdateBalance</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdateBalance)
+                 @Html.CheckBox("UpdateBalance")
                 @Html.ValidationMessageFor(model => model.UpdateBalance)
             </div>
-        </div>
-
+        </div> 
         <div class="form-group">
-            @Html.LabelFor(model => model.Enable, new { @class = "control-label col-md-2" })
+            <div class=" col-md-2 text-right">Enable</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Enable)
+                 @Html.CheckBox("Enable")
                 @Html.ValidationMessageFor(model => model.Enable)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CarryForward, new { @class = "control-label col-md-2" })
+            <div class=" col-md-2 text-right">CarryForward</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CarryForward)
+                 @Html.CheckBox("CarryForward")
                 @Html.ValidationMessageFor(model => model.CarryForward)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CarryForwardYear, new { @class = "control-label col-md-2" })
+       <div class="form-group">
+            <div class=" col-md-2 text-right">CarryForwardYear</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CarryForwardYear)
+                 @Html.CheckBox("CarryForwardYear")
                 @Html.ValidationMessageFor(model => model.CarryForwardYear)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CarryForwardDays, new { @class = "control-label col-md-2" })
+         <div class="form-group">
+            <div class=" col-md-2 text-right">CarryForwardDays</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CarryForwardDays)
+                 @Html.CheckBox("CarryForwardDays")
                 @Html.ValidationMessageFor(model => model.CarryForwardDays)
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.CountGZDays, new { @class = "control-label col-md-2" })
+            <div class=" col-md-2 text-right">CountGZDays</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CountGZDays)
+                 @Html.CheckBox("CountGZDays")
                 @Html.ValidationMessageFor(model => model.CountGZDays)
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CountRestDays, new { @class = "control-label col-md-2" })
+        </div>  
+          <div class="form-group">
+            <div class=" col-md-2 text-right">CountRestDays</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CountRestDays)
+                 @Html.CheckBox("CountRestDays")
                 @Html.ValidationMessageFor(model => model.CountRestDays)
             </div>
-        </div>
-
+        </div>     
         <div class="form-group">
-            @Html.LabelFor(model => model.MaxDaysConsective, new { @class = "control-label col-md-2" })
+            <div class="col-md-2 text-right">MaxDaysConsective</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxDaysConsective)
+                @Html.TextBoxFor(model => model.MaxDaysConsective,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaxDaysConsective)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MaxDaysMonth, new { @class = "control-label col-md-2" })
+             <div class="col-md-2 text-right">MaxDaysMonth</div>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxDaysMonth)
+                @Html.TextBoxFor(model => model.MaxDaysMonth,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MaxDaysMonth)
             </div>
         </div>
 
-        <div class="form-group">
+         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default btn-success" />
+                 @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
