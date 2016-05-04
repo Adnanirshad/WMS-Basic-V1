@@ -53,12 +53,17 @@ namespace WMS.Controllers
                 using (var ctx = new TAS2013Entities())
                 {
                     List<LvConsumed> _lvConsumed = new List<LvConsumed>();
-                    string empLvType = _lvapp.EmpID.ToString() + _lvapp.LvType;
+                    string empLvType = _lvapp.EmpID.ToString() + _lvapp.LeaveTypeID;
                     _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
-                    RemainingLeaves = (decimal)_lvConsumed.FirstOrDefault().YearRemaining;
-                    if ((RemainingLeaves - Convert.ToDecimal(_lvapp.NoOfDays)) >= 0)
+                    if (_lvConsumed.Count > 0)
                     {
-                        balance = true;
+                        RemainingLeaves = (decimal)_lvConsumed.FirstOrDefault().YearRemaining;
+                        if ((RemainingLeaves - Convert.ToDecimal(_lvapp.NoOfDays)) >= 0)
+                        {
+                            balance = true;
+                        }
+                        else
+                            balance = false;
                     }
                     else
                         balance = false;

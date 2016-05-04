@@ -1029,7 +1029,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2513,7 +2512,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>ED   </Value>
+                              <Value xml:space="preserve">   </Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2581,7 +2580,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>PP </Value>
+                              <Value>Present</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2615,7 +2614,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>     Total   </Value>
+                              <Value>     Working Days</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2751,7 +2750,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Off Day P</Value>
+                              <Value>Holiday P</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2785,7 +2784,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>GZ P</Value>
+                              <Value>GZP</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -2959,7 +2958,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=COUNT(IIf(Fields!EarlyOut.Value &gt; 0, Fields!EarlyOut.Value, Nothing))</Value>
+                              <Value />
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -3900,6 +3899,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
