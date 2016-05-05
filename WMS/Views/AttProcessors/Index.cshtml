@@ -43,10 +43,6 @@
     
         </th>
         <th>
-              @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CatSortParm })
-    
-        </th>
-        <th>
              Status
     
         </th>
@@ -54,11 +50,6 @@
              Created Date
     
         </th>
-        <th>
-             Created By
-    
-        </th>
-@*<th style="width:90px">Edit|View|Delete</th>*@
     </tr>
 
 @foreach (var item in Model) {
@@ -100,25 +91,21 @@
 			@item.EmpNo
             }
            
-        </td>
-       
+        </td> 
         <td>
-            @if(item.ProcessingDone==true)
-            {<div>Completed</div>}
+          @if (item.ProcessingDone==true)
+            {
+                <div>Active</div>
+            }
+            
             else
-            {<div>In Progress</div>}
-        </td>
+            {
+                <div>Inactive</div>
+            }
+        </td>             
          <td>
             @item.CreatedDate.Value.ToString("dd-MMM-yyyy")
-        </td>
-        <td>
-            @item.User.Name
-        </td>
-@* <td>
-          @Html.ActionLink(" ", "Edit", new { id=item.AttProcesserSchedulerID} , new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs btn-EditViewDelete" })
-          @Html.ActionLink(" ", "Details", new { id = item.AttProcesserSchedulerID}, new { @class = "glyphicon glyphicon-pencil btn btn-info btn-xs btn-EditViewDelete" }) 
-          @Html.ActionLink(" ", "Delete", new { id=item.AttProcesserSchedulerID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
-          </td>*@
+        </td>    
     </tr>
 }
 

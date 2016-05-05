@@ -87,15 +87,6 @@ namespace WMS.Reports.Filters
             string query = qb.QueryForSectionRptFilters(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from ViewSection "+query);
             _View = dt.ToList<ViewSection>().AsQueryable().SortBy("DeptName").ToList();
-            if (fm.SectionFilter.Count > 0)
-            {
-                foreach (var Sec in fm.SectionFilter)
-                {
-                    short _SecID = Convert.ToInt16(Sec.ID);
-                    _TempView.AddRange(_View.Where(aa => aa.SectionID == _SecID).ToList());
-                }
-                _View = _TempView.ToList();
-            }
             
             if (fm.DepartmentFilter.Count > 0)
             {
