@@ -17,27 +17,28 @@ namespace WMS.Models
         public LvType()
         {
             this.LvApplications = new HashSet<LvApplication>();
-            this.LvConsumeds = new HashSet<LvConsumed>();
+            this.LvDatas = new HashSet<LvData>();
         }
     
         public string LvTypeID { get; set; }
         public string LvDesc { get; set; }
         public string FldName { get; set; }
-        public bool HalfLeave { get; set; }
+        public Nullable<bool> HalfLeave { get; set; }
         public string HalfLvCode { get; set; }
         public string HalfAbCode { get; set; }
-        public byte MaxDays { get; set; }
-        public bool UpdateBalance { get; set; }
+        public Nullable<byte> MaxDays { get; set; }
+        public Nullable<bool> UpdateBalance { get; set; }
         public Nullable<bool> Enable { get; set; }
         public Nullable<bool> CarryForward { get; set; }
-        public Nullable<bool> CarryForwardYear { get; set; }
-        public Nullable<bool> CarryForwardDays { get; set; }
+        public Nullable<bool> CountVacDays { get; set; }
+        public Nullable<short> CarryForwardYear { get; set; }
+        public Nullable<short> CarryForwardDays { get; set; }
         public Nullable<bool> CountGZDays { get; set; }
         public Nullable<bool> CountRestDays { get; set; }
-        public Nullable<byte> MaxDaysConsective { get; set; }
-        public Nullable<byte> MaxDaysMonth { get; set; }
+        public Nullable<short> MaxDaysConsective { get; set; }
+        public Nullable<short> MaxDaysMonth { get; set; }
     
         public virtual ICollection<LvApplication> LvApplications { get; set; }
-        public virtual ICollection<LvConsumed> LvConsumeds { get; set; }
+        public virtual ICollection<LvData> LvDatas { get; set; }
     }
 }

@@ -28,5 +28,6 @@ namespace WMS.Models
     
         public virtual Emp Emp { get; set; }
         public virtual LvApplication LvApplication { get; set; }
+        public virtual LvType LvType { get; set; }
     }
 }

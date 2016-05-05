@@ -41,7 +41,6 @@ namespace WMS.Models
     
         public virtual Emp Emp { get; set; }
         public virtual LvType LvType { get; set; }
-        public virtual User User { get; set; }
         public virtual ICollection<LvData> LvDatas { get; set; }
     }
 }

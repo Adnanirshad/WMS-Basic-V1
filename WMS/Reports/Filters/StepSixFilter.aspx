@@ -55,7 +55,7 @@
                                          <li><a href="../ReportContainer.aspx?reportname=present">Present</a></li>
                                         <li><a href="../ReportContainer.aspx?reportname=absent">Absent</a></li>
                                         <%--<li><a href="../ReportContainer.aspx?reportname=lv_application">Leave Application</a></li>--%>
-                                        <li><a href="../ReportContainer.aspx?reportname=short_lv">Short Leave</a></li>
+                                        <%--<li><a href="../ReportContainer.aspx?reportname=short_lv">Short Leave</a></li>--%>
                                         <li><a href="../ReportContainer.aspx?reportname=late_in">Late In</a></li>
                                         <li><a href="../ReportContainer.aspx?reportname=late_out">Late Out</a></li>
                                         <li><a href="../ReportContainer.aspx?reportname=early_in">Early In</a></li>
@@ -76,6 +76,7 @@
                                     <h5>Detailed</h5>
                                     <ul>
                                         <li><a href="../ReportContainer.aspx?reportname=emp_att">Employee Attendance</a></li>
+                                        <li><a href="../ReportContainer.aspx?reportname=emp_summary">Employee Summary</a></li>
                                     </ul>
                                 </li>
                             </ul>

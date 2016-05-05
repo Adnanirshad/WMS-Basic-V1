@@ -5,78 +5,77 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="77b0529d8c8943089f4fd90828fb6208" Name="Diagram1" ZoomLevel="19">
-        <EntityTypeShape EntityType="TAS201Model.AttData" Width="1.5" PointX="3.9187757689127585" PointY="19.064803788002955" />
-        <EntityTypeShape EntityType="TAS201Model.AttDataManEdit" Width="1.5" PointX="0.99660301813697583" PointY="17.281274878085252" />
-        <EntityTypeShape EntityType="TAS201Model.AttMnData" Width="1.5" PointX="7.5540327632585695" PointY="16.678173803108827" />
-        <EntityTypeShape EntityType="TAS201Model.AttMnDataPer" Width="1.5" PointX="11.360783166885742" PointY="21.924341450410122" />
-        <EntityTypeShape EntityType="TAS201Model.AttProcess" Width="1.5" PointX="8.1970984377884761" PointY="7.1204557302968832" />
-        <EntityTypeShape EntityType="TAS201Model.AttProcessorScheduler" Width="1.5" PointX="4.6503173376667855" PointY="17.785318591531979" />
-        <EntityTypeShape EntityType="TAS201Model.AuditForm" Width="1.5" PointX="3.3893533849107818" PointY="22.670794333643649" />
-        <EntityTypeShape EntityType="TAS201Model.AuditLog" Width="1.5" PointX="3.8121662697811454" PointY="31.515668511165153" />
-        <EntityTypeShape EntityType="TAS201Model.AuditOperation" Width="1.5" PointX="5.6132464341880972" PointY="31.428983628483948" />
-        <EntityTypeShape EntityType="TAS201Model.Crew" Width="1.5" PointX="7.1215019669018229" PointY="23.046369518640624" />
-        <EntityTypeShape EntityType="TAS201Model.DailySummary" Width="1.5" PointX="9.80381469512536" PointY="9.0980088157104362" />
-        <EntityTypeShape EntityType="TAS201Model.DaysName" Width="1.5" PointX="4.2950759140286019" PointY="5.2125338936282946" />
-        <EntityTypeShape EntityType="TAS201Model.Department" Width="1.5" PointX="8.3794282564797555" PointY="9.1258483571586417" />
-        <EntityTypeShape EntityType="TAS201Model.Designation" Width="1.5" PointX="7.4287881196610579" PointY="29.111071942891492" />
-        <EntityTypeShape EntityType="TAS201Model.DownloadTime" Width="1.5" PointX="11.239752558637296" PointY="27.168694180980648" />
-        <EntityTypeShape EntityType="TAS201Model.DutyCode" Width="1.5" PointX="11.607049114819173" PointY="5.06006363269876" />
-        <EntityTypeShape EntityType="TAS201Model.DutyTime" Width="1.5" PointX="1.7478132088425631" PointY="20.154846737233385" />
-        <EntityTypeShape EntityType="TAS201Model.Emp" Width="1.5" PointX="8.7546491868582788" PointY="10.067806814828797" />
-        <EntityTypeShape EntityType="TAS201Model.EmpFace" Width="1.5" PointX="10.580903363684612" PointY="10.714843874198778" />
-        <EntityTypeShape EntityType="TAS201Model.EmpFp" Width="1.5" PointX="1.3418480331738703" PointY="2.4214280556987169" />
-        <EntityTypeShape EntityType="TAS201Model.EmpPhoto" Width="1.5" PointX="3.5893058532799156" PointY="23.475143339240525" />
-        <EntityTypeShape EntityType="TAS201Model.EmpType" Width="1.5" PointX="8.099039005161746" PointY="16.574816026061221" />
-        <EntityTypeShape EntityType="TAS201Model.Holiday" Width="1.5" PointX="10.116833924370276" PointY="23.137971486494862" />
-        <EntityTypeShape EntityType="TAS201Model.JobCard" Width="1.5" PointX="4.5870243518552858" PointY="6.8768635722235141" />
-        <EntityTypeShape EntityType="TAS201Model.JobCardApp" Width="1.5" PointX="8.9931733184462281" PointY="12.046402117259056" />
-        <EntityTypeShape EntityType="TAS201Model.JobCardDetail" Width="1.5" PointX="2.8783457572005435" PointY="4.7220664791399924" />
-        <EntityTypeShape EntityType="TAS201Model.LicenseDeviceInfo" Width="1.5" PointX="0.095624383583489986" PointY="17.952473574295862" />
-        <EntityTypeShape EntityType="TAS201Model.LicenseInfo" Width="1.5" PointX="6.4655534524775824" PointY="1.3520599013902526" />
-        <EntityTypeShape EntityType="TAS201Model.Location" Width="1.5" PointX="2.8542255064725062" PointY="29.445074154736975" />
-        <EntityTypeShape EntityType="TAS201Model.LvApplication" Width="1.5" PointX="10.101049822802214" PointY="11.018239011530875" />
-        <EntityTypeShape EntityType="TAS201Model.LvConsumed" Width="1.5" PointX="10.825527056504752" PointY="1.1843498354704818" />
-        <EntityTypeShape EntityType="TAS201Model.LvData" Width="1.5" PointX="8.9818754852665013" PointY="26.690234986455287" />
-        <EntityTypeShape EntityType="TAS201Model.LvShort" Width="1.5" PointX="3.0631217840421581" PointY="7.3407826010793364" />
-        <EntityTypeShape EntityType="TAS201Model.LvType" Width="1.5" PointX="4.92168126298193" PointY="20.883428955862033" />
-        <EntityTypeShape EntityType="TAS201Model.Option" Width="1.5" PointX="11.74689868825809" PointY="0.097969904587590084" />
-        <EntityTypeShape EntityType="TAS201Model.PollData" Width="1.5" PointX="1.2374723280023188" PointY="4.2538132836361475" />
-        <EntityTypeShape EntityType="TAS201Model.PollDataError" Width="1.5" PointX="10.444020827507611" PointY="16.569243856039478" />
-        <EntityTypeShape EntityType="TAS201Model.RdrDutyCode" Width="1.5" PointX="5.0530827162103185" PointY="2.6683625144271006" />
-        <EntityTypeShape EntityType="TAS201Model.RdrEventLog" Width="1.5" PointX="7.3127143007296667" PointY="26.878719744681717" />
-        <EntityTypeShape EntityType="TAS201Model.Reader" Width="1.5" PointX="3.8378662857403354" PointY="31.207170530784488" />
-        <EntityTypeShape EntityType="TAS201Model.ReaderType" Width="1.5" PointX="10.835168782079204" PointY="12.933238080205973" />
-        <EntityTypeShape EntityType="TAS201Model.Reason" Width="1.5" PointX="1.9234786601380811" PointY="17.926271372440397" />
-        <EntityTypeShape EntityType="TAS201Model.Remark" Width="1.5" PointX="7.3099145606671989" PointY="26.230064493711136" />
-        <EntityTypeShape EntityType="TAS201Model.RosterApp" Width="1.5" PointX="1.8018994786785447" PointY="18.708361649284306" />
-        <EntityTypeShape EntityType="TAS201Model.RosterDetail" Width="1.5" PointX="1.0925140739849368" PointY="21.993671263565155" />
-        <EntityTypeShape EntityType="TAS201Model.RosterType" Width="1.5" PointX="0.92120204908829284" PointY="30.770668148421993" />
-        <EntityTypeShape EntityType="TAS201Model.Section" Width="1.5" PointX="5.9170166300223279" PointY="24.560022410266111" />
-        <EntityTypeShape EntityType="TAS201Model.ServiceLog" Width="1.5" PointX="2.0825084643822667" PointY="8.3871324399426257" />
-        <EntityTypeShape EntityType="TAS201Model.Shift" Width="1.5" PointX="11.821303266948696" PointY="26.907202360642703" />
-        <EntityTypeShape EntityType="TAS201Model.sysdiagram" Width="1.5" PointX="3.1524342257308" PointY="19.637441197241397" />
-        <EntityTypeShape EntityType="TAS201Model.User" Width="1.5" PointX="3.7550580444536443" PointY="23.348635982418728" />
-        <EntityTypeShape EntityType="TAS201Model.UserModule" Width="1.5" PointX="2.8319251513257271" PointY="23.883825611269021" />
-        <EntityTypeShape EntityType="TAS201Model.UserSection" Width="1.5" PointX="3.2799284659698271" PointY="3.4217754022319689" />
-        <EntityTypeShape EntityType="TAS201Model.EmpView" Width="1.5" PointX="3.3267541021698874" PointY="15.685754500183162" />
-        <EntityTypeShape EntityType="TAS201Model.ViewAttData" Width="1.5" PointX="1.6790948741506298" PointY="14.573113358846452" />
-        <EntityTypeShape EntityType="TAS201Model.ViewDepartment" Width="1.5" PointX="5.1943081622916782" PointY="12.7325482725783" />
-        <EntityTypeShape EntityType="TAS201Model.ViewDetailAttData" Width="1.5" PointX="7.20403652228603" PointY="27.728962330021414" />
-        <EntityTypeShape EntityType="TAS201Model.ViewEmpPic" Width="1.5" PointX="5.2966708472448731" PointY="15.934834070473366" />
-        <EntityTypeShape EntityType="TAS201Model.ViewJobCardApp" Width="1.5" PointX="10.52065252816335" PointY="6.0253965882702714" />
-        <EntityTypeShape EntityType="TAS201Model.ViewJobCardEmp" Width="1.5" PointX="2.6989235592535343" PointY="13.938260263734618" />
-        <EntityTypeShape EntityType="TAS201Model.ViewJobCardTime" Width="1.5" PointX="0.95089399672620645" PointY="26.416121718667505" />
-        <EntityTypeShape EntityType="TAS201Model.ViewLocation" Width="1.5" PointX="6.7387717844633244" PointY="9.331391905123084" />
-        <EntityTypeShape EntityType="TAS201Model.ViewLvApplication" Width="1.5" PointX="11.115536665132055" PointY="4.5292580595841905" />
-        <EntityTypeShape EntityType="TAS201Model.ViewMonthlyData" Width="1.5" PointX="7.6781633513412277" PointY="3.290699796420848" />
-        <EntityTypeShape EntityType="TAS201Model.ViewMonthlyDataPer" Width="1.5" PointX="4.1309579816325375" PointY="5.0877548032848887" />
-        <EntityTypeShape EntityType="TAS201Model.ViewMultipleInOut" Width="1.5" PointX="1.1793326759614669" PointY="24.593369107969743" />
-        <EntityTypeShape EntityType="TAS201Model.ViewSection" Width="1.5" PointX="6.9270856785248434" PointY="22.596868898066166" />
+        <EntityTypeShape EntityType="TAS201Model.AttData" Width="1.5" PointX="6.5231435757703817" PointY="22.647340338047286" />
+        <EntityTypeShape EntityType="TAS201Model.AttDataManEdit" Width="1.5" PointX="7.3281151705086769" PointY="1.4573332227102169" />
+        <EntityTypeShape EntityType="TAS201Model.AttMnData" Width="1.5" PointX="2.4299701016535842" PointY="25.361009803303055" />
+        <EntityTypeShape EntityType="TAS201Model.AttMnDataPer" Width="1.5" PointX="10.199719687085468" PointY="3.0723856999875911" />
+        <EntityTypeShape EntityType="TAS201Model.AttProcess" Width="1.5" PointX="9.7367972385775285" PointY="27.522606326044819" />
+        <EntityTypeShape EntityType="TAS201Model.AttProcessorScheduler" Width="1.5" PointX="1.509072958263137" PointY="16.402908735164864" />
+        <EntityTypeShape EntityType="TAS201Model.AuditForm" Width="1.5" PointX="8.844691871127436" PointY="11.620386650609033" />
+        <EntityTypeShape EntityType="TAS201Model.AuditLog" Width="1.5" PointX="10.402119430900607" PointY="19.01388881495869" />
+        <EntityTypeShape EntityType="TAS201Model.AuditOperation" Width="1.5" PointX="10.233521287438236" PointY="0.050035119080001078" />
+        <EntityTypeShape EntityType="TAS201Model.Crew" Width="1.5" PointX="10.770220063054106" PointY="17.267187990838284" />
+        <EntityTypeShape EntityType="TAS201Model.DailySummary" Width="1.5" PointX="1.1870137290968623" PointY="16.467651866594167" />
+        <EntityTypeShape EntityType="TAS201Model.DaysName" Width="1.5" PointX="0.76085976174141268" PointY="5.848793360334259" />
+        <EntityTypeShape EntityType="TAS201Model.Department" Width="1.5" PointX="1.9456770745784404" PointY="28.025838015613072" />
+        <EntityTypeShape EntityType="TAS201Model.Designation" Width="1.5" PointX="4.0632508341517539" PointY="4.3176773359615712" />
+        <EntityTypeShape EntityType="TAS201Model.DownloadTime" Width="1.5" PointX="11.313979815372257" PointY="9.611978267138813" />
+        <EntityTypeShape EntityType="TAS201Model.DutyCode" Width="1.5" PointX="7.1368356752846562" PointY="20.610881874622258" />
+        <EntityTypeShape EntityType="TAS201Model.DutyTime" Width="1.5" PointX="8.0725466590712536" PointY="17.561713450384193" />
+        <EntityTypeShape EntityType="TAS201Model.Emp" Width="1.5" PointX="1.4763913031091873" PointY="24.691473421031365" />
+        <EntityTypeShape EntityType="TAS201Model.EmpFace" Width="1.5" PointX="11.180768111339198" PointY="20.346349278626196" />
+        <EntityTypeShape EntityType="TAS201Model.EmpFp" Width="1.5" PointX="7.3073190875851175" PointY="28.926793767570889" />
+        <EntityTypeShape EntityType="TAS201Model.EmpPhoto" Width="1.5" PointX="9.5304586819980575" PointY="7.3822302852674531" />
+        <EntityTypeShape EntityType="TAS201Model.EmpType" Width="1.5" PointX="10.337608012527976" PointY="12.89317173366117" />
+        <EntityTypeShape EntityType="TAS201Model.Holiday" Width="1.5" PointX="11.826353872114026" PointY="1.7393519439452103" />
+        <EntityTypeShape EntityType="TAS201Model.JobCard" Width="1.5" PointX="11.281971495264196" PointY="16.089528255206314" />
+        <EntityTypeShape EntityType="TAS201Model.JobCardApp" Width="1.5" PointX="2.3152293629549581" PointY="0.55872628118783529" />
+        <EntityTypeShape EntityType="TAS201Model.JobCardDetail" Width="1.5" PointX="11.258797678751311" PointY="18.390411027888959" />
+        <EntityTypeShape EntityType="TAS201Model.LicenseDeviceInfo" Width="1.5" PointX="8.39818443562751" PointY="0.14212293929519268" />
+        <EntityTypeShape EntityType="TAS201Model.LicenseInfo" Width="1.5" PointX="1.2968718359697944" PointY="0.927397668793517" />
+        <EntityTypeShape EntityType="TAS201Model.Location" Width="1.5" PointX="7.7318928650263192" PointY="13.692847094355546" />
+        <EntityTypeShape EntityType="TAS201Model.LvApplication" Width="1.5" PointX="10.600822883937891" PointY="10.454082255463154" />
+        <EntityTypeShape EntityType="TAS201Model.LvConsumed" Width="1.5" PointX="5.4471278420868927" PointY="22.881575162933011" />
+        <EntityTypeShape EntityType="TAS201Model.LvData" Width="1.5" PointX="1.8381648221230904" PointY="16.352814369067929" />
+        <EntityTypeShape EntityType="TAS201Model.LvShort" Width="1.5" PointX="3.1841416969821514" PointY="15.413312680746108" />
+        <EntityTypeShape EntityType="TAS201Model.LvType" Width="1.5" PointX="10.078544116615571" PointY="6.02413153928897" />
+        <EntityTypeShape EntityType="TAS201Model.Option" Width="1.5" PointX="2.8812536908692" PointY="3.0475117280369215" />
+        <EntityTypeShape EntityType="TAS201Model.PollData" Width="1.5" PointX="7.9494401942703128" PointY="6.9430408212091033" />
+        <EntityTypeShape EntityType="TAS201Model.PollDataError" Width="1.5" PointX="4.7114440820698835" PointY="31.79379306724006" />
+        <EntityTypeShape EntityType="TAS201Model.RdrDutyCode" Width="1.5" PointX="8.9447368145663" PointY="27.783139658990848" />
+        <EntityTypeShape EntityType="TAS201Model.RdrEventLog" Width="1.5" PointX="7.8377614374448363" PointY="21.1357876309826" />
+        <EntityTypeShape EntityType="TAS201Model.Reader" Width="1.5" PointX="2.3669436380113211" PointY="3.4491202549306306" />
+        <EntityTypeShape EntityType="TAS201Model.ReaderType" Width="1.5" PointX="11.227717760590705" PointY="26.745807302531695" />
+        <EntityTypeShape EntityType="TAS201Model.Reason" Width="1.5" PointX="11.303899638030631" PointY="29.611886559804848" />
+        <EntityTypeShape EntityType="TAS201Model.Remark" Width="1.5" PointX="4.3456941714257438" PointY="0.64115077287012279" />
+        <EntityTypeShape EntityType="TAS201Model.RosterApp" Width="1.5" PointX="11.330896267355836" PointY="21.384668151561481" />
+        <EntityTypeShape EntityType="TAS201Model.RosterDetail" Width="1.5" PointX="5.2887707079242778" PointY="3.0096458061643157" />
+        <EntityTypeShape EntityType="TAS201Model.RosterType" Width="1.5" PointX="1.5274096678604416" PointY="16.122534535882313" />
+        <EntityTypeShape EntityType="TAS201Model.Section" Width="1.5" PointX="9.0290580955469331" PointY="9.0321019780971579" />
+        <EntityTypeShape EntityType="TAS201Model.ServiceLog" Width="1.5" PointX="5.40041982075219" PointY="2.5329813223951407" />
+        <EntityTypeShape EntityType="TAS201Model.Shift" Width="1.5" PointX="0.93017153485220461" PointY="11.214140331006675" />
+        <EntityTypeShape EntityType="TAS201Model.sysdiagram" Width="1.5" PointX="1.6507977031407866" PointY="16.123630978224629" />
+        <EntityTypeShape EntityType="TAS201Model.User" Width="1.5" PointX="2.5737128623638825" PointY="24.061125781415555" />
+        <EntityTypeShape EntityType="TAS201Model.UserModule" Width="1.5" PointX="3.1523194048331673" PointY="3.1264332398429668" />
+        <EntityTypeShape EntityType="TAS201Model.UserSection" Width="1.5" PointX="4.2600821611751254" PointY="23.080419655461061" />
+        <EntityTypeShape EntityType="TAS201Model.EmpView" Width="1.5" PointX="2.1849600533884765" PointY="22.60136542776663" />
+        <EntityTypeShape EntityType="TAS201Model.ViewAttData" Width="1.5" PointX="3.1085592876693973" PointY="7.6751852369286055" />
+        <EntityTypeShape EntityType="TAS201Model.ViewDepartment" Width="1.5" PointX="4.5100126883527318" PointY="31.48259334242092" />
+        <EntityTypeShape EntityType="TAS201Model.ViewDetailAttData" Width="1.5" PointX="2.7678740223720082" PointY="24.819740768903745" />
+        <EntityTypeShape EntityType="TAS201Model.ViewEmpPic" Width="1.5" PointX="4.6925630852079774" PointY="19.779866943033351" />
+        <EntityTypeShape EntityType="TAS201Model.ViewJobCardApp" Width="1.5" PointX="9.2766910480692477" PointY="7.2898862991900586" />
+        <EntityTypeShape EntityType="TAS201Model.ViewJobCardEmp" Width="1.5" PointX="1.7866112169747295" PointY="7.8498937524156149" />
+        <EntityTypeShape EntityType="TAS201Model.ViewJobCardTime" Width="1.5" PointX="6.4490959879239531" PointY="5.4914494927467077" />
+        <EntityTypeShape EntityType="TAS201Model.ViewLocation" Width="1.5" PointX="8.9702786193090862" PointY="4.6736973694868835" />
+        <EntityTypeShape EntityType="TAS201Model.ViewLvApplication" Width="1.5" PointX="11.615407230153403" PointY="5.0759726488385226" />
+        <EntityTypeShape EntityType="TAS201Model.ViewMonthlyData" Width="1.5" PointX="5.5745822124064812" PointY="3.53174890742253" />
+        <EntityTypeShape EntityType="TAS201Model.ViewMonthlyDataPer" Width="1.5" PointX="6.5222525794628332" PointY="21.319650183114991" />
+        <EntityTypeShape EntityType="TAS201Model.ViewMultipleInOut" Width="1.5" PointX="9.4885058372693631" PointY="9.68655683551289" />
+        <EntityTypeShape EntityType="TAS201Model.ViewSection" Width="1.5" PointX="6.2751226584776871" PointY="22.188218723138895" />
         <AssociationConnector Association="TAS201Model.FK_AttData_Emp" />
         <AssociationConnector Association="TAS201Model.FK_AttDataManEdit_Emp" />
-        <AssociationConnector Association="TAS201Model.FK_AttDataManEdit_User" />
+        <AssociationConnector Association="TAS201Model.FK_AttProcessorScheduler_Location" />
         <AssociationConnector Association="TAS201Model.FK_AttProcessorScheduler_User" />
-        <AssociationConnector Association="TAS201Model.FK_AuditLog_User" />
         <AssociationConnector Association="TAS201Model.FK_Emp_Crew" />
         <AssociationConnector Association="TAS201Model.FK_Shift_DaysName" />
         <AssociationConnector Association="TAS201Model.FK_Shift_DaysName1" />
@@ -94,11 +93,9 @@
         <AssociationConnector Association="TAS201Model.FK_PollData_Emp" />
         <AssociationConnector Association="TAS201Model.FK_JobCardDetail_JobCardApp" />
         <AssociationConnector Association="TAS201Model.FK_Reader_Location" />
-        <AssociationConnector Association="TAS201Model.FK_Shift_Location" />
         <AssociationConnector Association="TAS201Model.FK_LvApplication_LvType" />
-        <AssociationConnector Association="TAS201Model.FK_LvApplication_User" />
         <AssociationConnector Association="TAS201Model.FK_LvData_LvApplications" />
-        <AssociationConnector Association="TAS201Model.FK_LvConsumed_LvType" />
+        <AssociationConnector Association="TAS201Model.FK_LvData_LvType" />
         <AssociationConnector Association="TAS201Model.FK_Reader_RdrID" />
         <AssociationConnector Association="TAS201Model.FK_Reader_RdrDutyCode" />
         <AssociationConnector Association="TAS201Model.FK_Reader_ReaderType1" />

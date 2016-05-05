@@ -177,16 +177,15 @@
       [ViewDetailAttData].[SecID] AS [SecID], 
       [ViewDetailAttData].[CardNo] AS [CardNo], 
       [ViewDetailAttData].[NicNo] AS [NicNo], 
+      [ViewDetailAttData].[FatherName] AS [FatherName], 
       [ViewDetailAttData].[JoinDate] AS [JoinDate], 
-      [ViewDetailAttData].[ValidDate] AS [ValidDate], 
       [ViewDetailAttData].[Status] AS [Status], 
       [ViewDetailAttData].[TypeName] AS [TypeName], 
       [ViewDetailAttData].[LocName] AS [LocName], 
       [ViewDetailAttData].[ShiftName] AS [ShiftName], 
-      [ViewDetailAttData].[EmpDate] AS [EmpDate], 
-      [ViewDetailAttData].[AttDate] AS [AttDate], 
-      [ViewDetailAttData].[Expr1] AS [Expr1], 
       [ViewDetailAttData].[EmpID] AS [EmpID], 
+      [ViewDetailAttData].[AttDate] AS [AttDate], 
+      [ViewDetailAttData].[EmpDate] AS [EmpDate], 
       [ViewDetailAttData].[DutyCode] AS [DutyCode], 
       [ViewDetailAttData].[DutyTime] AS [DutyTime], 
       [ViewDetailAttData].[TimeIn] AS [TimeIn], 
@@ -220,6 +219,8 @@
       [ViewDetailAttData].[StatusBreak] AS [StatusBreak], 
       [ViewDetailAttData].[ShifMin] AS [ShifMin], 
       [ViewDetailAttData].[Remarks] AS [Remarks], 
+      [ViewDetailAttData].[DeptID] AS [DeptID], 
+      [ViewDetailAttData].[Deleted] AS [Deleted], 
       [ViewDetailAttData].[Tin0] AS [Tin0], 
       [ViewDetailAttData].[Tout0] AS [Tout0], 
       [ViewDetailAttData].[Tin1] AS [Tin1], 
@@ -231,13 +232,11 @@
       [ViewDetailAttData].[Tin4] AS [Tin4], 
       [ViewDetailAttData].[Tout4] AS [Tout4], 
       [ViewDetailAttData].[Tin5] AS [Tin5], 
-      [ViewDetailAttData].[Tin6] AS [Tin6], 
       [ViewDetailAttData].[Tout5] AS [Tout5], 
+      [ViewDetailAttData].[Tin6] AS [Tin6], 
       [ViewDetailAttData].[Tout6] AS [Tout6], 
       [ViewDetailAttData].[Tin7] AS [Tin7], 
-      [ViewDetailAttData].[Tout7] AS [Tout7], 
-      [ViewDetailAttData].[DeptID] AS [DeptID], 
-      [ViewDetailAttData].[Deleted] AS [Deleted]
+      [ViewDetailAttData].[Tout7] AS [Tout7]
       FROM [dbo].[ViewDetailAttData] AS [ViewDetailAttData]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewEmpPic" EntityType="TAS201Model.Store.ViewEmpPic" store:Type="Views" store:Schema="dbo" store:Name="ViewEmpPic">
@@ -695,23 +694,36 @@
           <EntitySet Name="ViewMultipleInOut" EntityType="TAS201Model.Store.ViewMultipleInOut" store:Type="Views" store:Schema="dbo" store:Name="ViewMultipleInOut">
             <DefiningQuery>SELECT 
       [ViewMultipleInOut].[EmpNo] AS [EmpNo], 
+      [ViewMultipleInOut].[GradeName] AS [GradeName], 
       [ViewMultipleInOut].[SectionName] AS [SectionName], 
+      [ViewMultipleInOut].[CrewName] AS [CrewName], 
       [ViewMultipleInOut].[DeptID] AS [DeptID], 
       [ViewMultipleInOut].[TypeName] AS [TypeName], 
+      [ViewMultipleInOut].[CatID] AS [CatID], 
+      [ViewMultipleInOut].[CatName] AS [CatName], 
+      [ViewMultipleInOut].[RegionName] AS [RegionName], 
+      [ViewMultipleInOut].[CityName] AS [CityName], 
       [ViewMultipleInOut].[LocName] AS [LocName], 
       [ViewMultipleInOut].[ShiftName] AS [ShiftName], 
       [ViewMultipleInOut].[DesignationName] AS [DesignationName], 
       [ViewMultipleInOut].[EmpName] AS [EmpName], 
       [ViewMultipleInOut].[DesigID] AS [DesigID], 
+      [ViewMultipleInOut].[JobID] AS [JobID], 
       [ViewMultipleInOut].[TypeID] AS [TypeID], 
+      [ViewMultipleInOut].[GradeID] AS [GradeID], 
       [ViewMultipleInOut].[SecID] AS [SecID], 
       [ViewMultipleInOut].[CardNo] AS [CardNo], 
+      [ViewMultipleInOut].[FpID] AS [FpID], 
       [ViewMultipleInOut].[NicNo] AS [NicNo], 
       [ViewMultipleInOut].[Status] AS [Status], 
+      [ViewMultipleInOut].[CrewID] AS [CrewID], 
+      [ViewMultipleInOut].[HasOT] AS [HasOT], 
       [ViewMultipleInOut].[EmpID] AS [EmpID], 
+      [ViewMultipleInOut].[DivisionName] AS [DivisionName], 
       [ViewMultipleInOut].[DeptName] AS [DeptName], 
       [ViewMultipleInOut].[ShiftID] AS [ShiftID], 
       [ViewMultipleInOut].[LocID] AS [LocID], 
+      [ViewMultipleInOut].[DivID] AS [DivID], 
       [ViewMultipleInOut].[EmpDate] AS [EmpDate], 
       [ViewMultipleInOut].[AttDate] AS [AttDate], 
       [ViewMultipleInOut].[DutyCode] AS [DutyCode], 
@@ -768,8 +780,7 @@
       [ViewMultipleInOut].[Tin11] AS [Tin11], 
       [ViewMultipleInOut].[Tout11] AS [Tout11], 
       [ViewMultipleInOut].[Tin12] AS [Tin12], 
-      [ViewMultipleInOut].[Tout12] AS [Tout12], 
-      [ViewMultipleInOut].[Deleted] AS [Deleted]
+      [ViewMultipleInOut].[Tout12] AS [Tout12]
       FROM [dbo].[ViewMultipleInOut] AS [ViewMultipleInOut]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewSection" EntityType="TAS201Model.Store.ViewSection" store:Type="Views" store:Schema="dbo" store:Name="ViewSection">
@@ -788,17 +799,13 @@
             <End Role="Emp" EntitySet="Emp" />
             <End Role="AttDataManEdit" EntitySet="AttDataManEdit" />
           </AssociationSet>
-          <AssociationSet Name="FK_AttDataManEdit_User" Association="TAS201Model.Store.FK_AttDataManEdit_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="AttDataManEdit" EntitySet="AttDataManEdit" />
+          <AssociationSet Name="FK_AttProcessorScheduler_Location" Association="TAS201Model.Store.FK_AttProcessorScheduler_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="AttProcessorScheduler" EntitySet="AttProcessorScheduler" />
           </AssociationSet>
           <AssociationSet Name="FK_AttProcessorScheduler_User" Association="TAS201Model.Store.FK_AttProcessorScheduler_User">
             <End Role="User" EntitySet="User" />
             <End Role="AttProcessorScheduler" EntitySet="AttProcessorScheduler" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AuditLog_User" Association="TAS201Model.Store.FK_AuditLog_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="AuditLog" EntitySet="AuditLog" />
           </AssociationSet>
           <AssociationSet Name="FK_Emp_Crew" Association="TAS201Model.Store.FK_Emp_Crew">
             <End Role="Crew" EntitySet="Crew" />
@@ -840,16 +847,8 @@
             <End Role="LvType" EntitySet="LvType" />
             <End Role="LvApplication" EntitySet="LvApplication" />
           </AssociationSet>
-          <AssociationSet Name="FK_LvApplication_User" Association="TAS201Model.Store.FK_LvApplication_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="LvApplication" EntitySet="LvApplication" />
-          </AssociationSet>
           <AssociationSet Name="FK_LvConsumed_Emp" Association="TAS201Model.Store.FK_LvConsumed_Emp">
             <End Role="Emp" EntitySet="Emp" />
-            <End Role="LvConsumed" EntitySet="LvConsumed" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LvConsumed_LvType" Association="TAS201Model.Store.FK_LvConsumed_LvType">
-            <End Role="LvType" EntitySet="LvType" />
             <End Role="LvConsumed" EntitySet="LvConsumed" />
           </AssociationSet>
           <AssociationSet Name="FK_LvData_Emp" Association="TAS201Model.Store.FK_LvData_Emp">
@@ -858,6 +857,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_LvData_LvApplications" Association="TAS201Model.Store.FK_LvData_LvApplications">
             <End Role="LvApplication" EntitySet="LvApplication" />
+            <End Role="LvData" EntitySet="LvData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvData_LvType" Association="TAS201Model.Store.FK_LvData_LvType">
+            <End Role="LvType" EntitySet="LvType" />
             <End Role="LvData" EntitySet="LvData" />
           </AssociationSet>
           <AssociationSet Name="FK_LvShort_Emp" Association="TAS201Model.Store.FK_LvShort_Emp">
@@ -906,10 +909,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Shift_DaysName1" Association="TAS201Model.Store.FK_Shift_DaysName1">
             <End Role="DaysName" EntitySet="DaysName" />
-            <End Role="Shift" EntitySet="Shift" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Shift_Location" Association="TAS201Model.Store.FK_Shift_Location">
-            <End Role="Location" EntitySet="Location" />
             <End Role="Shift" EntitySet="Shift" />
           </AssociationSet>
         </EntityContainer>
@@ -1448,7 +1447,7 @@
           <Key>
             <PropertyRef Name="WorkCardID" />
           </Key>
-          <Property Name="WorkCardID" Type="smallint" Nullable="false" />
+          <Property Name="WorkCardID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="WorkCardName" Type="nvarchar" MaxLength="100" />
           <Property Name="WorMin" Type="smallint" />
         </EntityType>
@@ -1536,8 +1535,7 @@
           <Key>
             <PropertyRef Name="EmpLvTypeYear" />
           </Key>
-          <Property Name="EmpLvTypeYear" Type="nvarchar" Nullable="false" MaxLength="10" />
-          <Property Name="LVYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmpLvTypeYear" Type="nvarchar" Nullable="false" MaxLength="8" />
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="LeaveTypeID" Type="char" MaxLength="1" />
           <Property Name="JanConsumed" Type="float" />
@@ -1596,20 +1594,21 @@
           </Key>
           <Property Name="LvTypeID" Type="char" Nullable="false" MaxLength="1" />
           <Property Name="LvDesc" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="FldName" Type="nvarchar" Nullable="false" MaxLength="10" />
-          <Property Name="HalfLeave" Type="bit" Nullable="false" />
-          <Property Name="HalfLvCode" Type="nvarchar" Nullable="false" MaxLength="10" />
-          <Property Name="HalfAbCode" Type="nvarchar" Nullable="false" MaxLength="10" />
-          <Property Name="MaxDays" Type="tinyint" Nullable="false" />
-          <Property Name="UpdateBalance" Type="bit" Nullable="false" />
+          <Property Name="FldName" Type="nvarchar" MaxLength="30" />
+          <Property Name="HalfLeave" Type="bit" />
+          <Property Name="HalfLvCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="HalfAbCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="MaxDays" Type="tinyint" />
+          <Property Name="UpdateBalance" Type="bit" />
           <Property Name="Enable" Type="bit" />
           <Property Name="CarryForward" Type="bit" />
-          <Property Name="CarryForwardYear" Type="bit" />
-          <Property Name="CarryForwardDays" Type="bit" />
+          <Property Name="CountVacDays" Type="bit" />
+          <Property Name="CarryForwardYear" Type="smallint" />
+          <Property Name="CarryForwardDays" Type="smallint" />
           <Property Name="CountGZDays" Type="bit" />
           <Property Name="CountRestDays" Type="bit" />
-          <Property Name="MaxDaysConsective" Type="tinyint" />
-          <Property Name="MaxDaysMonth" Type="tinyint" />
+          <Property Name="MaxDaysConsective" Type="smallint" />
+          <Property Name="MaxDaysMonth" Type="smallint" />
         </EntityType>
         <EntityType Name="Option">
           <Key>
@@ -2018,16 +2017,15 @@
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
           <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
           <Property Name="JoinDate" Type="date" />
-          <Property Name="ValidDate" Type="date" />
           <Property Name="Status" Type="bit" />
           <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="LocName" Type="varchar" Nullable="false" MaxLength="30" />
           <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="EmpDate" Type="nvarchar" Nullable="false" MaxLength="15" />
-          <Property Name="AttDate" Type="date" />
-          <Property Name="Expr1" Type="nvarchar" MaxLength="15" />
           <Property Name="EmpID" Type="int" />
+          <Property Name="AttDate" Type="date" />
+          <Property Name="EmpDate" Type="nvarchar" Nullable="false" MaxLength="15" />
           <Property Name="DutyCode" Type="char" MaxLength="1" />
           <Property Name="DutyTime" Type="time" />
           <Property Name="TimeIn" Type="datetime" />
@@ -2061,6 +2059,8 @@
           <Property Name="StatusBreak" Type="bit" />
           <Property Name="ShifMin" Type="smallint" />
           <Property Name="Remarks" Type="varchar" MaxLength="100" />
+          <Property Name="DeptID" Type="smallint" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
           <Property Name="Tin0" Type="datetime" />
           <Property Name="Tout0" Type="datetime" />
           <Property Name="Tin1" Type="datetime" />
@@ -2072,13 +2072,11 @@
           <Property Name="Tin4" Type="datetime" />
           <Property Name="Tout4" Type="datetime" />
           <Property Name="Tin5" Type="datetime" />
-          <Property Name="Tin6" Type="datetime" />
           <Property Name="Tout5" Type="datetime" />
+          <Property Name="Tin6" Type="datetime" />
           <Property Name="Tout6" Type="datetime" />
           <Property Name="Tin7" Type="datetime" />
           <Property Name="Tout7" Type="datetime" />
-          <Property Name="DeptID" Type="smallint" Nullable="false" />
-          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewEmpPic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2291,7 +2289,6 @@
             <PropertyRef Name="ShiftName" />
             <PropertyRef Name="DeptID" />
             <PropertyRef Name="LeaveTypeID" />
-            <PropertyRef Name="FldName" />
             <PropertyRef Name="LvDesc" />
           </Key>
           <Property Name="EmpID" Type="int" Nullable="false" />
@@ -2325,7 +2322,7 @@
           <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DeptID" Type="smallint" Nullable="false" />
           <Property Name="LeaveTypeID" Type="char" Nullable="false" MaxLength="1" />
-          <Property Name="FldName" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="FldName" Type="nvarchar" MaxLength="30" />
           <Property Name="LvDesc" Type="nvarchar" Nullable="false" MaxLength="30" />
           <Property Name="Deleted" Type="bit" />
         </EntityType>
@@ -2602,36 +2599,41 @@
         <EntityType Name="ViewMultipleInOut">
           <Key>
             <PropertyRef Name="EmpNo" />
-            <PropertyRef Name="SectionName" />
-            <PropertyRef Name="DeptID" />
-            <PropertyRef Name="TypeName" />
-            <PropertyRef Name="LocName" />
-            <PropertyRef Name="ShiftName" />
-            <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
-            <PropertyRef Name="NicNo" />
             <PropertyRef Name="EmpID" />
-            <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
           </Key>
           <Property Name="EmpNo" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="SectionName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="DeptID" Type="smallint" Nullable="false" />
-          <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="30" />
-          <Property Name="LocName" Type="varchar" Nullable="false" MaxLength="30" />
-          <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="DesignationName" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="GradeName" Type="nvarchar" MaxLength="20" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CrewName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeptID" Type="smallint" />
+          <Property Name="TypeName" Type="varchar" MaxLength="30" />
+          <Property Name="CatID" Type="smallint" />
+          <Property Name="CatName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LocName" Type="varchar" MaxLength="30" />
+          <Property Name="ShiftName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DesignationName" Type="nvarchar" MaxLength="200" />
           <Property Name="EmpName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DesigID" Type="int" />
+          <Property Name="JobID" Type="smallint" />
           <Property Name="TypeID" Type="tinyint" />
+          <Property Name="GradeID" Type="smallint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FpID" Type="int" />
+          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
+          <Property Name="CrewID" Type="smallint" />
+          <Property Name="HasOT" Type="bit" />
           <Property Name="EmpID" Type="int" Nullable="false" />
-          <Property Name="DeptName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="DivisionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeptName" Type="nvarchar" MaxLength="100" />
           <Property Name="ShiftID" Type="tinyint" />
           <Property Name="LocID" Type="smallint" />
+          <Property Name="DivID" Type="smallint" />
           <Property Name="EmpDate" Type="nvarchar" Nullable="false" MaxLength="15" />
           <Property Name="AttDate" Type="date" />
           <Property Name="DutyCode" Type="char" MaxLength="1" />
@@ -2689,7 +2691,6 @@
           <Property Name="Tout11" Type="datetime" />
           <Property Name="Tin12" Type="datetime" />
           <Property Name="Tout12" Type="datetime" />
-          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewSection' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2729,15 +2730,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AttDataManEdit_User">
-          <End Role="User" Type="TAS201Model.Store.User" Multiplicity="0..1" />
-          <End Role="AttDataManEdit" Type="TAS201Model.Store.AttDataManEdit" Multiplicity="*" />
+        <Association Name="FK_AttProcessorScheduler_Location">
+          <End Role="Location" Type="TAS201Model.Store.Location" Multiplicity="1" />
+          <End Role="AttProcessorScheduler" Type="TAS201Model.Store.AttProcessorScheduler" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
+            <Principal Role="Location">
+              <PropertyRef Name="LocID" />
             </Principal>
-            <Dependent Role="AttDataManEdit">
-              <PropertyRef Name="UserID" />
+            <Dependent Role="AttProcessorScheduler">
+              <PropertyRef Name="LocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2750,18 +2751,6 @@
             </Principal>
             <Dependent Role="AttProcessorScheduler">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AuditLog_User">
-          <End Role="User" Type="TAS201Model.Store.User" Multiplicity="0..1" />
-          <End Role="AuditLog" Type="TAS201Model.Store.AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="AuditUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2885,18 +2874,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LvApplication_User">
-          <End Role="User" Type="TAS201Model.Store.User" Multiplicity="0..1" />
-          <End Role="LvApplication" Type="TAS201Model.Store.LvApplication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="LvApplication">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LvConsumed_Emp">
           <End Role="Emp" Type="TAS201Model.Store.Emp" Multiplicity="1" />
           <End Role="LvConsumed" Type="TAS201Model.Store.LvConsumed" Multiplicity="*" />
@@ -2906,18 +2883,6 @@
             </Principal>
             <Dependent Role="LvConsumed">
               <PropertyRef Name="EmpID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LvConsumed_LvType">
-          <End Role="LvType" Type="TAS201Model.Store.LvType" Multiplicity="0..1" />
-          <End Role="LvConsumed" Type="TAS201Model.Store.LvConsumed" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LvType">
-              <PropertyRef Name="LvTypeID" />
-            </Principal>
-            <Dependent Role="LvConsumed">
-              <PropertyRef Name="LeaveTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2942,6 +2907,18 @@
             </Principal>
             <Dependent Role="LvData">
               <PropertyRef Name="LvID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvData_LvType">
+          <End Role="LvType" Type="TAS201Model.Store.LvType" Multiplicity="1" />
+          <End Role="LvData" Type="TAS201Model.Store.LvData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvType">
+              <PropertyRef Name="LvTypeID" />
+            </Principal>
+            <Dependent Role="LvData">
+              <PropertyRef Name="LvCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3089,18 +3066,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shift_Location">
-          <End Role="Location" Type="TAS201Model.Store.Location" Multiplicity="0..1" />
-          <End Role="Shift" Type="TAS201Model.Store.Shift" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocID" />
-            </Principal>
-            <Dependent Role="Shift">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -3181,17 +3146,13 @@
             <End Role="Emp" EntitySet="Emps" />
             <End Role="AttDataManEdit" EntitySet="AttDataManEdits" />
           </AssociationSet>
-          <AssociationSet Name="FK_AttDataManEdit_User" Association="TAS201Model.FK_AttDataManEdit_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="AttDataManEdit" EntitySet="AttDataManEdits" />
+          <AssociationSet Name="FK_AttProcessorScheduler_Location" Association="TAS201Model.FK_AttProcessorScheduler_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="AttProcessorScheduler" EntitySet="AttProcessorSchedulers" />
           </AssociationSet>
           <AssociationSet Name="FK_AttProcessorScheduler_User" Association="TAS201Model.FK_AttProcessorScheduler_User">
             <End Role="User" EntitySet="Users" />
             <End Role="AttProcessorScheduler" EntitySet="AttProcessorSchedulers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AuditLog_User" Association="TAS201Model.FK_AuditLog_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="AuditLog" EntitySet="AuditLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_Emp_Crew" Association="TAS201Model.FK_Emp_Crew">
             <End Role="Crew" EntitySet="Crews" />
@@ -3261,25 +3222,17 @@
             <End Role="Location" EntitySet="Locations" />
             <End Role="Reader" EntitySet="Readers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Shift_Location" Association="TAS201Model.FK_Shift_Location">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="Shift" EntitySet="Shifts" />
-          </AssociationSet>
           <AssociationSet Name="FK_LvApplication_LvType" Association="TAS201Model.FK_LvApplication_LvType">
             <End Role="LvType" EntitySet="LvTypes" />
-            <End Role="LvApplication" EntitySet="LvApplications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LvApplication_User" Association="TAS201Model.FK_LvApplication_User">
-            <End Role="User" EntitySet="Users" />
             <End Role="LvApplication" EntitySet="LvApplications" />
           </AssociationSet>
           <AssociationSet Name="FK_LvData_LvApplications" Association="TAS201Model.FK_LvData_LvApplications">
             <End Role="LvApplication" EntitySet="LvApplications" />
             <End Role="LvData" EntitySet="LvDatas" />
           </AssociationSet>
-          <AssociationSet Name="FK_LvConsumed_LvType" Association="TAS201Model.FK_LvConsumed_LvType">
+          <AssociationSet Name="FK_LvData_LvType" Association="TAS201Model.FK_LvData_LvType">
             <End Role="LvType" EntitySet="LvTypes" />
-            <End Role="LvConsumed" EntitySet="LvConsumeds" />
+            <End Role="LvData" EntitySet="LvDatas" />
           </AssociationSet>
           <AssociationSet Name="FK_Reader_RdrID" Association="TAS201Model.FK_Reader_RdrID">
             <End Role="Reader" EntitySet="Readers" />
@@ -3407,7 +3360,6 @@
           <Property Type="Int16" Name="OldShiftMin" />
           <Property Type="Int16" Name="NewShiftMin" />
           <NavigationProperty Name="Emp" Relationship="TAS201Model.FK_AttDataManEdit_Emp" FromRole="AttDataManEdit" ToRole="Emp" />
-          <NavigationProperty Name="User" Relationship="TAS201Model.FK_AttDataManEdit_User" FromRole="AttDataManEdit" ToRole="User" />
         </EntityType>
         <EntityType Name="AttMnData">
           <Key>
@@ -3644,6 +3596,7 @@
           <Property Type="DateTime" Name="CreatedDate" Precision="3" />
           <Property Type="Int32" Name="EmpID" />
           <Property Type="String" Name="EmpNo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Location" Relationship="TAS201Model.FK_AttProcessorScheduler_Location" FromRole="AttProcessorScheduler" ToRole="Location" />
           <NavigationProperty Name="User" Relationship="TAS201Model.FK_AttProcessorScheduler_User" FromRole="AttProcessorScheduler" ToRole="User" />
         </EntityType>
         <EntityType Name="AuditForm">
@@ -3662,7 +3615,6 @@
           <Property Type="Int32" Name="AuditUserID" />
           <Property Type="Int16" Name="FormID" />
           <Property Type="Int16" Name="OperationID" />
-          <NavigationProperty Name="User" Relationship="TAS201Model.FK_AuditLog_User" FromRole="AuditLog" ToRole="User" />
         </EntityType>
         <EntityType Name="AuditOperation">
           <Key>
@@ -3866,7 +3818,7 @@
           <Key>
             <PropertyRef Name="WorkCardID" />
           </Key>
-          <Property Type="Int16" Name="WorkCardID" Nullable="false" />
+          <Property Type="Int16" Name="WorkCardID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="WorkCardName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Int16" Name="WorMin" />
         </EntityType>
@@ -3928,9 +3880,9 @@
           </Key>
           <Property Type="Int16" Name="LocID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AttProcessorSchedulers" Relationship="TAS201Model.FK_AttProcessorScheduler_Location" FromRole="Location" ToRole="AttProcessorScheduler" />
           <NavigationProperty Name="Emps" Relationship="TAS201Model.FK_Emp_Location" FromRole="Location" ToRole="Emp" />
           <NavigationProperty Name="Readers" Relationship="TAS201Model.FK_Reader_Location" FromRole="Location" ToRole="Reader" />
-          <NavigationProperty Name="Shifts" Relationship="TAS201Model.FK_Shift_Location" FromRole="Location" ToRole="Shift" />
         </EntityType>
         <EntityType Name="LvApplication">
           <Key>
@@ -3957,15 +3909,13 @@
           <Property Type="Boolean" Name="Active" />
           <NavigationProperty Name="Emp" Relationship="TAS201Model.FK_LvApplication_Emp" FromRole="LvApplication" ToRole="Emp" />
           <NavigationProperty Name="LvType" Relationship="TAS201Model.FK_LvApplication_LvType" FromRole="LvApplication" ToRole="LvType" />
-          <NavigationProperty Name="User" Relationship="TAS201Model.FK_LvApplication_User" FromRole="LvApplication" ToRole="User" />
           <NavigationProperty Name="LvDatas" Relationship="TAS201Model.FK_LvData_LvApplications" FromRole="LvApplication" ToRole="LvData" />
         </EntityType>
         <EntityType Name="LvConsumed">
           <Key>
             <PropertyRef Name="EmpLvTypeYear" />
           </Key>
-          <Property Type="String" Name="EmpLvTypeYear" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LVYear" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmpLvTypeYear" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
           <Property Type="String" Name="LeaveTypeID" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="Double" Name="JanConsumed" />
@@ -3985,7 +3935,6 @@
           <Property Type="Double" Name="GrandTotal" />
           <Property Type="Double" Name="GrandTotalRemaining" />
           <NavigationProperty Name="Emp" Relationship="TAS201Model.FK_LvConsumed_Emp" FromRole="LvConsumed" ToRole="Emp" />
-          <NavigationProperty Name="LvType" Relationship="TAS201Model.FK_LvConsumed_LvType" FromRole="LvConsumed" ToRole="LvType" />
         </EntityType>
         <EntityType Name="LvData">
           <Key>
@@ -4004,6 +3953,7 @@
           <Property Type="Boolean" Name="Active" />
           <NavigationProperty Name="Emp" Relationship="TAS201Model.FK_LvData_Emp" FromRole="LvData" ToRole="Emp" />
           <NavigationProperty Name="LvApplication" Relationship="TAS201Model.FK_LvData_LvApplications" FromRole="LvData" ToRole="LvApplication" />
+          <NavigationProperty Name="LvType" Relationship="TAS201Model.FK_LvData_LvType" FromRole="LvData" ToRole="LvType" />
         </EntityType>
         <EntityType Name="LvShort">
           <Key>
@@ -4029,22 +3979,23 @@
           </Key>
           <Property Type="String" Name="LvTypeID" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="LvDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="FldName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="HalfLeave" Nullable="false" />
-          <Property Type="String" Name="HalfLvCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="HalfAbCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Type="Byte" Name="MaxDays" Nullable="false" />
-          <Property Type="Boolean" Name="UpdateBalance" Nullable="false" />
+          <Property Type="String" Name="FldName" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="HalfLeave" />
+          <Property Type="String" Name="HalfLvCode" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HalfAbCode" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="Byte" Name="MaxDays" />
+          <Property Type="Boolean" Name="UpdateBalance" />
           <Property Type="Boolean" Name="Enable" />
           <Property Type="Boolean" Name="CarryForward" />
-          <Property Type="Boolean" Name="CarryForwardYear" />
-          <Property Type="Boolean" Name="CarryForwardDays" />
+          <Property Type="Boolean" Name="CountVacDays" />
+          <Property Type="Int16" Name="CarryForwardYear" />
+          <Property Type="Int16" Name="CarryForwardDays" />
           <Property Type="Boolean" Name="CountGZDays" />
           <Property Type="Boolean" Name="CountRestDays" />
-          <Property Type="Byte" Name="MaxDaysConsective" />
-          <Property Type="Byte" Name="MaxDaysMonth" />
+          <Property Type="Int16" Name="MaxDaysConsective" />
+          <Property Type="Int16" Name="MaxDaysMonth" />
           <NavigationProperty Name="LvApplications" Relationship="TAS201Model.FK_LvApplication_LvType" FromRole="LvType" ToRole="LvApplication" />
-          <NavigationProperty Name="LvConsumeds" Relationship="TAS201Model.FK_LvConsumed_LvType" FromRole="LvType" ToRole="LvConsumed" />
+          <NavigationProperty Name="LvDatas" Relationship="TAS201Model.FK_LvData_LvType" FromRole="LvType" ToRole="LvData" />
         </EntityType>
         <EntityType Name="Option">
           <Key>
@@ -4248,7 +4199,6 @@
           <NavigationProperty Name="DaysName" Relationship="TAS201Model.FK_Shift_DaysName" FromRole="Shift" ToRole="DaysName" />
           <NavigationProperty Name="DaysName1" Relationship="TAS201Model.FK_Shift_DaysName1" FromRole="Shift" ToRole="DaysName" />
           <NavigationProperty Name="Emps" Relationship="TAS201Model.FK_Emp_Shift" FromRole="Shift" ToRole="Emp" />
-          <NavigationProperty Name="Location" Relationship="TAS201Model.FK_Shift_Location" FromRole="Shift" ToRole="Location" />
           <NavigationProperty Name="RosterApps" Relationship="TAS201Model.FK_RosterApp_Shift" FromRole="Shift" ToRole="RosterApp" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -4293,10 +4243,7 @@
           <Property Type="Boolean" Name="MRoster" />
           <Property Type="Boolean" Name="MProcess" />
           <Property Type="Boolean" Name="Deleted" />
-          <NavigationProperty Name="AttDataManEdits" Relationship="TAS201Model.FK_AttDataManEdit_User" FromRole="User" ToRole="AttDataManEdit" />
           <NavigationProperty Name="AttProcessorSchedulers" Relationship="TAS201Model.FK_AttProcessorScheduler_User" FromRole="User" ToRole="AttProcessorScheduler" />
-          <NavigationProperty Name="AuditLogs" Relationship="TAS201Model.FK_AuditLog_User" FromRole="User" ToRole="AuditLog" />
-          <NavigationProperty Name="LvApplications" Relationship="TAS201Model.FK_LvApplication_User" FromRole="User" ToRole="LvApplication" />
         </EntityType>
         <EntityType Name="UserModule">
           <Key>
@@ -4462,16 +4409,15 @@
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="JoinDate" Precision="0" />
-          <Property Type="DateTime" Name="ValidDate" Precision="0" />
           <Property Type="Boolean" Name="Status" />
           <Property Type="String" Name="TypeName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="EmpDate" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="AttDate" Precision="0" />
-          <Property Type="String" Name="Expr1" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="EmpID" />
+          <Property Type="DateTime" Name="AttDate" Precision="0" />
+          <Property Type="String" Name="EmpDate" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DutyCode" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="Time" Name="DutyTime" Precision="7" />
           <Property Type="DateTime" Name="TimeIn" Precision="3" />
@@ -4505,6 +4451,8 @@
           <Property Type="Boolean" Name="StatusBreak" />
           <Property Type="Int16" Name="ShifMin" />
           <Property Type="String" Name="Remarks" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int16" Name="DeptID" Nullable="false" />
+          <Property Type="Boolean" Name="Deleted" />
           <Property Type="DateTime" Name="Tin0" Precision="3" />
           <Property Type="DateTime" Name="Tout0" Precision="3" />
           <Property Type="DateTime" Name="Tin1" Precision="3" />
@@ -4516,13 +4464,11 @@
           <Property Type="DateTime" Name="Tin4" Precision="3" />
           <Property Type="DateTime" Name="Tout4" Precision="3" />
           <Property Type="DateTime" Name="Tin5" Precision="3" />
-          <Property Type="DateTime" Name="Tin6" Precision="3" />
           <Property Type="DateTime" Name="Tout5" Precision="3" />
+          <Property Type="DateTime" Name="Tin6" Precision="3" />
           <Property Type="DateTime" Name="Tout6" Precision="3" />
           <Property Type="DateTime" Name="Tin7" Precision="3" />
           <Property Type="DateTime" Name="Tout7" Precision="3" />
-          <Property Type="Int16" Name="DeptID" Nullable="false" />
-          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewEmpPic">
           <Key>
@@ -4717,7 +4663,6 @@
             <PropertyRef Name="ShiftName" />
             <PropertyRef Name="DeptID" />
             <PropertyRef Name="LeaveTypeID" />
-            <PropertyRef Name="FldName" />
             <PropertyRef Name="LvDesc" />
           </Key>
           <Property Type="Int32" Name="EmpID" Nullable="false" />
@@ -4751,7 +4696,7 @@
           <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int16" Name="DeptID" Nullable="false" />
           <Property Type="String" Name="LeaveTypeID" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="FldName" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FldName" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="LvDesc" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Deleted" />
         </EntityType>
@@ -5019,36 +4964,41 @@
         <EntityType Name="ViewMultipleInOut">
           <Key>
             <PropertyRef Name="EmpNo" />
-            <PropertyRef Name="SectionName" />
-            <PropertyRef Name="DeptID" />
-            <PropertyRef Name="TypeName" />
-            <PropertyRef Name="LocName" />
-            <PropertyRef Name="ShiftName" />
-            <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
-            <PropertyRef Name="NicNo" />
             <PropertyRef Name="EmpID" />
-            <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
           </Key>
           <Property Type="String" Name="EmpNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SectionName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int16" Name="DeptID" Nullable="false" />
-          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DesignationName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GradeName" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SectionName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CrewName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="DeptID" />
+          <Property Type="String" Name="TypeName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int16" Name="CatID" />
+          <Property Type="String" Name="CatName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RegionName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CityName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LocName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShiftName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DesignationName" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="DesigID" />
+          <Property Type="Int16" Name="JobID" />
           <Property Type="Byte" Name="TypeID" />
+          <Property Type="Int16" Name="GradeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="FpID" />
+          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Status" />
+          <Property Type="Int16" Name="CrewID" />
+          <Property Type="Boolean" Name="HasOT" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
-          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DivisionName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DeptName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Byte" Name="ShiftID" />
           <Property Type="Int16" Name="LocID" />
+          <Property Type="Int16" Name="DivID" />
           <Property Type="String" Name="EmpDate" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="AttDate" Precision="0" />
           <Property Type="String" Name="DutyCode" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -5106,7 +5056,6 @@
           <Property Type="DateTime" Name="Tout11" Precision="3" />
           <Property Type="DateTime" Name="Tin12" Precision="3" />
           <Property Type="DateTime" Name="Tout12" Precision="3" />
-          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewSection">
           <Key>
@@ -5143,15 +5092,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AttDataManEdit_User">
-          <End Type="TAS201Model.User" Role="User" Multiplicity="0..1" />
-          <End Type="TAS201Model.AttDataManEdit" Role="AttDataManEdit" Multiplicity="*" />
+        <Association Name="FK_AttProcessorScheduler_Location">
+          <End Type="TAS201Model.Location" Role="Location" Multiplicity="1" />
+          <End Type="TAS201Model.AttProcessorScheduler" Role="AttProcessorScheduler" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
+            <Principal Role="Location">
+              <PropertyRef Name="LocID" />
             </Principal>
-            <Dependent Role="AttDataManEdit">
-              <PropertyRef Name="UserID" />
+            <Dependent Role="AttProcessorScheduler">
+              <PropertyRef Name="LocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5164,18 +5113,6 @@
             </Principal>
             <Dependent Role="AttProcessorScheduler">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AuditLog_User">
-          <End Type="TAS201Model.User" Role="User" Multiplicity="0..1" />
-          <End Type="TAS201Model.AuditLog" Role="AuditLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="AuditLog">
-              <PropertyRef Name="AuditUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5383,18 +5320,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Shift_Location">
-          <End Type="TAS201Model.Location" Role="Location" Multiplicity="0..1" />
-          <End Type="TAS201Model.Shift" Role="Shift" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocID" />
-            </Principal>
-            <Dependent Role="Shift">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LvApplication_LvType">
           <End Type="TAS201Model.LvType" Role="LvType" Multiplicity="1" />
           <End Type="TAS201Model.LvApplication" Role="LvApplication" Multiplicity="*" />
@@ -5404,18 +5329,6 @@
             </Principal>
             <Dependent Role="LvApplication">
               <PropertyRef Name="LeaveTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LvApplication_User">
-          <End Type="TAS201Model.User" Role="User" Multiplicity="0..1" />
-          <End Type="TAS201Model.LvApplication" Role="LvApplication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="LvApplication">
-              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5431,15 +5344,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LvConsumed_LvType">
-          <End Type="TAS201Model.LvType" Role="LvType" Multiplicity="0..1" />
-          <End Type="TAS201Model.LvConsumed" Role="LvConsumed" Multiplicity="*" />
+        <Association Name="FK_LvData_LvType">
+          <End Type="TAS201Model.LvType" Role="LvType" Multiplicity="1" />
+          <End Type="TAS201Model.LvData" Role="LvData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LvType">
               <PropertyRef Name="LvTypeID" />
             </Principal>
-            <Dependent Role="LvConsumed">
-              <PropertyRef Name="LeaveTypeID" />
+            <Dependent Role="LvData">
+              <PropertyRef Name="LvCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6191,7 +6104,6 @@
                 <ScalarProperty Name="JanConsumed" ColumnName="JanConsumed" />
                 <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="LVYear" ColumnName="LVYear" />
                 <ScalarProperty Name="EmpLvTypeYear" ColumnName="EmpLvTypeYear" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -6240,6 +6152,7 @@
                 <ScalarProperty Name="CountGZDays" ColumnName="CountGZDays" />
                 <ScalarProperty Name="CarryForwardDays" ColumnName="CarryForwardDays" />
                 <ScalarProperty Name="CarryForwardYear" ColumnName="CarryForwardYear" />
+                <ScalarProperty Name="CountVacDays" ColumnName="CountVacDays" />
                 <ScalarProperty Name="CarryForward" ColumnName="CarryForward" />
                 <ScalarProperty Name="Enable" ColumnName="Enable" />
                 <ScalarProperty Name="UpdateBalance" ColumnName="UpdateBalance" />
@@ -6622,13 +6535,11 @@
           <EntitySetMapping Name="ViewDetailAttDatas">
             <EntityTypeMapping TypeName="TAS201Model.ViewDetailAttData">
               <MappingFragment StoreEntitySet="ViewDetailAttData">
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="Tout7" ColumnName="Tout7" />
                 <ScalarProperty Name="Tin7" ColumnName="Tin7" />
                 <ScalarProperty Name="Tout6" ColumnName="Tout6" />
-                <ScalarProperty Name="Tout5" ColumnName="Tout5" />
                 <ScalarProperty Name="Tin6" ColumnName="Tin6" />
+                <ScalarProperty Name="Tout5" ColumnName="Tout5" />
                 <ScalarProperty Name="Tin5" ColumnName="Tin5" />
                 <ScalarProperty Name="Tout4" ColumnName="Tout4" />
                 <ScalarProperty Name="Tin4" ColumnName="Tin4" />
@@ -6640,6 +6551,8 @@
                 <ScalarProperty Name="Tin1" ColumnName="Tin1" />
                 <ScalarProperty Name="Tout0" ColumnName="Tout0" />
                 <ScalarProperty Name="Tin0" ColumnName="Tin0" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="ShifMin" ColumnName="ShifMin" />
                 <ScalarProperty Name="StatusBreak" ColumnName="StatusBreak" />
@@ -6673,16 +6586,15 @@
                 <ScalarProperty Name="TimeIn" ColumnName="TimeIn" />
                 <ScalarProperty Name="DutyTime" ColumnName="DutyTime" />
                 <ScalarProperty Name="DutyCode" ColumnName="DutyCode" />
-                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-                <ScalarProperty Name="AttDate" ColumnName="AttDate" />
                 <ScalarProperty Name="EmpDate" ColumnName="EmpDate" />
+                <ScalarProperty Name="AttDate" ColumnName="AttDate" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
                 <ScalarProperty Name="LocName" ColumnName="LocName" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ValidDate" ColumnName="ValidDate" />
                 <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
                 <ScalarProperty Name="NicNo" ColumnName="NicNo" />
                 <ScalarProperty Name="CardNo" ColumnName="CardNo" />
                 <ScalarProperty Name="SecID" ColumnName="SecID" />
@@ -7169,7 +7081,6 @@
           <EntitySetMapping Name="ViewMultipleInOuts">
             <EntityTypeMapping TypeName="TAS201Model.ViewMultipleInOut">
               <MappingFragment StoreEntitySet="ViewMultipleInOut">
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="Tout12" ColumnName="Tout12" />
                 <ScalarProperty Name="Tin12" ColumnName="Tin12" />
                 <ScalarProperty Name="Tout11" ColumnName="Tout11" />
@@ -7227,23 +7138,36 @@
                 <ScalarProperty Name="DutyCode" ColumnName="DutyCode" />
                 <ScalarProperty Name="AttDate" ColumnName="AttDate" />
                 <ScalarProperty Name="EmpDate" ColumnName="EmpDate" />
+                <ScalarProperty Name="DivID" ColumnName="DivID" />
                 <ScalarProperty Name="LocID" ColumnName="LocID" />
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="HasOT" ColumnName="HasOT" />
+                <ScalarProperty Name="CrewID" ColumnName="CrewID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="NicNo" ColumnName="NicNo" />
+                <ScalarProperty Name="FpID" ColumnName="FpID" />
                 <ScalarProperty Name="CardNo" ColumnName="CardNo" />
                 <ScalarProperty Name="SecID" ColumnName="SecID" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
                 <ScalarProperty Name="DesigID" ColumnName="DesigID" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
                 <ScalarProperty Name="LocName" ColumnName="LocName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="CatName" ColumnName="CatName" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="CrewName" ColumnName="CrewName" />
                 <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
                 <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
               </MappingFragment>
             </EntityTypeMapping>

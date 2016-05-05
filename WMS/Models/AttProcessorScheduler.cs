@@ -28,6 +28,7 @@ namespace WMS.Models
         public Nullable<int> EmpID { get; set; }
         public string EmpNo { get; set; }
     
+        public virtual Location Location { get; set; }
         public virtual User User { get; set; }
     }
 }

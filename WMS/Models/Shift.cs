@@ -52,7 +52,6 @@ namespace WMS.Models
         public virtual DaysName DaysName { get; set; }
         public virtual DaysName DaysName1 { get; set; }
         public virtual ICollection<Emp> Emps { get; set; }
-        public virtual Location Location { get; set; }
         public virtual ICollection<RosterApp> RosterApps { get; set; }
     }
 }

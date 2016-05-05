@@ -271,7 +271,11 @@ namespace WMS.Controllers
                       {
                           using (TAS2013Entities dc = new TAS2013Entities())
                           {
-                              var v = dc.Users.Where(a => a.UserName.Equals(u.UserName) && a.Password==u.Password && a.Status == true).FirstOrDefault();
+                              List<User> users = new List<Models.User>();
+                              int NoOfUsres = Convert.ToInt32(GlobalVaribales.NoOfUsers);
+                              users = dc.Users.Where(aa => aa.Deleted == false).ToList();
+                              var usr = users.Take(NoOfUsres);
+                              var v = usr.Where(a => a.UserName.ToUpper().Equals(u.UserName.ToUpper()) && a.Password.ToUpper() == u.Password.ToUpper() && a.Status == true).FirstOrDefault();
                               //login for emplioyee
                               if (v != null)
                               {
@@ -435,14 +439,12 @@ namespace WMS.Controllers
             DashboardValues dv = new DashboardValues();
             TAS2013Entities db = new TAS2013Entities();
             List<DailySummary> ds = new List<DailySummary>();
-            //List<JobCardEmp> jcEmp = new List<JobCardEmp>();
-            //if (dt.DayOfWeek == DayOfWeek.Saturday)
-            //    dt = dt.AddDays(-1);
-            //if (dt.DayOfWeek == DayOfWeek.Sunday)
-            //    dt = dt.AddDays(-2);
-            //jcEmp = db.JobCardEmps.Where(aa => aa.Dated == dt).ToList();
-            //List<JobCardTime> jcEmpT = new List<JobCardTime>();
-            //jcEmpT = db.JobCardTimes.Where(aa => aa.DutyDate == dt).ToList();
+            List<JobCardDetail> jcEmp = new List<JobCardDetail>();
+            if (dt.DayOfWeek == DayOfWeek.Saturday)
+                dt = dt.AddDays(-1);
+            if (dt.DayOfWeek == DayOfWeek.Sunday)
+                dt = dt.AddDays(-2);
+            jcEmp = db.JobCardDetails.Where(aa => aa.Dated == dt).ToList();
             ds = db.DailySummaries.Where(aa => aa.Date == dt && aa.Criteria == "C").ToList();
             if (ds.Count > 0)
             {
@@ -457,31 +459,48 @@ namespace WMS.Controllers
                 dv.EarlyOut = (short)ds.FirstOrDefault().EOEmps;
                 dv.OverTime = (short)ds.FirstOrDefault().OTEmps;
                 dv.ShortLeaves = (short)ds.FirstOrDefault().ShortLvEmps;
-                //dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 11).Count();
-                //dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 9).Count();
-                //dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 8).Count();
-                //dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count + jcEmpT.Where(aa => aa.JobCardID == 10).Count();
+                dv.JCFieldTour = jcEmp.Where(aa => aa.WrkCardID == 5).ToList().Count;
+                dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 7).ToList().Count;
+                dv.JCSeminar = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count;
+                dv.JCOD = jcEmp.Where(aa => aa.WrkCardID == 1).ToList().Count;
+                //dv.JCFieldTour = 80;
+                //dv.JCTraining = 90;
+                //dv.JCSeminar = 80;
+                //dv.JCOD = 80;
                 dv.EWork = (int)(ds.FirstOrDefault().ExpectedWorkMins / 60);
                 dv.AWork = (int)(ds.FirstOrDefault().ActualWorkMins / 60);
                 dv.LWork = (int)(ds.FirstOrDefault().LossWorkMins / 60);
             }
             else
             {
-                dv.DateTime = dt.ToString("dd-MMM-yyy");
-                dv.TotalEmps = 0;
-                dv.Present = 0;
-                dv.Absent = 0;
-                dv.Leaves = 0;
-                dv.LateIn = 0;
-                dv.LateOut = 0;
-                dv.EarlyIn = 0;
-                dv.EarlyOut = 0;
-                dv.OverTime = 0;
-                dv.ShortLeaves = 0;
-                //dv.JCOfficalAssignment = jcEmp.Where(aa => aa.WrkCardID == 11).ToList().Count;
-                //dv.JCTour = jcEmp.Where(aa => aa.WrkCardID == 9).ToList().Count;
-                //dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count;
-                //dv.JCVisit = jcEmp.Where(aa => aa.WrkCardID == 10).ToList().Count;
+                var countOfRows = db.DailySummaries.Count();
+                if (countOfRows > 1)
+                {
+                    ds = db.DailySummaries.ToList();
+                    DailySummary dss = ds[countOfRows - 1];
+                    dv.DateTime = ds[countOfRows - 1].Date.Value.Date.ToString("dd-MMM-yyy");
+                    dv.TotalEmps = (short)ds[countOfRows - 1].TotalEmps;
+                    dv.Present = (short)ds[countOfRows - 1].PresentEmps;
+                    dv.Absent = (short)ds[countOfRows - 1].AbsentEmps;
+                    dv.Leaves = (short)ds[countOfRows - 1].LvEmps;
+                    dv.LateIn = (short)ds[countOfRows - 1].LIEmps;
+                    dv.LateOut = (short)ds[countOfRows - 1].LOEmps;
+                    dv.EarlyIn = (short)ds[countOfRows - 1].EIEmps;
+                    dv.EarlyOut = (short)ds[countOfRows - 1].EOEmps;
+                    dv.OverTime = (short)ds[countOfRows - 1].OTEmps;
+                    dv.ShortLeaves = (short)ds[countOfRows - 1].ShortLvEmps;
+                    dv.JCFieldTour = jcEmp.Where(aa => aa.WrkCardID == 5).ToList().Count;
+                    dv.JCTraining = jcEmp.Where(aa => aa.WrkCardID == 7).ToList().Count;
+                    dv.JCSeminar = jcEmp.Where(aa => aa.WrkCardID == 8).ToList().Count;
+                    dv.JCOD = jcEmp.Where(aa => aa.WrkCardID == 1).ToList().Count;
+                    //dv.JCFieldTour = 80;
+                    //dv.JCTraining = 90;
+                    //dv.JCSeminar = 80;
+                    //dv.JCOD = 80;
+                    dv.EWork = (int)(ds.FirstOrDefault().ExpectedWorkMins / 60);
+                    dv.AWork = (int)(ds.FirstOrDefault().ActualWorkMins / 60);
+                    dv.LWork = (int)(ds.FirstOrDefault().LossWorkMins / 60);
+                }
             }
             if (HttpContext.Request.IsAjaxRequest())
                 return Json(dv
@@ -504,32 +523,96 @@ namespace WMS.Controllers
                 dg.DateTime1 = ds[0].Date.Value.ToString("dd-MMM");
                 dg.LateIn1 = (int)ds[0].LIEmps;
 
-                dg.DateTime2 = ds[2].Date.Value.ToString("dd-MMM");
-                dg.LateIn2 = (int)ds[2].LIEmps;
-
-                dg.DateTime3 = ds[4].Date.Value.ToString("dd-MMM");
-                dg.LateIn3 = (int)ds[4].LIEmps;
-
-                dg.DateTime4 = ds[7].Date.Value.ToString("dd-MMM");
-                dg.LateIn4 = (int)ds[7].LIEmps;
-
-                dg.DateTime5 = ds[10].Date.Value.ToString("dd-MMM");
-                dg.LateIn5 = (int)ds[10].LIEmps;
-
-                dg.DateTime6 = ds[12].Date.Value.ToString("dd-MMM");
-                dg.LateIn6 = (int)ds[12].LIEmps;
-
-                dg.DateTime7 = ds[15].Date.Value.ToString("dd-MMM");
-                dg.LateIn7 = (int)ds[15].LIEmps;
-
-                dg.DateTime8 = ds[17].Date.Value.ToString("dd-MMM");
-                dg.LateIn8 = (int)ds[17].LIEmps;
-
-                dg.DateTime9 = ds[19].Date.Value.ToString("dd-MMM");
-                dg.LateIn9 = (int)ds[19].LIEmps;
-
-                dg.DateTime10 = ds[ds.Count - 1].Date.Value.ToString("dd-MMM");
-                dg.LateIn10 = (int)ds[ds.Count - 1].LIEmps;
+                if (ds.Count > 1)
+                {
+                    dg.DateTime2 = ds[2].Date.Value.ToString("dd-MMM");
+                    dg.LateIn2 = (int)ds[2].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime2 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn2 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 2)
+                {
+                    dg.DateTime3 = ds[4].Date.Value.ToString("dd-MMM");
+                    dg.LateIn3 = (int)ds[4].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime3 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn3 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 3)
+                {
+                    dg.DateTime4 = ds[7].Date.Value.ToString("dd-MMM");
+                    dg.LateIn4 = (int)ds[7].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime4 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn4 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 4)
+                {
+                    dg.DateTime5 = ds[10].Date.Value.ToString("dd-MMM");
+                    dg.LateIn5 = (int)ds[10].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime5 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn5 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 5)
+                {
+                    dg.DateTime6 = ds[12].Date.Value.ToString("dd-MMM");
+                    dg.LateIn6 = (int)ds[12].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime6 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn6 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 6)
+                {
+                    dg.DateTime7 = ds[15].Date.Value.ToString("dd-MMM");
+                    dg.LateIn7 = (int)ds[15].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime7 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn7 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 7)
+                {
+                    dg.DateTime8 = ds[17].Date.Value.ToString("dd-MMM");
+                    dg.LateIn8 = (int)ds[17].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime8 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn8 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 8)
+                {
+                    dg.DateTime9 = ds[19].Date.Value.ToString("dd-MMM");
+                    dg.LateIn9 = (int)ds[19].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime9 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn9 = (int)ds[0].LIEmps;
+                }
+                if (ds.Count > 9)
+                {
+                    dg.DateTime10 = ds[ds.Count - 1].Date.Value.ToString("dd-MMM");
+                    dg.LateIn10 = (int)ds[ds.Count - 1].LIEmps;
+                }
+                else
+                {
+                    dg.DateTime10 = ds[0].Date.Value.ToString("dd-MMM");
+                    dg.LateIn10 = (int)ds[0].LIEmps;
+                }
             }
             else
             {
@@ -556,10 +639,10 @@ namespace WMS.Controllers
         public int EarlyOut { get; set; }
         public int OverTime { get; set; }
         public int ShortLeaves { get; set; }
-        public int JCTour { get; set; }
-        public int JCVisit { get; set; }
+        public int JCFieldTour { get; set; }
         public int JCTraining { get; set; }
-        public int JCOfficalAssignment { get; set; }
+        public int JCSeminar { get; set; }
+        public int JCOD { get; set; }
         public int EWork { get; set; }
         public int AWork { get; set; }
         public int LWork { get; set; }

@@ -25,7 +25,7 @@ namespace WMS.Controllers
             ViewData["JobDateFrom"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
-            
+            ViewBag.CrewID = new SelectList(db.Crews, "CrewID", "CrewName");
             return View();
         }
         // Job Card create Action
@@ -83,6 +83,7 @@ namespace WMS.Controllers
                 ViewData["JobDateFrom"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
                 ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
                 ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
+                ViewBag.CrewID = new SelectList(db.JobCards, "CrewID", "CrewName");
             }
             catch (Exception ex)
             {
@@ -92,6 +93,7 @@ namespace WMS.Controllers
             ViewData["JobDateFrom"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
+            ViewBag.CrewID = new SelectList(db.JobCards, "CrewID", "CrewName");
             ViewBag.CMessage = Message;
             return View("JCCreate");
         }

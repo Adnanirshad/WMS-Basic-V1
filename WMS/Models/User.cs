@@ -16,10 +16,7 @@ namespace WMS.Models
     {
         public User()
         {
-            this.AttDataManEdits = new HashSet<AttDataManEdit>();
             this.AttProcessorSchedulers = new HashSet<AttProcessorScheduler>();
-            this.AuditLogs = new HashSet<AuditLog>();
-            this.LvApplications = new HashSet<LvApplication>();
         }
     
         public int UserID { get; set; }
@@ -51,9 +48,6 @@ namespace WMS.Models
         public Nullable<bool> MProcess { get; set; }
         public Nullable<bool> Deleted { get; set; }
     
-        public virtual ICollection<AttDataManEdit> AttDataManEdits { get; set; }
         public virtual ICollection<AttProcessorScheduler> AttProcessorSchedulers { get; set; }
-        public virtual ICollection<AuditLog> AuditLogs { get; set; }
-        public virtual ICollection<LvApplication> LvApplications { get; set; }
     }
 }

@@ -204,6 +204,16 @@
     <Content Include="Scripts\angular\Dashboard\jquery-jvectormap-1.2.2.min.js" />
     <Content Include="Scripts\angular\Dashboard\jquery-jvectormap-world-mill-en.js" />
     <Content Include="Scripts\angular\Dashboard\jquery.sparkline.min.js" />
+    <Content Include="Scripts\Dashboard\app.min.js" />
+    <Content Include="Scripts\Dashboard\bootstrap.min.js" />
+    <Content Include="Scripts\Dashboard\Chart.min.js" />
+    <Content Include="Scripts\Dashboard\dashboard2.js" />
+    <Content Include="Scripts\Dashboard\DashboardValues.js" />
+    <Content Include="Scripts\Dashboard\demo.js" />
+    <Content Include="Scripts\Dashboard\jQuery-2.1.4.min.js" />
+    <Content Include="Scripts\Dashboard\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Scripts\Dashboard\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Scripts\Dashboard\jquery.sparkline.min.js" />
     <Content Include="Scripts\EditAttendance.js" />
     <Content Include="Scripts\dx.chartjs.js" />
     <Content Include="Scripts\Employee\catEmpTypeCompanyCreate.js" />
@@ -229,6 +239,7 @@
     <Content Include="Scripts\HR\DivisionCompany.js" />
     <Content Include="Scripts\HR\DivisionCompanyCreate.js" />
     <Content Include="Scripts\JavaScript1.js" />
+    <Content Include="Scripts\JobCard.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.maskedinput.js" />
@@ -885,6 +896,7 @@
     <EmbeddedResource Include="Reports\RDLC\EmpAttSummary.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\Employee.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\EmployeeDetail.rdlc" />
+    <EmbeddedResource Include="Reports\RDLC\EmpSummary.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\MLvApplication.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\MRFlexyDetailExcelP.rdlc" />
     <EmbeddedResource Include="Reports\RDLC\DRShortLeave.rdlc" />

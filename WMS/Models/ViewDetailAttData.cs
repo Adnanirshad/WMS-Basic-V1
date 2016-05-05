@@ -26,16 +26,15 @@ namespace WMS.Models
         public Nullable<short> SecID { get; set; }
         public string CardNo { get; set; }
         public string NicNo { get; set; }
+        public string FatherName { get; set; }
         public Nullable<System.DateTime> JoinDate { get; set; }
-        public Nullable<System.DateTime> ValidDate { get; set; }
         public Nullable<bool> Status { get; set; }
         public string TypeName { get; set; }
         public string LocName { get; set; }
         public string ShiftName { get; set; }
-        public string EmpDate { get; set; }
-        public Nullable<System.DateTime> AttDate { get; set; }
-        public string Expr1 { get; set; }
         public Nullable<int> EmpID { get; set; }
+        public Nullable<System.DateTime> AttDate { get; set; }
+        public string EmpDate { get; set; }
         public string DutyCode { get; set; }
         public Nullable<System.TimeSpan> DutyTime { get; set; }
         public Nullable<System.DateTime> TimeIn { get; set; }
@@ -69,6 +68,8 @@ namespace WMS.Models
         public Nullable<bool> StatusBreak { get; set; }
         public Nullable<short> ShifMin { get; set; }
         public string Remarks { get; set; }
+        public short DeptID { get; set; }
+        public Nullable<bool> Deleted { get; set; }
         public Nullable<System.DateTime> Tin0 { get; set; }
         public Nullable<System.DateTime> Tout0 { get; set; }
         public Nullable<System.DateTime> Tin1 { get; set; }
@@ -80,12 +81,10 @@ namespace WMS.Models
         public Nullable<System.DateTime> Tin4 { get; set; }
         public Nullable<System.DateTime> Tout4 { get; set; }
         public Nullable<System.DateTime> Tin5 { get; set; }
-        public Nullable<System.DateTime> Tin6 { get; set; }
         public Nullable<System.DateTime> Tout5 { get; set; }
+        public Nullable<System.DateTime> Tin6 { get; set; }
         public Nullable<System.DateTime> Tout6 { get; set; }
         public Nullable<System.DateTime> Tin7 { get; set; }
         public Nullable<System.DateTime> Tout7 { get; set; }
-        public short DeptID { get; set; }
-        public Nullable<bool> Deleted { get; set; }
     }
 }

@@ -32,6 +32,7 @@ namespace WMS.Reports
                 _dateFrom = list[0];
                 string _dateTo = list[1];
                 CreateFlexyMonthlyDataTable();
+                CreateEmpSummaryDataTable();
                 companyimage = GetCompanyImages(fm);
                 string PathString = "";
                 string consolidatedMonth = "";
@@ -274,6 +275,18 @@ namespace WMS.Reports
                             PathString = "/WMS/Reports/RDLC/EmpAttSummary.rdlc";
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
                         break;
+                    case "emp_summary": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'" + _dateTo + "'" + " )");
+                        title = "Employee Attendance Summary";
+                        _ViewList8 = dt.ToList<ViewAttData>();
+                        _TempViewList8 = new List<ViewAttData>();
+                        //Change the Paths
+                        if (GlobalVariables.DeploymentType == false)
+                            PathString = "/Reports/RDLC/EmpSummary.rdlc";
+                        else
+                            PathString = "/WMS/Reports/RDLC/EmpSummary.rdlc";
+                        //LoadReport(PathString, CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom, _dateTo), _dateFrom + " TO " + _dateTo);
+                        CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom, _dateTo);
+                        break;
 
                 }
 
@@ -285,6 +298,16 @@ namespace WMS.Reports
 
 
             }
+        }
+
+        private void CreateEmpSummaryDataTable()
+        {
+            
+        }
+
+        private string CalculateEmpSummary(List<ViewAttData> list, string _dateFrom, string _dateTo)
+        {
+            throw new NotImplementedException();
         }
         #region -- AttSummaryReport--
 

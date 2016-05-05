@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class = "navbar-brand">
-                       <a href="/WMS/Home/LogOut" ><span>  Workforce Management System</span></a>
+                       <a href="/PPAF/Home" ><span>  Workforce Management System</span></a>
                     </div>
                 </div>
                 <div class="navbar-collapse collapse pull-right">
@@ -52,22 +52,22 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-folder-close"></span><span>  Company</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/WMS/Emp">Employees</a></li>
-                                <li><a href="/WMS/Shift">Shifts</a></li>
-                                <li><a href="/WMS/Holiday">Holidays</a></li>                       
+                                <li><a href="/PPAF/Emp">Employees</a></li>
+                                <li><a href="/PPAF/Shift">Shifts</a></li>
+                                <li><a href="/PPAF/Holiday">Holidays</a></li>                       
                                 <li class="divider"></li>
-                                <li><a href="/WMS/Designation">Designations</a></li>   
-                                    <li><a href="/WMS/EmpType">Employee Type</a></li>                                                                                                   <li><a href="/WMS/Crew">Crews</a></li>
+                                <li><a href="/PPAF/Designation">Designations</a></li>   
+                                    <li><a href="/PPAF/EmpType">Employee Type</a></li>                                                                                                   <li><a href="/PPAF/Crew">Crews</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/WMS/Dept">Groups</a></li>
-                                <li><a href="/WMS/Section">Units</a></li>                     
+                                <li><a href="/PPAF/Dept">Groups</a></li>
+                                <li><a href="/PPAF/Section">Units</a></li>                     
                                 <li class="divider"></li>
-                                <li><a href="/WMS/Location">Locations</a></li>    
-                                <li><a href="/WMS/Roster">Rosters</a></li>    
-                                <li><a href="/WMS/Option">Options</a></li>             
+                                <li><a href="/PPAF/Location">Locations</a></li>    
+                                <li><a href="/PPAF/Roster">Rosters</a></li>    
+                                <li><a href="/PPAF/Option">Options</a></li>             
                                 <% if(Session["MUser"].ToString() == "1")%>
                                 <%{ %>
-                                    <li><a href="/WMS/User">Users</a></li>
+                                    <li><a href="/PPAF/User">Users</a></li>
                                 <%} %>
                             </ul>
                         </li>
@@ -79,9 +79,9 @@
                           <ul class="dropdown-menu">                     
                              <% if(Session["MProcess"].ToString() == "1")%>
                             <%{ %>
-                                 <li><a href="/WMS/EditAttendance">Edit Attendance</a></li>
-                                 <li><a href="/WMS/JobCard">Job Card</a></li>
-                             <li><a href="/WMS/AttProcessors">Process Attendance</a></li>
+                                 <li><a href="/PPAF/EditAttendance">Edit Attendance</a></li>
+                                 <li><a href="/PPAF/JobCard">Job Card</a></li>
+                             <li><a href="/PPAF/AttProcessors">Process Attendance</a></li>
                             <%} %>
                           </ul>
                         </li>
@@ -91,7 +91,7 @@
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-phone"></i>  Readers <b class="caret"></b></a>
                           <ul class="dropdown-menu">
-                            <li><a href="/WMS/Reader">Readers</a></li>
+                            <li><a href="/PPAF/Reader">Readers</a></li>
                           </ul>
                         </li>
                       <%} %>
@@ -100,16 +100,18 @@
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large"></i>  Leaves <b class="caret"></b></a>
                           <ul class="dropdown-menu">                      
-                            <li><a href="/WMS/LvShort">Short Leaves</a></li>                      
-                              <li><a href="/WMS/LeaveSettings">Leave Quota</a></li>                         
+                            <li><a href="/PPAF/LvApp">Leaves Application</a></li> 
+                          <li><a href="/PPAF/LeaveType">Leave Type</a></li>           
+                        <%--<li><a href="~/LvShort">Short Leaves</a></li> --%>                     
+                          <li><a href="/PPAF/LeaveSettings">Leave Quota</a></li>                       
                           </ul>
                         </li>
                       <%} %>
-                        <li><a href="~/Reports/Filters/StepOneFilter.aspx"><i class="glyphicon glyphicon-stats"></i> Reports</a></li>
+                        <li><a href="/PPAF/Reports/Filters/StepOneFilter.aspx"><i class="glyphicon glyphicon-stats"></i> Reports</a></li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>  <b class="caret"></b></a>
                           <ul class="dropdown-menu">
-                            <li><a href="/WMS/Home/LogOut" ><span>  LogOut</span></a></li>
+                            <li><a href="/PPAF/Home/LogOut" ><span>  LogOut</span></a></li>
                               
                           </ul>
                         </li>

@@ -145,29 +145,29 @@
                         <strong>Job Cards</strong>
                       </p>
                       <div class="progress-group">
-                        <span class="progress-text">Official Tour</span>
-                        <span class="progress-number"><b><label id="JCTour"></label></b></span>
+                        <span class="progress-text">Field Visit</span>
+                        <span class="progress-number"><b><label id="JCFieldTour"></label></b></span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-aqua" style="width: 100%"></div>
                         </div>
                       </div><!-- /.progress-group -->
                       <div class="progress-group">
-                        <span class="progress-text">Official Visit</span>
-                        <span class="progress-number"><b><label id="JCVisit"></label></b></span>
+                        <span class="progress-text">Training</span>
+                        <span class="progress-number"><b><label id="JCTraining"></label></b></span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-red" style="width: 100%"></div>
                         </div>
                       </div><!-- /.progress-group -->
                       <div class="progress-group">
-                        <span class="progress-text">Official Training </span>
-                        <span class="progress-number"><b><label id="JCTraining"></label></b></span>
+                        <span class="progress-text">Seminar / Workshop </span>
+                        <span class="progress-number"><b><label id="JCSeminar"></label></b></span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-green" style="width: 100%"></div>
                         </div>
                       </div><!-- /.progress-group -->
                       <div class="progress-group">
-                        <span class="progress-text">Official Assignment</span>
-                        <span class="progress-number"><b><label id="JCAssignment"></label></b></span>
+                        <span class="progress-text">Official Duty</span>
+                        <span class="progress-number"><b><label id="JCOD"></label></b></span>
                         <div class="progress sm">
                           <div class="progress-bar progress-bar-yellow" style="width: 100%"></div>
                         </div>
@@ -197,7 +197,7 @@
         //--------------
         //- AREA CHART -
         //--------------
-        var URL = '/Home/GetDahboardGraph';
+        var URL = '/PPAF/Home/GetDahboardGraph';
         //var URL = '/Emp/CrewList';
         $.getJSON(URL, function (dataa) {
             // Get context with jQuery - using jQuery's .get() method.

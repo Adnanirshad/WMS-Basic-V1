@@ -19,7 +19,5 @@ namespace WMS.Models
         public Nullable<int> AuditUserID { get; set; }
         public Nullable<short> FormID { get; set; }
         public Nullable<short> OperationID { get; set; }
-    
-        public virtual User User { get; set; }
     }
 }

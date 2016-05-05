@@ -788,6 +788,26 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="EmpSummary" msprop:Generator_TableClassName="EmpSummaryDataTable" msprop:Generator_TableVarName="tableEmpSummary" msprop:Generator_RowChangedName="EmpSummaryRowChanged" msprop:Generator_TablePropName="EmpSummary" msprop:Generator_RowDeletingName="EmpSummaryRowDeleting" msprop:Generator_RowChangingName="EmpSummaryRowChanging" msprop:Generator_RowEvHandlerName="EmpSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="EmpSummaryRowDeleted" msprop:Generator_RowClassName="EmpSummaryRow" msprop:Generator_UserTableName="EmpSummary" msprop:Generator_RowEvArgName="EmpSummaryRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EmpNo" msprop:Generator_ColumnVarNameInTable="columnEmpNo" msprop:Generator_ColumnPropNameInRow="EmpNo" msprop:Generator_ColumnPropNameInTable="EmpNoColumn" msprop:Generator_UserColumnName="EmpNo" type="xs:string" minOccurs="0" />
+              <xs:element name="EmpName" msprop:Generator_ColumnVarNameInTable="columnEmpName" msprop:Generator_ColumnPropNameInRow="EmpName" msprop:Generator_ColumnPropNameInTable="EmpNameColumn" msprop:Generator_UserColumnName="EmpName" type="xs:string" minOccurs="0" />
+              <xs:element name="Unit" msprop:Generator_ColumnVarNameInTable="columnUnit" msprop:Generator_ColumnPropNameInRow="Unit" msprop:Generator_ColumnPropNameInTable="UnitColumn" msprop:Generator_UserColumnName="Unit" type="xs:string" minOccurs="0" />
+              <xs:element name="Group" msprop:Generator_ColumnVarNameInTable="columnGroup" msprop:Generator_ColumnPropNameInRow="Group" msprop:Generator_ColumnPropNameInTable="GroupColumn" msprop:Generator_UserColumnName="Group" type="xs:string" minOccurs="0" />
+              <xs:element name="DateStart" msprop:Generator_ColumnVarNameInTable="columnDateStart" msprop:Generator_ColumnPropNameInRow="DateStart" msprop:Generator_ColumnPropNameInTable="DateStartColumn" msprop:Generator_UserColumnName="DateStart" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DateEnd" msprop:Generator_ColumnVarNameInTable="columnDateEnd" msprop:Generator_ColumnPropNameInRow="DateEnd" msprop:Generator_ColumnPropNameInTable="DateEndColumn" msprop:Generator_UserColumnName="DateEnd" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="AvgTimeIn" msprop:Generator_ColumnVarNameInTable="columnAvgTimeIn" msprop:Generator_ColumnPropNameInRow="AvgTimeIn" msprop:Generator_ColumnPropNameInTable="AvgTimeInColumn" msprop:Generator_UserColumnName="AvgTimeIn" type="xs:string" minOccurs="0" />
+              <xs:element name="AvgTimeOut" msprop:Generator_ColumnVarNameInTable="columnAvgTimeOut" msprop:Generator_ColumnPropNameInRow="AvgTimeOut" msprop:Generator_ColumnPropNameInTable="AvgTimeOutColumn" msprop:Generator_UserColumnName="AvgTimeOut" type="xs:string" minOccurs="0" />
+              <xs:element name="AvgWorkSpend" msprop:Generator_ColumnVarNameInTable="columnAvgWorkSpend" msprop:Generator_ColumnPropNameInRow="AvgWorkSpend" msprop:Generator_ColumnPropNameInTable="AvgWorkSpendColumn" msprop:Generator_UserColumnName="AvgWorkSpend" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalWorkDays" msprop:Generator_ColumnVarNameInTable="columnTotalWorkDays" msprop:Generator_ColumnPropNameInRow="TotalWorkDays" msprop:Generator_ColumnPropNameInTable="TotalWorkDaysColumn" msprop:Generator_UserColumnName="TotalWorkDays" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalPresent" msprop:Generator_ColumnVarNameInTable="columnTotalPresent" msprop:Generator_ColumnPropNameInRow="TotalPresent" msprop:Generator_ColumnPropNameInTable="TotalPresentColumn" msprop:Generator_UserColumnName="TotalPresent" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalAbsent" msprop:Generator_ColumnVarNameInTable="columnTotalAbsent" msprop:Generator_ColumnPropNameInRow="TotalAbsent" msprop:Generator_ColumnPropNameInTable="TotalAbsentColumn" msprop:Generator_UserColumnName="TotalAbsent" type="xs:int" minOccurs="0" />
+              <xs:element name="TotalLateIn" msprop:Generator_ColumnVarNameInTable="columnTotalLateIn" msprop:Generator_ColumnPropNameInRow="TotalLateIn" msprop:Generator_ColumnPropNameInTable="TotalLateInColumn" msprop:Generator_UserColumnName="TotalLateIn" type="xs:int" minOccurs="0" />
+              <xs:element name="LateInPercent" msprop:Generator_ColumnVarNameInTable="columnLateInPercent" msprop:Generator_ColumnPropNameInRow="LateInPercent" msprop:Generator_ColumnPropNameInTable="LateInPercentColumn" msprop:Generator_UserColumnName="LateInPercent" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">

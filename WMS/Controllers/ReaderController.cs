@@ -55,7 +55,6 @@ namespace WMS.Controllers
             {
                 readers = readers.Where(s => s.RdrName.ToUpper().Contains(searchString.ToUpper())
                      || s.ReaderType.RdrTypeName.ToUpper().Contains(searchString.ToUpper())
-                     || s.Location.LocName.ToUpper().Contains(searchString.ToUpper())
                      || s.IpAdd.ToUpper().Contains(searchString.ToUpper())).ToList();
             }
 
