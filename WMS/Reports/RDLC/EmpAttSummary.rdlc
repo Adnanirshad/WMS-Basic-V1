@@ -2378,7 +2378,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!DutyCode.Value)</Value>
+                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!DutyCode.Value = "D" or Fields!DutyCode.Value ="L" or Fields!DutyCode.Value="O", Fields!DutyCode.Value, Nothing))</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -2404,6 +2404,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

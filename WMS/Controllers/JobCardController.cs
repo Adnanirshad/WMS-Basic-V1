@@ -37,63 +37,61 @@ namespace WMS.Controllers
             QueryBuilder qb = new QueryBuilder();
             string query = qb.MakeCustomizeQuery(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
-            List<EmpView> emps = dt.ToList<EmpView>();
-            try
+            string criteria = Request.Form["CreateJCCriteria"].ToString();
+            short _WorkCardID = Convert.ToInt16(Request.Form["JobCardType"].ToString());
+            //First Save Job Card Application
+            JobCardApp jobCardApp = new JobCardApp();
+            jobCardApp.CardType = _WorkCardID;
+            jobCardApp.DateCreated = DateTime.Now;
+            jobCardApp.DateStarted = Convert.ToDateTime(Request.Form["JobDateFrom"]);
+            jobCardApp.DateEnded = Convert.ToDateTime(Request.Form["JobDateTo"]);
+            jobCardApp.Status = false;
+            string Remakrs = Request.Form["Remakrs"].ToString();
+            if (Remakrs != "")
+                jobCardApp.Remarks = Remakrs;
+            jobCardApp.UserID = LoggedInUser.UserID;
+            switch (criteria)
             {
-                string _EmpNo = "";
-                // int CompID = Convert.ToInt16(Request.Form["CompanyID"].ToString());
-                List<EmpView> _Emp = new List<EmpView>();
-                short _WorkCardID = Convert.ToInt16(Request.Form["JobCardType"].ToString());
-                //First Save Job Card Application
-                JobCardApp jobCardApp = new JobCardApp();
-                jobCardApp.CardType = _WorkCardID;
-                jobCardApp.DateCreated = DateTime.Now;
-                jobCardApp.DateStarted = Convert.ToDateTime(Request.Form["JobDateFrom"]);
-                jobCardApp.DateEnded = Convert.ToDateTime(Request.Form["JobDateTo"]);
-                jobCardApp.Status = false;
-                string Remakrs = Request.Form["Remakrs"].ToString();
-                if (Remakrs != "")
-                    jobCardApp.Remarks = Remakrs;
-                jobCardApp.UserID = LoggedInUser.UserID;
-                _EmpNo = Request.Form["JobEmpNo"];
-                _Emp = emps.Where(aa => aa.EmpNo == _EmpNo).ToList();
-                if (_Emp.Count > 0)
-                {
-                    jobCardApp.CriteriaDate = _Emp.FirstOrDefault().EmpID;
-                    jobCardApp.JobCardCriteria = "E";
+                case "ByCrew":
+                    jobCardApp.CriteriaDate = Convert.ToInt32(Request.Form["CrewID"].ToString());
+                    jobCardApp.JobCardCriteria = "C";
                     if (ValidateJobCard(jobCardApp))
                     {
                         db.JobCardApps.Add(jobCardApp);
                         if (db.SaveChanges() > 0)
-                        {
                             AddJobCardAppToJobCardData();
-                            Message = "Job Card Created Sucessfully";
-                        }
-                        else
-                            Message = "Job Card is not created due to server error";
                     }
                     else
-                        Message = "Job Card already created for FPID: " + _EmpNo;
-                }
-                else
-                    Message = "No Employee found, Please enter a valid FPID";
-                //Add Job Card to JobCardData and Mark Legends in Attendance Data if attendance Created
-                Session["EditAttendanceDate"] = DateTime.Today.Date.ToString("yyyy-MM-dd");
-                ViewData["datef"] = Session["EditAttendanceDate"].ToString();
-                ViewData["JobDateFrom"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
-                ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
-                ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
-                ViewBag.CrewID = new SelectList(db.JobCards, "CrewID", "CrewName");
-            }
-            catch (Exception ex)
-            {
-                Message = "An Error occured while creating Job Card of " + Request.Form["JobCardType"].ToString();
+                        Message = "Job Card Validation failed";
+                    break;
+                case "ByEmployee":
+                    string EmpNo = "";
+                    EmpNo = Request.Form["JobEmpNo"];
+                    List<Emp> emptemp = db.Emps.Where(aa => aa.EmpNo == EmpNo).ToList();
+                    if (emptemp.Count > 0)
+                    {
+                        jobCardApp.CriteriaDate = emptemp.FirstOrDefault().EmpID;
+                        jobCardApp.JobCardCriteria = "E";
+                        if (ValidateJobCard(jobCardApp))
+                        {
+                            db.JobCardApps.Add(jobCardApp);
+                            if (db.SaveChanges() > 0)
+                                AddJobCardAppToJobCardData();
+                        }
+                        else
+                            Message = "Job Card Validation failed";
+                    }
+                    else
+                        Message = "There is no employee found";
+                    break;
             }
             //List<EmpView> emps = new List<EmpView>();
             ViewData["JobDateFrom"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
-            ViewBag.CrewID = new SelectList(db.JobCards, "CrewID", "CrewName");
+            ViewBag.CrewID = new SelectList(db.Crews, "CrewID", "CrewName");
+            if (Message == "")
+                Message = "Job Card created sucessfully";
             ViewBag.CMessage = Message;
             return View("JCCreate");
         }
@@ -202,6 +200,9 @@ namespace WMS.Controllers
                         int _EmpID = (int)jcApp.CriteriaDate;
                         _Emp = db.Emps.Where(aa => aa.EmpID == _EmpID).ToList();
                         break;
+                    case "C":
+                        _Emp = db.Emps.Where(aa => aa.CrewID == jcApp.CriteriaDate).ToList();
+                        break;
                 }
                 foreach (var selectedEmp in _Emp)
                 {
@@ -223,7 +224,7 @@ namespace WMS.Controllers
                 _jobCardEmp.WrkCardID = jcApp.CardType;
                 //_jobCardEmp.DateCreated = DateTime.Now;
                 //_jobCardEmp.WorkMin = jcApp.WorkMin;
-                //_jobCardEmp.AppID = jcApp.JobCardID;
+                _jobCardEmp.JCAppID = jcApp.JobCardID;
                 _jobCardEmp.Remarks = jcApp.Remarks;
                 db.JobCardDetails.Add(_jobCardEmp);
                 if (db.SaveChanges() > 0)

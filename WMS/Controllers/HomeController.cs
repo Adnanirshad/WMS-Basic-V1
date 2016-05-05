@@ -193,41 +193,41 @@ namespace WMS.Controllers
                 db.SaveChanges();
             }
         }
-        
-        //private bool CheckForValidLicense()
-        //{
-        //    bool valid = false;
-        //    try
-        //    {
-        //        using (var db = new TAS2013Entities())
-        //        {
-        //            if (db.LicenseInfoes.ToList().Count > 0)
-        //            {
-        //                LicenseInfo li = new LicenseInfo();
-        //                li = db.LicenseInfoes.FirstOrDefault();
-        //                string val = StringCipher.Decrypt(li.ValidLicense, "1234");
-        //                if (val == "1")
-        //                {
-        //                    string ClientMAC = GetClientMacAddress();
-        //                    string DatabaseMac = StringCipher.Decrypt(li.ClientMAC, "1234");
-        //                    if (ClientMAC==DatabaseMac)
-        //                        valid = true;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        valid = false;
-        //    }
-        //    return valid;
-        //}
+
         private bool CheckForValidLicense()
         {
-            bool valid;
-            
-            return true;
+            bool valid = false;
+            try
+            {
+                using (var db = new TAS2013Entities())
+                {
+                    if (db.LicenseInfoes.ToList().Count > 0)
+                    {
+                        LicenseInfo li = new LicenseInfo();
+                        li = db.LicenseInfoes.FirstOrDefault();
+                        string val = StringCipher.Decrypt(li.ValidLicense, "1234");
+                        if (val == "1")
+                        {
+                            string ClientMAC = GetClientMacAddress();
+                            string DatabaseMac = StringCipher.Decrypt(li.ClientMAC, "1234");
+                            if (ClientMAC == DatabaseMac)
+                                valid = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                valid = false;
+            }
+            return valid;
         }
+        //private bool CheckForValidLicense()
+        //{
+        //    bool valid;
+            
+        //    return true;
+        //}
         public static string GetClientMacAddress()
         {
             IPGlobalProperties computerProperties = IPGlobalProperties.GetIPGlobalProperties();
