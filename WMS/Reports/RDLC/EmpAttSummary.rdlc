@@ -3367,7 +3367,7 @@
         </SortExpressions>
         <Top>0.05694in</Top>
         <Left>0.075in</Left>
-        <Height>2.5264in</Height>
+        <Height>2.52639in</Height>
         <Width>7.48311in</Width>
         <Style>
           <Border>
@@ -3451,22 +3451,6 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Image Name="Image1">
-          <Source>Database</Source>
-          <Value>=First(Fields!EmpPic.Value, "DataSet2")</Value>
-          <MIMEType>image/jpeg</MIMEType>
-          <Sizing>FitProportional</Sizing>
-          <Top>0.06999in</Top>
-          <Left>5.9675in</Left>
-          <Height>0.51681in</Height>
-          <Width>1.51561in</Width>
-          <ZIndex>2</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </Image>
       </ReportItems>
       <Style>
         <Border>
