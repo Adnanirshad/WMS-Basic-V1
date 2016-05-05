@@ -5478,6 +5478,8 @@ namespace WMS.Models {
             
             private global::System.Data.DataColumn columnLateInPercent;
             
+            private global::System.Data.DataColumn columnEmpID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public EmpSummaryDataTable() {
@@ -5625,6 +5627,14 @@ namespace WMS.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EmpIDColumn {
+                get {
+                    return this.columnEmpID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5660,7 +5670,7 @@ namespace WMS.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public EmpSummaryRow AddEmpSummaryRow(string EmpNo, string EmpName, string Unit, string Group, System.DateTime DateStart, System.DateTime DateEnd, string AvgTimeIn, string AvgTimeOut, string AvgWorkSpend, int TotalWorkDays, int TotalPresent, int TotalAbsent, int TotalLateIn, string LateInPercent) {
+            public EmpSummaryRow AddEmpSummaryRow(string EmpNo, string EmpName, string Unit, string Group, System.DateTime DateStart, System.DateTime DateEnd, string AvgTimeIn, string AvgTimeOut, string AvgWorkSpend, int TotalWorkDays, int TotalPresent, int TotalAbsent, int TotalLateIn, string LateInPercent, int EmpID) {
                 EmpSummaryRow rowEmpSummaryRow = ((EmpSummaryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         EmpNo,
@@ -5676,7 +5686,8 @@ namespace WMS.Models {
                         TotalPresent,
                         TotalAbsent,
                         TotalLateIn,
-                        LateInPercent};
+                        LateInPercent,
+                        EmpID};
                 rowEmpSummaryRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEmpSummaryRow);
                 return rowEmpSummaryRow;
@@ -5713,6 +5724,7 @@ namespace WMS.Models {
                 this.columnTotalAbsent = base.Columns["TotalAbsent"];
                 this.columnTotalLateIn = base.Columns["TotalLateIn"];
                 this.columnLateInPercent = base.Columns["LateInPercent"];
+                this.columnEmpID = base.Columns["EmpID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5746,6 +5758,8 @@ namespace WMS.Models {
                 base.Columns.Add(this.columnTotalLateIn);
                 this.columnLateInPercent = new global::System.Data.DataColumn("LateInPercent", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLateInPercent);
+                this.columnEmpID = new global::System.Data.DataColumn("EmpID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmpID);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12604,6 +12618,22 @@ namespace WMS.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EmpID {
+                get {
+                    try {
+                        return ((int)(this[this.tableEmpSummary.EmpIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EmpID\' in table \'EmpSummary\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmpSummary.EmpIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEmpNoNull() {
                 return this.IsNull(this.tableEmpSummary.EmpNoColumn);
             }
@@ -12768,6 +12798,18 @@ namespace WMS.Models {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLateInPercentNull() {
                 this[this.tableEmpSummary.LateInPercentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEmpIDNull() {
+                return this.IsNull(this.tableEmpSummary.EmpIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEmpIDNull() {
+                this[this.tableEmpSummary.EmpIDColumn] = global::System.Convert.DBNull;
             }
         }
         

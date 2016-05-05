@@ -11,7 +11,7 @@
     <Shape ID="DesignTable:ViewDetailAttData" ZOrder="4" X="854" Y="1387" Height="305" Width="252" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:Option" ZOrder="3" X="530" Y="1426" Height="172" Width="185" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
     <Shape ID="DesignTable:FlexyMonthPer" ZOrder="2" X="299" Y="1213" Height="1758" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="1754" />
-    <Shape ID="DesignTable:EmpSummary" ZOrder="1" X="531" Y="2608" Height="295" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="349" />
+    <Shape ID="DesignTable:EmpSummary" ZOrder="1" X="531" Y="2608" Height="295" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="291" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

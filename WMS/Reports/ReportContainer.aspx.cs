@@ -275,17 +275,16 @@ namespace WMS.Reports
                             PathString = "/WMS/Reports/RDLC/EmpAttSummary.rdlc";
                         LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
                         break;
-                    case "emp_summary": dt = qb.GetValuesfromDB("select * from ViewAttData " + query + " and (AttDate >= " + "'" + _dateFrom + "'" + " and AttDate <= " + "'" + _dateTo + "'" + " )");
-                        title = "Employee Attendance Summary";
-                        _ViewList8 = dt.ToList<ViewAttData>();
-                        _TempViewList8 = new List<ViewAttData>();
+                    case "emp_summary": dt = qb.GetValuesfromDB("select * from EmpView " + query);
+                         _ViewList = dt.ToList<EmpView>();
+                        _TempViewList = new List<EmpView>();
                         //Change the Paths
                         if (GlobalVariables.DeploymentType == false)
                             PathString = "/Reports/RDLC/EmpSummary.rdlc";
                         else
                             PathString = "/WMS/Reports/RDLC/EmpSummary.rdlc";
                         //LoadReport(PathString, CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom, _dateTo), _dateFrom + " TO " + _dateTo);
-                        CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom, _dateTo);
+                        LoadReport(PathString,CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList, _ViewList), Convert.ToDateTime(_dateFrom), Convert.ToDateTime(_dateTo)), _dateFrom + " TO " + _dateTo);
                         break;
 
                 }
@@ -300,14 +299,121 @@ namespace WMS.Reports
             }
         }
 
+        
+
+
+
         private void CreateEmpSummaryDataTable()
         {
-            
+            EmpSummaryDT.Columns.Add("EmpNo", typeof(string));
+            EmpSummaryDT.Columns.Add("EmpName", typeof(string));
+            EmpSummaryDT.Columns.Add("Unit", typeof(string));
+            EmpSummaryDT.Columns.Add("Group", typeof(string));
+            EmpSummaryDT.Columns.Add("DateStart", typeof(DateTime));
+            EmpSummaryDT.Columns.Add("DateEnd", typeof(DateTime));
+            EmpSummaryDT.Columns.Add("AvgTimeIn", typeof(string));
+            EmpSummaryDT.Columns.Add("AvgTimeOut", typeof(string));
+            EmpSummaryDT.Columns.Add("AvgWorkSpend", typeof(string));
+            EmpSummaryDT.Columns.Add("TotalWorkDays", typeof(int));
+            EmpSummaryDT.Columns.Add("TotalPresent", typeof(int));
+            EmpSummaryDT.Columns.Add("TotalAbsent", typeof(int));
+            EmpSummaryDT.Columns.Add("TotalLateIn", typeof(int));
+            EmpSummaryDT.Columns.Add("LateInPercent", typeof(string));
+            EmpSummaryDT.Columns.Add("EmpID", typeof(int));
         }
-
-        private string CalculateEmpSummary(List<ViewAttData> list, string _dateFrom, string _dateTo)
+        public void AddValuesInEmpSummaryDT(string EmpNo, string EmpName, string unit, string Group, DateTime DateStart, DateTime DateEnd, string AvgTimeIn,
+            string AvgTimeOut, string AvgWorkSpend, int TotalWD, int TotalP, int TotalA, int TotalLI, string LIPercent, int EmpID)
         {
-            throw new NotImplementedException();
+            EmpSummaryDT.Rows.Add(EmpNo, EmpName, unit, Group, DateStart, DateEnd, AvgTimeIn, AvgTimeOut, AvgWorkSpend, TotalWD, TotalP, TotalA, TotalLI, LIPercent, EmpID);
+        }
+        DataTable EmpSummaryDT = new DataTable();
+        private DataTable CalculateEmpSummary(List<EmpView> emps, DateTime dateFrom, DateTime dateTo)
+        {
+            using (var db = new TAS2013Entities())
+            {
+                List<AttData> attDatas = new List<AttData>();
+                attDatas = db.AttDatas.Where(aa => aa.AttDate >= dateFrom && aa.AttDate <= dateTo).ToList();
+                foreach (var emp in emps)
+                {
+                    string AvgTimeIn = "";
+                    string AvgTimeOut = "";
+                    int TimeInMins=0;
+                    int TimeOutMins=0;
+                    int TimeInCount=0;
+                    int TimeOutCount=0;
+                    string AvgWorkSpend = "";
+                    int workMins=0;
+                    int TotalPresent = 0;
+                    int TotalWorkDays = 0;
+                    int TotalAbsent = 0;
+                    int TotalLateIn = 0;
+                    int TotalWorkMins = 0;
+                    int TotalWorkCount = 0;
+                    string LateInPercent = "";
+                    List<AttData> attdata = attDatas.Where(aa => aa.EmpID == emp.EmpID).ToList();
+                    foreach (var ad in attdata)
+                    {
+                        if (ad.DutyCode != "R" && ad.DutyCode != "G")
+                        {
+                            TotalWorkDays = TotalWorkDays + 1;
+                            if (ad.StatusAB != true)
+                            {
+                                TotalPresent = TotalPresent + 1;
+                            }
+                            else
+                                TotalAbsent = TotalAbsent + 1;
+                            if (ad.StatusLI == true)
+                                TotalLateIn = TotalLateIn + 1;
+                            if (ad.WorkMin > 0)
+                                workMins = (int)(workMins + ad.WorkMin);
+                            if (ad.TimeIn != null)
+                            {
+                                TimeInCount = TimeInCount + 1;
+                                TimeInMins = (int)(TimeInMins + ad.TimeIn.Value.TimeOfDay.TotalMinutes);
+                            }
+                            if (ad.TimeOut != null)
+                            {
+                                TimeOutCount = TimeOutCount + 1;
+                                TimeOutMins = (int)(TimeOutMins + ad.TimeOut.Value.TimeOfDay.TotalMinutes);
+                            }
+                            if (ad.WorkMin >0)
+                            {
+                                TotalWorkCount = TotalWorkCount + 1;
+                                TotalWorkMins = (int)(TotalWorkMins + ad.WorkMin);
+                            }
+
+                        }
+                    }
+                    if (TotalPresent > 0)
+                    {
+                        LateInPercent = ((TotalLateIn * 100) / TotalPresent).ToString()+"%";
+                    }
+                    TimeSpan AvgTIN=new TimeSpan();
+                    TimeSpan AvgTOut=new TimeSpan();
+                    if (TimeInCount > 0)
+                    {
+                        int min = TimeInMins/TimeInCount;
+                        AvgTIN=new TimeSpan(0,min,0);
+                        AvgTimeIn = AvgTIN.Hours.ToString("00")+":"+AvgTIN.Minutes.ToString("00");
+                    }
+                    if (TimeOutCount > 0)
+                    {
+                        int min = TimeOutMins/TimeOutCount;
+                        AvgTOut=new TimeSpan(0,min,0);
+                        AvgTimeOut = AvgTOut.Hours.ToString("00")+":"+AvgTOut.Minutes.ToString("00");
+                    }
+                    if (TotalWorkCount > 0)
+                    {
+                        int min = TotalWorkMins / TotalWorkCount;
+                        TimeSpan tt = new TimeSpan(0, min, 0);
+                        AvgWorkSpend=tt.Hours.ToString("00")+":"+tt.Minutes.ToString("00");
+                    }
+                    AvgWorkSpend = (AvgTOut - AvgTIN).ToString();
+                    AddValuesInEmpSummaryDT(emp.EmpNo, emp.EmpName, emp.SectionName, emp.DeptName, dateFrom, dateTo, AvgTimeIn, AvgTimeOut, AvgWorkSpend,
+                        TotalWorkDays, TotalPresent, TotalAbsent, TotalLateIn, LateInPercent, emp.EmpID);
+                }
+            }
+            return EmpSummaryDT;
         }
         #region -- AttSummaryReport--
 
@@ -665,7 +771,30 @@ namespace WMS.Reports
             this.ReportViewer1.LocalReport.SetParameters(new ReportParameter[] { rp, rp1 });
             ReportViewer1.LocalReport.Refresh();
         }
+        private void LoadReport(string PathString, DataTable dataTable, string Date)
+        {
+            string _Header = "Employees Summary Report";
+            this.ReportViewer1.LocalReport.DisplayName = "Employee Summary Report";
+            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            ReportViewer1.LocalReport.ReportPath = Server.MapPath(PathString);
+            System.Security.PermissionSet sec = new System.Security.PermissionSet(System.Security.Permissions.PermissionState.Unrestricted);
+            ReportViewer1.LocalReport.SetBasePermissionsForSandboxAppDomain(sec);
+            ReportDataSource datasource1 = new ReportDataSource("DataSet1", dataTable);
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.HyperlinkTarget = "_blank";
+            IEnumerable<Option> companyImage;
+            companyImage = companyimage.AsQueryable();
+            ReportDataSource datasource2 = new ReportDataSource("DataSet2", companyImage);
 
+            ReportViewer1.LocalReport.DataSources.Clear();
+            ReportViewer1.LocalReport.EnableExternalImages = true;
+            ReportViewer1.LocalReport.DataSources.Add(datasource1);
+            ReportViewer1.LocalReport.DataSources.Add(datasource2);
+            ReportParameter rp = new ReportParameter("Header", _Header, false);
+            ReportParameter rp1 = new ReportParameter("Date", Date, false);
+            this.ReportViewer1.LocalReport.SetParameters(new ReportParameter[] { rp, rp1 });
+            ReportViewer1.LocalReport.Refresh();
+        }
         private List<ViewMultipleInOut> ReportsFilterImplementation(FiltersModel fm, List<ViewMultipleInOut> _TempViewList, List<ViewMultipleInOut> _ViewList)
         {
 
