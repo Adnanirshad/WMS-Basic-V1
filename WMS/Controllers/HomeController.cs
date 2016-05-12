@@ -83,7 +83,7 @@ namespace WMS.Controllers
         }
 
         private void SetGlobalVaribale()
-        {
+{
             using (var db = new TAS2013Entities())
             {
                 GlobalVaribales.ServerPath = db.Options.FirstOrDefault().ServerFilePath;

@@ -421,7 +421,7 @@ namespace WMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(jobcardapp).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(jobcardapp).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
