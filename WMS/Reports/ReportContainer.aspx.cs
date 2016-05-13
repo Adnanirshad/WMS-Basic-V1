@@ -273,7 +273,7 @@ namespace WMS.Reports
                             PathString = "/Reports/RDLC/EmpAttSummary.rdlc";
                         else
                             PathString = "/WMS/Reports/RDLC/EmpAttSummary.rdlc";
-                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom + " TO " + _dateTo);
+                        LoadReport(PathString, ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), Convert.ToDateTime(_dateFrom).ToString("dd-MMM-yyyy") + " TO " + Convert.ToDateTime(_dateTo).ToString("dd-MMM-yyyy"));
                         break;
                     case "emp_summary": dt = qb.GetValuesfromDB("select * from EmpView " + query);
                          _ViewList = dt.ToList<EmpView>();
@@ -284,7 +284,7 @@ namespace WMS.Reports
                         else
                             PathString = "/WMS/Reports/RDLC/EmpSummary.rdlc";
                         //LoadReport(PathString, CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList8, _ViewList8), _dateFrom, _dateTo), _dateFrom + " TO " + _dateTo);
-                        LoadReport(PathString,CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList, _ViewList), Convert.ToDateTime(_dateFrom), Convert.ToDateTime(_dateTo)), _dateFrom + " TO " + _dateTo);
+                        LoadReport(PathString, CalculateEmpSummary(ReportsFilterImplementation(fm, _TempViewList, _ViewList), Convert.ToDateTime(_dateFrom), Convert.ToDateTime(_dateTo)), Convert.ToDateTime(_dateFrom).ToString("dd-MMM-yyyy") + " TO " + Convert.ToDateTime(_dateTo).ToString("dd-MMM-yyyy"));
                         break;
 
                 }
@@ -320,11 +320,14 @@ namespace WMS.Reports
             EmpSummaryDT.Columns.Add("TotalLateIn", typeof(int));
             EmpSummaryDT.Columns.Add("LateInPercent", typeof(string));
             EmpSummaryDT.Columns.Add("EmpID", typeof(int));
+            EmpSummaryDT.Columns.Add("Presentpercent", typeof(string));
+            EmpSummaryDT.Columns.Add("AbsentPercent", typeof(string));
+            
         }
         public void AddValuesInEmpSummaryDT(string EmpNo, string EmpName, string unit, string Group, DateTime DateStart, DateTime DateEnd, string AvgTimeIn,
-            string AvgTimeOut, string AvgWorkSpend, int TotalWD, int TotalP, int TotalA, int TotalLI, string LIPercent, int EmpID)
+            string AvgTimeOut, string AvgWorkSpend, int TotalWD, int TotalP, int TotalA, int TotalLI, string LIPercent, int EmpID,string PresentPercent,string AbsentPercent)
         {
-            EmpSummaryDT.Rows.Add(EmpNo, EmpName, unit, Group, DateStart, DateEnd, AvgTimeIn, AvgTimeOut, AvgWorkSpend, TotalWD, TotalP, TotalA, TotalLI, LIPercent, EmpID);
+            EmpSummaryDT.Rows.Add(EmpNo, EmpName, unit, Group, DateStart, DateEnd, AvgTimeIn, AvgTimeOut, AvgWorkSpend, TotalWD, TotalP, TotalA, TotalLI, LIPercent, EmpID, PresentPercent,AbsentPercent);
         }
         DataTable EmpSummaryDT = new DataTable();
         private DataTable CalculateEmpSummary(List<EmpView> emps, DateTime dateFrom, DateTime dateTo)
@@ -344,8 +347,10 @@ namespace WMS.Reports
                     string AvgWorkSpend = "";
                     int workMins=0;
                     int TotalPresent = 0;
+                    string PresentPercent = "";
                     int TotalWorkDays = 0;
                     int TotalAbsent = 0;
+                    string AbsentPercent = "";
                     int TotalLateIn = 0;
                     int TotalWorkMins = 0;
                     int TotalWorkCount = 0;
@@ -408,9 +413,17 @@ namespace WMS.Reports
                         TimeSpan tt = new TimeSpan(0, min, 0);
                         AvgWorkSpend=tt.Hours.ToString("00")+":"+tt.Minutes.ToString("00");
                     }
+                    if (TotalAbsent > 0)
+                    {
+                        AbsentPercent = ((TotalAbsent * 100) / TotalWorkDays).ToString() + "%";
+                    }
+                    if (TotalPresent > 0)
+                    {
+                        PresentPercent = ((TotalPresent * 100) / TotalWorkDays).ToString() + "%";
+                    }
                     AvgWorkSpend = (AvgTOut - AvgTIN).ToString();
                     AddValuesInEmpSummaryDT(emp.EmpNo, emp.EmpName, emp.SectionName, emp.DeptName, dateFrom, dateTo, AvgTimeIn, AvgTimeOut, AvgWorkSpend,
-                        TotalWorkDays, TotalPresent, TotalAbsent, TotalLateIn, LateInPercent, emp.EmpID);
+                        TotalWorkDays, TotalPresent, TotalAbsent, TotalLateIn, LateInPercent, emp.EmpID,PresentPercent,AbsentPercent);
                 }
             }
             return EmpSummaryDT;
