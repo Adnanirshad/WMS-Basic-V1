@@ -5484,6 +5484,10 @@ namespace WMS.Models {
             
             private global::System.Data.DataColumn columnAbsentPercent;
             
+            private global::System.Data.DataColumn columnEarlyOutCount;
+            
+            private global::System.Data.DataColumn columnEarlyOutPercent;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public EmpSummaryDataTable() {
@@ -5655,6 +5659,22 @@ namespace WMS.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EarlyOutCountColumn {
+                get {
+                    return this.columnEarlyOutCount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EarlyOutPercentColumn {
+                get {
+                    return this.columnEarlyOutPercent;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5707,7 +5727,9 @@ namespace WMS.Models {
                         string LateInPercent, 
                         int EmpID, 
                         string Presentpercent, 
-                        string AbsentPercent) {
+                        string AbsentPercent, 
+                        int EarlyOutCount, 
+                        string EarlyOutPercent) {
                 EmpSummaryRow rowEmpSummaryRow = ((EmpSummaryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         EmpNo,
@@ -5726,7 +5748,9 @@ namespace WMS.Models {
                         LateInPercent,
                         EmpID,
                         Presentpercent,
-                        AbsentPercent};
+                        AbsentPercent,
+                        EarlyOutCount,
+                        EarlyOutPercent};
                 rowEmpSummaryRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowEmpSummaryRow);
                 return rowEmpSummaryRow;
@@ -5766,6 +5790,8 @@ namespace WMS.Models {
                 this.columnEmpID = base.Columns["EmpID"];
                 this.columnPresentpercent = base.Columns["Presentpercent"];
                 this.columnAbsentPercent = base.Columns["AbsentPercent"];
+                this.columnEarlyOutCount = base.Columns["EarlyOutCount"];
+                this.columnEarlyOutPercent = base.Columns["EarlyOutPercent"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5805,6 +5831,10 @@ namespace WMS.Models {
                 base.Columns.Add(this.columnPresentpercent);
                 this.columnAbsentPercent = new global::System.Data.DataColumn("AbsentPercent", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAbsentPercent);
+                this.columnEarlyOutCount = new global::System.Data.DataColumn("EarlyOutCount", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEarlyOutCount);
+                this.columnEarlyOutPercent = new global::System.Data.DataColumn("EarlyOutPercent", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEarlyOutPercent);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12711,6 +12741,38 @@ namespace WMS.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int EarlyOutCount {
+                get {
+                    try {
+                        return ((int)(this[this.tableEmpSummary.EarlyOutCountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EarlyOutCount\' in table \'EmpSummary\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmpSummary.EarlyOutCountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string EarlyOutPercent {
+                get {
+                    try {
+                        return ((string)(this[this.tableEmpSummary.EarlyOutPercentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EarlyOutPercent\' in table \'EmpSummary\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEmpSummary.EarlyOutPercentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEmpNoNull() {
                 return this.IsNull(this.tableEmpSummary.EmpNoColumn);
             }
@@ -12911,6 +12973,30 @@ namespace WMS.Models {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAbsentPercentNull() {
                 this[this.tableEmpSummary.AbsentPercentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEarlyOutCountNull() {
+                return this.IsNull(this.tableEmpSummary.EarlyOutCountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEarlyOutCountNull() {
+                this[this.tableEmpSummary.EarlyOutCountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEarlyOutPercentNull() {
+                return this.IsNull(this.tableEmpSummary.EarlyOutPercentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEarlyOutPercentNull() {
+                this[this.tableEmpSummary.EarlyOutPercentColumn] = global::System.Convert.DBNull;
             }
         }
         

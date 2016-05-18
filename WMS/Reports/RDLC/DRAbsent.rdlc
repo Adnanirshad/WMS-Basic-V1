@@ -431,7 +431,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -764,8 +763,11 @@
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>
-                    <TablixMember />
+                    <TablixMember>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
                   </TablixMembers>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
               </TablixMembers>
               <KeepWithGroup>After</KeepWithGroup>
@@ -944,6 +946,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.05556in</Top>
         <Left>0.0625in</Left>
@@ -1111,7 +1114,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox90</rd:DefaultName>
-          <Top>0.05694in</Top>
+          <Top>0.04167in</Top>
           <Left>0.07302in</Left>
           <Height>0.25in</Height>
           <Width>3.32292in</Width>
