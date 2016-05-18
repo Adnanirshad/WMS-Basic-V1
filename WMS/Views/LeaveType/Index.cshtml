@@ -7,45 +7,31 @@
 
 <div>
       <form class ="form-inline" role="form">
-          <div class="form-group"> <h3>Leave Type</h3> </div>
-          <div class="form-group CreateBtnMargin"><p>@Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-xs btn-success" })</p></div>
-          <div class="form-group pull-right SearchBtnMargin">
-              @using (Html.BeginForm("Index", "LeaveType", FormMethod.Get))
-                {
-                  <p>Find :@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)  
-                 <input class="btn btn-sm btn-success" type="submit" /></p>
-              }
-          </div> 
+          <div class="form-group"> <h3>Leave Types</h3> </div>
+          
       </form>  
     </div>
  <div class="table-responsive">
         <table class="table table-bordered table-hover  table-condensed">
             <tr class="table-header">
         <th>
-            @Html.DisplayNameFor(model => model.LvDesc)
+           Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FldName)
+            Report Legend
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HalfLeave)
+            Half Leave
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HalfLvCode)
+            Days
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HalfAbCode)
+            Update Balance
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MaxDays)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateBalance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Enable)
-        
-        <th></th>
+            Enable
+        <th>Edit | View</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -57,29 +43,28 @@
             @Html.DisplayFor(modelItem => item.FldName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HalfLeave)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HalfLvCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HalfAbCode)
+            @if(item.HalfLeave==true)
+            {<span>Yes</span>}
+            else{<span>No</span>}
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MaxDays)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UpdateBalance)
+           @if(item.UpdateBalance==true)
+            {<span>Yes</span>}
+            else{<span>No</span>}
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Enable)
+            @if(item.HalfLeave==true)
+            {<span>Active</span>}
+            else{<span>Inactive</span>}
         </td>
          <td>
             @Html.ActionLink(" ", "Edit", new { id=item.LvTypeID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
             @Html.ActionLink(" ", "Details", new { id=item.LvTypeID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" }) 
-            @Html.ActionLink(" ", "Delete", new { id=item.LvTypeID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
         </td>
     </tr>
 }
-
+</div>
 </table>
