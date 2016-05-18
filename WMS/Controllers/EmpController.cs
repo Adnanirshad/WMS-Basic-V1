@@ -185,7 +185,7 @@ namespace WMS.Controllers
             int cardno = Convert.ToInt32(emp.CardNo);
             emp.CardNo = cardno.ToString("0000000000");
             if(db.Emps.Where(aa=>aa.Status==true).Count()>=Convert.ToInt32(GlobalVaribales.NoOfEmps))
-                ModelState.AddModelError("EmpNo", "Emp No is required!");
+                ModelState.AddModelError("EmpNo", "Active Number of employees are exceeded from license ");
             if (string.IsNullOrEmpty(emp.EmpNo))
                 ModelState.AddModelError("EmpNo", "Emp No is required!");
             if (string.IsNullOrEmpty(emp.EmpName))
@@ -444,6 +444,7 @@ namespace WMS.Controllers
         {
             Emp emp = db.Emps.Find(id);
             emp.Deleted = true;
+            emp.Status = false;
             ViewBag.JS = "toastr.success('" + emp.EmpName + " removed');";
             db.SaveChanges();
             return RedirectToAction("Index");

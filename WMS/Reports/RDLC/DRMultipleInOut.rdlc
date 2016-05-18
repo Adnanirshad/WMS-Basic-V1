@@ -2612,7 +2612,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>TASReportDataSet</rd:DataSetName>
-        <rd:SchemaPath>F:\WMS Basic\SCP FOR Bubbloo\SCP Project\SCP\WMS\Models\TASReportDataSet.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Projects\CNS\Working Projects\Client Projects\PPAF\WMS-PPAF\WMS\Models\TASReportDataSet.xsd</rd:SchemaPath>
         <rd:TableName>ViewDetailAttData</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
