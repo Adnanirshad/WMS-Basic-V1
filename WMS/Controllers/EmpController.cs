@@ -444,6 +444,7 @@ namespace WMS.Controllers
         {
             Emp emp = db.Emps.Find(id);
             emp.Deleted = true;
+            emp.Status = false;
             ViewBag.JS = "toastr.success('" + emp.EmpName + " removed');";
             db.SaveChanges();
             return RedirectToAction("Index");

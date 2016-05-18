@@ -267,8 +267,20 @@ namespace WMS.Controllers
                         case 3:// Absent
                             AddJCToAttData(_empDate, _empID, _Date, "D",true, false, false, false, false, "Absent");
                             break;
-                        case 5:// Special Holiday
-                            AddJCToAttData(_empDate, _empID, _Date, "G", false, false, false, true, false, "SH");
+                        case 5:// Field Visit
+                            AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Field Visit");
+                            break;
+                        case 6:// Monitoring Visit
+                            AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Monitoring Visit");
+                            break;
+                        case 7:// Training
+                            AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Training");
+                            break;
+                        case 8:// Seminar / Workshop
+                            AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Seminar / Workshop");
+                            break;
+                        case 9:// Official Meeting
+                            AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Official Meeting");
                             break;
                     }
                 }
