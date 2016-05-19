@@ -1628,6 +1628,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Left>0.06666in</Left>
         <Height>0.5in</Height>

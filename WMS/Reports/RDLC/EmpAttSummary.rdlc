@@ -2480,7 +2480,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
+<<<<<<< HEAD
                               <Value />
+=======
+                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!WorkMin.Value &gt; 0 or (Fields!StatusP.Value=true), Fields!StatusP.Value, Nothing))</Value>
+>>>>>>> 49a80ef2d04e46bd6b81c6bdc3682d5d53a29b7a
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -3085,15 +3089,19 @@
               <TablixMembers>
                 <TablixMember>
                   <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Details" />
@@ -3119,6 +3127,10 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+<<<<<<< HEAD
+=======
+        <RepeatColumnHeaders>true</RepeatColumnHeaders>
+>>>>>>> 49a80ef2d04e46bd6b81c6bdc3682d5d53a29b7a
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <PageBreak>
@@ -3234,7 +3246,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Late In: L.I , Late Out , Early In: E.I , Early Out: E.O , Normal Overtime: N-OT , GZ Overtime: GZ-OT</Value>
+                  <Value>L.I = Late In, L.O = Late Out , E.I = Early In, E.O = Early Out , N-OT = Normal Overtime , D.O = Day OFF </Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -3245,9 +3257,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox57</rd:DefaultName>
           <Top>0.04167in</Top>
-          <Left>0.0625in</Left>
+          <Left>0.075in</Left>
           <Height>0.1875in</Height>
-          <Width>5.48437in</Width>
+          <Width>5.16145in</Width>
           <Style>
             <Border>
               <Style>None</Style>

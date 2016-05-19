@@ -322,12 +322,14 @@ namespace WMS.Reports
             EmpSummaryDT.Columns.Add("EmpID", typeof(int));
             EmpSummaryDT.Columns.Add("Presentpercent", typeof(string));
             EmpSummaryDT.Columns.Add("AbsentPercent", typeof(string));
+            EmpSummaryDT.Columns.Add("EarlyOutCount", typeof(int));
+            EmpSummaryDT.Columns.Add("EarlyOutPercent", typeof(string));
             
         }
         public void AddValuesInEmpSummaryDT(string EmpNo, string EmpName, string unit, string Group, DateTime DateStart, DateTime DateEnd, string AvgTimeIn,
-            string AvgTimeOut, string AvgWorkSpend, int TotalWD, int TotalP, int TotalA, int TotalLI, string LIPercent, int EmpID,string PresentPercent,string AbsentPercent)
+            string AvgTimeOut, string AvgWorkSpend, int TotalWD, int TotalP, int TotalA, int TotalLI, string LIPercent, int EmpID,string PresentPercent,string AbsentPercent,int EarlyOutCount, string EarlyOutPrecent)
         {
-            EmpSummaryDT.Rows.Add(EmpNo, EmpName, unit, Group, DateStart, DateEnd, AvgTimeIn, AvgTimeOut, AvgWorkSpend, TotalWD, TotalP, TotalA, TotalLI, LIPercent, EmpID, PresentPercent,AbsentPercent);
+            EmpSummaryDT.Rows.Add(EmpNo, EmpName, unit, Group, DateStart, DateEnd, AvgTimeIn, AvgTimeOut, AvgWorkSpend, TotalWD, TotalP, TotalA, TotalLI, LIPercent, EmpID, PresentPercent, AbsentPercent, EarlyOutCount, EarlyOutPrecent);
         }
         DataTable EmpSummaryDT = new DataTable();
         private DataTable CalculateEmpSummary(List<EmpView> emps, DateTime dateFrom, DateTime dateTo)
@@ -355,6 +357,8 @@ namespace WMS.Reports
                     int TotalWorkMins = 0;
                     int TotalWorkCount = 0;
                     string LateInPercent = "";
+                    int EarlyOutCount = 0;
+                    string EarlyOutPrecent = "";
                     List<AttData> attdata = attDatas.Where(aa => aa.EmpID == emp.EmpID).ToList();
                     foreach (var ad in attdata)
                     {
@@ -369,6 +373,8 @@ namespace WMS.Reports
                                 TotalAbsent = TotalAbsent + 1;
                             if (ad.StatusLI == true)
                                 TotalLateIn = TotalLateIn + 1;
+                            if (ad.StatusEO == true)
+                                EarlyOutCount = EarlyOutCount + 1;
                             if (ad.WorkMin > 0)
                                 workMins = (int)(workMins + ad.WorkMin);
                             if (ad.TimeIn != null)
@@ -392,6 +398,7 @@ namespace WMS.Reports
                     if (TotalPresent > 0)
                     {
                         LateInPercent = ((TotalLateIn * 100) / TotalPresent).ToString()+"%";
+                        EarlyOutPrecent = ((EarlyOutCount * 100) / TotalPresent).ToString() + "%";
                     }
                     TimeSpan AvgTIN=new TimeSpan();
                     TimeSpan AvgTOut=new TimeSpan();
@@ -423,7 +430,7 @@ namespace WMS.Reports
                     }
                     AvgWorkSpend = (AvgTOut - AvgTIN).ToString();
                     AddValuesInEmpSummaryDT(emp.EmpNo, emp.EmpName, emp.SectionName, emp.DeptName, dateFrom, dateTo, AvgTimeIn, AvgTimeOut, AvgWorkSpend,
-                        TotalWorkDays, TotalPresent, TotalAbsent, TotalLateIn, LateInPercent, emp.EmpID,PresentPercent,AbsentPercent);
+                        TotalWorkDays, TotalPresent, TotalAbsent, TotalLateIn, LateInPercent, emp.EmpID,PresentPercent,AbsentPercent,EarlyOutCount,EarlyOutPrecent);
                 }
             }
             return EmpSummaryDT;
