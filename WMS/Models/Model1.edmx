@@ -1352,7 +1352,7 @@
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
           <Property Name="PinCode" Type="char" MaxLength="4" />
-          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
           <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
           <Property Name="BloodGroup" Type="nvarchar" MaxLength="6" />
           <Property Name="BirthDate" Type="date" />
@@ -1362,7 +1362,7 @@
           <Property Name="IssueDate" Type="date" />
           <Property Name="ResignDate" Type="date" />
           <Property Name="HomeAdd" Type="varchar" MaxLength="300" />
-          <Property Name="ProcessAtt" Type="bit" Nullable="false" />
+          <Property Name="ProcessAtt" Type="bit" />
           <Property Name="Status" Type="bit" />
           <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
@@ -2575,7 +2575,6 @@
             <PropertyRef Name="ShiftName" />
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
-            <PropertyRef Name="NicNo" />
             <PropertyRef Name="EmpID" />
             <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
@@ -2592,7 +2591,7 @@
           <Property Name="TypeID" Type="tinyint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="NicNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="DeptName" Type="nvarchar" Nullable="false" MaxLength="100" />
@@ -3698,7 +3697,7 @@
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="PinCode" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="BloodGroup" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="BirthDate" Precision="0" />
@@ -3708,7 +3707,7 @@
           <Property Type="DateTime" Name="IssueDate" Precision="0" />
           <Property Type="DateTime" Name="ResignDate" Precision="0" />
           <Property Type="String" Name="HomeAdd" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="ProcessAtt" Nullable="false" />
+          <Property Type="Boolean" Name="ProcessAtt" />
           <Property Type="Boolean" Name="Status" />
           <Property Type="String" Name="PhoneNo" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Remarks" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -4930,7 +4929,6 @@
             <PropertyRef Name="ShiftName" />
             <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
-            <PropertyRef Name="NicNo" />
             <PropertyRef Name="EmpID" />
             <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
@@ -4947,7 +4945,7 @@
           <Property Type="Byte" Name="TypeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="NicNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Status" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
           <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />

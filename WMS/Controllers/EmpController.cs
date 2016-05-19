@@ -16,6 +16,8 @@ using WMS.CustomClass;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Reflection;
+using System.Data.Entity.Validation;
+using System.Text;
 
 namespace WMS.Controllers
 {
@@ -184,7 +186,7 @@ namespace WMS.Controllers
             string empNo = "";
             int cardno = Convert.ToInt32(emp.CardNo);
             emp.CardNo = cardno.ToString("0000000000");
-            if(db.Emps.Where(aa=>aa.Status==true).Count()>=Convert.ToInt32(GlobalVaribales.NoOfEmps))
+            if(db.Emps.Where(aa=>aa.Status==true && aa.Deleted!=true).Count()>=Convert.ToInt32(GlobalVaribales.NoOfEmps))
                 ModelState.AddModelError("EmpNo", "Active Number of employees are exceeded from license ");
             if (string.IsNullOrEmpty(emp.EmpNo))
                 ModelState.AddModelError("EmpNo", "Emp No is required!");
@@ -237,6 +239,7 @@ namespace WMS.Controllers
                 //emp.FpID = emp.EmpID;
                 db.Emps.Add(emp);
                 db.SaveChanges();
+                //SaveChanges(db);
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Employee, (byte)MyEnums.Operation.Add, DateTime.Now);
                 HttpPostedFileBase file = Request.Files["ImageData"];
@@ -283,7 +286,32 @@ namespace WMS.Controllers
             }
             return View(emp);
         }
+        private void SaveChanges(DbContext context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
 
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
+        }
         // GET: /Emp/Edit/5
          [CustomActionAttribute]
         public ActionResult Edit(int? id)

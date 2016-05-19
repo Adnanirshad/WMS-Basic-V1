@@ -48,7 +48,7 @@ namespace WMS.Models
         public Nullable<System.DateTime> IssueDate { get; set; }
         public Nullable<System.DateTime> ResignDate { get; set; }
         public string HomeAdd { get; set; }
-        public bool ProcessAtt { get; set; }
+        public Nullable<bool> ProcessAtt { get; set; }
         public Nullable<bool> Status { get; set; }
         public string PhoneNo { get; set; }
         public string Remarks { get; set; }
