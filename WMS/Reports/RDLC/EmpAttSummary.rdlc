@@ -2480,7 +2480,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!WorkMin.Value &gt; 0, Fields!WorkMin.Value, Nothing))</Value>
+                              <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!WorkMin.Value &gt; 0 or (Fields!StatusP.Value=true), Fields!StatusP.Value, Nothing))</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -2503,6 +2503,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
