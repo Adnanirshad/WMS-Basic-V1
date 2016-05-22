@@ -2473,18 +2473,14 @@
                 <TablixCell />
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox1">
+                    <Textbox Name="Textbox107">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-<<<<<<< HEAD
-                              <Value />
-=======
                               <Value>=Count(Microsoft.VisualBasic.Interaction.IIf(Fields!WorkMin.Value &gt; 0 or (Fields!StatusP.Value=true), Fields!StatusP.Value, Nothing))</Value>
->>>>>>> 49a80ef2d04e46bd6b81c6bdc3682d5d53a29b7a
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -2495,7 +2491,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox1</rd:DefaultName>
+                      <rd:DefaultName>Textbox82</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>White</Color>
@@ -3127,10 +3123,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-<<<<<<< HEAD
-=======
         <RepeatColumnHeaders>true</RepeatColumnHeaders>
->>>>>>> 49a80ef2d04e46bd6b81c6bdc3682d5d53a29b7a
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <PageBreak>

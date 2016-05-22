@@ -17,6 +17,7 @@ namespace WMS.Models
         public LvType()
         {
             this.LvApplications = new HashSet<LvApplication>();
+            this.LvConsumeds = new HashSet<LvConsumed>();
             this.LvDatas = new HashSet<LvData>();
         }
     
@@ -39,6 +40,7 @@ namespace WMS.Models
         public Nullable<short> MaxDaysMonth { get; set; }
     
         public virtual ICollection<LvApplication> LvApplications { get; set; }
+        public virtual ICollection<LvConsumed> LvConsumeds { get; set; }
         public virtual ICollection<LvData> LvDatas { get; set; }
     }
 }

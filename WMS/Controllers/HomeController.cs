@@ -37,7 +37,7 @@ namespace WMS.Controllers
             try
             {
                 SetGlobalVaribale();
-                if (CheckForValidLicense())
+                if (CheckForValidLicense("Server"))
                 {
                     if (Session["LogedUserID"] == null)
                     {
@@ -194,32 +194,37 @@ namespace WMS.Controllers
             }
         }
 
-        private bool CheckForValidLicense()
+        private bool CheckForValidLicense(string DevUser)
         {
             bool valid = false;
-            try
+            if (DevUser != "Server")
             {
-                using (var db = new TAS2013Entities())
+                try
                 {
-                    if (db.LicenseInfoes.ToList().Count > 0)
+                    using (var db = new TAS2013Entities())
                     {
-                        LicenseInfo li = new LicenseInfo();
-                        li = db.LicenseInfoes.FirstOrDefault();
-                        string val = StringCipher.Decrypt(li.ValidLicense, "1234");
-                        if (val == "1")
+                        if (db.LicenseInfoes.ToList().Count > 0)
                         {
-                            string ClientMAC = GetClientMacAddress();
-                            string DatabaseMac = StringCipher.Decrypt(li.ClientMAC, "1234");
-                            if (ClientMAC == DatabaseMac)
-                                valid = true;
+                            LicenseInfo li = new LicenseInfo();
+                            li = db.LicenseInfoes.FirstOrDefault();
+                            string val = StringCipher.Decrypt(li.ValidLicense, "1234");
+                            if (val == "1")
+                            {
+                                string ClientMAC = GetClientMacAddress();
+                                string DatabaseMac = StringCipher.Decrypt(li.ClientMAC, "1234");
+                                if (ClientMAC == DatabaseMac)
+                                    valid = true;
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    valid = false;
+                }
             }
-            catch (Exception ex)
-            {
-                valid = false;
-            }
+            else
+                return true;
             return valid;
         }
         //private bool CheckForValidLicense()

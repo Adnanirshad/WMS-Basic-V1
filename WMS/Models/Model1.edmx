@@ -754,8 +754,7 @@
       [ViewMultipleInOut].[Tin11] AS [Tin11], 
       [ViewMultipleInOut].[Tout11] AS [Tout11], 
       [ViewMultipleInOut].[Tin12] AS [Tin12], 
-      [ViewMultipleInOut].[Tout12] AS [Tout12], 
-      [ViewMultipleInOut].[Deleted] AS [Deleted]
+      [ViewMultipleInOut].[Tout12] AS [Tout12]
       FROM [dbo].[ViewMultipleInOut] AS [ViewMultipleInOut]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewSection" EntityType="TAS2015_PPAFModel.Store.ViewSection" store:Type="Views" store:Schema="dbo" store:Name="ViewSection">
@@ -824,6 +823,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_LvConsumed_Emp" Association="TAS2015_PPAFModel.Store.FK_LvConsumed_Emp">
             <End Role="Emp" EntitySet="Emp" />
+            <End Role="LvConsumed" EntitySet="LvConsumed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvConsumed_LvType" Association="TAS2015_PPAFModel.Store.FK_LvConsumed_LvType">
+            <End Role="LvType" EntitySet="LvType" />
             <End Role="LvConsumed" EntitySet="LvConsumed" />
           </AssociationSet>
           <AssociationSet Name="FK_LvData_Emp" Association="TAS2015_PPAFModel.Store.FK_LvData_Emp">
@@ -1511,6 +1514,7 @@
             <PropertyRef Name="EmpLvTypeYear" />
           </Key>
           <Property Name="EmpLvTypeYear" Type="nvarchar" Nullable="false" MaxLength="8" />
+          <Property Name="LvYear" Type="char" MaxLength="4" />
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="LeaveTypeID" Type="char" MaxLength="1" />
           <Property Name="JanConsumed" Type="float" />
@@ -2654,7 +2658,6 @@
           <Property Name="Tout11" Type="datetime" />
           <Property Name="Tin12" Type="datetime" />
           <Property Name="Tout12" Type="datetime" />
-          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'TAS2015_PPAF.dbo.ViewSection' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2847,6 +2850,18 @@
             </Principal>
             <Dependent Role="LvConsumed">
               <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvConsumed_LvType">
+          <End Role="LvType" Type="TAS2015_PPAFModel.Store.LvType" Multiplicity="0..1" />
+          <End Role="LvConsumed" Type="TAS2015_PPAFModel.Store.LvConsumed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvType">
+              <PropertyRef Name="LvTypeID" />
+            </Principal>
+            <Dependent Role="LvConsumed">
+              <PropertyRef Name="LeaveTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3193,6 +3208,10 @@
           <AssociationSet Name="FK_LvData_LvApplications" Association="TAS2015_PPAFModel.FK_LvData_LvApplications">
             <End Role="LvApplication" EntitySet="LvApplications" />
             <End Role="LvData" EntitySet="LvDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvConsumed_LvType" Association="TAS2015_PPAFModel.FK_LvConsumed_LvType">
+            <End Role="LvType" EntitySet="LvTypes" />
+            <End Role="LvConsumed" EntitySet="LvConsumeds" />
           </AssociationSet>
           <AssociationSet Name="FK_LvData_LvType" Association="TAS2015_PPAFModel.FK_LvData_LvType">
             <End Role="LvType" EntitySet="LvTypes" />
@@ -3880,6 +3899,7 @@
             <PropertyRef Name="EmpLvTypeYear" />
           </Key>
           <Property Type="String" Name="EmpLvTypeYear" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LvYear" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
           <Property Type="String" Name="LeaveTypeID" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="Double" Name="JanConsumed" />
@@ -3899,6 +3919,7 @@
           <Property Type="Double" Name="GrandTotal" />
           <Property Type="Double" Name="GrandTotalRemaining" />
           <NavigationProperty Name="Emp" Relationship="TAS2015_PPAFModel.FK_LvConsumed_Emp" FromRole="LvConsumed" ToRole="Emp" />
+          <NavigationProperty Name="LvType" Relationship="TAS2015_PPAFModel.FK_LvConsumed_LvType" FromRole="LvConsumed" ToRole="LvType" />
         </EntityType>
         <EntityType Name="LvData">
           <Key>
@@ -3959,6 +3980,7 @@
           <Property Type="Int16" Name="MaxDaysConsective" />
           <Property Type="Int16" Name="MaxDaysMonth" />
           <NavigationProperty Name="LvApplications" Relationship="TAS2015_PPAFModel.FK_LvApplication_LvType" FromRole="LvType" ToRole="LvApplication" />
+          <NavigationProperty Name="LvConsumeds" Relationship="TAS2015_PPAFModel.FK_LvConsumed_LvType" FromRole="LvType" ToRole="LvConsumed" />
           <NavigationProperty Name="LvDatas" Relationship="TAS2015_PPAFModel.FK_LvData_LvType" FromRole="LvType" ToRole="LvData" />
         </EntityType>
         <EntityType Name="Option">
@@ -5008,7 +5030,6 @@
           <Property Type="DateTime" Name="Tout11" Precision="3" />
           <Property Type="DateTime" Name="Tin12" Precision="3" />
           <Property Type="DateTime" Name="Tout12" Precision="3" />
-          <Property Type="Boolean" Name="Deleted" />
         </EntityType>
         <EntityType Name="ViewSection">
           <Key>
@@ -5294,6 +5315,18 @@
             </Principal>
             <Dependent Role="LvData">
               <PropertyRef Name="LvID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvConsumed_LvType">
+          <End Type="TAS2015_PPAFModel.LvType" Role="LvType" Multiplicity="0..1" />
+          <End Type="TAS2015_PPAFModel.LvConsumed" Role="LvConsumed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvType">
+              <PropertyRef Name="LvTypeID" />
+            </Principal>
+            <Dependent Role="LvConsumed">
+              <PropertyRef Name="LeaveTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6057,6 +6090,7 @@
                 <ScalarProperty Name="JanConsumed" ColumnName="JanConsumed" />
                 <ScalarProperty Name="LeaveTypeID" ColumnName="LeaveTypeID" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="LvYear" ColumnName="LvYear" />
                 <ScalarProperty Name="EmpLvTypeYear" ColumnName="EmpLvTypeYear" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -7021,7 +7055,6 @@
           <EntitySetMapping Name="ViewMultipleInOuts">
             <EntityTypeMapping TypeName="TAS2015_PPAFModel.ViewMultipleInOut">
               <MappingFragment StoreEntitySet="ViewMultipleInOut">
-                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="Tout12" ColumnName="Tout12" />
                 <ScalarProperty Name="Tin12" ColumnName="Tin12" />
                 <ScalarProperty Name="Tout11" ColumnName="Tout11" />

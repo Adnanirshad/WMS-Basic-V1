@@ -761,6 +761,50 @@ namespace WMS.Controllers
         }
 
         #endregion
+
+        public ActionResult GetEmpInfo(string empNo)
+        {
+            List<Emp> emp = db.Emps.Where(aa => aa.EmpNo == empNo).ToList();
+            if (emp.Count > 0)
+            {
+                string year = DateTime.Today.Year.ToString();
+                int empID = emp.First().EmpID;
+                List<LvConsumed> lvConsumed = db.LvConsumeds.Where(aa => aa.EmpID == empID && aa.LvYear == year).ToList();
+                string DOB = "";
+                if (emp.FirstOrDefault().JoinDate != null)
+                    DOB = emp.FirstOrDefault().JoinDate.Value.ToString("dd-MMM-yyyy");
+                if (lvConsumed.Count > 0)
+                {
+                    string emplvTypeCL = emp.First().EmpID.ToString() + "A";
+                    string emplvTypeAL = emp.First().EmpID.ToString() + "B";
+                    string emplvTypeSL = emp.First().EmpID.ToString() + "C";
+                    string emplvTypeCPL = emp.First().EmpID.ToString() + "E";
+                    string CL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeCL).First().YearRemaining.ToString();
+                    string AL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeAL).First().YearRemaining.ToString();
+                    string SL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeSL).First().YearRemaining.ToString();
+                    string CPL = "0";
+                    if (lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeCPL).Count() > 0)
+                        if (lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeCPL).First().YearRemaining != null)
+                            CPL = lvConsumed.Where(aa => aa.EmpLvTypeYear == emplvTypeCPL).First().YearRemaining.ToString();
+                    if (HttpContext.Request.IsAjaxRequest())
+                        return Json(emp.FirstOrDefault().EmpName + "@" + emp.FirstOrDefault().Designation.DesignationName + "@" +
+                            emp.FirstOrDefault().Section.SectionName + "@" + CL + "@" + AL + "@" + SL + "@" + CPL + "@" + emp.FirstOrDefault().FatherName
+                            + "@" + DOB
+                           , JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    if (HttpContext.Request.IsAjaxRequest())
+                        return Json(emp.FirstOrDefault().EmpName + "@" + emp.FirstOrDefault().Designation.DesignationName + "@" +
+                            emp.FirstOrDefault().Section.SectionName + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota"
+                            + "@" + emp.FirstOrDefault().FatherName
+                            + "@" + DOB
+                           , JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 
 }

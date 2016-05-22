@@ -247,6 +247,7 @@
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\LeaveQuota.js" />
     <Content Include="Scripts\LeaveType.js" />
+    <Content Include="Scripts\LoadEmpInfo.js" />
     <Content Include="Scripts\LogIn.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.avatar.css" />
