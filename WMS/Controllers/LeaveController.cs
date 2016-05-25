@@ -806,6 +806,95 @@ namespace WMS.Controllers
             return check;
         }
 
-       
+        internal bool CheckForMaxMonthDays(LvApplication lvapplication, LvType lvType)
+        {
+            bool check = false;
+            if(lvapplication.FromDate.Month==lvapplication.ToDate.Month)
+            {
+                DateTime dts = new DateTime(lvapplication.FromDate.Year, lvapplication.FromDate.Month, 1);
+                DateTime dte = new DateTime(lvapplication.FromDate.Year, lvapplication.FromDate.Month, lvapplication.ToDate.Day);
+                float TotalnumOfDayInMonth = 0;
+                using (var ctx = new TAS2013Entities())
+                {
+                    List<LvApplication> lvapps = new List<LvApplication>();
+                    lvapps = ctx.LvApplications.Where(aa => aa.FromDate >= dts && aa.ToDate <= dte && aa.EmpID == lvapplication.EmpID).ToList();
+                    foreach (var lv in lvapps)
+                    {
+                        TotalnumOfDayInMonth = TotalnumOfDayInMonth + lv.NoOfDays;
+                    }
+                }
+                if (lvType.MaxDaysMonth == 0)
+                {
+                    check = true;
+                }
+                else if (TotalnumOfDayInMonth <= lvType.MaxDaysMonth)
+                    check = true;
+
+            }
+            else
+                check=true;
+            return check;
+        }
+
+        internal float CalculateNoOfDays(LvApplication lvapplication, LvType lvType)
+        {
+            TAS2013Entities db= new TAS2013Entities();
+            float val = 0;
+            if (lvapplication.IsHalf == true)
+                val= (float)0.5;
+            else
+            {
+                if (lvType.CountRestDays != true)
+                {
+                    Shift ss = db.Emps.Where(aa=>aa.EmpID==lvapplication.EmpID).First().Shift;
+                    DateTime dts = lvapplication.FromDate;
+                    while (dts <= lvapplication.ToDate)
+                    {
+                        if (!CurrentDayNotRest(ss, dts))
+                            val = val + 1;
+                        dts = dts.AddDays(1);
+                    }
+                }
+            }
+            return val;
+        }
+
+        private bool CurrentDayNotRest(Shift ss, DateTime dts)
+        {
+            bool holiday = false;
+            switch (dts.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    if (ss.MonMin == 0)
+                        holiday = true;
+                    break;
+                case DayOfWeek.Tuesday:
+                    if (ss.TueMin == 0)
+                        holiday = true;
+                    break;
+                case DayOfWeek.Wednesday:
+                    if (ss.WedMin == 0)
+                        holiday = true;
+                    break;
+                case DayOfWeek.Thursday:
+                    if (ss.ThuMin == 0)
+                        holiday = true;
+                    break;
+                case DayOfWeek.Friday:
+                    if (ss.FriMin == 0)
+                        holiday = true;
+                    break;
+                case DayOfWeek.Saturday:
+                    if (ss.SatMin == 0)
+                        holiday = true;
+                    break;
+                case DayOfWeek.Sunday:
+                    if (ss.SunMin == 0)
+                        holiday = true;
+                    break;
+            }
+
+            return holiday;
+        }
     }
 }
