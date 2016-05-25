@@ -128,16 +128,42 @@ namespace WMS.Controllers
             {
                 LvType lvType = db.LvTypes.First(aa => aa.LvTypeID == lvapplication.LeaveTypeID);
                 LeaveController LvProcessController = new LeaveController();
-                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LeaveTypeID, lvType))
+                if (LvProcessController.CheckDuplicateLeave(lvapplication))
+                {
+                    if (lvType.UpdateBalance == true)
+                    {
+                        if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LeaveTypeID, lvType))
+                        {
+                            if (LvProcessController.CheckLeaveBalance(lvapplication, lvType))
+                            {
+
+                            }
+                            else
+                                ModelState.AddModelError("LvType", "Leave Balance Exceeds, Please check the balance");
+                        }
+                        else
+                            ModelState.AddModelError("LvType", "Leave Quota does not exist");
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("FromDate", "This Employee already has leave of this date ");
+                }
+
+                if (LvProcessController.HasLeaveQuota(lvapplication.EmpID, lvapplication.LeaveTypeID, lvType))//done
                 {
                     if (lvapplication.IsHalf != true)
                     {
                         lvapplication.NoOfDays = (float)((lvapplication.ToDate - lvapplication.FromDate).TotalDays) + 1;
                         lvapplication.Active = true;
-                        if (LvProcessController.CheckDuplicateLeave(lvapplication))
+                        if (LvProcessController.CheckDuplicateLeave(lvapplication))//done
                         {
                             //Check leave Balance
-                            if (LvProcessController.CheckLeaveBalance(lvapplication, lvType))
+                            if (LvProcessController.CheckLeaveBalance(lvapplication, lvType))//done
                             {
                                 lvapplication.LvDate = DateTime.Today;
                                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());

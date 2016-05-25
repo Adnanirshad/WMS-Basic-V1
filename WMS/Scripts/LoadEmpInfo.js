@@ -1,12 +1,9 @@
-﻿
-$(document).ready(function () {
-
+﻿$(document).ready(function () {
     $('#buttonId').click(function () {
-
         var empNo = document.getElementById("EmpNo").value;
         //var URL = '/WMS/LvApp/GetEmpInfo';
         var URL = '/Emp/GetEmpInfo';
-        $.getJSON(URL + '/' + empNo, function (data) {
+        $.getJSON(URL, { empNo: empNo }, function (data) {
             var values = data.split('@');
             document.getElementById("EName").value = values[0];
             document.getElementById("EDesignation").value = values[1];
@@ -19,6 +16,4 @@ $(document).ready(function () {
             document.getElementById("EDOB").value = values[8];
         });
     });
-
-
-});​
+});

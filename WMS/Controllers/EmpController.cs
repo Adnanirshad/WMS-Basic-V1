@@ -802,6 +802,15 @@ namespace WMS.Controllers
                            , JsonRequestBehavior.AllowGet);
                 }
             }
+            else
+            {
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json("Not found" + "@" + "Not found" + "@" +
+                        "Not found" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota"
+                        + "@" + "Not found"
+                        + "@" + "Not found"
+                       , JsonRequestBehavior.AllowGet);
+            }
 
             return RedirectToAction("Index");
         }

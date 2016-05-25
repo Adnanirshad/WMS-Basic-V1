@@ -796,8 +796,6 @@ namespace WMS.Controllers
         public bool HasLeaveQuota(int empID, string lvType,LvType leaveType)
         {
             bool check = false;
-            if (leaveType.UpdateBalance == true)
-            {
                 using (var ctx = new TAS2013Entities())
                 {
                     List<LvConsumed> lv = new List<LvConsumed>();
@@ -805,10 +803,9 @@ namespace WMS.Controllers
                     if (lv.Count > 0)
                         check = true;
                 }
-            }
-            else
-                check = true;
             return check;
         }
+
+       
     }
 }
