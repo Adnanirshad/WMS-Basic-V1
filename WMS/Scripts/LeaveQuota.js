@@ -23,17 +23,20 @@
 //            $("#ByEmpTypeDiv").show();
 //        }
 //    });
-//});
+//});EmpInformition
 
 $('#byAll').change(function () {
     if ($(this).is(":checked")) {
         $("#ByEmpTypeDiv").hide();
         $("#ByEmpNoDiv").hide();
+        $("#EmpInformition").hide();
+        
     }
 });
 $('#byEmp').change(function () {
     if ($(this).is(":checked")) {
         $("#ByEmpNoDiv").show();
+        $("#EmpInformition").show();
         $("#ByEmpTypeDiv").hide();
     }
 });
@@ -41,5 +44,21 @@ $('#byEmpType').change(function () {
     if ($(this).is(":checked")) {
         $("#ByEmpTypeDiv").show();
         $("#ByEmpNoDiv").hide();
+        $("#EmpInformition").hide();
     }
+});
+$(document).ready(function () {
+    $('#buttonId').click(function () {
+        var empNo = document.getElementById("EmpNo").value;
+        //var URL = '/WMS/LvApp/GetEmpInfo';
+        var URL = '/Emp/GetEmpInfo';
+        $.getJSON(URL, { empNo: empNo }, function (data) {
+            var values = data.split('@');
+            document.getElementById("EName").value = values[0];
+            document.getElementById("EDesignation").value = values[1];
+            document.getElementById("ESection").value = values[2];
+            document.getElementById("EFName").value = values[7];
+            
+        });
+    });
 });

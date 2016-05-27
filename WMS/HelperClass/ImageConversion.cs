@@ -17,9 +17,11 @@ namespace WMS.HelperClass
                 EmpPhoto _EmpPhoto = new EmpPhoto();
                 int empPhotoID = 0;
                 _empPhotoList = context.EmpPhotoes.Where(aa => aa.EmpID == _Emp.EmpID).ToList();
-                _EmpPhoto.EmpPic = ConvertToBytes(file);
+               
                 if (_empPhotoList.Count > 0)
                 {
+                    _EmpPhoto = context.EmpPhotoes.First(aa => aa.EmpID == _Emp.EmpID);
+                    _EmpPhoto.EmpPic = ConvertToBytes(file);
                     //Update Existing Image
                     _EmpPhoto.EmpID = _empPhotoList.FirstOrDefault().EmpID;
                     _EmpPhoto.PhotoID = _empPhotoList.FirstOrDefault().PhotoID;
@@ -27,6 +29,7 @@ namespace WMS.HelperClass
                 else
                 {
                     //Add New Image
+                    _EmpPhoto.EmpPic = ConvertToBytes(file);
                     _EmpPhoto.EmpID = _Emp.EmpID;
                     context.EmpPhotoes.Add(_EmpPhoto);
                 }
@@ -34,6 +37,7 @@ namespace WMS.HelperClass
                 {
                     empPhotoID = _EmpPhoto.PhotoID;
                     context.SaveChanges();
+
                     return empPhotoID;
                 }
                 catch (Exception ex)

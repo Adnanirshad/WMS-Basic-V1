@@ -25,9 +25,9 @@
     <div class="table-responsive">
         <table class="table table-bordered table-hover  table-condensed">
             <tr class="table-header">
-                @*<th style="width:6%">
+                <th style="width:6%">
                    Photo
-                </th>*@
+                </th>
                 <th style="width:90px">
                    Emp No
                 </th>
@@ -56,9 +56,9 @@
             </tr>
             @foreach (var item in Model) {
             <tr>
-                @*<td>
-                    <img src="/Emp/RetrieveImage/@item.EmpID" alt="" height=40 width=45/>
-                </td>*@
+                <td>
+                    <img src="/Emp/RetrieveImage/@item.EmpID" alt="" height=58 width=55/>
+                </td>
                 <td>
                    @Html.DisplayFor(modelItem => item.EmpNo)
                 </td>

@@ -192,6 +192,14 @@ namespace WMS.Controllers
                 ModelState.AddModelError("EmpNo", "Emp No is required!");
             if (string.IsNullOrEmpty(emp.EmpName))
                 ModelState.AddModelError("EmpName", "Name is required!");
+            if (emp.EmpID != null)
+            {
+                if (db.Emps.Where(aa => aa.EmpID == emp.EmpID).Count() > 0)
+                    ModelState.AddModelError("EmpID", "Emp ID should be unique!");
+            }
+            else
+                ModelState.AddModelError("EmpID", "Emp ID is a required fields!");
+
             if (emp.EmpNo != null)
             {
                 if (emp.EmpNo.Length > 15)
@@ -238,8 +246,8 @@ namespace WMS.Controllers
                 emp.Deleted = false;
                 //emp.FpID = emp.EmpID;
                 db.Emps.Add(emp);
-                db.SaveChanges();
-                //SaveChanges(db);
+                //db.SaveChanges();
+                SaveChanges(db);
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Employee, (byte)MyEnums.Operation.Add, DateTime.Now);
                 HttpPostedFileBase file = Request.Files["ImageData"];
@@ -373,6 +381,8 @@ namespace WMS.Controllers
 
                     }
                 }
+
+                
                 if (string.IsNullOrEmpty(emp.EmpNo))
                     ModelState.AddModelError("EmpNo", "Emp No field is required!");
                 if (string.IsNullOrEmpty(emp.EmpName))

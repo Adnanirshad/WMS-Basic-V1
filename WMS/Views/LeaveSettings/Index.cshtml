@@ -6,7 +6,8 @@
 <h2>Leaves Settings</h2>
 <a    href="~/LeaveSettings/LvQuotaList">List of Employees Leave Quotas</a><hr />
 <p class="ErorrMessage">@ViewBag.CMessage</p>
-<section class="col-md-12">
+<article class="row">
+<section class="col-md-6">
     <div calss="col-md-8">
         <div class="form-group">
                 <div class="radio-inline">
@@ -28,7 +29,8 @@
                 </div>
                 <div class="col-md-6">
                     <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>
-                                    
+                    <br />
+                    <div class="col-md-1"><input type="button" id="buttonId" value="Search"/></div>                    
                 </div>
             </div>
         </div>
@@ -47,7 +49,28 @@
          </div>
     </div>
 </section>
-     <section class="col-md-6" style="margin-top:2%">
+<section class="col-md-6" >
+    <div class="col-md-4" style="display: none;" id="EmpInformition">
+        <div style="margin-top:10px"> 
+        <h5>Emp Name</h5>
+        <input "form-control col-md-10 btn btn-default" type="text" id="EName" />
+        </div>
+        <div style="margin-top:10px"> 
+        <h5>Father's Name</h5>
+        <input "form-control col-md-10 btn btn-default" type="text" id="EFName" />
+        </div>
+        <div style="margin-top:10px">
+        <h5>Designation</h5>
+        <input "form-control col-md-10 btn btn-default" type="text" id="EDesignation" />
+        </div>
+        <div style="margin-top:10px">
+        <h5>Unit</h5>
+        <input "form-control col-md-10 btn btn-default" type="text" id="ESection" />
+    </div>
+    </div>
+    </section>
+<section class="col-md-12" style="margin-top:2%">
+     <section class="col-md-6" >
         <div class="panel panel-default">
             <div class="panel-heading"><h4>Create Leave Quota</h4></div>
             <div class="panel-body">
@@ -65,7 +88,7 @@
                             </div>
                             <div class="col-md-6">
                                 <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>
-                                    
+                                
                             </div>
                         </div>
                     </div>*@
@@ -120,7 +143,7 @@
      <header></header>
        
     </section>
-    <section class="col-md-6"  style="margin-top:2%">
+    <section class="col-md-6" >
         <div class="panel panel-default">
             <div class="panel-heading"><h4>Create Leave Balance New Year</h4></div>
             <div class="panel-body">
@@ -193,6 +216,7 @@
      <header></header>
        
     </section>
-
+</section>
+</article>
 <script src="@Url.Content("~/Scripts/LeaveQuota.js")"></script>
 
