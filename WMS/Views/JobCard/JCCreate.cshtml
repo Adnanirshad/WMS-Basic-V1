@@ -41,10 +41,10 @@
         <div class="form-group" id="EmpNoDiv">
             <label class="control-label col-md-4">Emp No<span style="color:red;"> *</span></label>           
             <div class="col-md-8">
-                <input id="JobEmpNo" name="JobEmpNo" type="text" class="form-control"/>
+                <input id="EmpNo" name="EmpNo" type="text" class="form-control" onchange="checkInput(this);"/>
             </div>
+           <input type='button' id="buttonId" name="buttonId" value="Search" style="margin-left:37%;margin-top:3%" class="btn btn-info"/>​
         </div>
-       ​<input type='button' id="buttonId" name="buttonId" value="Search Employee" class="btn btn-default btn-info"/>​
         <div class="form-group" id="CrewDiv">
             <label class="control-label col-md-4">Crew<span style="color:red;"> *</span></label>
             <div class="col-md-8">
@@ -72,15 +72,7 @@
               <div style="margin-top:10px"> 
                 <h5>Emp Name</h5>
                 <input "form-control col-md-10 btn btn-default" type="text" id="EName" />
-              </div>
-              <div style="margin-top:10px"> 
-                <h5>Father's Name</h5>
-                <input "form-control col-md-10 btn btn-default" type="text" id="EFName" />
-              </div>
-                 <div style="margin-top:10px"> 
-                <h5>Date Of Join</h5>
-                <input "form-control col-md-10 btn btn-default" type="text" id="EDOB" />
-              </div>
+              </div>                
              <div style="margin-top:10px">
                 <h5>Designation</h5>
                 <input "form-control col-md-10 btn btn-default" type="text" id="EDesignation" />
@@ -88,23 +80,7 @@
              <div style="margin-top:10px">
                 <h5>Section</h5>
                 <input "form-control col-md-10 btn btn-default" type="text" id="ESection" />
-            </div>
-                <div style="margin-top:10px">
-                <h5>Casual Leaves Balance</h5>
-                <input "form-control col-md-10 btn btn-default" type="text" id="ECL" />
-            </div>
-                <div style="margin-top:10px">
-                <h5>Annual Leaves Balance</h5>
-                <input "form-control col-md-10 btn btn-default" type="text" id="EAL" />
-            </div>
-                <div style="margin-top:10px">
-                <h5>Sick Leaves Balance</h5>
-                <input "form-control col-md-10 btn btn-default" type="text" id="ESL" />
-            </div>
-                <div style="margin-top:10px">
-                <h5>CPL Balance</h5>
-                <input "form-control col-md-10 btn btn-default" type="text" id="ECPL" />
-            </div>
+            </div>             
            </div>
     </section>
 <script src="@Url.Content("~/Scripts/EditAttendance.js")"></script>
@@ -113,3 +89,24 @@
 </article>
 
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#buttonId').click(function () {
+            var empNo = document.getElementById("EmpNo").value;
+            //var URL = '/WMS/LvApp/GetEmpInfo';
+            var URL = '/Emp/GetEmpInfo';
+            $.getJSON(URL, { empNo: empNo }, function (data) {
+                
+                document.getElementById("EName").value = values[0];
+                document.getElementById("EDesignation").value = values[1];
+                document.getElementById("ESection").value = values[2];
+
+            });
+        });
+    });
+    function checkInput(obj) {
+        
+        alert(obj.value);
+        
+    }
+</script>
