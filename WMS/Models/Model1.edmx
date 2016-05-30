@@ -681,36 +681,23 @@
           <EntitySet Name="ViewMultipleInOut" EntityType="TAS2015_PPAFModel.Store.ViewMultipleInOut" store:Type="Views" store:Schema="dbo" store:Name="ViewMultipleInOut">
             <DefiningQuery>SELECT 
       [ViewMultipleInOut].[EmpNo] AS [EmpNo], 
-      [ViewMultipleInOut].[GradeName] AS [GradeName], 
       [ViewMultipleInOut].[SectionName] AS [SectionName], 
-      [ViewMultipleInOut].[CrewName] AS [CrewName], 
       [ViewMultipleInOut].[DeptID] AS [DeptID], 
       [ViewMultipleInOut].[TypeName] AS [TypeName], 
-      [ViewMultipleInOut].[CatID] AS [CatID], 
-      [ViewMultipleInOut].[CatName] AS [CatName], 
-      [ViewMultipleInOut].[RegionName] AS [RegionName], 
-      [ViewMultipleInOut].[CityName] AS [CityName], 
       [ViewMultipleInOut].[LocName] AS [LocName], 
       [ViewMultipleInOut].[ShiftName] AS [ShiftName], 
       [ViewMultipleInOut].[DesignationName] AS [DesignationName], 
       [ViewMultipleInOut].[EmpName] AS [EmpName], 
       [ViewMultipleInOut].[DesigID] AS [DesigID], 
-      [ViewMultipleInOut].[JobID] AS [JobID], 
       [ViewMultipleInOut].[TypeID] AS [TypeID], 
-      [ViewMultipleInOut].[GradeID] AS [GradeID], 
       [ViewMultipleInOut].[SecID] AS [SecID], 
       [ViewMultipleInOut].[CardNo] AS [CardNo], 
-      [ViewMultipleInOut].[FpID] AS [FpID], 
       [ViewMultipleInOut].[NicNo] AS [NicNo], 
       [ViewMultipleInOut].[Status] AS [Status], 
-      [ViewMultipleInOut].[CrewID] AS [CrewID], 
-      [ViewMultipleInOut].[HasOT] AS [HasOT], 
       [ViewMultipleInOut].[EmpID] AS [EmpID], 
-      [ViewMultipleInOut].[DivisionName] AS [DivisionName], 
       [ViewMultipleInOut].[DeptName] AS [DeptName], 
       [ViewMultipleInOut].[ShiftID] AS [ShiftID], 
       [ViewMultipleInOut].[LocID] AS [LocID], 
-      [ViewMultipleInOut].[DivID] AS [DivID], 
       [ViewMultipleInOut].[EmpDate] AS [EmpDate], 
       [ViewMultipleInOut].[AttDate] AS [AttDate], 
       [ViewMultipleInOut].[DutyCode] AS [DutyCode], 
@@ -1522,7 +1509,7 @@
           <Key>
             <PropertyRef Name="EmpLvTypeYear" />
           </Key>
-          <Property Name="EmpLvTypeYear" Type="nvarchar" Nullable="false" MaxLength="8" />
+          <Property Name="EmpLvTypeYear" Type="nvarchar" Nullable="false" MaxLength="15" />
           <Property Name="EmpID" Type="int" Nullable="false" />
           <Property Name="LeaveTypeID" Type="char" MaxLength="1" />
           <Property Name="LvYear" Type="char" MaxLength="4" />
@@ -2581,41 +2568,35 @@
         <EntityType Name="ViewMultipleInOut">
           <Key>
             <PropertyRef Name="EmpNo" />
+            <PropertyRef Name="SectionName" />
+            <PropertyRef Name="DeptID" />
+            <PropertyRef Name="TypeName" />
+            <PropertyRef Name="LocName" />
+            <PropertyRef Name="ShiftName" />
+            <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
             <PropertyRef Name="EmpID" />
+            <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
           </Key>
           <Property Name="EmpNo" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="GradeName" Type="nvarchar" MaxLength="20" />
-          <Property Name="SectionName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CrewName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DeptID" Type="smallint" />
-          <Property Name="TypeName" Type="varchar" MaxLength="30" />
-          <Property Name="CatID" Type="smallint" />
-          <Property Name="CatName" Type="nvarchar" MaxLength="50" />
-          <Property Name="RegionName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LocName" Type="varchar" MaxLength="30" />
-          <Property Name="ShiftName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DesignationName" Type="nvarchar" MaxLength="200" />
+          <Property Name="SectionName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DeptID" Type="smallint" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="LocName" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="ShiftName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DesignationName" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="EmpName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DesigID" Type="int" />
-          <Property Name="JobID" Type="smallint" />
           <Property Name="TypeID" Type="tinyint" />
-          <Property Name="GradeID" Type="smallint" />
           <Property Name="SecID" Type="smallint" />
           <Property Name="CardNo" Type="char" MaxLength="10" />
-          <Property Name="FpID" Type="int" />
           <Property Name="NicNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="bit" />
-          <Property Name="CrewID" Type="smallint" />
-          <Property Name="HasOT" Type="bit" />
           <Property Name="EmpID" Type="int" Nullable="false" />
-          <Property Name="DivisionName" Type="nvarchar" MaxLength="50" />
-          <Property Name="DeptName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DeptName" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="ShiftID" Type="tinyint" />
           <Property Name="LocID" Type="smallint" />
-          <Property Name="DivID" Type="smallint" />
           <Property Name="EmpDate" Type="nvarchar" Nullable="false" MaxLength="15" />
           <Property Name="AttDate" Type="date" />
           <Property Name="DutyCode" Type="char" MaxLength="1" />
@@ -3897,7 +3878,7 @@
           <Key>
             <PropertyRef Name="EmpLvTypeYear" />
           </Key>
-          <Property Type="String" Name="EmpLvTypeYear" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmpLvTypeYear" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
           <Property Type="String" Name="LeaveTypeID" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="LvYear" MaxLength="4" FixedLength="true" Unicode="false" />
@@ -4941,41 +4922,35 @@
         <EntityType Name="ViewMultipleInOut">
           <Key>
             <PropertyRef Name="EmpNo" />
+            <PropertyRef Name="SectionName" />
+            <PropertyRef Name="DeptID" />
+            <PropertyRef Name="TypeName" />
+            <PropertyRef Name="LocName" />
+            <PropertyRef Name="ShiftName" />
+            <PropertyRef Name="DesignationName" />
             <PropertyRef Name="EmpName" />
             <PropertyRef Name="EmpID" />
+            <PropertyRef Name="DeptName" />
             <PropertyRef Name="EmpDate" />
           </Key>
           <Property Type="String" Name="EmpNo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GradeName" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SectionName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CrewName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int16" Name="DeptID" />
-          <Property Type="String" Name="TypeName" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="Int16" Name="CatID" />
-          <Property Type="String" Name="CatName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="RegionName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="CityName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="LocName" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ShiftName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DesignationName" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SectionName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="DeptID" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LocName" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShiftName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DesignationName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="DesigID" />
-          <Property Type="Int16" Name="JobID" />
           <Property Type="Byte" Name="TypeID" />
-          <Property Type="Int16" Name="GradeID" />
           <Property Type="Int16" Name="SecID" />
           <Property Type="String" Name="CardNo" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Type="Int32" Name="FpID" />
           <Property Type="String" Name="NicNo" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Status" />
-          <Property Type="Int16" Name="CrewID" />
-          <Property Type="Boolean" Name="HasOT" />
           <Property Type="Int32" Name="EmpID" Nullable="false" />
-          <Property Type="String" Name="DivisionName" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DeptName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DeptName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Byte" Name="ShiftID" />
           <Property Type="Int16" Name="LocID" />
-          <Property Type="Int16" Name="DivID" />
           <Property Type="String" Name="EmpDate" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="AttDate" Precision="0" />
           <Property Type="String" Name="DutyCode" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -7103,36 +7078,23 @@
                 <ScalarProperty Name="DutyCode" ColumnName="DutyCode" />
                 <ScalarProperty Name="AttDate" ColumnName="AttDate" />
                 <ScalarProperty Name="EmpDate" ColumnName="EmpDate" />
-                <ScalarProperty Name="DivID" ColumnName="DivID" />
                 <ScalarProperty Name="LocID" ColumnName="LocID" />
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
-                <ScalarProperty Name="DivisionName" ColumnName="DivisionName" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-                <ScalarProperty Name="HasOT" ColumnName="HasOT" />
-                <ScalarProperty Name="CrewID" ColumnName="CrewID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="NicNo" ColumnName="NicNo" />
-                <ScalarProperty Name="FpID" ColumnName="FpID" />
                 <ScalarProperty Name="CardNo" ColumnName="CardNo" />
                 <ScalarProperty Name="SecID" ColumnName="SecID" />
-                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="JobID" ColumnName="JobID" />
                 <ScalarProperty Name="DesigID" ColumnName="DesigID" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
                 <ScalarProperty Name="ShiftName" ColumnName="ShiftName" />
                 <ScalarProperty Name="LocName" ColumnName="LocName" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
-                <ScalarProperty Name="CatName" ColumnName="CatName" />
-                <ScalarProperty Name="CatID" ColumnName="CatID" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="DeptID" ColumnName="DeptID" />
-                <ScalarProperty Name="CrewName" ColumnName="CrewName" />
                 <ScalarProperty Name="SectionName" ColumnName="SectionName" />
-                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
                 <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
               </MappingFragment>
             </EntityTypeMapping>
