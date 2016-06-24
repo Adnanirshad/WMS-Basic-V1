@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <div class="col-md-12">
      <div class="jumbotron">
-    <h1>Fatima Group</h1>
+    <h1>DHA I-R</h1>
     <h2>Reporting System</h2>
 </div>
 

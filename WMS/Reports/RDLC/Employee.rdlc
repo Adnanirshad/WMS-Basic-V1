@@ -15,13 +15,7 @@
               <Width>1.40278in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.09374in</Width>
-            </TablixColumn>
-            <TablixColumn>
               <Width>1.75972in</Width>
-            </TablixColumn>
-            <TablixColumn>
-              <Width>1.25in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.11459in</Width>
@@ -76,7 +70,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>P. No</Value>
+                              <Value>DHO/DHS</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -135,39 +129,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox7">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>CNIC No</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox3">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -201,39 +162,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox25">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Group</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox9</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="Textbox70">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -241,7 +169,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Units</Value>
+                              <Value>Directorate</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -403,38 +331,6 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="NicNo">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!NicNo.Value</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>NicNo</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
                     <Textbox Name="DesignationName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -452,38 +348,6 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>DesignationName</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="DeptName">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!DeptName.Value</Value>
-                              <Style>
-                                <FontSize>8pt</FontSize>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>DeptName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -576,8 +440,6 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
-            <TablixMember />
-            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -601,7 +463,7 @@
         <Top>0.05556in</Top>
         <Left>0.01455in</Left>
         <Height>0.5in</Height>
-        <Width>9.03402in</Width>
+        <Width>6.69028in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -609,10 +471,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.98958in</Height>
+    <Height>2.24236in</Height>
     <Style />
   </Body>
-  <Width>10.42363in</Width>
+  <Width>6.85071in</Width>
   <Page>
     <PageHeader>
       <Height>0.75486in</Height>
@@ -642,7 +504,7 @@
           <Top>0.44166in</Top>
           <Left>0.01455in</Left>
           <Height>0.29236in</Height>
-          <Width>5.46044in</Width>
+          <Width>3.12711in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -658,8 +520,8 @@
           <Value>=First(Fields!CompanyLogo.Value, "DataSet2")</Value>
           <MIMEType>image/jpeg</MIMEType>
           <Sizing>FitProportional</Sizing>
-          <Top>0.22708in</Top>
-          <Left>9.09235in</Left>
+          <Top>0.21319in</Top>
+          <Left>5.47566in</Left>
           <Height>0.5in</Height>
           <Width>1.22917in</Width>
           <ZIndex>1</ZIndex>
@@ -688,10 +550,9 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Generated by Workforce Management System</Value>
+                  <Value>DHA I-R Attendance Management System</Value>
                   <Style>
-                    <FontSize>11pt</FontSize>
-                    <FontWeight>SemiBold</FontWeight>
+                    <FontWeight>Bold</FontWeight>
                     <Color>DimGray</Color>
                   </Style>
                 </TextRun>
@@ -733,8 +594,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>0.04167in</Top>
-          <Left>8.99219in</Left>
+          <Top>0.02778in</Top>
+          <Left>5.363in</Left>
           <Height>0.225in</Height>
           <Width>1.34183in</Width>
           <ZIndex>1</ZIndex>

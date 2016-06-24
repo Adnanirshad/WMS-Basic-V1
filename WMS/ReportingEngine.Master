@@ -3,7 +3,7 @@
 <!DOCTYPE html>    
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>WMS - Reports</title>
+    <title>DHA I-R - Reports</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
 
     </asp:ContentPlaceHolder>
@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class = "navbar-brand">
-                       <a href="/PPAF/Home" ><span>  Workforce Management System</span></a>
+                       <a href="~/DHA/Home" ><span>  DHA I-R Attendance System</span></a>
                     </div>
                 </div>
                 <div class="navbar-collapse collapse pull-right">
@@ -52,22 +52,23 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-folder-close"></span><span>  Company</span> <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/PPAF/Emp">Employees</a></li>
-                                <li><a href="/PPAF/Shift">Shifts</a></li>
-                                <li><a href="/PPAF/Holiday">Holidays</a></li>                       
+                                <li><a href="/DHA/Emp">Employees</a></li>
+                                <li><a href="/DHA/Shift">Shifts</a></li>
+                                <li><a href="/DHA/Holiday">Holidays</a></li>                       
                                 <li class="divider"></li>
-                                <li><a href="/PPAF/Designation">Designations</a></li>   
-                                    <li><a href="/PPAF/EmpType">Employee Type</a></li>                                                                                                   <li><a href="/PPAF/Crew">Crews</a></li>
+                                <li><a href="/DHA/Designation">Designations</a></li>   
+                               <li><a href="/DHA/EmpType">Employee Type</a></li>
+                                <li><a href="/DHA/Crew">Crews</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/PPAF/Dept">Groups</a></li>
-                                <li><a href="/PPAF/Section">Units</a></li>                     
+                                <li><a href="/DHA/Dept">Groups</a></li>
+                                <li><a href="/DHA/Section">Units</a></li>                     
                                 <li class="divider"></li>
-                                <li><a href="/PPAF/Location">Locations</a></li>    
-                                <li><a href="/PPAF/Roster">Rosters</a></li>    
-                                <li><a href="/PPAF/Option">Options</a></li>             
+                                <li><a href="/DHA/Location">Locations</a></li>    
+                                <li><a href="/DHA/Roster">Rosters</a></li>    
+                                <li><a href="/DHA/Option">Options</a></li>             
                                 <% if(Session["MUser"].ToString() == "1")%>
                                 <%{ %>
-                                    <li><a href="/PPAF/User">Users</a></li>
+                                    <li><a href="/DHA/User">Users</a></li>
                                 <%} %>
                             </ul>
                         </li>
@@ -79,9 +80,9 @@
                           <ul class="dropdown-menu">                     
                              <% if(Session["MProcess"].ToString() == "1")%>
                             <%{ %>
-                                 <li><a href="/PPAF/EditAttendance">Edit Attendance</a></li>
-                                 <li><a href="/PPAF/JobCard">Job Card</a></li>
-                             <li><a href="/PPAF/AttProcessors">Process Attendance</a></li>
+                                 <li><a href="/DHA/EditAttendance">Edit Attendance</a></li>
+                                 <li><a href="/DHA/JobCard">Job Card</a></li>
+                             <li><a href="/DHA/AttProcessors">Process Attendance</a></li>
                             <%} %>
                           </ul>
                         </li>
@@ -91,7 +92,7 @@
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-phone"></i>  Readers <b class="caret"></b></a>
                           <ul class="dropdown-menu">
-                            <li><a href="/PPAF/Reader">Readers</a></li>
+                            <li><a href="/DHA/Reader">Readers</a></li>
                           </ul>
                         </li>
                       <%} %>
@@ -100,18 +101,18 @@
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th-large"></i>  Leaves <b class="caret"></b></a>
                           <ul class="dropdown-menu">                      
-                            <li><a href="/PPAF/LvApp">Leaves Application</a></li> 
-                          <li><a href="/PPAF/LeaveType">Leave Type</a></li>           
+                            <li><a href="/DHA/LvApp">Leaves Application</a></li> 
+                          <li><a href="/DHA/LeaveType">Leave Type</a></li>           
                         <%--<li><a href="~/LvShort">Short Leaves</a></li> --%>                     
-                          <li><a href="/PPAF/LeaveSettings">Leave Quota</a></li>                       
+                          <li><a href="/DHA/LeaveSettings">Leave Quota</a></li>                       
                           </ul>
                         </li>
                       <%} %>
-                        <li><a href="/PPAF/Reports/Filters/StepOneFilter.aspx"><i class="glyphicon glyphicon-stats"></i> Reports</a></li>
+                        <li><a href="/DHA/Reports/Filters/StepOneFilter.aspx"><i class="glyphicon glyphicon-stats"></i> Reports</a></li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i>  <b class="caret"></b></a>
                           <ul class="dropdown-menu">
-                            <li><a href="/PPAF/Home/LogOut" ><span>  LogOut</span></a></li>
+                            <li><a href="/DHA/Home/LogOut" ><span>  LogOut</span></a></li>
                               
                           </ul>
                         </li>

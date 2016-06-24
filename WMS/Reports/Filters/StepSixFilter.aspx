@@ -63,6 +63,7 @@
                                         <li><a href="../ReportContainer.aspx?reportname=overtime">Overtime</a></li>
                                         <li><a href="../ReportContainer.aspx?reportname=missing_attendance">Missing Attendance</a></li>
                                         <li><a href="../ReportContainer.aspx?reportname=multiple_in_out">Multiple In/Out</a></li>
+                                        <li><a href="../ReportContainer.aspx?reportname=Daily_Parade_Sheet">Parade State Sheet </a></li>
 
                                     </ul>
                                 </li>
@@ -76,7 +77,7 @@
                                     <h5>Detailed</h5>
                                     <ul>
                                         <li><a href="../ReportContainer.aspx?reportname=emp_att">Employee Attendance</a></li>
-                                        <li><a href="../ReportContainer.aspx?reportname=emp_summary">Employee Summary</a></li>
+                                        <%--<li><a href="../ReportContainer.aspx?reportname=emp_summary">Employee Summary</a></li>--%>
                                     </ul>
                                 </li>
                             </ul>
@@ -93,7 +94,7 @@
                        {
                            {
                                int d = ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter.Count;
-                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Units</a>  <span style ='float:right;' class='badge' id='SectionSpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
+                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Directorates</a>  <span style ='float:right;' class='badge' id='SectionSpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
                            }
                            foreach (var item in ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter)
                            {

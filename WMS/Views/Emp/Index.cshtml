@@ -29,7 +29,7 @@
                    Photo
                 </th>
                 <th style="width:90px">
-                   Emp No
+                   DHS/DHO
                 </th>
                 <th>
                     @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
@@ -37,17 +37,12 @@
                 <th>
                     CardNo
                 </th>
-                <th>
-                    CNIC No
-                </th>
+               
                 <th>
                      @Html.ActionLink("Designation", "Index", new { sortOrder = ViewBag.DesigSortParm })
                 </th>
                 <th>
-                     @Html.ActionLink("Unit", "Index", new { sortOrder = ViewBag.SectionSortParm })
-                </th>
-                 <th>
-                     @Html.ActionLink("Group", "Index", new { sortOrder = ViewBag.DepartmentSortParm })
+                     @Html.ActionLink("Directorate/Branch", "Index", new { sortOrder = ViewBag.SectionSortParm })
                 </th>
                 <th>
                     Status
@@ -69,18 +64,11 @@
                     @Html.DisplayFor(modelItem => item.CardNo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NicNo)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.DesignationName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SectionName)
-                </td>                            
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeptName)
-                </td>
-                
+                </td> 
                  <td>
                      @if (item.Status==true)
                     {

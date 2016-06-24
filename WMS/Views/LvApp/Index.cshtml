@@ -29,10 +29,7 @@
             @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
         <th>
-           Unit
-        </th>
-        <th>
-            Group
+           Directorate
         </th>
         <th>
             @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm })
@@ -62,9 +59,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SectionName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeptName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LvDesc)

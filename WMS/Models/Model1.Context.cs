@@ -74,23 +74,17 @@ namespace WMS.Models
         public DbSet<Section> Sections { get; set; }
         public DbSet<ServiceLog> ServiceLogs { get; set; }
         public DbSet<Shift> Shifts { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserModule> UserModules { get; set; }
         public DbSet<UserSection> UserSections { get; set; }
         public DbSet<EmpView> EmpViews { get; set; }
         public DbSet<ViewAttData> ViewAttDatas { get; set; }
-        public DbSet<ViewDepartment> ViewDepartments { get; set; }
         public DbSet<ViewDetailAttData> ViewDetailAttDatas { get; set; }
         public DbSet<ViewEmpPic> ViewEmpPics { get; set; }
         public DbSet<ViewJobCardApp> ViewJobCardApps { get; set; }
-        public DbSet<ViewJobCardEmp> ViewJobCardEmps { get; set; }
-        public DbSet<ViewJobCardTime> ViewJobCardTimes { get; set; }
-        public DbSet<ViewLocation> ViewLocations { get; set; }
         public DbSet<ViewLvApplication> ViewLvApplications { get; set; }
-        public DbSet<ViewMonthlyData> ViewMonthlyDatas { get; set; }
-        public DbSet<ViewMonthlyDataPer> ViewMonthlyDataPers { get; set; }
         public DbSet<ViewMultipleInOut> ViewMultipleInOuts { get; set; }
         public DbSet<ViewSection> ViewSections { get; set; }
+        public DbSet<ViewMonthlyData> ViewMonthlyDatas { get; set; }
     }
 }

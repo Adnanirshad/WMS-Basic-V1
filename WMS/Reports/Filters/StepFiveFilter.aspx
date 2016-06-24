@@ -17,7 +17,7 @@
                         <h4>Filters Navigation</h4>
                     </li>
                   <li >
-                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Units, Locations</p></asp:LinkButton>
+                        <asp:LinkButton ID="btnStepOne" runat="server" CssClass="inactive-link" OnClick="btnStepOne_Click" >Step One<p>Directorates, Locations</p></asp:LinkButton>
                     </li>
                     <li>
                         <asp:LinkButton ID="btnStepFour" runat="server" CssClass="inactive-link" OnClick="btnStepFour_Click" >Step Two<p>Types, Shifts</p></asp:LinkButton>
@@ -79,8 +79,8 @@
                                         
                                          <asp:BoundField DataField="EmpNo" HeaderText="P.No" />
                                         <asp:BoundField DataField="EmpName" HeaderText="Name" />
-                                    <asp:BoundField DataField ="SectionName" HeaderText ="Unit" />
-                                        <asp:BoundField DataField ="DeptName" HeaderText ="Groups" />
+                                    <asp:BoundField DataField ="SectionName" HeaderText ="Directorates" />
+                                        <%--<asp:BoundField DataField ="DeptName" HeaderText ="Groups" />--%>
 
                                         <%--<asp:BoundField DataField="CompName" HeaderText="Company Name" />--%>
                     
@@ -114,7 +114,7 @@
                        {
                            {
                                int d = ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter.Count;
-                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Units</a>  <span style ='float:right;' class='badge' id='CompanySpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
+                               Response.Write("<div class='panel panel-default'><div class='panel-heading'><h4 class='panel-title'><a style = 'text-decoration: none !important;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne'>Directorates</a>  <span style ='float:right;' class='badge' id='CompanySpan'>" + d + "</span></h4></div><div id='collapseOne' class='panel-collapse collapse out'><div class='list-group'>");
                            }
                            foreach (var item in ((WMSLibrary.FiltersModel)HttpContext.Current.Session["FiltersModel"]).SectionFilter)
                            {

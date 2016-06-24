@@ -6,37 +6,37 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.53413in</Width>
+              <Width>0.67996in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.57511in</Width>
+              <Width>1.5699in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.38209in</Width>
+              <Width>1.37688in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.35182in</Width>
+              <Width>1.34661in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.60497in</Width>
+              <Width>0.59976in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.64583in</Width>
+              <Width>0.64062in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.4984in</Width>
+              <Width>0.49319in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.42788in</Width>
+              <Width>0.42267in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.42361in</Width>
+              <Width>0.4184in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.46875in</Width>
+              <Width>0.46354in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.05289in</Width>
+              <Width>1.04768in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -74,6 +74,7 @@
                       </Style>
                     </Textbox>
                     <ColSpan>4</ColSpan>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -194,7 +195,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>P.No</Value>
+                              <Value>DHO/DHS</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -290,7 +291,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Units</Value>
+                              <Value>Directorate</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -587,65 +588,6 @@
                         <RightBorder>
                           <Color>Black</Color>
                         </RightBorder>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                    <ColSpan>11</ColSpan>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-                <TablixCell />
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="DeptName">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!DeptName.Value</Value>
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
-                                <Color>DimGray</Color>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Left</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>DeptName</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
-                        </Border>
-                        <LeftBorder>
-                          <Color>Black</Color>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Color>Black</Color>
-                        </RightBorder>
-                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1119,51 +1061,6 @@
               </TablixHeader>
               <TablixMembers>
                 <TablixMember>
-                  <TablixHeader>
-                    <Size>0.03125in</Size>
-                    <CellContents>
-                      <Textbox Name="Textbox4">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style>
-                                  <FontSize>9pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Textbox4</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Style>Solid</Style>
-                          </Border>
-                          <TopBorder>
-                            <Color>White</Color>
-                          </TopBorder>
-                          <BottomBorder>
-                            <Color>White</Color>
-                          </BottomBorder>
-                          <LeftBorder>
-                            <Color>White</Color>
-                          </LeftBorder>
-                          <RightBorder>
-                            <Color>Black</Color>
-                          </RightBorder>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
                   <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
               </TablixMembers>
@@ -1219,56 +1116,6 @@
               </TablixHeader>
               <TablixMembers>
                 <TablixMember>
-                  <TablixHeader>
-                    <Size>0.03125in</Size>
-                    <CellContents>
-                      <Textbox Name="Textbox5">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style>
-                                  <FontSize>9pt</FontSize>
-                                  <FontWeight>Bold</FontWeight>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Textbox5</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Style>Solid</Style>
-                          </Border>
-                          <TopBorder>
-                            <Color>White</Color>
-                          </TopBorder>
-                          <BottomBorder>
-                            <Color>White</Color>
-                          </BottomBorder>
-                          <LeftBorder>
-                            <Color>White</Color>
-                          </LeftBorder>
-                          <RightBorder>
-                            <Color>Black</Color>
-                          </RightBorder>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
-                  <TablixMembers>
-                    <TablixMember>
-                      <RepeatOnNewPage>true</RepeatOnNewPage>
-                    </TablixMember>
-                  </TablixMembers>
                   <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
               </TablixMembers>
@@ -1332,135 +1179,19 @@
                 </CellContents>
               </TablixHeader>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember>
-                  <TablixHeader>
-                    <Size>0.03125in</Size>
-                    <CellContents>
-                      <Textbox Name="Textbox6">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style>
-                                  <FontWeight>Bold</FontWeight>
-                                  <Color>DimGray</Color>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style>
-                              <TextAlign>Left</TextAlign>
-                            </Style>
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Textbox6</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Color>LightGrey</Color>
-                            <Style>Solid</Style>
-                          </Border>
-                          <TopBorder>
-                            <Color>White</Color>
-                          </TopBorder>
-                          <BottomBorder>
-                            <Color>White</Color>
-                          </BottomBorder>
-                          <LeftBorder>
-                            <Color>White</Color>
-                          </LeftBorder>
-                          <RightBorder>
-                            <Color>Black</Color>
-                          </RightBorder>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
-                  <TablixMembers>
-                    <TablixMember />
-                  </TablixMembers>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Group2">
-                    <GroupExpressions>
-                      <GroupExpression>Departments</GroupExpression>
-                    </GroupExpressions>
-                  </Group>
+                  <Group Name="Details" />
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!DeptName.Value</Value>
+                      <Value>=Fields!SectionName.Value</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=Fields!EmpName.Value</Value>
                     </SortExpression>
                   </SortExpressions>
-                  <TablixHeader>
-                    <Size>0.03125in</Size>
-                    <CellContents>
-                      <Textbox Name="Group2">
-                        <CanGrow>true</CanGrow>
-                        <KeepTogether>true</KeepTogether>
-                        <Paragraphs>
-                          <Paragraph>
-                            <TextRuns>
-                              <TextRun>
-                                <Value />
-                                <Style>
-                                  <FontSize>8pt</FontSize>
-                                </Style>
-                              </TextRun>
-                            </TextRuns>
-                            <Style />
-                          </Paragraph>
-                        </Paragraphs>
-                        <rd:DefaultName>Group2</rd:DefaultName>
-                        <Style>
-                          <Border>
-                            <Color>LightGrey</Color>
-                            <Style>Solid</Style>
-                          </Border>
-                          <TopBorder>
-                            <Color>White</Color>
-                          </TopBorder>
-                          <BottomBorder>
-                            <Color>White</Color>
-                          </BottomBorder>
-                          <LeftBorder>
-                            <Color>White</Color>
-                          </LeftBorder>
-                          <RightBorder>
-                            <Color>Black</Color>
-                          </RightBorder>
-                          <VerticalAlign>Middle</VerticalAlign>
-                          <PaddingLeft>2pt</PaddingLeft>
-                          <PaddingRight>2pt</PaddingRight>
-                          <PaddingTop>2pt</PaddingTop>
-                          <PaddingBottom>2pt</PaddingBottom>
-                        </Style>
-                      </Textbox>
-                    </CellContents>
-                  </TablixHeader>
                   <TablixMembers>
-                    <TablixMember>
-                      <KeepWithGroup>After</KeepWithGroup>
-                    </TablixMember>
-                    <TablixMember>
-                      <Group Name="Details" />
-                      <SortExpressions>
-                        <SortExpression>
-                          <Value>=Fields!SectionName.Value</Value>
-                        </SortExpression>
-                        <SortExpression>
-                          <Value>=Fields!EmpName.Value</Value>
-                        </SortExpression>
-                      </SortExpressions>
-                      <TablixMembers>
-                        <TablixMember />
-                      </TablixMembers>
-                    </TablixMember>
+                    <TablixMember />
                   </TablixMembers>
                 </TablixMember>
               </TablixMembers>
@@ -1470,9 +1201,9 @@
         <RepeatRowHeaders>true</RepeatRowHeaders>
         <DataSetName>DataSet1</DataSetName>
         <Top>0.0625in</Top>
-        <Left>0.07684in</Left>
-        <Height>1.25in</Height>
-        <Width>9.02798in</Width>
+        <Left>0.13934in</Left>
+        <Height>1in</Height>
+        <Width>9.09048in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1483,10 +1214,10 @@
     <Height>2in</Height>
     <Style />
   </Body>
-  <Width>9.14977in</Width>
+  <Width>9.34769in</Width>
   <Page>
     <PageHeader>
-      <Height>0.74875in</Height>
+      <Height>0.78in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1624,7 +1355,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Generated by Workforce Management System</Value>
+                  <Value>DHA I-R Attendance Management System</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                     <Color>DimGray</Color>
