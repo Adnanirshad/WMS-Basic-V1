@@ -114,7 +114,7 @@ namespace WMS.Controllers
             User LoggedInUser = Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
             string query = qb.MakeCustomizeQuery(LoggedInUser);
-            DataTable dt = qb.GetValuesfromDB("select * from ViewJobCardApp " + query);
+            DataTable dt = qb.GetValuesfromDB("select * from ViewJobCardApp ");
             List<ViewJobCardApp> jobCardsApps = dt.ToList<ViewJobCardApp>();
 
             // List<EmpView> emps = db.EmpViews.ToList();
@@ -259,13 +259,13 @@ namespace WMS.Controllers
                     {
 
                         case 1:// Official Duty
-                            AddJCToAttData(_empDate, _empID, _Date,"O",false,false,false,false,true,"Offical Duty");
+                            AddJCToAttData(_empDate, _empID, _Date, "O", false, false, false, false, true, "Offical Duty");
                             break;
                         case 2:// Present
                             AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Present");
                             break;
                         case 3:// Absent
-                            AddJCToAttData(_empDate, _empID, _Date, "D",true, false, false, false, false, "Absent");
+                            AddJCToAttData(_empDate, _empID, _Date, "D", true, false, false, false, false, "Absent");
                             break;
                         case 5:// Field Visit
                             AddJCToAttData(_empDate, _empID, _Date, "D", false, false, false, false, true, "Field Visit");
@@ -288,7 +288,7 @@ namespace WMS.Controllers
             }
         }
 
-        private bool AddJCToAttData(string _empDate, int _empID, DateTime _Date, string dutyCode, bool statusAB, bool statusDO, 
+        private bool AddJCToAttData(string _empDate, int _empID, DateTime _Date, string dutyCode, bool statusAB, bool statusDO,
             bool statusLeave, bool statusGZ, bool statusP, string Remarks)
         {
             bool check = false;
@@ -474,5 +474,5 @@ namespace WMS.Controllers
             }
             base.Dispose(disposing);
         }
-	}
+    }
 }

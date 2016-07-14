@@ -248,6 +248,7 @@
     <Content Include="Scripts\LeaveQuota.js" />
     <Content Include="Scripts\LeaveType.js" />
     <Content Include="Scripts\LoadEmpInfo.js" />
+    <Content Include="Scripts\LoadEmpInfoJC.js" />
     <Content Include="Scripts\LogIn.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.avatar.css" />
@@ -299,6 +300,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\a.pubxml" />
     <Content Include="ReportingEngine.Master" />
+    <None Include="Properties\PublishProfiles\DHA-WMS%2814Jully%29.pubxml" />
     <None Include="Properties\PublishProfiles\PPAF-New.pubxml" />
     <None Include="Properties\PublishProfiles\WMSProfile.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
