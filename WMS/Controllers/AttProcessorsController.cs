@@ -167,7 +167,7 @@ namespace WMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Entry(attprocessor).State = EntityState.Modified;
+                context.Entry(attprocessor).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }

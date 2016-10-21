@@ -1,22 +1,20 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Leave Qouta";
 }
 
 <h2>Leaves Settings</h2>
 <a    href="~/LeaveSettings/LvQuotaList">List of Employees Leave Quotas</a><hr />
 <p class="ErorrMessage">@ViewBag.CMessage</p>
-<article class="row">
-<section style="margin-top:1%">
-     <section class="col-md-12" >
-        <div class="panel panel-default">
-            <div class="panel-heading"><h4>Create Leave Quota</h4></div>
-            <div class="panel-body">
-                 @using (Html.BeginForm("CreateLeaveQuota", "LeaveSettings", FormMethod.Post))
+@using (Html.BeginForm("CreateLeaveQuota", "LeaveSettings", FormMethod.Post))
                 {
-                     
-                <section class="col-md-6">
-                    <div calss="col-md-8">
+<article class="row">
+ <div class="well bs-component">
+        <form class="form-horizontal" action="~/Attendance/LeaveApplication/Create" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>Create New Leave Application</legend>
+                <div style="margin-left:3%">
                         <div class="form-group">
                                 <div class="radio-inline">
                                     @Html.RadioButton("RBQuotaEmpSelection", "byAll", true,new { id = "byAll" }) All
@@ -29,91 +27,91 @@
                                 </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div id="ByEmpNoDiv" class="row" style="display: none;">
-                            <div class="row" style="margin-bottom:15px; margin-top:15px">
-                                <div class="col-md-5">
-                                    <label>Employee No</label>
+                <section class="col-lg-7 col-md-7 col-sm-7">
+                    <div class="form-group" id="ByEmpNoDiv">
+                        <div class="form-inline">
+                          <label class="col-lg-3 col-md-3 col-sm-3 control-label">Emp No</label>
+                          <div class="col-lg-9 col-md-9 col-sm-9">
+                              <div class="input-group">
+                                  <input  autofocus id="EmpNo" name="EmpNo" type="text" class="form-control" placeholder="EMP-00001"/>
+                                  <span class="input-group-btn">
+                                      <input type='button' id="buttonId" name="buttonId" value="Search"  class="btn btn-secondary"/>​ 
+                                  </span>
                                 </div>
-                                <div class="col-md-4">
-                                    <input id="EmpNo" name="EmpNo" type="text" class="form-control"/>         
+                          </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group" id="ByEmpTypeDiv">
+                        <div class="form-inline">
+                          <label class="col-lg-3 col-md-3 col-sm-3 control-label">Emp Type</label>
+                          <div class="col-lg-9 col-md-9 col-sm-9">
+                              <div class="input-group">
+                                  @Html.DropDownList("TypeID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
                                 </div>
-                                <div class="col-md-1"><input type="button" id="buttonId" value="Search"/></div>
-                            </div>
+                          </div>
                         </div>
-                        <div id="ByEmpTypeDiv" class="row" style="display: none;">
-                                <div class="row" style="margin-bottom:15px; margin-top:15px">
-                                    <div class="col-md-5">
-                                        <label>Employee Type</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                                  @Html.DropDownList("TypeID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidth"})
-                                    </div>
-                                </div>
-                         </div>
+
+                    </div>         
+                     <div class="col-md-9">                   
+                    <div class="row" style="margin-bottom:1%">
+                        <div class="col-md-4">
+                            <label>Qouta Year</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="QYear" name="QYear" type="date" class="form-control"/>
+                                    
+                        </div>
                     </div>
-                </section>
-                <section class="col-md-6" >
-                    <div class="col-md-4" style="display: none;" id="EmpInformition">
-                        <div style="margin-top:10px"> 
-                        <h5>Emp Name</h5>
-                        <input "form-control col-md-10 btn btn-default" type="text" id="EName" />
-                        </div>
-                        <div style="margin-top:10px"> 
-                        <h5>Father's Name</h5>
-                        <input "form-control col-md-10 btn btn-default" type="text" id="EFName" />
-                        </div>
-                        <div style="margin-top:10px">
-                        <h5>Designation</h5>
-                        <input "form-control col-md-10 btn btn-default" type="text" id="EDesignation" />
-                        </div>
-                        <div style="margin-top:10px">
-                        <h5>Unit</h5>
-                        <input "form-control col-md-10 btn btn-default" type="text" id="ESection" />
-                    </div>
-                    </div>
-                    </section>
-               <div class="col-md-12">
-                    <div class="row" style="margin-left:10%; margin-bottom:1%; margin-top:5%">
+                    <div class="row" style="margin-bottom:1%">
                         <div class="col-md-4">
                             <label>Casual Leaves</label>
                         </div>
                         <div class="col-md-4">
-                            <input id="CLeaves" name="CLeaves" type="number" class="form-control"/>
+                            <input id="CLeaves" name="CLeaves" type="number" step="00.01" class="form-control"/>
                                     
                         </div>
                     </div>
-                    <div class="row" style="margin-left:10%; margin-bottom:1%">
+                    <div class="row" style="margin-bottom:1%">
                         <div class="col-md-4">
                             <label>Annual Leaves</label>
                         </div>
                         <div class="col-md-4">
-                           <input id="ALeaves" name="ALeaves" type="number" class="form-control"/>
+                           <input id="ALeaves" name="ALeaves" type="number" step="00.01" class="form-control"/>
                         </div>
                     </div>
-                    <div class="row" style="margin-left:10%; margin-bottom:1%">
+                    <div class="row" style="margin-bottom:1%">
                         <div class="col-md-4">
                             <label>Sick Leaves</label>
                         </div>
                         <div class="col-md-4">
-                            <input id="SLeaves" name="SLeaves" type="number" class="form-control"/>
+                            <input id="SLeaves" name="SLeaves" type="number" step="00.01" class="form-control"/>
                                     
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-left:10%; margin-bottom:3%">
-                    <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            @Html.ActionLink("Cancel", "Index",null,new { @class = "btn btn-default " })
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input type="submit" value="Save"  class="btn btn-xs btn-success"/>
-                    </div>
+                </section>
+                <section class="col-lg-5 col-md-5 col-sm-5">
+                <div class="list-group">                  
+                    <a  class="list-group-item">
+                        <h4 class="list-group-item-heading">Employee Information</h4>
+                        <p id="EName" class="list-group-item-text EmpInfoSecondaryMargin"></p>
+                        <p id="EFName" class="list-group-item-text EmpInfoSecondaryMargin"></p>
+                        <p id="EDesignation" class="list-group-item-text EmpInfoSecondaryMargin"></p>                       
+                        <p id="ESection" class="list-group-item-text EmpInfoSecondaryMargin"></p>                                            
+                    </a>                  
                 </div>
-                }
-            </div>
-        </div>
-       
-    </section>
-</section>
+                </section>
+                
+            </fieldset>
+        </form>
+    </div>
 </article>
+}
 <script src="@Url.Content("~/Scripts/LeaveQuota.js")"></script>
-

@@ -249,7 +249,7 @@ namespace WMS.Controllers
             reader.Status = (bool)ValueProvider.GetValue("Status").ConvertTo(typeof(bool));
             if (ModelState.IsValid)
             {
-                db.Entry(reader).State = EntityState.Modified;
+                db.Entry(reader).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Reader, (byte)MyEnums.Operation.Edit, DateTime.Now);

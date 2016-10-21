@@ -63,10 +63,11 @@
                                         <li><a href="../ReportContainer.aspx?reportname=overtime">Overtime</a></li>
                                         <li><a href="../ReportContainer.aspx?reportname=missing_attendance">Missing Attendance</a></li>
                                         <li><a href="../ReportContainer.aspx?reportname=multiple_in_out">Multiple In/Out</a></li>
-                                        <li><a href="../ReportContainer.aspx?reportname=Daily_Parade_Sheet">Parade State Sheet </a></li>
+                                        <%--<li><a href="../ReportContainer.aspx?reportname=Daily_Parade_Sheet">Parade State Sheet </a></li>--%>
 
                                     </ul>
                                 </li>
+
                                 <li>
                                     <h5>Monthly</h5>
                                     <ul>

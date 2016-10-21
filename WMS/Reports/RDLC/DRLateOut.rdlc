@@ -74,7 +74,6 @@
                       </Style>
                     </Textbox>
                     <ColSpan>4</ColSpan>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell />
@@ -1061,6 +1060,7 @@
               </TablixHeader>
               <TablixMembers>
                 <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
                   <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
               </TablixMembers>
@@ -1116,6 +1116,7 @@
               </TablixHeader>
               <TablixMembers>
                 <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
                   <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
               </TablixMembers>
@@ -1203,7 +1204,7 @@
         <Top>0.0625in</Top>
         <Left>0.13934in</Left>
         <Height>1in</Height>
-        <Width>9.09048in</Width>
+        <Width>9.09046in</Width>
         <Style>
           <Border>
             <Style>None</Style>

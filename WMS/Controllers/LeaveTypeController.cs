@@ -82,7 +82,7 @@ namespace WMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(lvtype).State = EntityState.Modified;
+                db.Entry(lvtype).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

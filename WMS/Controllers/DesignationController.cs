@@ -165,7 +165,7 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Entry(designation).State = EntityState.Modified;
+                db.Entry(designation).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Designation, (byte)MyEnums.Operation.Edit, DateTime.Now);

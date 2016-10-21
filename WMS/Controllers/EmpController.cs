@@ -185,6 +185,7 @@ namespace WMS.Controllers
         {
             string empNo = "";
             int cardno = Convert.ToInt32(emp.CardNo);
+            emp.EmpNo = emp.EmpID.ToString();
             emp.CardNo = cardno.ToString("0000000000");
             if(db.Emps.Where(aa=>aa.Status==true && aa.Deleted!=true).Count()>=Convert.ToInt32(GlobalVaribales.NoOfEmps))
                 ModelState.AddModelError("EmpNo", "Active Number of employees are exceeded from license ");
@@ -416,7 +417,7 @@ namespace WMS.Controllers
                     }
                     emp.EmpNo = emp.EmpNo.ToUpper();
                     emp.Deleted = false;
-                    db.Entry(emp).State = EntityState.Modified;
+                    db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
                    
                     db.SaveChanges();
                     int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
@@ -824,6 +825,43 @@ namespace WMS.Controllers
                         "Not found" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota" + "@" + "No Quota"
                         + "@" + "Not found"
                         + "@" + "Not found"
+                       , JsonRequestBehavior.AllowGet);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult GetEmployeeInfo(string empNo)
+        {
+            List<Emp> emp = db.Emps.Where(aa => aa.EmpNo == empNo).ToList();
+            string Name = "";
+            string Designation = "";
+            string Section = "";
+            string FatherName = "";
+            string Type = "";
+            string DOJ = "";
+            if (emp.Count > 0)
+            {
+                Name = "Name: " + emp.FirstOrDefault().EmpName;
+                FatherName = "FatherName:" + emp.FirstOrDefault().FatherName;
+                Designation = "Designation: " + emp.FirstOrDefault().Designation.DesignationName;
+                Section = "Section: " + emp.FirstOrDefault().Section.SectionName;
+                Type = "Type: " + emp.FirstOrDefault().Status;
+                if (emp.FirstOrDefault().BirthDate != null)
+                    DOJ = "Join Date: " + emp.FirstOrDefault().BirthDate.Value.ToString("dd-MMM-yyyy");
+                else
+                    DOJ = "Join Date: Not Added";
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json(Name + "@" + FatherName + "@" + Designation + "@" + Section + "@" + Type + "@" + DOJ, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Name = "Name: Not found";
+                Designation = "Designation: Not found";
+                Section = "Section: Not found";
+                Type = "Type: Not found";
+                DOJ = "Join Date: Not found";
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json(Name + "@" + FatherName + "@" + Designation + "@" + Section + "@" + Type + "@" + DOJ
                        , JsonRequestBehavior.AllowGet);
             }
 

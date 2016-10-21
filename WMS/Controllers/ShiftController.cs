@@ -233,7 +233,7 @@ namespace WMS.Controllers
                 shift.SubtractEIFromWork = (bool)ValueProvider.GetValue("SubtractEIFromWork").ConvertTo(typeof(bool));
                 shift.AddEIInOT = (bool)ValueProvider.GetValue("AddEIInOT").ConvertTo(typeof(bool));
                 shift.GZDays = shift.Holiday;
-                db.Entry(shift).State = EntityState.Modified;
+                db.Entry(shift).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Shift, (byte)MyEnums.Operation.Edit, DateTime.Now);

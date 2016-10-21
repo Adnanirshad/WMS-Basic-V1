@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "ComapnyInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Company Information</h2>
+@using (Html.BeginForm("SaveCompanyInfo", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{   
+    <section class="col-md-12">
+        <div class="form-horizontal"> 
+        <section class="col-md-10">
+    <div class="form-group">
+      <label class="col-lg-2 control-label">CompanyName</label>
+      <div class="col-lg-10">
+        <input type="text" id="CompanyName" name="CompanyName" class="form-control" placeholder="Your Company">
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="col-lg-2 control-label">Add Path</label>
+      <div class="col-lg-10">
+        <input type="text" id="Path" name="Path" class="form-control" placeholder="E://">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Add Logo</label>
+      <div class="col-lg-10">
+        <input name="uploadFile" id="logo" type="file" />             
+      </div>
+    </div>
+    
+       </section>
+        <section class="col-md-6" style="margin-left:14%">
+             <input type="submit" value="Next" class="btn btn-default" />
+        </section>
+            </div>
+   </section>
+    
+    
+}
+                
+

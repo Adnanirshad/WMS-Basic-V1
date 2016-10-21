@@ -25,6 +25,9 @@
 //    });
 //});EmpInformition
 
+$("#ByEmpTypeDiv").hide();
+$("#ByEmpNoDiv").hide();
+$("#EmpInformition").hide();
 $('#byAll').change(function () {
     if ($(this).is(":checked")) {
         $("#ByEmpTypeDiv").hide();
@@ -36,7 +39,7 @@ $('#byAll').change(function () {
 $('#byEmp').change(function () {
     if ($(this).is(":checked")) {
         $("#ByEmpNoDiv").show();
-        $("#EmpInformition").show();
+        $("#EmpInformition").hide();
         $("#ByEmpTypeDiv").hide();
         $("#radioValue").val("byEmp");
         
@@ -51,17 +54,22 @@ $('#byEmpType').change(function () {
     }
 });
 $(document).ready(function () {
+
+    document.getElementById("EName").innerHTML = "Name: No Selected Employee";
+    document.getElementById("EFName").innerHTML = "FatherName: No Selected Employee";
+    document.getElementById("EDesignation").innerHTML = "Designation: No Selected Employee";
+    document.getElementById("ESection").innerHTML = "Section: No Selected Employee";
     $('#buttonId').click(function () {
         var empNo = document.getElementById("EmpNo").value;
         //var URL = '/WMS/LvApp/GetEmpInfo';
-        var URL = '/Emp/GetEmpInfo';
-        $.getJSON(URL, { empNo: empNo }, function (data) {
-            var values = data.split('@');
-            document.getElementById("EName").value = values[0];
-            document.getElementById("EDesignation").value = values[1];
-            document.getElementById("ESection").value = values[2];
-            document.getElementById("EFName").value = values[7];
-            
-        });
+            var URL = '/Emp/GetEmployeeInfo';
+            $.getJSON(URL, { EmpNo: empNo }, function (data) {
+                var values = data.split('@');
+                document.getElementById("EName").innerHTML = values[0];
+                document.getElementById("EFName").innerHTML = values[1];
+                document.getElementById("EDesignation").innerHTML = values[2];
+                document.getElementById("ESection").innerHTML = values[3];
+
+            });
     });
 });

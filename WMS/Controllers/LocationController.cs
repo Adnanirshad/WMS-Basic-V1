@@ -190,7 +190,7 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Entry(location).State = EntityState.Modified;
+                db.Entry(location).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

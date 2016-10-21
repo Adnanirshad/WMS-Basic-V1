@@ -39,7 +39,7 @@ namespace WMS.Controllers
             DateTime dt1 = DateTime.Today;
             DateTime dt2 = new DateTime(dt1.Year, 1, 1);
             string date = dt2.Year.ToString()+"-"+dt2.Month.ToString()+"-"+dt2.Day.ToString()+" ";
-            DataTable dt = qb.GetValuesfromDB("select * from ViewLvApplication  where(ToDate >= '" + date + "')");
+            DataTable dt = qb.GetValuesfromDB("select * from ViewLvApplication  where(ToDate >= '" + date + "') order by LvID desc");
             List<ViewLvApplication> lvapplications = dt.ToList<ViewLvApplication>();
 
 
@@ -160,10 +160,10 @@ namespace WMS.Controllers
                                     ModelState.AddModelError("FromDate", "Leave Monthly Quota Exceeds");
                             }
                             else
-                                ModelState.AddModelError("LvType", "Leave Balance Exceeds, Please check the balance");
+                                ModelState.AddModelError("FromDate", "Leave Balance Exceeds, Please check the balance");
                         }
                         else
-                            ModelState.AddModelError("LvType", "Leave Quota does not exist");
+                            ModelState.AddModelError("FromDate", "Leave Quota does not exist");
                     }
                     else
                     {
@@ -227,7 +227,7 @@ namespace WMS.Controllers
             if (ModelState.IsValid)
             {
                 User LoggedInUser = Session["LoggedUser"] as User;
-                db.Entry(lvapplication).State = EntityState.Modified;
+                db.Entry(lvapplication).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.Leave, (byte)MyEnums.Operation.Edit, DateTime.Now);
@@ -257,9 +257,8 @@ namespace WMS.Controllers
         // POST: /LvApp/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         [CustomActionAttribute]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             LeaveController LvProcessController = new LeaveController();
             LvApplication lvapplication = db.LvApplications.Find(id);
@@ -294,6 +293,82 @@ namespace WMS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult GetEmpInfo(string empNo)
+        {
+            List<EmpView> emp = db.EmpViews.Where(aa => aa.EmpNo == empNo).ToList();
+            string Name = "";
+            string Designation = "";
+            string Section = "";
+            string Type = "";
+            string DOJ = "";
+            if (emp.Count > 0)
+            {
+                Name = "Name: " + emp.FirstOrDefault().EmpName;
+                Designation = "Designation: " + emp.FirstOrDefault().DesignationName;
+                Section = "Section: " + emp.FirstOrDefault().SectionName;
+                Type = "Type: " + emp.FirstOrDefault().TypeName;
+                if (emp.FirstOrDefault().BirthDate != null)
+                    DOJ = "Join Date: " + emp.FirstOrDefault().BirthDate.Value.ToString("dd-MMM-yyyy");
+                else
+                    DOJ = "Join Date: Not Added";
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json(Name + "@" + Designation + "@" + Section + "@" + Type + "@" + DOJ, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Name = "Name: Not found";
+                Designation = "Designation: Not found";
+                Section = "Section: Not found";
+                Type = "Type: Not found";
+                DOJ = "Join Date: Not found";
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json(Name + "@" + Designation + "@" + Section + "@" + Type + "@" + DOJ
+                       , JsonRequestBehavior.AllowGet);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult GetEmpLeaveBalance(string empNo)
+        {
+            List<Emp> emp = db.Emps.Where(aa => aa.EmpNo == empNo).ToList();
+            if (emp.Count > 0)
+            {
+                int id = emp.FirstOrDefault().EmpID;
+                string year = DateTime.Today.Year.ToString("0000");
+                List<LvConsumed> LvQuota = db.LvConsumeds.Where(aa => aa.EmpID == id && aa.LvYear == year).ToList();
+                string CLBalance = "";
+                string ALBalance = "";
+                string SLBalance = "";
+                string CPLBalance = "";
+                if (LvQuota.Where(aa => aa.LeaveTypeID == "A").Count() > 0)
+                    CLBalance = "Casual: " + LvQuota.First(aa => aa.LeaveTypeID == "A").YearRemaining;
+                else
+                    CLBalance = "Casual: 0";
+                if (LvQuota.Where(aa => aa.LeaveTypeID == "B").Count() > 0)
+                    ALBalance = "Annual: " + LvQuota.First(aa => aa.LeaveTypeID == "B").YearRemaining;
+                else
+                    ALBalance = "Annual: 0";
+                if (LvQuota.Where(aa => aa.LeaveTypeID == "C").Count() > 0)
+                    SLBalance = "Sick: " + LvQuota.First(aa => aa.LeaveTypeID == "C").YearRemaining;
+                else
+                    SLBalance = "Sick: 0";
+                if (LvQuota.Where(aa => aa.LeaveTypeID == "H").Count() > 0)
+                    CPLBalance = "CPL: " + LvQuota.First(aa => aa.LeaveTypeID == "H").YearRemaining;
+                else
+                    CPLBalance = "CPL: 0";
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json(CLBalance + "@" + ALBalance + "@" + SLBalance + "@" + CPLBalance, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json("Casual: 0" + "@" + "Annual: 0" + "@" +
+                        "Sick: 0" + "@" + "CPL: 0"
+                       , JsonRequestBehavior.AllowGet);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

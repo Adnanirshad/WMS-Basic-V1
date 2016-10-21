@@ -3,7 +3,7 @@
 <!DOCTYPE html>    
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>DHA I-R - Reports</title>
+    <title><%Session["CompanyName"].ToString(); %>Reports</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
 
     </asp:ContentPlaceHolder>
@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class = "navbar-brand">
-                       <a href="~/DHA/Home" ><span>  DHA I-R Attendance System</span></a>
+                       <a href="~/DHA/Home" ><span>  WMS Reporting</span></a>
                     </div>
                 </div>
                 <div class="navbar-collapse collapse pull-right">

@@ -1,0 +1,22 @@
+﻿body {
+     .btn {
+    border: 0 none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-success {
+    background: #0099cc;
+    color: #ffffff;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
+    background: #33a6cc;
+}
+.btn-success:active, .btn-success.active {
+    background: #007299;
+    box-shadow: none;
+}
+}

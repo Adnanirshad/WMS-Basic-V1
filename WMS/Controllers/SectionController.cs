@@ -148,7 +148,7 @@ namespace WMS.Controllers
                 ModelState.AddModelError("DeptID", "Please select Department");
             if (ModelState.IsValid)
             {
-                db.Entry(section).State = EntityState.Modified;
+                db.Entry(section).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

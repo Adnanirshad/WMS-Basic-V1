@@ -168,7 +168,7 @@ namespace WMS.Controllers
             user.DateCreated = DateTime.Today;
             user.Deleted = false;
             // db.Entry(user).State = EntityState.Modified;
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             //User Section
             int count = Convert.ToInt32(Request.Form["uSectionCount"]);

@@ -115,7 +115,7 @@ namespace WMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(holiday).State = EntityState.Modified;
+                db.Entry(holiday).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

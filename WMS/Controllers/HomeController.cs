@@ -32,48 +32,59 @@ namespace WMS.Controllers
         }
         //
         // GET: /Home/
+        TAS2013Entities db = new TAS2013Entities();
         public ActionResult Index()
         {
             try
             {
-                SetGlobalVaribale();
+                if (db.Options.ToList().Count > 0)
+                {
+
+                    SetGlobalVaribale();
+                    Session["CompanyName"] = db.Options.FirstOrDefault().CompanyName; 
                 if (CheckForValidLicense("Client"))
                 {
-                    if (Session["LogedUserID"] == null)
-                    {
-                        Session["LogedUserID"] = "";
-                        Session["Role"] = "";
-                        Session["MHR"] = "0";
-                        Session["MDevice"] = "0";
-                        Session["MLeave"] = "0";
-                        Session["MEditAtt"] = "0";
-                        Session["MUser"] = "0";
-                        Session["LogedUserFullname"] = "";
-                        Session["UserCompany"] = "";
-                        Session["MRDailyAtt"] = "0";
-                        Session["MRLeave"] = "0";
-                        Session["MRMonthly"] = "0";
-                        Session["MRAudit"] = "0";
-                        Session["MRManualEditAtt"] = "0";
-                        Session["MREmployee"] = "0";
-                        Session["MRoster"] = "0";
-                        Session["MRDetail"] = "0";
-                        Session["MRSummary"] = "0";
-                        Session["MProcess"] = "0";
-                        return View();
-                    }
-                    else if (Session["LogedUserID"].ToString() == "")
-                    {
-                        return View();
+                        if (Session["LogedUserID"] == null)
+                        {
+                            Session["LogedUserID"] = "";
+                            Session["Role"] = "";
+                            Session["MHR"] = "0";
+                            Session["MDevice"] = "0";
+                            Session["MLeave"] = "0";
+                            Session["MEditAtt"] = "0";
+                            Session["MUser"] = "0";
+                            Session["LogedUserFullname"] = "";
+                            Session["UserCompany"] = "";
+                            Session["MRDailyAtt"] = "0";
+                            Session["MRLeave"] = "0";
+                            Session["MRMonthly"] = "0";
+                            Session["MRAudit"] = "0";
+                            Session["MRManualEditAtt"] = "0";
+                            Session["MREmployee"] = "0";
+                            Session["MRoster"] = "0";
+                            Session["MRDetail"] = "0";
+                            Session["MRSummary"] = "0";
+                            Session["MProcess"] = "0";
+                            return View();
+                        }
+                        else if (Session["LogedUserID"].ToString() == "")
+                        {
+                            return View();
+                        }
+                        else
+                        {
+                            return View("AfterLogin");
+                        }
                     }
                     else
                     {
-                        return View("AfterLogin");
+                        return View("LoadLicense");
                     }
                 }
                 else
                 {
-                    return View("LoadLicense");
+                    Session["CompanyName"] = "No Company";
+                    return View("CompanyInfo");
                 }
             }
             catch (Exception ex)
@@ -81,7 +92,35 @@ namespace WMS.Controllers
                 return View();
             }
         }
-
+        public ActionResult SaveCompanyInfo(HttpPostedFileBase uploadFile)
+        {
+            string CompanyName = Request.Form["CompanyName"].ToString();
+            string EPath = Request.Form["Path"].ToString();
+            if (uploadFile.ContentLength > 0)
+            {
+                string filePath = Path.GetFileName(uploadFile.FileName);
+                uploadFile.SaveAs(EPath + filePath);
+                //SaveImage("E:\\air.png");
+                SaveImage(EPath + filePath, CompanyName,EPath);
+            }
+            return RedirectToAction("Index");
+        }
+        private void SaveImage(string fileaddress,string ComName, string EPath)
+        {
+            //image to byteArray
+            Image img = Image.FromFile(fileaddress);
+            byte[] bArr = imgToByteArray(img);
+            //byte[] bArr = imgToByteConverter(img);
+            //Again convert byteArray to image and displayed in a picturebox
+            TAS2013Entities ctx = new TAS2013Entities();
+            Option oo = new Option();
+            oo.CompanyLogo = bArr;
+            oo.CompanyName = ComName;
+            oo.ServerFilePath = EPath;
+            oo.ID = 1;
+            ctx.Options.Add(oo);
+            ctx.SaveChanges();
+        }
         private void AdjustLeaves()
         {
             using (var mydb = new TAS2013Entities())
@@ -307,7 +346,7 @@ namespace WMS.Controllers
                               int NoOfUsres = Convert.ToInt32(GlobalVaribales.NoOfUsers);
                               users = dc.Users.Where(aa => aa.Deleted == false).ToList();
                               var usr = users.Take(NoOfUsres);
-                              var v = usr.Where(a => a.UserName.ToUpper().Equals(u.UserName.ToUpper()) && a.Password.ToUpper() == u.Password.ToUpper() && a.Status == true).FirstOrDefault();
+                              var v = usr.Where(a => a.UserName.ToUpper().Equals(u.UserName.ToUpper()) && a.Password.ToUpper() == u.Password.ToUpper()).FirstOrDefault();
                               //login for emplioyee
                               if (v != null)
                               {
@@ -428,6 +467,7 @@ namespace WMS.Controllers
                 Session["MRLeave"] = null;
                 Session["MRMonthly"] = null;
                 Session["MRAudit"] = null;
+                Session["CompanyName"] = null;
                 Session["MRManualEditAtt"] = null;
                 Session["MREmployee"] = null;
                 Session["MRDetail"] = null;

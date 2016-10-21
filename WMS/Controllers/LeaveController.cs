@@ -53,7 +53,7 @@ namespace WMS.Controllers
                 using (var ctx = new TAS2013Entities())
                 {
                     List<LvConsumed> _lvConsumed = new List<LvConsumed>();
-                    string empLvType = _lvapp.EmpID.ToString() + _lvapp.LeaveTypeID;
+                    string empLvType = _lvapp.EmpID.ToString() + _lvapp.LeaveTypeID +_lvapp.FromDate.Year.ToString("0000");
                     _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                     if (_lvConsumed.Count > 0)
                     {
@@ -88,7 +88,7 @@ namespace WMS.Controllers
                     string _EmpDate = lvappl.EmpID + datetime.Date.ToString("yyMMdd");
                     using (var context = new TAS2013Entities())
                     {
-                        if (context.AttProcesses.Where(aa => aa.ProcessDate == datetime).Count() > 0)
+                        if (context.AttDatas.Where(aa => aa.EmpDate == _EmpDate).Count() > 0)
                         {
                             AttData _EmpAttData = new AttData();
                             _EmpAttData = context.AttDatas.First(aa => aa.EmpDate == _EmpDate);
@@ -163,7 +163,7 @@ namespace WMS.Controllers
                 using (var ctx = new TAS2013Entities())
                 {
                     List<LvConsumed> _lvConsumed = new List<LvConsumed>();
-                    string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
+                    string empLvType = lvappl.EmpID.ToString() + lvappl.LeaveTypeID + lvappl.FromDate.Year.ToString("0000"); ;
                     _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                     float _NoOfDays = lvappl.NoOfDays;
                     if (_lvConsumed.Count > 0)
@@ -480,7 +480,7 @@ namespace WMS.Controllers
             string _EmpDate = lvappl.EmpID + datetime.Date.ToString("yyMMdd");
             using (var db = new TAS2013Entities())
             {
-                if (db.AttProcesses.Where(aa => aa.ProcessDate == datetime).Count() > 0)
+                if (db.AttDatas.Where(aa => aa.EmpDate== _EmpDate).Count() > 0)
                 {
                     AttData _EmpAttData = new AttData();
                     _EmpAttData = db.AttDatas.First(aa => aa.EmpDate == _EmpDate);
@@ -520,7 +520,7 @@ namespace WMS.Controllers
             {
                 using (var ctx = new TAS2013Entities())
                 {
-                    string empLvType = lvapplication.EmpID.ToString() + lvapplication.LvType;
+                    string empLvType = lvapplication.EmpID.ToString() + lvapplication.LeaveTypeID + lvapplication.FromDate.Year.ToString("0000");
                     _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                     if (_lvConsumed.Count > 0)
                     {
@@ -637,9 +637,9 @@ namespace WMS.Controllers
                 {
                     using (var context = new TAS2013Entities())
                     {
-                        if (context.AttProcesses.Where(aa => aa.ProcessDate == Date.Date).Count() > 0)
-                        {
                             string _empdate = _EmpID.ToString() + Date.Date.ToString("yyMMdd");
+                        if (context.AttDatas.Where(aa => aa.EmpDate== _empdate).Count() > 0)
+                        {
                             var _AttData = context.AttDatas.Where(aa => aa.EmpDate == _empdate);
                             if (_AttData != null)
                             {
@@ -672,7 +672,7 @@ namespace WMS.Controllers
             List<LvConsumed> _lvConsumed = new List<LvConsumed>();
             using (var ctx = new TAS2013Entities())
             {
-                string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
+                string empLvType = lvappl.EmpID.ToString() + lvappl.LeaveTypeID + lvappl.FromDate.Year.ToString("0000");
                 _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                 if (_lvConsumed.Count > 0)
                 {
@@ -719,9 +719,9 @@ namespace WMS.Controllers
                 {
                     using (var context = new TAS2013Entities())
                     {
-                        if (context.AttProcesses.Where(aa => aa.ProcessDate == Date.Date).Count() > 0)
+                        string _empdate = _EmpID.ToString() + Date.Date.ToString("yyMMdd");
+                        if (context.AttDatas.Where(aa => aa.EmpDate== _empdate).Count() > 0)
                         {
-                            string _empdate = _EmpID.ToString() + Date.Date.ToString("yyMMdd");
                             var _AttData = context.AttDatas.Where(aa => aa.EmpDate == _empdate);
                             if (_AttData != null)
                             {
@@ -753,7 +753,7 @@ namespace WMS.Controllers
             List<LvConsumed> _lvConsumed = new List<LvConsumed>();
             using (var ctx = new TAS2013Entities())
             {
-                string empLvType = lvappl.EmpID.ToString() + lvappl.LvType;
+                string empLvType = lvappl.EmpID.ToString() + lvappl.LeaveTypeID + lvappl.FromDate.Year.ToString("0000");
                 _lvConsumed = ctx.LvConsumeds.Where(aa => aa.EmpLvTypeYear == empLvType).ToList();
                 if (_lvConsumed.Count > 0)
                 {

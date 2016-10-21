@@ -150,7 +150,7 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Entry(readertype).State = EntityState.Modified;
+                db.Entry(readertype).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

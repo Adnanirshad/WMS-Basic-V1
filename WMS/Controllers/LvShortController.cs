@@ -155,7 +155,7 @@ namespace WMS.Controllers
             {
                 lvshort.CreatedDate = DateTime.Today;
                 lvshort.THour = lvshort.EHour - lvshort.SHour;
-                db.Entry(lvshort).State = EntityState.Modified;
+                db.Entry(lvshort).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 int _userID = Convert.ToInt32(Session["LogedUserID"].ToString());
                 HelperClass.MyHelper.SaveAuditLog(_userID, (byte)MyEnums.FormName.ShortLeave, (byte)MyEnums.Operation.Edit, DateTime.Now);

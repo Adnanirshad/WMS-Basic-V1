@@ -27,9 +27,10 @@ namespace WMS.Controllers
         [HttpPost]
         public ActionResult CreateLeaveQuota()
         {
-            int AL = Convert.ToInt32(Request.Form["ALeaves"].ToString());
-            int CL = Convert.ToInt32(Request.Form["CLeaves"].ToString());
-            int SL = Convert.ToInt32(Request.Form["SLeaves"].ToString());
+            double AL = Convert.ToDouble(Request.Form["ALeaves"].ToString());
+            double CL = Convert.ToDouble(Request.Form["CLeaves"].ToString());
+            double SL = Convert.ToDouble(Request.Form["SLeaves"].ToString());
+            DateTime QYear = Convert.ToDateTime(Request.Form["QYear"].ToString());
             ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
             List<Emp> _Emp = new List<Emp>();
             List<LvType> _lvType = new List<LvType>();
@@ -56,8 +57,16 @@ namespace WMS.Controllers
             if (_Emp.Count > 0)
             {
                 _lvType = db.LvTypes.Where(aa => aa.UpdateBalance == true).ToList();
-                GenerateLeaveQuotaAttributes(_Emp, _lvType, AL, CL, SL);
-                ViewBag.CMessage = "Leave Balance is created";
+                string val = CheckEmployeeLeaveQuota(_Emp, QYear.Year.ToString());
+                if (val == "OK")
+                {
+                    GenerateLeaveQuotaAttributes(_Emp, _lvType, AL, CL, SL, QYear.Year.ToString());
+                    ViewBag.CMessage = "Leave Balance is created";
+                }
+                else
+                {
+                    ViewBag.CMessage = "Already created quota for specific employee "+val;
+                }
             }
             else
             {
@@ -70,6 +79,16 @@ namespace WMS.Controllers
 
 
             return View("Index");
+        }
+
+        private string CheckEmployeeLeaveQuota(List<Emp> _Emp, string year)
+        {
+            foreach (var emp in _Emp)
+            {
+                if (db.LvConsumeds.Where(aa => aa.EmpID == emp.EmpID && aa.LvYear == year).Count() > 0)
+                    return emp.EmpNo;
+            }
+            return "OK";
         }
         //
         // GET: /LeaveSettings/Details/5
@@ -294,7 +313,7 @@ namespace WMS.Controllers
                 ); // Add the original exception as the innerException
             }
         }
-        public void GenerateLeaveQuotaAttributes(List<Emp> _emp, List<LvType> _lvType,int AL,int CL,int SL)
+        public void GenerateLeaveQuotaAttributes(List<Emp> _emp, List<LvType> _lvType, double AL, double CL, double SL, string year)
         {
             using (var ctx = new TAS2013Entities())
             {
@@ -307,10 +326,10 @@ namespace WMS.Controllers
                         List<LvConsumed> lvConsumedlvType = new List<LvConsumed>();
                         if (lvcon.Where(aa => aa.EmpLvTypeYear == empLvType).Count() == 0)
                         {
-                            string empType = emp.EmpID.ToString() + lvType.LvTypeID+DateTime.Today.Year.ToString("0000");
+                            string empType = emp.EmpID.ToString() + lvType.LvTypeID+year;
                             LvConsumed lvConsumed = new LvConsumed();
                             lvConsumed.EmpLvTypeYear = empType;
-                            lvConsumed.LvYear = DateTime.Today.Date.Year.ToString("0000");
+                            lvConsumed.LvYear = year;
                             lvConsumed.EmpID = emp.EmpID;
                             lvConsumed.LeaveTypeID = lvType.LvTypeID;
                             lvConsumed.JanConsumed = 0;

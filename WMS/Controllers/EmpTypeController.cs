@@ -158,7 +158,7 @@ namespace WMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Entry(emptype).State = EntityState.Modified;
+                db.Entry(emptype).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -83,8 +83,8 @@ namespace WMS.Models
         public DbSet<ViewEmpPic> ViewEmpPics { get; set; }
         public DbSet<ViewJobCardApp> ViewJobCardApps { get; set; }
         public DbSet<ViewLvApplication> ViewLvApplications { get; set; }
+        public DbSet<ViewMonthlyData> ViewMonthlyDatas { get; set; }
         public DbSet<ViewMultipleInOut> ViewMultipleInOuts { get; set; }
         public DbSet<ViewSection> ViewSections { get; set; }
-        public DbSet<ViewMonthlyData> ViewMonthlyDatas { get; set; }
     }
 }
