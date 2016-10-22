@@ -1,23 +1,24 @@
 ﻿@model WMS.Models.Department
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Department Edit";
 }
-
-<h2>Edit Groups</h2>
+<br />
+<h3>Edit Department</h3>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-    
-        <hr />
+     <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Dept/Edit" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
+    <div class="form-horizontal">          
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.DeptID)
 
         <div class="form-group">
-           <div class="control-label col-md-2">Group</div>
+           <div class="control-label col-md-2">Department</div>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.DeptName,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DeptName)
@@ -33,6 +34,9 @@
             </div>
         </div>
     </div>
+                </fieldset>
+            </form>
+         </div>
 }
 
 <script src="@Url.Content("~/Scripts/HR/DivisionCompany.js")"></script>

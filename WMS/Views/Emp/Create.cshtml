@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Create";
 }
+<br />
 <script type="text/javascript">
     function fileCheck(obj) {
         var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
@@ -12,8 +13,6 @@
     }
 </script>
 <h2>Create Employee</h2>
-<hr />
-
 <script>
     $(function () {
         $('#myTab a:last').tab('show')
@@ -23,11 +22,15 @@
 @using (Html.BeginForm("Create", "Emp", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
-    
+    <article class="row">
+ <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Emp/Create" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
          <div class="form-group">
-            <label class="control-label col-md-2">DHS/DHO<span style="color:red;"> *</span></label>
+            <label class="control-label col-md-2">Employee No<span style="color:red;"> *</span></label>
             <div class="col-md-2">
                 @Html.TextBoxFor(model => model.EmpID, new { @class = "form-control", @type="number" })
                 @Html.ValidationMessageFor(model => model.EmpID)
@@ -291,6 +294,10 @@
             </div>
         </div>
     </div>
+                </fieldset>
+            </form>
+     </div>
+        </article>
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

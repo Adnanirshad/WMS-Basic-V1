@@ -1,18 +1,21 @@
 ﻿@model WMS.Models.User
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "User Create";
 }
+<br />
     <div>
       <form class ="form-inline" role="form">
-          <div class="form-group "> <h2>Create User</h2> </div>
+          <div class="form-group "> <h3>Create new User</h3> </div>
       </form>  
     </div>
- <hr />
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+     <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/User/Create" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
     <div class="form-horizontal">
     @Html.ValidationSummary(true)
       <div ng-app="UserLocation" ng-controller="myCtrl" data-ng-init="initFunction()">
@@ -122,6 +125,9 @@
         </div>
       </div>
     </div>
+                </fieldset>
+            </form>
+         </div>
 }
 @*<div>
     <div ng-controller="myCtrl" data-ng-init="initFunction()">

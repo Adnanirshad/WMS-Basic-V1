@@ -1,13 +1,15 @@
 ﻿@model WMS.Models.Location
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Location Delete";
 }
-
-
-<h3>Are you sure you want to delete this Location?</h3>
+<br />
+<h3 style="color:red">Are you sure you want to delete this Location?</h3>
+ <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Location/Delete" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             Location Name:
@@ -34,3 +36,6 @@
     }
 <hr />
 </div>
+</fieldset>
+            </form>
+     </div>

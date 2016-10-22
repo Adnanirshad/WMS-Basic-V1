@@ -1,20 +1,24 @@
 ﻿@model WMS.Models.Emp
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Employee Details";
 }
-
-<h2>Details</h2>
-
+<br />
+<h2>Employee Details</h2>
+ <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Emp/Details" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
 <div>
-    <h4>Emp</h4>
 	<hr />
     <dl class="dl-horizontal">
-        <dt>
+        <section class="col-md-12">
+            <section class="col-md-6">
+                <dt>
             @Html.DisplayNameFor(model => model.EmpID)
         </dt>
         <dt>
-            DHS/DHO
+           Employee No
         </dt>
 
         <dd>
@@ -44,11 +48,6 @@
         <dd>
             @Html.DisplayFor(model => model.CardNo)
         </dd>
-
-        
-
-        
-
         <dt>
             @Html.DisplayNameFor(model => model.PinCode)
         </dt>
@@ -88,8 +87,48 @@
         <dd>
             @Html.DisplayFor(model => model.BirthDate)
         </dd>
+                     <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CellNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CellNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlagFP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlagFP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlagFace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlagFace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlagCard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlagCard)
+        </dd>
+            </section>
+            <section class="col-md-6">
+                <dt>
             @Html.DisplayNameFor(model => model.MarStatus)
         </dt>
 
@@ -136,19 +175,12 @@
         <dd>
             @Html.DisplayFor(model => model.HomeAdd)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.ProcessAtt)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.ProcessAtt)
         </dd>
-
-        
-
-        
-
         <dt>
             @Html.DisplayNameFor(model => model.Status)
         </dt>
@@ -172,68 +204,20 @@
         <dd>
             @Html.DisplayFor(model => model.Remarks)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CellNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CellNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FlagFP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FlagFP)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FlagFace)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FlagFace)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FlagCard)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FlagCard)
-        </dd>
-
-        <dt>
+                 <dt>
             @Html.DisplayNameFor(model => model.EmpImageID)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.EmpImageID)
-        </dd>
-
-       
-
-        
-
+        </dd>         
         <dt>
             @Html.DisplayNameFor(model => model.Designation.DesignationName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Designation.DesignationName)
-        </dd>
-
-        
+        </dd>       
         <dt>
             @Html.DisplayNameFor(model => model.Location.LocName)
         </dt>
@@ -264,11 +248,17 @@
 
         <dd>
             @Html.DisplayFor(model => model.EmpType.TypeName)
-       
-
+            </dd>
+        
+            </section>
+            </section>
+        <dd>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.EmpID } , new { @class = "btn btn-warning" })
+            @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+        </dd>          
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EmpID } , new { @class = "btn btn-warning" })
-    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
-</p>
+      
+</fieldset>
+            </form>
+     </div>

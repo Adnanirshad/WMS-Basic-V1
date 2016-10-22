@@ -23,7 +23,7 @@
         <th>
             @Html.ActionLink("Location", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
-        <th>Edit | View | Delete</th>
+        <th>Edit | Delete</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -33,7 +33,7 @@
         </td>               
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.LocID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
-            @Html.ActionLink(" ", "Details", new { id=item.LocID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" }) 
+            @*@Html.ActionLink(" ", "Details", new { id=item.LocID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" })*@ 
             @Html.ActionLink(" ", "Delete", new { id=item.LocID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
         </td>
     </tr>

@@ -1,20 +1,21 @@
 ﻿@model WMS.Models.Location
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Location Edit";
 }
-
+<br />
  <div>
       <form class ="form-inline" role="form">
           <div class="form-group "> <h3>Edit Location</h3> </div>
       </form>  
     </div>
- <hr />
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+     <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Location/Edit" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.LocID)
@@ -33,4 +34,7 @@
             </div>
         </div>
     </div>
+                </fieldset>
+            </form>
+         </div>
 }

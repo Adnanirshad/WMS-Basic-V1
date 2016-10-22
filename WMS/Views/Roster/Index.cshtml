@@ -1,12 +1,17 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roster Index";
 }
+<br />
 <article class="row">
         <header>
-            <h3>Define Roster</h3>
-            <h5>@Html.ActionLink("List of Roster Applications", "RosterAppIndex",null,new { @class = "" })</h5><hr/>
+            <h3>Define new Roster</h3>
+            <h5>@Html.ActionLink("List of Roster Applications", "RosterAppIndex",null,new { @class = "" })</h5>
         </header>
+     <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Roster/Index" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
         @using (Html.BeginForm("Create", "Roster", FormMethod.Post)) 
         {
             @Html.AntiForgeryToken()
@@ -143,6 +148,9 @@
                 </div>   
       
         }
+                </fieldset>
+            </form>
+         </div>
 </article>
 <script src="@Url.Content("~/Scripts/JavaScript1.js")"></script>
 <script src="@Url.Content("~/Scripts/rosterScript.js")"></script>

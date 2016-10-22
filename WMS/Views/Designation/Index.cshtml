@@ -13,9 +13,8 @@
           <div class="form-group"> <h3>Designations</h3> </div>
           <div class="form-group CreateBtnMargin"><p>@Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-xs btn-success" })</p></div>
           <div class="form-group pull-right SearchBtnMargin">
-              @using (Html.BeginForm("Index", "Designation", FormMethod.Get))
-                {
-                  <p>Find :@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)  
+              @using (Html.BeginForm("Index", "Designation", FormMethod.Get))              
+                 {<p>Find: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control"})  
                  <input class="btn btn-sm btn-success" type="submit" /></p>
               }
           </div> 
@@ -27,7 +26,7 @@
         <th>
             @Html.ActionLink("Designation", "Index", new { sortOrder = ViewBag.NameSortParm })
         </th>
-        <th>Edit|View|Delete</th>
+        <th>Edit|Delete</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -37,7 +36,7 @@
         </td>
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.DesignationID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
-            @Html.ActionLink(" ", "Details", new { id=item.DesignationID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" }) 
+           @* @Html.ActionLink(" ", "Details", new { id=item.DesignationID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" }) *@
             @Html.ActionLink(" ", "Delete", new { id=item.DesignationID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
         </td>
     </tr>

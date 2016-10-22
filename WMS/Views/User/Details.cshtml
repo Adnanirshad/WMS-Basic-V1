@@ -1,16 +1,19 @@
 ﻿@model WMS.Models.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
-
-<h2>Details</h2>
-
+<br />
+<h3>User Details</h3>
+<div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/User/Details" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
 <div>
-    <h4>User</h4>
-	<hr />
     <dl class="dl-horizontal">
-        <dt>
+        <section class="col-md-12">
+            <section class="col-md-6">
+                <dt>
             @Html.DisplayNameFor(model => model.UserName)
         </dt>
 
@@ -48,12 +51,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        
-
-        
-
+        </dd> 
         <dt>
             @Html.DisplayNameFor(model => model.CanEdit)
         </dt>
@@ -101,8 +99,9 @@
         <dd>
             @Html.DisplayFor(model => model.MDevice)
         </dd>
-
-        <dt>
+            </section>
+            <section class="col-md-6">
+                 <dt>
             @Html.DisplayNameFor(model => model.MLeave)
         </dt>
 
@@ -197,7 +196,8 @@
         <dd>
             @Html.DisplayFor(model => model.MRDetail)
         </dd>
-
+            </section>
+        </section>
        @* <dt>
             @Html.DisplayNameFor(model => model.MRSummary)
         </dt>
@@ -213,10 +213,6 @@
         <dd>
             @Html.DisplayFor(model => model.MRGraph)
         </dd>*@
-
-       
-        
-
         @*<dt>
             @Html.DisplayNameFor(model => model.UserRole.RoleName)
         </dt>
@@ -224,10 +220,14 @@
         <dd>
             @Html.DisplayFor(model => model.UserRole.RoleName)
         </dd>*@
-
+         <dd>
+            @Html.ActionLink(" Edit ", "Edit", new { id = Model.UserID } , new { @class = "btn btn-warning" })
+             @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
+        </dd>
     </dl>
-</div>
-<p>
-    @Html.ActionLink(" Edit ", "Edit", new { id = Model.UserID } , new { @class = "btn btn-warning" })
-     @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
-</p>
+        
+    </div>
+       
+</fieldset>
+            </form>
+    </div>

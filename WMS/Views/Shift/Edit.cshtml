@@ -3,17 +3,20 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+<br />
  <div>
       <form class ="form-inline" role="form">
           <div class="form-group "> <h2>Edit Shift Timings</h2> </div>
       </form>  
     </div>
- <hr />
+<hr />
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+    <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Shift/Edit" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.ShiftID)
@@ -237,6 +240,9 @@
             </div>
         </div>
     </div>
+                </fieldset>
+            </form>
+        </div>
 }
 <script type="text/javascript">
     $(document).ready(function () {

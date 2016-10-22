@@ -14,9 +14,15 @@
       </form>  
 </div>
  <hr />
+<div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Shift/Edit" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
 <div>
     <dl class="dl-horizontal">
-        <dt>
+        <section class="col-md-12">
+            <section class="col-md-4">
+                <dt>
             Shift Name:
         </dt>
 
@@ -66,12 +72,9 @@
         <dt>
             Roster Type:
         </dt>
-
-       @* <dd>
-            @Html.DisplayFor(model => model.RosterType1.Name)
-        </dd>*@
-
-        <dt>
+            </section>
+            <section class="col-md-4">
+                <dt>
             Monday Work Min:
         </dt>
 
@@ -126,8 +129,10 @@
         <dd>
             @Html.DisplayFor(model => model.SunMin)
         </dd>
-        <dt>
-            <span style="font-size:18px;">Margins</span><hr />
+            </section>
+            <section class="col-md-4">
+                 <dt>
+            <div style="font-size:18px;">Margins:</div>
         </dt>
 
         <dd>
@@ -218,9 +223,22 @@
         <dd>
             @Html.DisplayFor(model => model.BreakMin)
         </dd>
+            </section>
+        </section>
+        
+
+       @* <dd>
+            @Html.DisplayFor(model => model.RosterType1.Name)
+        </dd>*@
+
+        
+       
         <dd>
              @Html.ActionLink(" Edit ", "Edit", new { id = Model.ShiftID } , new { @class = "btn btn-warning" })
              @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
         </dd>
     </dl>
 </div>
+                </fieldset>
+            </form>
+    </div>

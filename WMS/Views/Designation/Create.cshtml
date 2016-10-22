@@ -1,19 +1,21 @@
 ﻿@model WMS.Models.Designation
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Designation Create";
 }
-
+<br />
  <div>
       <form class ="form-inline" role="form">
           <div class="form-group "> <h2>Add Designation</h2> </div>
       </form>  
     </div>
- <hr />
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Designation/Create" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
 
@@ -32,4 +34,7 @@
             </div>
         </div>
     </div>
+                </fieldset>
+            </form>
+        </div>
 }

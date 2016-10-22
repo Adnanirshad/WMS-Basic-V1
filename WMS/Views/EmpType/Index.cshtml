@@ -25,7 +25,7 @@
             @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CatSortParm })
         </th>*@
        
-        <th>Edit | View | Delete</th>
+        <th>Edit | Delete</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -39,7 +39,7 @@
         
         <td>
             @Html.ActionLink(" ", "Edit", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" }) 
-            @Html.ActionLink(" ", "Details", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" }) 
+            @*@Html.ActionLink(" ", "Details", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" })*@ 
             @Html.ActionLink(" ", "Delete", new { id=item.TypeID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
         </td>
     </tr>

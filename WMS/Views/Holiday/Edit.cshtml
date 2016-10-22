@@ -1,31 +1,33 @@
 ﻿@model WMS.Models.Holiday
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Holiday Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Holiday</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+     <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Holiday/Edit" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
     <div class="form-horizontal">
-        <h4>Holiday</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.HolID)
 
         <div class="form-group">
-           <div class="control-label col-md-2">Date</div>
-            <div class="col-md-10">
+           <lable class="control-label col-md-2">Date</lable>
+            <div class="col-md-3">
                 @Html.EditorFor(model => model.HolDate)
                 @Html.ValidationMessageFor(model => model.HolDate)
             </div>
         </div>
 
         <div class="form-group">
-           <div class="control-label col-md-2">Description</div>
+           <lable class="control-label col-md-2">Description</lable>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.HolDesc, new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.HolDesc)
@@ -39,5 +41,8 @@
             </div>
         </div>
     </div>
+                </fieldset>
+            </form>
+         </div>
 }
 

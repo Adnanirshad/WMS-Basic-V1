@@ -1,7 +1,7 @@
 ﻿@model WMS.Models.Designation
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Designation Delete";
 }
 
 <style>
@@ -11,8 +11,11 @@
     }
 </style>
 
-<h2>Are you sure you want to delete this Designation?</h2>
-<hr />
+<h3 style="color:red">Are you sure you want to delete this Designation?</h3>
+<div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Designation/Delete" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
 <div>
     <dl class="dl-horizontal">
         <dt>
@@ -39,3 +42,6 @@
     }
     <hr />
 </div>
+</fieldset>
+            </form>
+    </div>

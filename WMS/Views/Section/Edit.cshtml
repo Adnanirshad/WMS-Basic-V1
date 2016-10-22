@@ -1,22 +1,24 @@
 ﻿@model WMS.Models.Section
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Section Edit";
 }
-
-<h2>Edit Unit</h2>
+<br />
+<h3>Edit Section</h3>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+     <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Holiday/Create" enctype="multipart/form-data" method="post">
+             @Html.AntiForgeryToken()
+            <fieldset>
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.SectionID)
 
         <div class="form-group">
-            <label class="control-label col-md-2">Group</label>
+            <label class="control-label col-md-2">Department</label>
             <div class="col-md-10">
               <select class="btn btn-default dropdown-toggle dropdown ComboBoxWidth" id="DeptID" name="DeptID"></select>
                         @Html.HiddenFor(model => model.DeptID , new { id = "selectedDeptIDHidden" }) 
@@ -24,7 +26,7 @@
             </div>
         </div>
           <div class="form-group">
-           <label class="control-label col-md-2">DTE</label>
+           <label class="control-label col-md-2">Section</label>
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.SectionName,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.SectionName)
@@ -38,6 +40,9 @@
             </div>
         </div>
     </div>
+                </fieldset>
+            </form>
+         </div>
 }
 
 <script src="@Url.Content("~/Scripts/HR/DeptCompany.js")"></script>
