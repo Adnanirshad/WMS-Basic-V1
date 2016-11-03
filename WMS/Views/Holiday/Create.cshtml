@@ -1,18 +1,16 @@
-﻿@model WMS.Models.Holiday
+﻿ @model WMS.Models.Holiday
 
 @{
     ViewBag.Title = "Create";
 }
-
- <h2>Create Holiday</h2>
-
+<br />
 @using (Html.BeginForm()) 
 {
-    @Html.AntiForgeryToken()
     <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Holiday/Create" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+                 <h3>Create Holiday</h3>
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true)

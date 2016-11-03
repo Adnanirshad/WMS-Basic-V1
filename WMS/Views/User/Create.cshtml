@@ -4,18 +4,18 @@
     ViewBag.Title = "User Create";
 }
 <br />
-    <div>
-      <form class ="form-inline" role="form">
-          <div class="form-group "> <h3>Create new User</h3> </div>
-      </form>  
-    </div>
+  <br /> 
 @using (Html.BeginForm()) 
 {
-    @Html.AntiForgeryToken()
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/User/Create" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+     <div>
+      <form class ="form-inline" role="form">
+          <div class="form-group "> <h3>Create new User</h3> </div>
+      </form>  
+    </div>
     <div class="form-horizontal">
     @Html.ValidationSummary(true)
       <div ng-app="UserLocation" ng-controller="myCtrl" data-ng-init="initFunction()">
@@ -91,12 +91,9 @@
                 <div class=" col-md-2 text-right">Forms</div>
                 <div class="col-md-10">
                     @Html.CheckBox("MHR") <label>HR</label>
-                    @Html.CheckBox("MOption") <label>Options</label>
                     @Html.CheckBox("MLeave") <label>Leaves</label>
-                    @Html.CheckBox("MRoster") <label>Roster</label>
                     @Html.CheckBox("MUser") <label>Users</label>
-                    @Html.CheckBox("MDevice") <label>Devices</label>
-                    @Html.CheckBox("MDesktop") <label>Desktop</label>
+                    @Html.CheckBox("MDevice") <label>Readers</label>
                     @Html.CheckBox("MEditAtt") <label>Edit Attendance</label>
                     @Html.CheckBox("MProcess") <label>Process Attendance</label>
                     
@@ -107,11 +104,9 @@
                 <div class="col-md-10">
                         @Html.CheckBox("MRLeave") <label>Leaves</label>
                         @Html.CheckBox("MRDailyAtt") <label>Daily Attendance</label>
-                        @Html.CheckBox("MRMonthly") <label>Monthly Attendance</label>
-                        @Html.CheckBox("MRAudit") <label>Audit</label>
-                    @Html.CheckBox("MRManualEditAtt") <label>Edit Attendance</label>
-                    @Html.CheckBox("MRDetail") <label>Detailed</label>
-                    @Html.CheckBox("MRSummary") <label>Summary</label>
+                        @Html.CheckBox("MRMonthly") <label>Monthly Attendance</label>                                       
+                        @Html.CheckBox("MRDetail") <label>Detailed</label>
+                
                 </div>
             </div>
      </section>

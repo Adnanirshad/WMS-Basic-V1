@@ -10,7 +10,6 @@
         </header>
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Roster/Index" enctype="multipart/form-data" method="post">
-             @Html.AntiForgeryToken()
             <fieldset>
         @using (Html.BeginForm("Create", "Roster", FormMethod.Post)) 
         {

@@ -12,7 +12,7 @@
         }
     }
 </script>
-<h2>Create Employee</h2>
+<br />
 <script>
     $(function () {
         $('#myTab a:last').tab('show')
@@ -21,12 +21,13 @@
 
 @using (Html.BeginForm("Create", "Emp", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
-    @Html.AntiForgeryToken()
     <article class="row">
  <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Emp/Create" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+           <h3>Create New Employees</h3>
+                <hr />
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
          <div class="form-group">

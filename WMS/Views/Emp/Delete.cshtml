@@ -7,10 +7,11 @@
 <h3 style="color:red">Are you sure you want to delete this? "Employee"</h3>
  <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Emp/Delete" enctype="multipart/form-data" method="post">
-             @Html.AntiForgeryToken()
             <fieldset>
 <div>
     <hr />
+     @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
     <dl class="dl-horizontal">
          <section class="col-md-12">
             <section class="col-md-6">
@@ -254,8 +255,7 @@
             </section>
     </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+   
 
          <div class="form-actions no-color">
             <div class="col-md-offset-1 col-md-10">
