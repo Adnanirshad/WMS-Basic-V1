@@ -14,3 +14,23 @@
         }
     });
 });
+$(document).ready(function () {
+
+    document.getElementById("EName").innerHTML = "Name: No Selected Employee";
+    document.getElementById("EFName").innerHTML = "FatherName: No Selected Employee";
+    document.getElementById("EDesignation").innerHTML = "Designation: No Selected Employee";
+    document.getElementById("ESection").innerHTML = "Section: No Selected Employee";
+    $('#buttonId').click(function () {
+        var empNo = document.getElementById("EmpNo").value;
+        //var URL = '/WMS/LvApp/GetEmpInfo';
+        var URL = '/Emp/GetEmployeeInfo';
+        $.getJSON(URL, { EmpNo: empNo }, function (data) {
+            var values = data.split('@');
+            document.getElementById("EName").innerHTML = values[0];
+            document.getElementById("EFName").innerHTML = values[1];
+            document.getElementById("EDesignation").innerHTML = values[2];
+            document.getElementById("ESection").innerHTML = values[3];
+
+        });
+    });
+});

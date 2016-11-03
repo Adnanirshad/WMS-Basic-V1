@@ -3,15 +3,15 @@
 @{
     ViewBag.Title = "Create";
 }
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-       <br />
-    <fieldset>
-     
-
+<br />
+<div class="well bs-component">
+        <form class="form-horizontal" action="~/LvApp/Create" enctype="multipart/form-data" method="post">
+            <fieldset>
         <legend>Attendance Processor</legend>
+        <hr />
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)     
+<section class="col-md-8">
  <div class="form-horizontal">
      <div class="form-group">
             <div class="control-label col-md-2">Process Type</div>
@@ -37,24 +37,31 @@
             </div>
         </div>
     </div>
-    <div id="employee">
-        <div class="form-group" >
-            <div class="control-label col-md-2">Employee No</div>
-            <div class="col-md-10">
-              @Html.TextBox("EmpNo",null,new { @class = "form-control"})
+     <div id="employee">
+        <div class="form-group" id="ByEmpNoDiv">
+            <div class="form-inline">
+                <label class="col-lg-2 col-md-2 col-sm-2 control-label">Emp No</label>
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div class="input-group">
+                        <input  autofocus id="EmpNo" name="EmpNo" type="text" class="form-control" placeholder="EMP-00001"/>
+                        <span class="input-group-btn">
+                            <input type='button' id="buttonId" name="buttonId" value="Search"  class="btn btn-secondary"/>? 
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
      <div class="form-group" >
             <div class="control-label col-md-2">From</div>
-            <div class="col-md-3">
+            <div class="col-md-4">
             @Html.EditorFor(model => model.DateFrom,@DateTime.Today.ToString("dd-MMM-yyyy"))
                 @Html.ValidationMessageFor(model => model.DateFrom)
             </div>
         </div>
      <div class="form-group" >
             <div class="control-label col-md-2">To</div>
-            <div class="col-md-3">
+            <div class="col-md-4">
             @Html.EditorFor(model => model.DateTo,@DateTime.Today.ToString("dd-MMM-yyyy"))
                 @Html.ValidationMessageFor(model => model.DateTo)
             </div>
@@ -66,13 +73,34 @@
                  @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary " })
             </div>
         </div>
+     
      </div>
-       
-    </fieldset>
+       </section>
+     <div id="empsid">
+        <section class="col-md-4" style="height:620px;"> 
+        <div class="list-group">                  
+            <a  class="list-group-item">
+                <h4 class="list-group-item-heading">Employee Information</h4>
+                <p id="EName" class="list-group-item-text EmpInfoSecondaryMargin"></p>
+                <p id="EFName" class="list-group-item-text EmpInfoSecondaryMargin"></p>
+                <p id="EDesignation" class="list-group-item-text EmpInfoSecondaryMargin"></p>                       
+                <p id="ESection" class="list-group-item-text EmpInfoSecondaryMargin"></p>                                            
+            </a>                  
+        </div>  
+    </section>
+         </div>
 }
+</fieldset>
+            </form>
+    </div>
 
 
 
-
-
+<style>
+    hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
+    }
+</style>
 <script src="@Url.Content("~/Scripts/ProcessAtt/CriteriaValueAttProcessor.js")"></script>

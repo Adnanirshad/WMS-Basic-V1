@@ -4,7 +4,6 @@
     ViewBag.Title = "User Create";
 }
 <br />
-  <br /> 
 @using (Html.BeginForm()) 
 {
      <div class="well bs-component">
@@ -16,6 +15,7 @@
           <div class="form-group "> <h3>Create new User</h3> </div>
       </form>  
     </div>
+                <hr/>
     <div class="form-horizontal">
     @Html.ValidationSummary(true)
       <div ng-app="UserLocation" ng-controller="myCtrl" data-ng-init="initFunction()">
@@ -135,3 +135,10 @@
 <script src="~/Scripts/angular/MainController.js"></script>  
 <script src="~/Scripts/angular/UserController.js"></script>
 <script src="~/Scripts/UserScripts.js"></script>
+<style>
+    hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
+    }
+</style>

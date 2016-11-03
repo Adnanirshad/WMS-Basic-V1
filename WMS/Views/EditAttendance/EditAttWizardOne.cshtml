@@ -10,7 +10,11 @@
         $('.focus :input').focus();
     });
 </script>
-
+<br />
+<div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/EmpType/Create" enctype="multipart/form-data" method="post">
+           
+            <fieldset>
 @using (Html.BeginForm("EditAttWizardData", "EditAttendance", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -26,8 +30,8 @@
             </div>
     </div>
 </div>
-    <div class="form-horizontal">
-        <hr />
+    <hr />
+    <div class="form-horizontal">    
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.EmpDate)
         <div>
@@ -345,7 +349,9 @@
 
 </div>
 }
-
+</fieldset>
+            </form>
+    </div>
 <script type="text/javascript">
     jQuery(function ($) {
         $("#date1").mask("99/99/9999", { placeholder: "mm/dd/yyyy" });
@@ -369,3 +375,10 @@
             document.getElementById("ShiftMin").disabled = true;
     }
 </script>
+<style>
+    hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
+    }
+</style>

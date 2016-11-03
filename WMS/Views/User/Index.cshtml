@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<br>
 <div>
       <form class ="form-inline" role="form">
-          <div class="form-group"> <h2>Users</h2> </div>
+          <div class="form-group"><h2>Users</h2></div>
           <div class="form-group CreateBtnMargin"><p>@Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-xs btn-success" })</p></div>
           <div class="form-group pull-right SearchBtnMargin">
               @using (Html.BeginForm("Index", "User", FormMethod.Get))
@@ -44,7 +44,7 @@
             CompName
         </th>*@
         
-        <th>Edit | View </th>
+        <th>Edit</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -116,8 +116,8 @@
         
         <td>
             @Html.ActionLink(" " , "Edit", new { id=item.UserID },new { @class = "glyphicon glyphicon-pencil btn btn-warning btn-xs" })
-            @Html.ActionLink(" " , "Details", new { id=item.UserID },new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" })
-            @Html.ActionLink(" ", "Delete", new { id=item.UserID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })
+           @* @Html.ActionLink(" " , "Details", new { id=item.UserID },new { @class = "glyphicon glyphicon-list btn btn-info btn-xs" })
+            @Html.ActionLink(" ", "Delete", new { id=item.UserID }, new { @class = "glyphicon glyphicon-trash btn btn-danger btn-xs" })*@
         </td>
     </tr>
 }

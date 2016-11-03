@@ -4,17 +4,19 @@
     ViewBag.Title = "Employee Type Create";
 }
 <br />
-<div>
-      <form class ="form-inline" role="form">
-          <div class="form-group "> <h3>Add Employee Type</h3> </div>
-      </form>  
-    </div>
+
 @using (Html.BeginForm()) 
 {
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/EmpType/Create" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+        <div>
+      <form class ="form-inline" role="form">
+          <div class="form-group "> <h3>Add Employee Type</h3> </div>
+      </form>  
+    </div>
+                <hr />
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
 
@@ -45,3 +47,10 @@
             </form>
          </div>
 }
+<style>
+    hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
+    }
+</style>

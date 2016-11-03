@@ -3,9 +3,13 @@
 @{
     ViewBag.Title = "Edit";
 }
+<br />
+<div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/Holiday/Create" enctype="multipart/form-data" method="post">
+            <fieldset>
  <div>
       <form class ="form-inline" role="form">
-          <div class="form-group "> <h2>Edit Reader Configuration</h2> </div>
+          <div style="margin-left:2%" class="form-group "> <h2>Edit Reader Configuration</h2> </div>
       </form>  
     </div>
  <hr />
@@ -91,4 +95,13 @@
         </div>
     </div>
 }
-
+</fieldset>
+            </form>
+    </div>
+<style>
+    hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
+    }
+</style>

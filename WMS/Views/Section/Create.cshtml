@@ -4,7 +4,7 @@
     ViewBag.Title = "Section Create";
 }
 <br />
-<h3>Add new Sections</h3>
+
 
 @using (Html.BeginForm()) 
 {
@@ -12,6 +12,8 @@
         <form class="form-horizontal" action="~/Views/Holiday/Create" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+        <h3>Add new Sections</h3>
+<hr />
     <div class="form-horizontal">
 
         @Html.ValidationSummary(true)
@@ -47,3 +49,10 @@
 }
 
 <script src="@Url.Content("~/Scripts/HR/DeptCompanyCreate.js")"></script>
+<style>
+    hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
+    }
+</style>

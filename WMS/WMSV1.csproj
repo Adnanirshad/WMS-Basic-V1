@@ -175,6 +175,7 @@
     <Content Include="Content\style\filter-navigation.css" />
     <Content Include="Content\style\filters-page.css" />
     <Content Include="Content\style\HoverBtn.css" />
+    <Content Include="Content\style\Hrcolor.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="ErrorPages\ErrorPage.aspx" />

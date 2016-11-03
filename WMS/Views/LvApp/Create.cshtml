@@ -3,17 +3,17 @@
 @{
     ViewBag.Title = "Create";
 }
-
-<div>
-      <form class ="form-inline" role="form">
-          <div class="form-group "> <h3>Add Leave Application</h3> </div>
-      </form>  
-</div>
- <hr />
+<br />
 <article class="row">
  <div class="well bs-component">
         <form class="form-horizontal" action="~/LvApp/Create" enctype="multipart/form-data" method="post">
             <fieldset>
+        <div style="margin-left:2%">
+            <form class ="form-inline" role="form">
+             <div class="form-group "> <h3>Add Leave Application</h3> </div>
+            </form>  
+        </div>
+                <hr />
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -141,6 +141,13 @@
     #ToDate
     {
         width:200px;
+    }
+</style>
+<style>
+    hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
     }
 </style>
 <script src="~/Scripts/LvAppLoadEmpInfo.js" type="text/javascript"></script>

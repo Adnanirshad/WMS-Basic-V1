@@ -29,11 +29,10 @@
                 $('#company').css('display', 'none');
                 $('#CategoryID').css('display', 'none');
                 $('#employee').css('display', 'inline');
-                $('#empDetails').css('display', 'none');
-                break;
+                $('#empDetails').css('display', 'none');          
+                break;               
         }
     });
-
     $('#ProcessCats').change(function () {
         switch ($("#ProcessCats option:selected").html()) {
             case 'Yes':
@@ -44,24 +43,24 @@
         }
     });
 
+    $(document).ready(function () {
 
-
-
-    $('#buttonId').click(function () {
-        var companyid = document.getElementById("CompanyIDForEmp").value;
-        var empNo = document.getElementById("EmpNo").value;
-        var URL = '/WMS/AttProcessors/GetEmpInfo';
-        // var URL = '/Emp/GradeList';
-        $.getJSON(URL + '/' + empNo + "w" + companyid, function (data) {
-            $('#empDetails').css('display', 'inline');
-            if (data == "NotFound")
-                document.getElementById("EName").value = "Employee not found";
-            else {
+        document.getElementById("EName").innerHTML = "Name: No Selected Employee";
+        document.getElementById("EFName").innerHTML = "FatherName: No Selected Employee";
+        document.getElementById("EDesignation").innerHTML = "Designation: No Selected Employee";
+        document.getElementById("ESection").innerHTML = "Section: No Selected Employee";
+        $('#buttonId').click(function () {
+            var empNo = document.getElementById("EmpNo").value;
+            //var URL = '/WMS/LvApp/GetEmpInfo';
+            var URL = '/Emp/GetEmployeeInfo';
+            $.getJSON(URL, { EmpNo: empNo }, function (data) {
                 var values = data.split('@');
-                document.getElementById("EName").value = values[0];
-                document.getElementById("EDesignation").value = values[1];
-                document.getElementById("ESection").value = values[2];
-            }
+                document.getElementById("EName").innerHTML = values[0];
+                document.getElementById("EFName").innerHTML = values[1];
+                document.getElementById("EDesignation").innerHTML = values[2];
+                document.getElementById("ESection").innerHTML = values[3];
+
+            });
         });
-    });
+    });      
 });
