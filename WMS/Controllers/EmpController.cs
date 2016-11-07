@@ -187,7 +187,7 @@ namespace WMS.Controllers
             int cardno = Convert.ToInt32(emp.CardNo);
             emp.EmpNo = emp.EmpID.ToString();
             emp.CardNo = cardno.ToString("0000000000");
-            if(db.Emps.Where(aa=>aa.Status==true && aa.Deleted!=true).Count()>=Convert.ToInt32(GlobalVaribales.NoOfEmps))
+            if (db.Emps.Where(aa => aa.Status == true && aa.Deleted != true).Count() >= Convert.ToInt32(GlobalVaribales.NoOfEmps))
                 ModelState.AddModelError("EmpNo", "Active Number of employees are exceeded from license ");
             if (string.IsNullOrEmpty(emp.EmpNo))
                 ModelState.AddModelError("EmpNo", "Emp No is required!");
@@ -205,13 +205,13 @@ namespace WMS.Controllers
             {
                 if (emp.EmpNo.Length > 15)
                     ModelState.AddModelError("EmpNo", "String length exceeds!");
-                if (db.Emps.Where(aa => aa.EmpNo.ToUpper() == emp.EmpNo.ToUpper()).Count() > 0 )
+                if (db.Emps.Where(aa => aa.EmpNo.ToUpper() == emp.EmpNo.ToUpper()).Count() > 0)
                     ModelState.AddModelError("EmpNo", "Emp No should be unique!");
             }
             if (emp.CardNo != null)
             {
                 if (db.Emps.Where(aa => aa.CardNo == emp.CardNo).Count() > 0)
-                    if(emp.CardNo!="0000000000")
+                    if (emp.CardNo != "0000000000")
                         ModelState.AddModelError("CardNo", "Card No should be unique!");
                 if (emp.CardNo.Length > 10)
                     ModelState.AddModelError("CardNo", "String length exceeds!");
@@ -221,13 +221,13 @@ namespace WMS.Controllers
                 if (emp.EmpName.Length > 40)
                     ModelState.AddModelError("EmpName", "String length exceeds!");
             }
-            if(emp.SecID== null)
+            if (emp.SecID == null)
                 ModelState.AddModelError("SecID", "Please Specify section!");
             if (emp.TypeID == null)
                 ModelState.AddModelError("TypeID", "Please Specify Type!");
             //if (emp.GradeID == null)
-                //ModelState.AddModelError("GradeID", "Please Specify Grade!");
-            if(db.Emps.Where(aa=>aa.Status==true).Count()> Convert.ToInt32(GlobalVaribales.NoOfEmps))
+            //ModelState.AddModelError("GradeID", "Please Specify Grade!");
+            if (db.Emps.Where(aa => aa.Status == true).Count() > Convert.ToInt32(GlobalVaribales.NoOfEmps))
                 ModelState.AddModelError("EmpNo", "Your Employees has exceeded from License, Please upgrade your license");
             if (ModelState.IsValid)
             {
@@ -256,7 +256,7 @@ namespace WMS.Controllers
                 {
                     ImageConversion _Image = new ImageConversion();
                     int imageID = _Image.UploadImageInDataBase(file, emp.EmpNo);
-                    if (imageID!=0)
+                    if (imageID != 0)
                     {
                         using (var ctx = new TAS2013Entities())
                         {
@@ -280,18 +280,18 @@ namespace WMS.Controllers
             using (TAS2013Entities context = new TAS2013Entities())
             {
 
-            //ViewBag.Wing = new SelectList(_wings.OrderBy(s=>s.DivisionName), "WingID", "WingName");
-            User LoggedInUser = Session["LoggedUser"] as User;
-            //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
-            ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s=>s.DesignationName), "DesignationID", "DesignationName");
-            //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
-            //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
-            ViewBag.LocID = new SelectList(db.Locations.OrderBy(s=>s.LocName), "LocID", "LocName");
-            ViewBag.SecID = new SelectList(db.Sections.OrderBy(s=>s.SectionName), "SectionID", "SectionName");
-            ViewBag.ShiftID = new SelectList(db.Shifts.OrderBy(s=>s.ShiftName), "ShiftID", "ShiftName");
-            ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s=>s.TypeName), "TypeID", "TypeName");
-            //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
-            ViewBag.DeptID = new SelectList(db.Departments.OrderBy(s=>s.DeptName), "DeptID", "DeptName");
+                //ViewBag.Wing = new SelectList(_wings.OrderBy(s=>s.DivisionName), "WingID", "WingName");
+                User LoggedInUser = Session["LoggedUser"] as User;
+                //ViewBag.CrewID = new SelectList(db.Crews.OrderBy(s=>s.CrewName), "CrewID", "CrewName");
+                ViewBag.DesigID = new SelectList(db.Designations.OrderBy(s => s.DesignationName), "DesignationID", "DesignationName");
+                //ViewBag.GradeID = new SelectList(db.Grades.OrderBy(s=>s.GradeName), "GradeID", "GradeName");
+                //ViewBag.JobID = new SelectList(db.JobTitles.OrderBy(s=>s.JobTitle1), "JobID", "JobTitle1");
+                ViewBag.LocID = new SelectList(db.Locations.OrderBy(s => s.LocName), "LocID", "LocName");
+                ViewBag.SecID = new SelectList(db.Sections.OrderBy(s => s.SectionName), "SectionID", "SectionName");
+                ViewBag.ShiftID = new SelectList(db.Shifts.OrderBy(s => s.ShiftName), "ShiftID", "ShiftName");
+                ViewBag.TypeID = new SelectList(db.EmpTypes.OrderBy(s => s.TypeName), "TypeID", "TypeName");
+                //ViewBag.CatID = new SelectList(db.Categories.OrderBy(s=>s.CatName), "CatID", "CatName");
+                ViewBag.DeptID = new SelectList(db.Departments.OrderBy(s => s.DeptName), "DeptID", "DeptName");
             }
             return View(emp);
         }

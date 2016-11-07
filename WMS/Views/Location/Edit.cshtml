@@ -4,17 +4,18 @@
     ViewBag.Title = "Location Edit";
 }
 <br />
- <div>
-      <form class ="form-inline" role="form">
-          <div class="form-group "> <h3>Edit Location</h3> </div>
-      </form>  
-    </div>
 @using (Html.BeginForm())
 {
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Location/Edit" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+     <div>
+      <form class ="form-inline" role="form">
+          <div class="form-group "> <h3>Edit Location</h3> </div>
+      </form>  
+    </div>
+    <hr />
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.LocID)
@@ -37,3 +38,10 @@
             </form>
          </div>
 }
+<style>
+    hr {
+        color: #fff;
+        background-color: #fff;
+        height: 1px;
+    }
+</style>

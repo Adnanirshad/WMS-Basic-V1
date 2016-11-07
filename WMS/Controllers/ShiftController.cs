@@ -25,7 +25,15 @@ namespace WMS.Controllers
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.ShiftNameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.StartTimeSortParm = sortOrder == "LvType" ? "LvType_desc" : "LvType";
+            ViewBag.MonMinSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.TueMinSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
+            ViewBag.WedMinSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
+            ViewBag.ThuMinSortParm = sortOrder == "thu" ? "Leave_desc" : "Leave";
+            ViewBag.FriMinSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
+            ViewBag.SatMinSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
+            ViewBag.SunMinSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
             if (searchString != null)
             {
                 page = 1;
@@ -34,32 +42,56 @@ namespace WMS.Controllers
             {
                 searchString = currentFilter;
             }
-
-            ViewBag.CurrentFilter = searchString;
             User LoggedInUser = Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
-            string query = qb.QueryForLocationSegeration(LoggedInUser);
-            DataTable dt = qb.GetValuesfromDB("select * from Shift " + query);
-            List<Shift> shift1 = dt.ToList<Shift>();
-            var shift = shift1.AsQueryable();
-
+            //string query = qb.MakeCustomizeQuery(LoggedInUser);         
+            DataTable dt = qb.GetValuesfromDB("select * from Shift");
+            List<Shift> lvapplications = dt.ToList<Shift>();
+            ViewBag.CurrentFilter = searchString;
+            //var lvapplications = db.LvApplications.Where(aa=>aa.ToDate>=dt2).Include(l => l.Emp).Include(l => l.LvType1);
             if (!String.IsNullOrEmpty(searchString))
             {
-                shift = shift.Where(s => s.ShiftName.ToUpper().Contains(searchString.ToUpper()));
+                lvapplications = lvapplications.Where(s => s.ShiftName.ToUpper().Contains(searchString.ToUpper())
+                     || s.ShiftName.ToUpper().Contains(searchString.ToUpper())).ToList();               
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    shift = shift.OrderByDescending(s => s.ShiftName);
+                    lvapplications = lvapplications.OrderByDescending(s => s.ShiftName).ToList();
+                    break;
+
+                case "LvType_desc":
+                    lvapplications = lvapplications.OrderByDescending(s => s.StartTime).ToList();
+                    break;
+                case "LvType":
+                    lvapplications = lvapplications.OrderBy(s => s.MonMin).ToList();
+                    break;
+                case "Date_desc":
+                    lvapplications = lvapplications.OrderByDescending(s => s.TueMin).ToList();
+                    break;
+                case "Date":
+                    lvapplications = lvapplications.OrderBy(s => s.WedMin).ToList();
+                    break;
+                case "thu":
+                    lvapplications = lvapplications.OrderBy(s => s.ThuMin).ToList();
+                    break;
+                case "fri":
+                    lvapplications = lvapplications.OrderBy(s => s.FriMin).ToList();
+                    break;
+                case "sat":
+                    lvapplications = lvapplications.OrderBy(s => s.SatMin).ToList();
+                    break;
+                case "sun":
+                    lvapplications = lvapplications.OrderBy(s => s.SunMin).ToList();
                     break;
                 default:
-                    shift = shift.OrderBy(s => s.ShiftName);
+                    lvapplications = lvapplications.OrderBy(s => s.ShiftName).ToList();
                     break;
             }
-            int pageSize = 8;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
-            return View(shift.ToPagedList(pageNumber, pageSize));
+            return View(lvapplications.OrderByDescending(aa => aa.ShiftID).ToPagedList(pageNumber, pageSize));
 
         }
 

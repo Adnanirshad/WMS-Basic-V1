@@ -48,43 +48,49 @@ namespace WMS.Controllers
                     AttData _attData = new AttData();
                     List<Emp> _Emp = new List<Emp>();
                     int EmpID = 0;
-                    _Emp = db.Emps.Where(aa => aa.EmpNo == _EmpNo && aa.Status==true).ToList();
+                    _Emp = db.Emps.Where(aa => aa.EmpNo == _EmpNo && aa.Status == true).ToList();                   
                     if (_Emp.Count > 0)
-                        EmpID = _Emp.FirstOrDefault().EmpID;
-                    _attData = db.AttDatas.FirstOrDefault(aa => aa.EmpID == EmpID && aa.AttDate == _AttDataFrom);
-                    if (_attData != null)
                     {
-                        List<PollData> _Polls = new List<PollData>();
-                        string _EmpDate = _attData.EmpID.ToString() + _AttDataFrom.Date.ToString("yyMMdd");
-                        _Polls = db.PollDatas.Where(aa => aa.EmpDate == _EmpDate).OrderBy(a => a.EntTime).ToList();
-                        ViewBag.PollsDataIn = _Polls.Where(aa => aa.RdrDuty == 1);
-                        ViewBag.PollsDataOut = _Polls.Where(aa => aa.RdrDuty == 5);
-                        ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s => s.EmpName), "EmpID", "EmpNo", _attData.EmpID);
-                        Session["NEmpNo"] = _attData.EmpID;
-                        ViewBag.SucessMessage = "";
-                        if (_attData.WorkMin != null)
-                            ViewBag.WorkMin = (TimeSpan.FromMinutes((double)_attData.WorkMin));
-                        if (_attData.LateOut != null)
-                            ViewBag.LateOut = TimeSpan.FromMinutes((double)_attData.LateOut);
-                        if (_attData.LateIn != null)
-                            ViewBag.LateIn = TimeSpan.FromMinutes((double)_attData.LateIn);
-                        if (_attData.EarlyOut != null)
-                            ViewBag.EarlyOut = TimeSpan.FromMinutes((double)_attData.EarlyOut);
-                        if (_attData.EarlyIn != null)
-                            ViewBag.EarlyIn = TimeSpan.FromMinutes((double)_attData.EarlyIn);
-                        if (_attData.OTMin != null)
-                            ViewBag.OT = TimeSpan.FromMinutes((double)_attData.OTMin);
-                        if (_attData.GZOTMin != null)
-                            ViewBag.GZOT = TimeSpan.FromMinutes((double)_attData.GZOTMin);
-                        return View(_attData);
+                        EmpID = _Emp.FirstOrDefault().EmpID;
+                        if (db.AttDatas.Where(aa => aa.EmpID == EmpID && aa.AttDate == _AttDataFrom).Count() > 0)
+                        {
+
+                            _attData = db.AttDatas.FirstOrDefault(aa => aa.EmpID == EmpID && aa.AttDate == _AttDataFrom);
+                            List<PollData> _Polls = new List<PollData>();
+                            string _EmpDate = _attData.EmpID.ToString() + _AttDataFrom.Date.ToString("yyMMdd");
+                            _Polls = db.PollDatas.Where(aa => aa.EmpDate == _EmpDate).OrderBy(a => a.EntTime).ToList();
+                            ViewBag.PollsDataIn = _Polls.Where(aa => aa.RdrDuty == 1);
+                            ViewBag.PollsDataOut = _Polls.Where(aa => aa.RdrDuty == 5);
+                            ViewBag.EmpID = new SelectList(db.Emps.OrderBy(s => s.EmpName), "EmpID", "EmpNo", _attData.EmpID);
+                            Session["NEmpNo"] = _attData.EmpID;
+                            ViewBag.SucessMessage = "";
+                            if (_attData.WorkMin != null)
+                                ViewBag.WorkMin = (TimeSpan.FromMinutes((double)_attData.WorkMin));
+                            if (_attData.LateOut != null)
+                                ViewBag.LateOut = TimeSpan.FromMinutes((double)_attData.LateOut);
+                            if (_attData.LateIn != null)
+                                ViewBag.LateIn = TimeSpan.FromMinutes((double)_attData.LateIn);
+                            if (_attData.EarlyOut != null)
+                                ViewBag.EarlyOut = TimeSpan.FromMinutes((double)_attData.EarlyOut);
+                            if (_attData.EarlyIn != null)
+                                ViewBag.EarlyIn = TimeSpan.FromMinutes((double)_attData.EarlyIn);
+                            if (_attData.OTMin != null)
+                                ViewBag.OT = TimeSpan.FromMinutes((double)_attData.OTMin);
+                            if (_attData.GZOTMin != null)
+                                ViewBag.GZOT = TimeSpan.FromMinutes((double)_attData.GZOTMin);
+                            return View(_attData);
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Attendance Not Found";
+                            return View("Index");
+                        }
                     }
                     else
-                    {
-                        ViewBag.Message = "Attendance Not Found";
-                        return View("Index");
-                    }
+                        ViewBag.Message = "No employee found";
                 }
                 else
+                    ViewBag.Message = "Please fill all field";
                     return View("Index");
             }
             catch (Exception ex)
@@ -96,6 +102,7 @@ namespace WMS.Controllers
             }
 
         }
+        
         //Add New Times and Process Attendance of Particular Employee
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -312,7 +319,43 @@ namespace WMS.Controllers
 
             }
         }
+        public ActionResult GetEmployeeInfo(string empNo)
+        {
+            List<Emp> emp = db.Emps.Where(aa => aa.EmpNo == empNo).ToList();
+            string Name = "";
+            string Designation = "";
+            string Section = "";
+            string FatherName = "";
+            string Type = "";
+            string DOJ = "";
+            if (emp.Count > 0)
+            {
+                Name = "Name: " + emp.FirstOrDefault().EmpName;
+                FatherName = "FatherName:" + emp.FirstOrDefault().FatherName;
+                Designation = "Designation: " + emp.FirstOrDefault().Designation.DesignationName;
+                Section = "Section: " + emp.FirstOrDefault().Section.SectionName;
+                Type = "Type: " + emp.FirstOrDefault().Status;
+                if (emp.FirstOrDefault().BirthDate != null)
+                    DOJ = "Join Date: " + emp.FirstOrDefault().BirthDate.Value.ToString("dd-MMM-yyyy");
+                else
+                    DOJ = "Join Date: Not Added";
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json(Name + "@" + FatherName + "@" + Designation + "@" + Section + "@" + Type + "@" + DOJ, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Name = "Name: Not found";
+                Designation = "Designation: Not found";
+                Section = "Section: Not found";
+                Type = "Type: Not found";
+                DOJ = "Join Date: Not found";
+                if (HttpContext.Request.IsAjaxRequest())
+                    return Json(Name + "@" + FatherName + "@" + Designation + "@" + Section + "@" + Type + "@" + DOJ
+                       , JsonRequestBehavior.AllowGet);
+            }
 
+            return RedirectToAction("Index");
+        }
 
     }
 }

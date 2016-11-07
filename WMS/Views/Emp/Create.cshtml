@@ -18,13 +18,12 @@
         $('#myTab a:last').tab('show')
     })
 </script>
-
+    
 @using (Html.BeginForm("Create", "Emp", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
+    @Html.AntiForgeryToken()
     <article class="row">
- <div class="well bs-component">
-        <form class="form-horizontal" action="~/Views/Emp/Create" enctype="multipart/form-data" method="post">
-             @Html.AntiForgeryToken()
+ <div class="well bs-component">     
             <fieldset>
            <h3>Create New Employees</h3>
                 <hr />
@@ -296,7 +295,7 @@
         </div>
     </div>
                 </fieldset>
-            </form>
+            
      </div>
         </article>
 }
@@ -333,8 +332,8 @@
 </script>
 <style>
     hr {
-        color: #d0d2d3;
-        background-color: #d0d2d3;
+        color: #fff;
+        background-color: #fff;
         height: 1px;
     }
 </style>

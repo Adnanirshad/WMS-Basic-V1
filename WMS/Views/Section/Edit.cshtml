@@ -4,14 +4,14 @@
     ViewBag.Title = "Section Edit";
 }
 <br />
-<h3>Edit Section</h3>
-
 @using (Html.BeginForm())
 {
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Holiday/Create" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+    <h3>Edit Section</h3>
+    <hr />
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.SectionID)
@@ -45,3 +45,10 @@
 }
 
 <script src="@Url.Content("~/Scripts/HR/DeptCompany.js")"></script>
+<style>
+    hr {
+        color: #fff;
+        background-color: #fff;
+        height: 1px;
+    }
+</style>

@@ -230,3 +230,8 @@ font-family:Ubuntu;
     width:150px;
     height:40px;
 }
+.hr {
+        color: #d0d2d3;
+        background-color: #d0d2d3;
+        height: 1px;
+    }

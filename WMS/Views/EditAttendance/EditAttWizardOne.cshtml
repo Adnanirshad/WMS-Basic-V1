@@ -11,12 +11,10 @@
     });
 </script>
 <br />
-<div class="well bs-component">
-        <form class="form-horizontal" action="~/Views/EmpType/Create" enctype="multipart/form-data" method="post">
-           
-            <fieldset>
 @using (Html.BeginForm("EditAttWizardData", "EditAttendance", FormMethod.Post))
 {
+    <div class="well bs-component">                 
+            <fieldset>
     @Html.AntiForgeryToken()
     <br />
     <div class="row">
@@ -348,10 +346,10 @@
     <div>
 
 </div>
-}
-</fieldset>
-            </form>
+                </fieldset>           
     </div>
+}
+
 <script type="text/javascript">
     jQuery(function ($) {
         $("#date1").mask("99/99/9999", { placeholder: "mm/dd/yyyy" });
@@ -377,8 +375,8 @@
 </script>
 <style>
     hr {
-        color: #d0d2d3;
-        background-color: #d0d2d3;
+        color: #fff;
+        background-color: #fff;
         height: 1px;
     }
 </style>

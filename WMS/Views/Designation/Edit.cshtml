@@ -4,18 +4,18 @@
     ViewBag.Title = "Designation Edit";
 }
 <br />
- <div>
-      <form class ="form-inline" role="form">
-          <div class="form-group "> <h2>Edit Designation</h2> </div>
-      </form>  
-    </div>
-
 @using (Html.BeginForm())
 {
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Designation/Edit" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+                <div>
+      <form class ="form-inline" role="form">
+          <div class="form-group "> <h2>Edit Designation</h2> </div>
+      </form>  
+    </div>
+                <hr />
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.DesignationID)
@@ -39,3 +39,10 @@
             </form>
          </div>
 }
+<style>
+    hr {
+        color: #fff;
+        background-color: #fff;
+        height: 1px;
+    }
+</style>

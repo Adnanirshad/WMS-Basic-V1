@@ -3,17 +3,16 @@
 @{
     ViewBag.Title = "Holiday Edit";
 }
-
-<h2>Edit Holiday</h2>
-
+<br />
 @using (Html.BeginForm())
 {
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Holiday/Edit" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
-    <div class="form-horizontal">
-        <hr />
+    <h2>Edit Holiday</h2>
+                <hr />
+    <div class="form-horizontal">     
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.HolID)
 
@@ -45,3 +44,10 @@
          </div>
 }
 
+<style>
+    hr {
+        color: #fff;
+        background-color: #fff;
+        height: 1px;
+    }
+</style>

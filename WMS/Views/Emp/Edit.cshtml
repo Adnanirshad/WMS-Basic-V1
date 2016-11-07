@@ -31,18 +31,19 @@
 </script>
 <p>
 </p>
- <div>
-      <form class ="form-inline" role="form">
-          <div class="form-group "> <h3>Edit Employee with <span class="h4">Employee No: @Model.EmpNo"</span></h3> </div>
-      </form>  
-    </div>
-
+<br />
 @using (Html.BeginForm("Edit","Emp", FormMethod.Post, new { enctype ="multipart/form-data" }))
 {
     <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Emp/Edit" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+        <div>
+            <form class ="form-inline" role="form">
+                <div class="form-group "> <h3>Edit Employee with <span class="h4">Employee No: @Model.EmpNo"</span></h3> </div>
+            </form>  
+        </div>
+        <hr />
      <div class="form-horizontal">
        <section class ="col-sm-6 col-md-6"> 
         @Html.ValidationSummary(true)
@@ -335,5 +336,10 @@
 <link href="~/Content/site.avatar.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/jquery.jcrop.css" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/wingSection.js")"></script>
-
-
+<style>
+    hr {
+        color: #fff;
+        background-color: #fff;
+        height: 1px;
+    }
+</style>

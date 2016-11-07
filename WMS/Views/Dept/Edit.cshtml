@@ -4,14 +4,14 @@
     ViewBag.Title = "Department Edit";
 }
 <br />
-<h3>Edit Department</h3>
-
 @using (Html.BeginForm())
 {
      <div class="well bs-component">
         <form class="form-horizontal" action="~/Views/Dept/Edit" enctype="multipart/form-data" method="post">
              @Html.AntiForgeryToken()
             <fieldset>
+   <h3>Edit Department</h3>
+                <hr />
     <div class="form-horizontal">          
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.DeptID)
@@ -39,3 +39,10 @@
 }
 
 <script src="@Url.Content("~/Scripts/HR/DivisionCompany.js")"></script>
+<style>
+    hr {
+        color: #fff;
+        background-color: #fff;
+        height: 1px;
+    }
+</style>

@@ -24,7 +24,7 @@ namespace WMS.Controllers
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DeptNameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";          
             if (searchString != null)
             {
                 page = 1;
@@ -33,31 +33,31 @@ namespace WMS.Controllers
             {
                 searchString = currentFilter;
             }
-
-            ViewBag.CurrentFilter = searchString;
             User LoggedInUser = Session["LoggedUser"] as User;
             QueryBuilder qb = new QueryBuilder();
-            string query = qb.QueryForCompanyViewForLinq(LoggedInUser);
-            var departments = db.Departments.AsQueryable();
+            //string query = qb.MakeCustomizeQuery(LoggedInUser);         
+            DataTable dt = qb.GetValuesfromDB("select * from Department");
+            List<Department> lvapplications = dt.ToList<Department>();
+            ViewBag.CurrentFilter = searchString;
+            //var lvapplications = db.LvApplications.Where(aa=>aa.ToDate>=dt2).Include(l => l.Emp).Include(l => l.LvType1);
             if (!String.IsNullOrEmpty(searchString))
             {
-                departments = departments.Where(s => s.DeptName.ToUpper().Contains(searchString.ToUpper())
-                    //||s.Division.DivisionName.ToUpper().Contains(searchString.ToUpper())
-                    );
+                lvapplications = lvapplications.Where(s => s.DeptName.ToUpper().Contains(searchString.ToUpper())
+                     || s.DeptName.ToUpper().Contains(searchString.ToUpper())).ToList();
             }
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    departments = departments.OrderByDescending(s => s.DeptName);
-                    break;
+                    lvapplications = lvapplications.OrderByDescending(s => s.DeptName).ToList();
+                    break;            
                 default:
-                    departments = departments.OrderBy(s => s.DeptName);
+                    lvapplications = lvapplications.OrderBy(s => s.DeptName).ToList();
                     break;
             }
-            int pageSize = 8;
+            int pageSize = 12;
             int pageNumber = (page ?? 1);
-            return View(departments.ToPagedList(pageNumber, pageSize));
+            return View(lvapplications.OrderByDescending(aa => aa.DeptID).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: /Dept/Details/5

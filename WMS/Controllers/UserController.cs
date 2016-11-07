@@ -11,7 +11,7 @@ using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
 using WMS.Controllers.Filters;
 using WMS.CustomClass;
-
+using PagedList;
 namespace WMS.Controllers
 {
     [CustomControllerAttributes]
@@ -20,8 +20,70 @@ namespace WMS.Controllers
         private TAS2013Entities db = new TAS2013Entities();
 
         // GET: /User/
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.UserNameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.NameSortParm = sortOrder == "LvType" ? "LvType_desc" : "LvType";
+            ViewBag.CanAddSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.CanEditSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
+            ViewBag.CanDeleteSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
+            ViewBag.CanViewSortParm = sortOrder == "thu" ? "Leave_desc" : "Leave";
+            ViewBag.StatusSortParm = sortOrder == "Leave" ? "Leave_desc" : "Leave";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            User LoggedInUser = Session["LoggedUser"] as User;
+            QueryBuilder qb = new QueryBuilder();
+            string query = qb.MakeCustomizeQuery(LoggedInUser);         
+            DataTable dt = qb.GetValuesfromDB("select * from User");
+            List<User> lvapplications = dt.ToList<User>();
+            ViewBag.CurrentFilter = searchString;
+            //var lvapplications = db.LvApplications.Where(aa=>aa.ToDate>=dt2).Include(l => l.Emp).Include(l => l.LvType1);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                lvapplications = lvapplications.Where(s => s.UserName.ToUpper().Contains(searchString.ToUpper())
+                     || s.Name.ToUpper().Contains(searchString.ToUpper())).ToList();
+                lvapplications = lvapplications.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper())
+                     || s.UserName.ToUpper().Contains(searchString.ToUpper())).ToList();
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    lvapplications = lvapplications.OrderByDescending(s => s.UserName).ToList();
+                    break;
+
+                case "LvType_desc":
+                    lvapplications = lvapplications.OrderByDescending(s => s.Name).ToList();
+                    break;
+                case "LvType":
+                    lvapplications = lvapplications.OrderBy(s => s.CanAdd).ToList();
+                    break;
+                case "Date_desc":
+                    lvapplications = lvapplications.OrderByDescending(s => s.CanEdit).ToList();
+                    break;
+                case "Date":
+                    lvapplications = lvapplications.OrderBy(s => s.CanDelete).ToList();
+                    break;
+                case "thu":
+                    lvapplications = lvapplications.OrderBy(s => s.CanView).ToList();
+                    break;
+                case "fri":
+                    lvapplications = lvapplications.OrderBy(s => s.Status).ToList();
+                    break;
+                default:
+                    lvapplications = lvapplications.OrderBy(s => s.UserName).ToList();
+                    break;
+            }
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            return View(lvapplications.OrderByDescending(aa => aa.UserID).ToPagedList(pageNumber, pageSize));
             int NoOfUsres = Convert.ToInt32(GlobalVaribales.NoOfUsers);
             var users = db.Users.Where(aa=>aa.Deleted==false);
             var usr = users.Take(NoOfUsres);

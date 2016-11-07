@@ -4,13 +4,14 @@
     ViewBag.Title = "Create";
 }
 <br />
-<div class="well bs-component">
-        <form class="form-horizontal" action="~/LvApp/Create" enctype="multipart/form-data" method="post">
-            <fieldset>
-        <legend>Attendance Processor</legend>
-        <hr />
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)     
+    @Html.ValidationSummary(true) 
+    <div class="well bs-component">
+        <form class="form-horizontal" action="~/Views/AttProcessors/Create" enctype="multipart/form-data" method="post">
+            <fieldset>
+     @Html.AntiForgeryToken()
+        <legend>Attendance Processor</legend>
+        <hr />    
 <section class="col-md-8">
  <div class="form-horizontal">
      <div class="form-group">
@@ -43,7 +44,7 @@
                 <label class="col-lg-2 col-md-2 col-sm-2 control-label">Emp No</label>
                 <div class="col-lg-8 col-md-8 col-sm-8">
                     <div class="input-group">
-                        <input  autofocus id="EmpNo" name="EmpNo" type="text" class="form-control" placeholder="EMP-00001"/>
+                        <input  autofocus id="EmpNo" name="EmpNo" type="text" class="form-control"/>
                         <span class="input-group-btn">
                             <input type='button' id="buttonId" name="buttonId" value="Search"  class="btn btn-secondary"/>? 
                         </span>
@@ -89,17 +90,18 @@
         </div>  
     </section>
          </div>
-}
-</fieldset>
+                </fieldset>
             </form>
     </div>
+}
+
 
 
 
 <style>
     hr {
-        color: #d0d2d3;
-        background-color: #d0d2d3;
+        color: #fff;
+        background-color: #fff;
         height: 1px;
     }
 </style>

@@ -1,14 +1,11 @@
-﻿@*@model IEnumerable<WMS.Models.JobCardApp>*@
-
-@model PagedList.IPagedList<WMS.Models.EmpView>
+﻿@model PagedList.IPagedList<WMS.Models.JobCardApp>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Job Card";
 }
 <br />
   <div class="well bs-component">
-        <form class="form-horizontal" action="~/Views/EmpType/Create" enctype="multipart/form-data" method="post">            
-            <fieldset> 
+        <fieldset> 
     <h2 style="margin-left:2%">Assign Job Card</h2>
             <h5 style="margin-left:2%">@Html.ActionLink("List of Job Cards", "JobCardList",null,new { @class = "" })</h5>
     <hr />
@@ -17,6 +14,34 @@
         {
  <section class="col-md-8">
         <div class="form-horizontal">
+        <p class="ErorrMessage">@ViewBag.CMessage</p>
+        <p style="color:green">@ViewBag.DMessage</p>
+        <div class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-4">
+               <div class="radio-inline"><label><input type="radio" checked value="ByEmployee" name="CreateJCCriteria">By Employee</label></div>
+                <div class="radio-inline"><label><input type="radio" value="ByCrew" name="CreateJCCriteria">By Crew</label></div>
+            </div>
+        </div>
+        <div class="form-group" id="EmpNoDiv">
+        <div class="form-inline">
+            <label class="col-lg-2 col-md-2 col-sm-2 control-label">Emp No</label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="input-group">
+                    <input  autofocus id="EmpNo" name="EmpNo" type="text" class="form-control"/>
+                    <span class="input-group-btn">
+                        <input type='button' id="buttonId" name="buttonId" value="Search"  class="btn btn-secondary"/>​ 
+                    </span>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-group" id="CrewDiv">
+            <label class="control-label col-md-2">Crew<span style="color:red;"> *</span></label>
+            <div class="col-md-4">
+                @Html.DropDownList("CrewID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthJobCard"})
+            </div>
+        </div>
         <div class="form-group">
             <label class="control-label col-md-2">From<span style="color:red;"> *</span></label>
             <div class="col-md-4">
@@ -36,38 +61,11 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2"></label>
-            <div class="col-md-4">
-               <div class="radio"><label><input type="radio" checked value="ByEmployee" name="CreateJCCriteria">By Employee</label></div>
-                <div class="radio"><label><input type="radio" value="ByCrew" name="CreateJCCriteria">By Crew</label></div>
-            </div>
-        </div>
-        <div class="form-group" id="ByEmpNoDiv">
-        <div class="form-inline">
-            <label class="col-lg-2 col-md-2 col-sm-2 control-label">Emp No</label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <div class="input-group">
-                    <input  autofocus id="EmpNo" name="EmpNo" type="text" class="form-control" placeholder="EMP-00001"/>
-                    <span class="input-group-btn">
-                        <input type='button' id="buttonId" name="buttonId" value="Search"  class="btn btn-secondary"/>​ 
-                    </span>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="form-group" id="CrewDiv">
-            <label class="control-label col-md-2">Crew<span style="color:red;"> *</span></label>
-            <div class="col-md-4">
-                @Html.DropDownList("CrewID",null,new { @class = "btn btn-default dropdown-toggle dropdown ComboBoxWidthJobCard"})
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label col-md-2">Remarks<span style="color:red;"> *</span></label>
             <div class="col-md-4">
                 <input id="Remakrs" name="Remakrs" type="text" class="form-control"/>
             </div>
         </div>
-        <p class="ErorrMessage">@ViewBag.CMessage</p>
         <div class="form-group">
             <label class="control-label col-md-2"></label>
             <div class="col-md-8">
@@ -96,8 +94,8 @@
 <script src="~/Scripts/LoadEmpInfoJC.js" type="text/javascript"></script>
 <style>
     hr {
-        color: #d0d2d3;
-        background-color: #d0d2d3;
+        color: #fff;
+        background-color: #fff;
         height: 1px;
     }
 </style>

@@ -34,6 +34,7 @@ namespace WMS.Controllers
         {
             User LoggedInUser = Session["LoggedUser"] as User;
             string Message = "";
+            string MessageSuccess = "";
             QueryBuilder qb = new QueryBuilder();
             string query = qb.MakeCustomizeQuery(LoggedInUser);
             DataTable dt = qb.GetValuesfromDB("select * from EmpView " + query);
@@ -46,52 +47,65 @@ namespace WMS.Controllers
             jobCardApp.DateStarted = Convert.ToDateTime(Request.Form["JobDateFrom"]);
             jobCardApp.DateEnded = Convert.ToDateTime(Request.Form["JobDateTo"]);
             jobCardApp.Status = false;
-            string Remakrs = Request.Form["Remakrs"].ToString();
+            string Remakrs = Request.Form["Remakrs"].ToString();  
+      
             if (Remakrs != "")
                 jobCardApp.Remarks = Remakrs;
             jobCardApp.UserID = LoggedInUser.UserID;
-            switch (criteria)
+            int NoOfDays = (int)(jobCardApp.DateEnded.Value - jobCardApp.DateStarted.Value).TotalDays;
+            if (NoOfDays < 400)
             {
-                case "ByCrew":
-                    jobCardApp.CriteriaDate = Convert.ToInt32(Request.Form["CrewID"].ToString());
-                    jobCardApp.JobCardCriteria = "C";
-                    if (ValidateJobCard(jobCardApp))
+                if (jobCardApp.DateStarted < jobCardApp.DateEnded)
+                {
+                    switch (criteria)
                     {
-                        db.JobCardApps.Add(jobCardApp);
-                        if (db.SaveChanges() > 0)
-                            AddJobCardAppToJobCardData();
+                        case "ByCrew":
+                            jobCardApp.CriteriaDate = Convert.ToInt32(Request.Form["CrewID"].ToString());
+                            jobCardApp.JobCardCriteria = "C";
+                            if (ValidateJobCard(jobCardApp))
+                            {
+                                db.JobCardApps.Add(jobCardApp);
+                                if (db.SaveChanges() > 0)
+                                    AddJobCardAppToJobCardData();
+                            }
+                            else
+                                Message = "Job Card Validation failed";
+                            break;
+                        case "ByEmployee":
+                            string EmpNo = "";
+                            EmpNo = Request.Form["EmpNo"];
+                            List<Emp> emptemp = db.Emps.Where(aa => aa.EmpNo == EmpNo).ToList();
+                            if (emptemp.Count > 0)
+                            {
+                                jobCardApp.CriteriaDate = emptemp.FirstOrDefault().EmpID;
+                                jobCardApp.JobCardCriteria = "E";
+                                if (ValidateJobCard(jobCardApp))
+                                {
+                                    db.JobCardApps.Add(jobCardApp);
+                                    if (db.SaveChanges() > 0)
+                                        AddJobCardAppToJobCardData();
+                                }
+                                else
+                                    Message = "Already applied job card on this date";
+                            }
+                            else
+                                Message = "There is no employee found";
+                            break;
                     }
-                    else
-                        Message = "Job Card Validation failed";
-                    break;
-                case "ByEmployee":
-                    string EmpNo = "";
-                    EmpNo = Request.Form["JobEmpNo"];
-                    List<Emp> emptemp = db.Emps.Where(aa => aa.EmpNo == EmpNo).ToList();
-                    if (emptemp.Count > 0)
-                    {
-                        jobCardApp.CriteriaDate = emptemp.FirstOrDefault().EmpID;
-                        jobCardApp.JobCardCriteria = "E";
-                        if (ValidateJobCard(jobCardApp))
-                        {
-                            db.JobCardApps.Add(jobCardApp);
-                            if (db.SaveChanges() > 0)
-                                AddJobCardAppToJobCardData();
-                        }
-                        else
-                            Message = "Job Card Validation failed";
-                    }
-                    else
-                        Message = "There is no employee found";
-                    break;
+                }
+                else
+                    Message = "Dates format is incorrect, please select correct format";
             }
+            else
+                Message = "Job card should not be applied more then one year";
             //List<EmpView> emps = new List<EmpView>();
             ViewData["JobDateFrom"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewData["JobDateTo"] = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
             ViewBag.JobCardType = new SelectList(db.JobCards, "WorkCardID", "WorkCardName");
             ViewBag.CrewID = new SelectList(db.Crews, "CrewID", "CrewName");
             if (Message == "")
-                Message = "Job Card created sucessfully";
+                MessageSuccess = "Job Card created sucessfully";
+            ViewBag.DMessage = MessageSuccess;
             ViewBag.CMessage = Message;
             return View("JCCreate");
         }
